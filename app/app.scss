@@ -37,6 +37,12 @@ background-size: cover;
 
 .bg {
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-label {
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
 }
