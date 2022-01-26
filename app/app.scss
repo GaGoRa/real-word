@@ -19,3 +19,23 @@
   font-family: 'Font Awesome 5 Free', 'fa-regular-400';
   font-weight: 400;
 }
+
+.page-home {
+  background-image: url('~/assets/images/bg_comun.png');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+}
+
+
+.page-login {
+  background-image: url('~/assets/images/background.png');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+} 
+
+.bg {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;}
