@@ -24,7 +24,7 @@
                     fontWeight="900" color="red" />
                 <Button borderRadius="82" fontSize="16" height="40"
                     fontWeight="900" marginTop="16" text="Login"
-                    backgroundColor="red" width="200" color="white" />
+                    backgroundColor="red" width="200" color="white" @tap="$navigator.navigate('/home')" />
             </StackLayout>
         </GridLayout>
     </Page>

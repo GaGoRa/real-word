@@ -14,7 +14,7 @@
   </StackLayout>
 
 
- <Navigator :defaultRoute="true ? '/home' : '/login'"/>
+ <Navigator :defaultRoute="false ? '/home' : '/login'"/>
 
 </MultiDrawer>
 
