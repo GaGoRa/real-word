@@ -18,11 +18,11 @@
                         text="Popular programs" marginRight="0"/>
                         <Image src="~/assets/icons/bars_label.png" height="24" />
                 </FlexboxLayout>
-               <ScrollView  col="0" row="1" scrollBarIndicatorVisible="false"
+                <ScrollView  col="0" row="1" scrollBarIndicatorVisible="false"
                     orientation="horizontal">
                     <GridLayout class="m-5" columns="auto auto auto">
                         <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/img1.jpg"
+                            backgroundImage="~/assets/images/File_010.JPG"
                             height="150" width="275" marginRight="32"
                             col="0"  alignItems="flex-end" justifyContent="center" >
 
@@ -31,7 +31,7 @@
 
                             </FlexboxLayout>
                         <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/img2.jpg"
+                            backgroundImage="~/assets/images/File_010.JPG"
                             height="150" width="275" marginRight="32"
                             col="1"  alignItems="flex-end" justifyContent="center" >
                             
@@ -40,7 +40,7 @@
 
                             </FlexboxLayout>
                         <FlexboxLayout borderRadius="20" class="bg"
-                           backgroundImage="~/assets/images/img3.jpg"
+                           backgroundImage="~/assets/images/File_010.JPG"
                             height="150" width="275"  alignItems="flex-end" justifyContent="center" marginRight="32"
                             col="2" >
                              <Label color="white" fontSize="32" fontWeight="900" 
@@ -65,7 +65,7 @@
                     orientation="horizontal">
                     <GridLayout  marginLeft="5" marginTop="16" columns="auto auto auto ">
                         <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/img4.jpg"
+                            backgroundImage="~/assets/images/File_014.JPG"
                             height="124" width="264" col="0" marginRight="20"  alignItems="flex-end" justifyContent="center" >
                             
                              <Label color="white" fontSize="32" fontWeight="900"
@@ -73,7 +73,7 @@
 
                             </FlexboxLayout>
                         <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/img5.jpg"
+                            backgroundImage="~/assets/images/SQUAT.JPG"
                             height="124" width="264" marginRight="20"
                             col="1"   alignItems="flex-end" justifyContent="center">
                             
@@ -82,7 +82,7 @@
 
                             </FlexboxLayout>
                         <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/img6.jpg"
+                            backgroundImage="~/assets/images/File_014.JPG"
                             height="124" width="264" marginRight="20"
                             col="2" alignItems="flex-end" justifyContent="center">
                             
@@ -108,7 +108,7 @@
                 </FlexboxLayout>
                 <StackLayout marginLeft="24" col="0" row="7" marginTop="16" backgroundColor="transparent" paddingRight="24">
                     <FlexboxLayout borderRadius="20" class="bg"
-                        backgroundImage="~/assets/images/img7.jpg"
+                        backgroundImage="~/assets/images/File_000.JPG"
                         height="150" width="100%" marginBottom="16" col="0"  alignItems="flex-end" justifyContent="center" >
                         
                              <Label color="white" fontSize="32" fontWeight="900"
@@ -116,7 +116,7 @@
 
                      </FlexboxLayout>
                     <FlexboxLayout borderRadius="20" class="bg"
-                        backgroundImage="~/assets/images/img8.jpg"
+                        backgroundImage="~/assets/images/IMG_2215.JPG"
                         height="150" width="100%" marginBottom="16" col="1"  alignItems="flex-end" justifyContent="center" >
                         
                              <Label color="white" fontSize="32" fontWeight="900" 
@@ -124,7 +124,7 @@
 
                         </FlexboxLayout>
                     <FlexboxLayout borderRadius="20" class="bg" 
-                        backgroundImage="~/assets/images/img1.jpg"
+                        backgroundImage="~/assets/images/File_019.JPG"
                         height="150" width="100%" marginBottom="16" col="2"  alignItems="flex-end" justifyContent="center" >
                         
                              <Label color="white" fontSize="32" fontWeight="900"
