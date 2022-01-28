@@ -12,7 +12,7 @@
         </ActionBar>
          <ScrollView  >
             <GridLayout columns="*" rows="*,*,*,*,*,*,*,*">
-                 <FlexboxLayout   col="0" row="0" marginTop="28"
+                <FlexboxLayout   col="0" row="0" marginTop="28"
                     backgroundColor="transparent">
                     <Label marginLeft="24" color="white" fontSize="24" fontWeight="900"
                         text="Popular programs" marginRight="0"/>
@@ -20,33 +20,15 @@
                 </FlexboxLayout>
                 <ScrollView  col="0" row="1" scrollBarIndicatorVisible="false"
                     orientation="horizontal">
-                    <GridLayout class="m-5" columns="auto auto auto">
-                        <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/File_010.JPG"
-                            height="150" width="275" marginRight="32"
-                            col="0"  alignItems="flex-end" justifyContent="center" >
-
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center"  text="ARM BLASTER"/>
-
-                            </FlexboxLayout>
-                        <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/File_010.JPG"
-                            height="150" width="275" marginRight="32"
-                            col="1"  alignItems="flex-end" justifyContent="center" >
-                            
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center"  text="ARM BLASTER"/>
-
-                            </FlexboxLayout>
-                        <FlexboxLayout borderRadius="20" class="bg"
-                           backgroundImage="~/assets/images/File_010.JPG"
-                            height="150" width="275"  alignItems="flex-end" justifyContent="center" marginRight="32"
-                            col="2" >
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center"  text="ARM BLASTER"/>
-                            </FlexboxLayout>
-                    </GridLayout>
+                    <StackLayout class="m-5" orientation="horizontal">
+                      
+                      <cardImage
+                        v-for="(item, key) in poular_programs"
+                        :key="`popular-${key}`"
+                        :data="item"
+                      />
+                           
+                    </StackLayout>
                 </ScrollView>
                 <StackLayout col="0" row="2" marginTop="4" marginBottom="16"
                     backgroundColor="transparent" >
@@ -63,35 +45,13 @@
                 </StackLayout>
                 <ScrollView  col="0" row="4" scrollBarIndicatorVisible="false"
                     orientation="horizontal">
-                    <GridLayout  marginLeft="5" marginTop="16" columns="auto auto auto ">
-                        <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/File_014.JPG"
-                            height="124" width="264" col="0" marginRight="20"  alignItems="flex-end" justifyContent="center" >
-                            
-                             <Label color="white" fontSize="32" fontWeight="900"
-                            horizontalAlignment="center" text="ARM BLASTER"/>
-
-                            </FlexboxLayout>
-                        <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/SQUAT.JPG"
-                            height="124" width="264" marginRight="20"
-                            col="1"   alignItems="flex-end" justifyContent="center">
-                            
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center" text="ARM BLASTER"/>
-
-                            </FlexboxLayout>
-                        <FlexboxLayout borderRadius="20" class="bg"
-                            backgroundImage="~/assets/images/File_014.JPG"
-                            height="124" width="264" marginRight="20"
-                            col="2" alignItems="flex-end" justifyContent="center">
-                            
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center"  text="ARM BLASTER"/>
-
-                            
-                        </FlexboxLayout>
-                    </GridLayout>
+                     <StackLayout class="m-5" marginTop="16" orientation="horizontal">
+                      <cardImage
+                        v-for="(item, key) in recommended"
+                        :key="`recomended-${key}`"
+                        :data="item"
+                      />
+                    </StackLayout>
                 </ScrollView>
 
                 <StackLayout col="0" row="5" marginTop="16" marginBottom="8"
@@ -106,31 +66,13 @@
                     <Label  color="white" fontSize="24" fontWeight="900"
                         text="My programs"   marginRight="0"  paddingRight="0"/>
                 </FlexboxLayout>
-                <StackLayout marginLeft="24" col="0" row="7" marginTop="16" backgroundColor="transparent" paddingRight="24">
-                    <FlexboxLayout borderRadius="20" class="bg"
-                        backgroundImage="~/assets/images/File_000.JPG"
-                        height="150" width="100%" marginBottom="16" col="0"  alignItems="flex-end" justifyContent="center" >
-                        
-                             <Label color="white" fontSize="32" fontWeight="900"
-                            horizontalAlignment="center" text="ANIMAL"/>
-
-                     </FlexboxLayout>
-                    <FlexboxLayout borderRadius="20" class="bg"
-                        backgroundImage="~/assets/images/IMG_2215.JPG"
-                        height="150" width="100%" marginBottom="16" col="1"  alignItems="flex-end" justifyContent="center" >
-                        
-                             <Label color="white" fontSize="32" fontWeight="900" 
-                            horizontalAlignment="center"  text="ANIMAL"/>
-
-                        </FlexboxLayout>
-                    <FlexboxLayout borderRadius="20" class="bg" 
-                        backgroundImage="~/assets/images/File_019.JPG"
-                        height="150" width="100%" marginBottom="16" col="2"  alignItems="flex-end" justifyContent="center" >
-                        
-                             <Label color="white" fontSize="32" fontWeight="900"
-                            horizontalAlignment="center"  text="ANIMAL"/>
-
-                    </FlexboxLayout>
+                <StackLayout marginLeft="8" col="0" row="7" marginTop="16" backgroundColor="transparent" paddingRight="24">
+                   <cardImage
+                        v-for="(item, key) in myprograms"
+                        :key="`recomended-${key}`"
+                        :data="item"
+                        marginBottom="16"
+                      />
                     
                 </StackLayout>
             </GridLayout>
@@ -138,9 +80,74 @@
     </Page>
 </template>
 <script>
+  import cardImage from '~/components/components/boxes/cardImage'
     export default {
+      components:{
+        cardImage
+      },
         data() {
-            return {};
+            return {
+              poular_programs: [
+                {
+                  img: '~/assets/images/File_010.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 192,
+                },
+                {
+                  img: '~/assets/images/File_010.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 192,
+                },
+                {
+                  img: '~/assets/images/File_010.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 192,
+                },
+              ],
+              recommended: [
+                {
+                  img: '~/assets/images/File_014.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 96,
+                },
+                {
+                  img: '~/assets/images/SQUAT.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 96,
+                },
+                {
+                  img: '~/assets/images/File_014.JPG',
+                  text: 'ARM BLASTER',
+                  width: 275,
+                  height: 96,
+                },
+              ],
+              myprograms:[
+                {
+                  img: '~/assets/images/File_000.JPG',
+                  text: 'ARM BLASTER',
+                  width: '100%',
+                  height: 173,
+                },
+                {
+                  img: '~/assets/images/IMG_2215.JPG',
+                  text: 'ARM BLASTER',
+                  width: '100%',
+                  height: 173,
+                },
+                {
+                  img: '~/assets/images/File_019.JPG',
+                  text: 'ARM BLASTER',
+                  width: '100%',
+                  height: 173,
+                },
+              ]
+            };
         }
     };
 </script>
