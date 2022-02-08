@@ -1,6 +1,4 @@
-<template>
-
-                      
+<template>                
 <AbsoluteLayout 
   marginLeft="16"
 >

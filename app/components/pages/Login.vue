@@ -21,7 +21,7 @@
             <StackLayout row="1" col="0" marginBottom="24" marginTop="32">
                 <Button borderRadius="82" fontSize="16" text="Register"
                     backgroundColor="white" width="200" height="40"
-                    fontWeight="900" color="red" />
+                    fontWeight="900" color="red" @tap="$navigator.navigate('/register')" />
                 <Button borderRadius="82" fontSize="16" height="40"
                     fontWeight="900" marginTop="16" text="Login"
                     backgroundColor="red" width="200" color="white" @tap="$navigator.navigate('/home')" />
