@@ -12,8 +12,20 @@
                     </FormattedString>
                 </Label>
                 <FlexboxLayout justifyContent="center" marginBottom="32">
-                    <TextField v-model="textFieldValue" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" />
+                    <TextField  maxLength="1" v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                    <TextField  maxLength="1" v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                    <TextField  maxLength="1"  v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="16" />
+
+                    <TextField  maxLength="10" v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                    <TextField  maxLength="10" v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="4" />
+                    <TextField maxLength="10"  v-model="textFieldValue" width="32" height="40"
+                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+
                 </FlexboxLayout>
                 <Label text="Wrong number?" fontSize="14"
                     textAlignment="center" marginBottom="32"/>
