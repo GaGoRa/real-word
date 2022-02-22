@@ -11,14 +11,8 @@
         <StackLayout col="0" row="1"  marginRight="32" marginLeft="32" class="home-panel">
             <!--Add your page content here-->
             <Label horizontalAlignment="left" color="#949494" fontSize="24" fontWeight="700"
-                textWrap="true" text="Welcome" />
-            <Label horizontalAlignment="center" color="#949494" fontSize="32"
-                fontWeight="900 " textWrap="true" text="To your new" />
-            <Label horizontalAlignment="right" fontSize="24" fontWeight="800"
-                textWrap="true" text="Training Regimen" color="#949494" marginBottom="24" />
-
-            <Image
-                src="~/assets/images/con_pito.png" />
+                textWrap="true" text="Payments" />
+           \
     </StackLayout>
     </GridLayout>
     </Page>

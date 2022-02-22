@@ -4,14 +4,11 @@
     <Label text="Im in the left drawer" />  
   </StackLayout>
   <StackLayout slot="right">
-    <Label text="Im in the right drawer" />  
+   <RightDrawer/>
+     
   </StackLayout>
-  <StackLayout slot="top">
-    <Label text="Im in the top drawer" />  
-  </StackLayout>
-  <StackLayout slot="bottom">
-    <Label text="Im in the bottom drawer" />  
-  </StackLayout>
+  
+ 
 
 
  <Navigator :defaultRoute="false ? '/home' : '/login'"/>
@@ -21,7 +18,12 @@
 </template>
 
 <script>
+ import RightDrawer from '~/components/components/menuDrawer/rightDrawer'
+
   export default {
+    components:{
+        RightDrawer
+      },
     computed: {
       message() {
         return "Blank {N}-Vue app";
