@@ -59,10 +59,17 @@ TextField {
   padding-left: 10;
   placeholder-color: grey;
   font-weight: 800;
+  box-shadow: 0 4px 6px -2px gray;
 }
 
 DropDown{
 padding-left: 4;
 padding-top: 4;
 font-weight: 800;
+box-shadow: 0 4px 6px -2px gray;
+}
+
+.stack-layout-btn {
+
+  box-shadow: 0 4px 6px -2px gray;
 }

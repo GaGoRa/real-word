@@ -11,7 +11,9 @@ import PaymentsPage from './components/pages/Payments.vue'
 import ProfilePage from './components/pages/Profile.vue'
 import PurchaseHistoryPage from './components/pages/PurchaseHistory.vue'
 import SubscriptionPage from './components/pages/Subscription.vue'
-
+import ChooseBestPrograms from './components/pages/ChooseBestPrograms.vue'
+import LoginAplication from './components/pages/LoginAplication.vue'
+import ResetPassword from './components/pages/ResetPassword.vue'
 export const routes = {
   '/home': {
     component: HomePage,
@@ -49,4 +51,14 @@ export const routes = {
   '/welcome': {
     component: WelcomePage,
   },
+  '/choose-best-progrmans': {
+    component: ChooseBestPrograms,
+  },
+  '/login-aplication': {
+    component: LoginAplication,
+  },
+  '/reset-password': {
+    component: ResetPassword,
+  },
+  
 }

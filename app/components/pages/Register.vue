@@ -7,28 +7,19 @@
                 <Label text="Register" fontSize="24" fontWeight="900"
                     textAlignment="center" color="#949494" marginBottom="16" />
 
-                <Button  height="40" borderRadius="12" backgroundColor="#2051D8"
-                    color="white">
-                    <FormattedString>
-                        <span>
-                            <Image src="~/assets/icons/icon_facebook.png" height="24" />
-                            </span>
+                 <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
+                    color="white" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                            <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
+                        <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="white" />
+                    </StackLayout>
 
-                        <span text="Login in with Facebook" color="white" />
+                 <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="white"
+                    color="white" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                        <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
+                        <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
+                    </StackLayout>
 
-                    </FormattedString>
-                </Button>
                 
-
-                <Button borderRadius="12" height="40" backgroundColor="white"
-                    color="white" marginBottom="16">
-                    <FormattedString>
-                        <span text="(ICON)" />
-                        <span text="Sign in with Google" color="black" />
-
-                    </FormattedString>
-                </Button>
-
                 <Label text="or" fontSize="24" fontWeight="900"
                     textAlignment="center" color="white" marginBottom="16" />
 
@@ -53,12 +44,16 @@
                     marginBottom="32" @tap="$navigator.navigate('/verification-code')"/>
 
                 <FlexboxLayout justifyContent="center">
-                   <!--   <Image marginLeft="24" src="~/assets/icons/background_label.png" height="24" /> -->
+                    <StackLayout>
+                    <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
+                    </StackLayout>
                     <Label text="Already Register?" color="black"
                         marginRight="8" />
                     <Label text="Login" textDecoration="underline"
                         fontWeight="900" color="black" @tap="$navigator.navigate('/login')" />
-                 <!--    <Image marginLeft="24" src="~/assets/icons/background_label.png" height="24" /> -->
+                     <StackLayout>
+                  <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
+                     </StackLayout>
                 </FlexboxLayout>
 
             </StackLayout>
@@ -72,7 +67,7 @@
       data(){
           return {
               items_selectPicker:[
-                  "country",
+                  "Country",
                   "Australia",
                     "Belgium",
                     "Bulgaria",
