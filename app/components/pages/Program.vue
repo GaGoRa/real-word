@@ -56,6 +56,7 @@
           <VideoPlayer
             src="~/assets/videos/pexels-tima-miroshnichenko-5319759.mp4"
             autoplay="true"
+            height="300"
             fill="true"
           >
           </VideoPlayer>
@@ -121,13 +122,12 @@
   </Page>
 </template>
 <script>
-import cardImage from "~/components/components/boxes/cardImage";
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
-
+import CardExercise from "~/components/components/boxes/CardExercise";
 export default {
   components: {
-    cardImage,
     CardSubscriptionProgram,
+    CardExercise,
   },
   data() {
     return {
@@ -151,6 +151,20 @@ export default {
           tittle: "One Time Purchase",
           mount: "$199.42",
           color: "#838383",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        },
+      ],
+      exercises: [
+        {
+          day: "1",
+          color: "#838383",
+          body: "legs",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        },
+        {
+          day: "2",
+          color: "#838383",
+          body: "arms",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
         },
       ],

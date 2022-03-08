@@ -74,6 +74,7 @@ export default {
           text: "ANIMAL",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
         {
@@ -81,6 +82,8 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
+
+          url: "/program",
           colorText: "white",
         },
         {
@@ -88,6 +91,7 @@ export default {
           text: "ANIMAL",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
         {
@@ -95,6 +99,7 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
       ],

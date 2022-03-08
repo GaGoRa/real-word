@@ -50,8 +50,8 @@
           paddingRight="24"
         >
           <cardImage
-            v-for="(item, key) in poular_programs"
-            :key="`popular-${key}`"
+            v-for="(item, key) in recommendated_programs"
+            :key="`recommendated-${key}`"
             :data="item"
             marginBottom="16"
           />
@@ -68,12 +68,13 @@ export default {
   },
   data() {
     return {
-      poular_programs: [
+      recommendated_programs: [
         {
           img: "~/assets/images/File_010.JPG",
           text: "ANIMAL",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
         {
@@ -81,6 +82,7 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
         {
@@ -88,6 +90,7 @@ export default {
           text: "ANIMAL",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
         {
@@ -95,6 +98,7 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
+          url: "/program",
           colorText: "white",
         },
       ],

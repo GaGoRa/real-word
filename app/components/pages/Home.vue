@@ -166,15 +166,6 @@ export default {
   },
   data() {
     return {
-      empty: [
-        {
-          img: "~/assets/images/background_white.JPG",
-          text: "Add Program",
-          width: "100%",
-          colorText: "#949494",
-          height: 173,
-        },
-      ],
       poular_programs: [
         {
           img: "~/assets/images/File_010.JPG",
