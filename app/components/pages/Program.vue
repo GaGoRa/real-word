@@ -56,7 +56,6 @@
           <VideoPlayer
             src="~/assets/videos/pexels-tima-miroshnichenko-5319759.mp4"
             autoplay="true"
-            height="300"
             fill="true"
           >
           </VideoPlayer>

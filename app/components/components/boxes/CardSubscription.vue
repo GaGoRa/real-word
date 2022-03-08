@@ -1,5 +1,5 @@
 <template>
-  <AbsoluteLayout marginLeft="16" marginTop="8">
+  <AbsoluteLayout marginLeft="16" marginTop="8" marginRight="16">
     <StackLayout
       top="0"
       left="0"
