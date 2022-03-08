@@ -17,7 +17,7 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
             width="40"
-            @tap="$navigator.navigate('/home')"
+            @tap="$navigator.back()"
           />
           <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
         </FlexboxLayout>
@@ -106,7 +106,7 @@
         </FlexboxLayout>
 
         <StackLayout col="0" row="5" marginTop="16">
-          <CardSubscription
+          <CardSubscriptionProgram
             v-for="(item, key) in subscriptions"
             :key="`subscription-${key}`"
             :data="item"
@@ -119,12 +119,12 @@
 </template>
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
-import CardSubscription from "~/components/components/boxes/CardSubscriptionProgram.vue";
+import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
 
 export default {
   components: {
     cardImage,
-    CardSubscription,
+    CardSubscriptionProgram,
   },
   data() {
     return {

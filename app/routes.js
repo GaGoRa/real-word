@@ -18,7 +18,7 @@ import PopularPrograms from './components/pages/PopularPrograms.vue'
 import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
 
 import AddPrograms from './components/pages/AddPrograms.vue'
-import ProgramBuy from './components/pages/ProgramBuy.vue'
+import Program from './components/pages/Program.vue'
 
 export const routes = {
   '/home': {
@@ -81,6 +81,6 @@ export const routes = {
     component: AddPrograms,
   },
   '/program': {
-    component: ProgramBuy,
+    component: Program,
   },
 }

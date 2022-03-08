@@ -38,15 +38,34 @@
       </FlexboxLayout>
     </ActionBar>
 
-    <StackLayout> </StackLayout>
-    <Label text="Subscription"></Label>
+    <StackLayout>
+      <CardSubscription
+        v-for="(item, key) in subscriptions"
+        :key="`subscription-${key}`"
+        :data="item"
+        marginBottom="16"
+      />
+    </StackLayout>
   </Page>
 </template>
 
 <script>
+import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
 export default {
+  components: {
+    CardSubscription,
+  },
   data() {
-    return {};
+    return {
+      subscriptions: [
+        {
+          tittle: "Gold Subscription",
+          mount: "$27.99",
+          color: "#EAB813",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        },
+      ],
+    };
   },
 };
 </script>

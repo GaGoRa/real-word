@@ -72,7 +72,7 @@ export default {
         {
           img: "~/assets/images/File_010.JPG",
           text: "ANIMAL",
-          width: 334,
+          width: "100%",
           height: 192,
           colorText: "white",
           url: "/program",
@@ -80,7 +80,7 @@ export default {
         {
           img: "~/assets/images/SQUAT.JPG",
           text: "LEG DESTRUCTION",
-          width: 334,
+          width: "100%",
           height: 192,
           colorText: "white",
           url: "/program",
@@ -88,7 +88,7 @@ export default {
         {
           img: "~/assets/images/File_014.JPG",
           text: "ANIMAL",
-          width: 334,
+          width: "100%",
           height: 192,
           colorText: "white",
           url: "/program",
@@ -96,7 +96,7 @@ export default {
         {
           img: "~/assets/images/File_010.JPG",
           text: "LEG DESTRUCTION",
-          width: 334,
+          width: "100%",
           height: 192,
           colorText: "white",
           url: "/program",

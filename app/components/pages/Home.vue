@@ -182,14 +182,14 @@ export default {
           width: 275,
           colorText: "white",
           height: 192,
-          url: "/popular-programs",
+          url: "/program",
         },
         {
           img: "~/assets/images/File_010.JPG",
           text: "ARM BLASTER",
           width: 275,
           colorText: "white",
-          url: "/popular-programs",
+          url: "/program",
           height: 192,
         },
         {
@@ -197,7 +197,7 @@ export default {
           text: "ARM BLASTER",
           width: 275,
           colorText: "white",
-          url: "/popular-programs",
+          url: "/program",
           height: 192,
         },
       ],
@@ -207,7 +207,7 @@ export default {
           text: "ARM BLASTER",
           width: 275,
           height: 96,
-          url: "/recommended-programs",
+          url: "/program",
           colorText: "white",
         },
         {
@@ -215,7 +215,7 @@ export default {
           text: "ARM BLASTER",
           width: 275,
           height: 96,
-          url: "/recommended-programs",
+          url: "/program",
           colorText: "white",
         },
         {
@@ -223,7 +223,7 @@ export default {
           text: "ARM BLASTER",
           width: 275,
           height: 96,
-          url: "/recommended-programs",
+          url: "/program",
           colorText: "white",
         },
       ],
@@ -233,7 +233,7 @@ export default {
           text: "ARM BLASTER",
           width: "100%",
           colorText: "white",
-
+          url: "/program",
           height: 173,
         },
         {
@@ -241,7 +241,7 @@ export default {
           text: "ARM BLASTER",
           width: "100%",
           colorText: "white",
-
+          url: "/program",
           height: 173,
         },
         {
@@ -249,7 +249,7 @@ export default {
           text: "ARM BLASTER",
           width: "100%",
           colorText: "white",
-
+          url: "/program",
           height: 173,
         },
         {

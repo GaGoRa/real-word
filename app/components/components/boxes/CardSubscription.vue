@@ -4,10 +4,10 @@
       top="0"
       left="0"
       width="352"
-      height="88"
+      height="auto"
       :backgroundColor="data.color"
       borderRadius="16"
-      padding="8"
+      padding="16"
     >
       <Label
         color="white"
@@ -25,6 +25,29 @@
         textWrap="true"
         :text="data.text"
       />
+
+      <FlexboxLayout justifyContent="space-between">
+        <Label
+          color="white"
+          fontSize="20"
+          fontWeight="900"
+          horizontalAlignment="left"
+          textWrap="true"
+          :text="`Monthly ${data.mount}`"
+        />
+        <StackLayout>
+          <Button
+            borderRadius="8"
+            fontSize="14"
+            text="Cancel Subscription"
+            backgroundColor="red"
+            width="152"
+            height="31"
+            fontWeight="800"
+            color="white"
+          />
+        </StackLayout>
+      </FlexboxLayout>
     </StackLayout>
   </AbsoluteLayout>
 </template>
