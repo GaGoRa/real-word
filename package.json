@@ -9,6 +9,7 @@
     "@nativescript/theme": "~3.0.1",
     "axios": "^0.25.0",
     "nativescript-drop-down": "^6.0.1",
+    "nativescript-videoplayer": "^5.0.1",
     "nativescript-vue": "~2.9.0",
     "nativescript-vue-multi-drawer": "^0.0.3",
     "nativescript-vue-navigator": "^1.2.0",

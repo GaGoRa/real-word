@@ -14,6 +14,12 @@ import SubscriptionPage from './components/pages/Subscription.vue'
 import ChooseBestPrograms from './components/pages/ChooseBestPrograms.vue'
 import LoginAplication from './components/pages/LoginAplication.vue'
 import ResetPassword from './components/pages/ResetPassword.vue'
+import PopularPrograms from './components/pages/PopularPrograms.vue'
+import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
+
+import AddPrograms from './components/pages/AddPrograms.vue'
+import ProgramBuy from './components/pages/ProgramBuy.vue'
+
 export const routes = {
   '/home': {
     component: HomePage,
@@ -60,5 +66,21 @@ export const routes = {
   '/reset-password': {
     component: ResetPassword,
   },
-  
+
+
+
+
+  '/popular-programs': {
+    component: PopularPrograms,
+  },
+  '/recommended-programs': {
+    component: RecommendedPrograms,
+  },
+
+  '/add-programs': {
+    component: AddPrograms,
+  },
+  '/program': {
+    component: ProgramBuy,
+  },
 }
