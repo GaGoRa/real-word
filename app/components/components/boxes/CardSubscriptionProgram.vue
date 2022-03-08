@@ -3,8 +3,8 @@
     <StackLayout
       top="0"
       left="0"
-      width="352"
-      height="96"
+      width="100%"
+      height="auto"
       :backgroundColor="data.color"
       borderRadius="16"
       padding="12"

@@ -28,7 +28,7 @@
           <Label
             textAlignment="center"
             text="Help"
-            fontSize="24"
+            fontSize="22"
             color="white"
             fontWeight="900"
             paddingTop="0"

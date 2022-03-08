@@ -1,5 +1,9 @@
 <template>
-  <Page class="page-home">
+  <Page
+    class="page-home"
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:VideoPlayer="nativescript-videoplayer"
+  >
     <ActionBar
       marginTop="16"
       height="64"
@@ -105,7 +109,7 @@
           <Image src="~/assets/icons/btn_icon_plus.png" height="40" />
         </FlexboxLayout>
 
-        <StackLayout col="0" row="5" marginTop="16">
+        <StackLayout col="0" row="5" marginTop="16" marginRight="16">
           <CardSubscriptionProgram
             v-for="(item, key) in subscriptions"
             :key="`subscription-${key}`"

@@ -28,10 +28,10 @@
           <Label
             textAlignment="center"
             text="Purchase History"
-            fontSize="24"
+            fontSize="20"
             color="white"
             fontWeight="900"
-            paddingTop="0"
+            paddingTop="2"
           />
         </StackLayout>
       </FlexboxLayout>

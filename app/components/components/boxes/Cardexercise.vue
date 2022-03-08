@@ -5,49 +5,36 @@
       left="0"
       width="100%"
       height="auto"
-      :backgroundColor="data.color"
+      backgroundColor="#838383"
       borderRadius="16"
       padding="16"
     >
-      <Label
-        color="white"
-        fontSize="16"
-        fontWeight="900"
-        horizontalAlignment="left"
-        textWrap="true"
-        :text="data.tittle"
-      />
+      <FlexboxLayout justifyContent="space-between">
+        <Label
+          color="white"
+          fontSize="16"
+          fontWeight="900"
+          horizontalAlignment="left"
+          textWrap="true"
+          :day="`Day ${data.day}`"
+        />
+        <Label
+          color="white"
+          fontSize="16"
+          fontWeight="900"
+          horizontalAlignment="left"
+          textWrap="true"
+          :body="data.body"
+        />
+      </FlexboxLayout>
 
       <Label
         color="white"
-        fontSi352ze="14"
+        fontSize="14"
         horizontalAlignment="left"
         textWrap="true"
         :text="data.text"
       />
-
-      <FlexboxLayout justifyContent="space-between">
-        <Label
-          color="white"
-          fontSize="20"
-          fontWeight="900"
-          horizontalAlignment="left"
-          textWrap="true"
-          :text="`Monthly ${data.mount}`"
-        />
-        <StackLayout>
-          <Button
-            borderRadius="8"
-            fontSize="14"
-            text="Cancel Subscription"
-            backgroundColor="red"
-            width="152"
-            height="31"
-            fontWeight="800"
-            color="white"
-          />
-        </StackLayout>
-      </FlexboxLayout>
     </StackLayout>
   </AbsoluteLayout>
 </template>
