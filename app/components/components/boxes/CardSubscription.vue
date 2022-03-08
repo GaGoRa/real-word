@@ -9,23 +9,14 @@
       borderRadius="16"
       padding="8"
     >
-      <FlexboxLayout justifyContent="space-between">
-        <Label
-          color="white"
-          fontSize="16"
-          fontWeight="900"
-          horizontalAlignment="left"
-          textWrap="true"
-          :text="data.tittle"
-        />
-        <Label
-          color="white"
-          fontSize="16"
-          fontWeight="900"
-          textWrap="true"
-          :text="data.mount"
-        />
-      </FlexboxLayout>
+      <Label
+        color="white"
+        fontSize="16"
+        fontWeight="900"
+        horizontalAlignment="left"
+        textWrap="true"
+        :text="data.tittle"
+      />
 
       <Label
         color="white"

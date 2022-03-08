@@ -229,14 +229,6 @@ export default {
       ],
       myprograms: [
         {
-          img: "~/assets/images/background_white.JPG",
-          text: "Add Program",
-          width: "100%",
-          colorText: "#949494",
-          height: 173,
-          url: "/add-programs",
-        },
-        {
           img: "~/assets/images/File_000.JPG",
           text: "ARM BLASTER",
           width: "100%",
@@ -259,6 +251,14 @@ export default {
           colorText: "white",
 
           height: 173,
+        },
+        {
+          img: "~/assets/images/background_white.JPG",
+          text: "Add Program",
+          width: "100%",
+          colorText: "#949494",
+          height: 173,
+          url: "/add-programs",
         },
       ],
       drawerState: false,

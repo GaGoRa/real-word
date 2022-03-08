@@ -75,6 +75,7 @@ export default {
           width: 334,
           height: 192,
           colorText: "white",
+          url: "/program",
         },
         {
           img: "~/assets/images/SQUAT.JPG",
@@ -82,6 +83,7 @@ export default {
           width: 334,
           height: 192,
           colorText: "white",
+          url: "/program",
         },
         {
           img: "~/assets/images/File_014.JPG",
@@ -89,6 +91,7 @@ export default {
           width: 334,
           height: 192,
           colorText: "white",
+          url: "/program",
         },
         {
           img: "~/assets/images/File_010.JPG",
@@ -96,6 +99,7 @@ export default {
           width: 334,
           height: 192,
           colorText: "white",
+          url: "/program",
         },
       ],
     };
