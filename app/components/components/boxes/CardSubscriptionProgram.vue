@@ -8,6 +8,7 @@
       :backgroundColor="data.color"
       borderRadius="16"
       padding="12"
+      class="box-shadow"
     >
       <FlexboxLayout justifyContent="space-between">
         <Label

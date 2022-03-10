@@ -14,7 +14,7 @@
           width="100%"
         >
           <Image src="~/assets/icons/bell_icon.png" height="24" />
-          <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
+          <BurgerMenu />
         </FlexboxLayout>
       </StackLayout>
     </ActionBar>
@@ -68,7 +68,7 @@
             textDecoration="underline"
             horizontalAlignment="center"
             @tap="$navigator.navigate('/popular-programs')"
-            text="View all"
+            text="ViburgerMenuew all"
           />
         </StackLayout>
         <StackLayout
@@ -160,9 +160,11 @@
 </template>
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
+import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 export default {
   components: {
     cardImage,
+    BurgerMenu,
   },
   data() {
     return {

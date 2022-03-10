@@ -45,6 +45,7 @@
             height="31"
             fontWeight="800"
             color="white"
+            @tap="$navigator.navigate('/subscription-cancel')"
           />
         </StackLayout>
       </FlexboxLayout>

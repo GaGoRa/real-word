@@ -5,26 +5,28 @@
       left="0"
       width="100%"
       height="auto"
-      backgroundColor="#838383"
+      completed: true
+      :backgroundColor="data.completed ? '#EAB813' : '#838383' "
       borderRadius="16"
       padding="16"
+      class="box-shadow"
     >
       <FlexboxLayout justifyContent="space-between">
         <Label
           color="white"
-          fontSize="16"
+          fontSize="20"
           fontWeight="900"
           horizontalAlignment="left"
           textWrap="true"
-          :day="`Day ${data.day}`"
+          :text="`Day ${data.day}`"
         />
         <Label
           color="white"
-          fontSize="16"
+          fontSize="20"
           fontWeight="900"
           horizontalAlignment="left"
           textWrap="true"
-          :body="data.body"
+          :text="data.body"
         />
       </FlexboxLayout>
 

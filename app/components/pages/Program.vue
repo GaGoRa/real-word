@@ -28,7 +28,7 @@
       </StackLayout>
     </ActionBar>
     <ScrollView>
-      <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*">
+      <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
         <StackLayout
           col="0"
           row="0"
@@ -55,7 +55,7 @@
         >
           <VideoPlayer
             src="~/assets/videos/pexels-tima-miroshnichenko-5319759.mp4"
-            autoplay="true"
+            autoplay="false"
             height="300"
             fill="true"
           >
@@ -109,13 +109,44 @@
           <Image src="~/assets/icons/btn_icon_plus.png" height="40" />
         </FlexboxLayout>
 
-        <StackLayout col="0" row="5" marginTop="16" marginRight="16">
-          <CardSubscriptionProgram
-            v-for="(item, key) in subscriptions"
-            :key="`subscription-${key}`"
-            :data="item"
-            marginBottom="16"
+        <FlexboxLayout
+          col="0"
+          row="5"
+          marginTop="8"
+          backgroundColor="transparent"
+          justifyContent="center"
+        >
+          <Button
+            borderRadius="16"
+            marginTop=""
+            fontSize="20"
+            text="Stop"
+            backgroundColor="red"
+            width="200"
+            height="48"
+            fontWeight="900"
+            color="white"
+            marginBottom="8"
           />
+        </FlexboxLayout>
+
+        <StackLayout col="0" row="6" marginTop="16" marginRight="16">
+          <StackLayout v-if="true">
+            <CardSubscriptionProgram
+              v-for="(item, key) in subscriptions"
+              :key="`subscription-${key}`"
+              :data="item"
+              marginBottom="16"
+            />
+          </StackLayout>
+          <StackLayout v-else>
+            <CardExercise
+              v-for="(item, key) in exercises"
+              :key="`exercise-${key}`"
+              :data="item"
+              marginBottom="12"
+            />
+          </StackLayout>
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -123,7 +154,7 @@
 </template>
 <script>
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
-import CardExercise from "~/components/components/boxes/CardExercise";
+import CardExercise from "~/components/components/boxes/CardExercise.vue";
 export default {
   components: {
     CardSubscriptionProgram,
@@ -156,15 +187,24 @@ export default {
       ],
       exercises: [
         {
+          completed: true,
           day: "1",
           color: "#838383",
-          body: "legs",
+          body: "Legs",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
         },
         {
+          completed: false,
           day: "2",
           color: "#838383",
-          body: "arms",
+          body: "Arms",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        },
+        {
+          completed: false,
+          day: "2",
+          color: "#838383",
+          body: "Back",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
         },
       ],

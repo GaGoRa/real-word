@@ -19,6 +19,7 @@ import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
 
 import AddPrograms from './components/pages/AddPrograms.vue'
 import Program from './components/pages/Program.vue'
+import SubscriptionCancel from './components/pages/SubscriptionCancel.vue'
 
 export const routes = {
   '/home': {
@@ -54,6 +55,10 @@ export const routes = {
   '/subscription': {
     component: SubscriptionPage,
   },
+  '/subscription-cancel': {
+    component: SubscriptionCancel,
+  },
+
   '/welcome': {
     component: WelcomePage,
   },
@@ -66,9 +71,6 @@ export const routes = {
   '/reset-password': {
     component: ResetPassword,
   },
-
-
-
 
   '/popular-programs': {
     component: PopularPrograms,

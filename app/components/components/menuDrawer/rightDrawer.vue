@@ -11,6 +11,7 @@
           src="~/assets/icons/Icon feather-arrow-left-circle.png"
           height="40"
           width="40"
+          @tap="toggleSwitchMenu(false)"
         />
       </StackLayout>
       <StackLayout
@@ -32,48 +33,49 @@
     <Label
       text="Profile"
       fontSize="16"
-      @tap="$navigator.navigate('/profile')"
+      @tap="$navigator.navigate('/profile'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="Payments"
       fontSize="16"
-      @tap="$navigator.navigate('/payments')"
+      @tap="$navigator.navigate('/payments'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="Purchase History"
       fontSize="16"
-      @tap="$navigator.navigate('/purchase-history')"
+      @tap="$navigator.navigate('/purchase-history'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="Subscription"
       fontSize="16"
-      @tap="$navigator.navigate('/subscription')"
+      @tap="$navigator.navigate('/subscription'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="help"
       fontSize="16"
-      @tap="$navigator.navigate('/help')"
+      @tap="$navigator.navigate('/help'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="Logout"
       fontSize="16"
-      @tap="$navigator.navigate('/logout')"
+      @tap="$navigator.navigate('/logout'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
     />
   </StackLayout>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     data: {
@@ -83,6 +85,9 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    ...mapMutations(["toggleSwitchMenu"]),
   },
 };
 </script>
