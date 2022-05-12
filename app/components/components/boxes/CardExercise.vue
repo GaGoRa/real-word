@@ -10,6 +10,7 @@
       borderRadius="16"
       padding="16"
       class="box-shadow"
+      @tap="$navigator.navigate('/day-exercise')"
     >
       <FlexboxLayout justifyContent="space-between">
         <Label

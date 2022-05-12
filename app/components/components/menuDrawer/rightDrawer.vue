@@ -68,7 +68,7 @@
     <Label
       text="Logout"
       fontSize="16"
-      @tap="$navigator.navigate('/logout'), toggleSwitchMenu(false)"
+      @tap="logoutAction"
       marginBottom="16"
       fontWeight="900"
     />
@@ -88,6 +88,16 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSwitchMenu"]),
+    logoutAction(){
+            alert({
+              cancelable:true,
+              message: "Are you sure you want to logout?",
+              okButtonText: "Logout",
+              theme:5
+      }).then(() => {
+        console.log("Alert dialog closed");
+      });
+          }
   },
 };
 </script>

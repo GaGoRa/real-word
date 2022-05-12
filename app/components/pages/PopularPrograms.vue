@@ -1,5 +1,9 @@
 <template>
-  <Page class="page-home">
+  <Page class="page-home" actionBarHidden="true">
+    <!-- <StackLayout>
+    <NavBarBurgerMenu/>
+
+    </StackLayout> -->
     <ActionBar
       marginTop="16"
       height="64"
@@ -62,9 +66,11 @@
 </template>
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
 export default {
   components: {
     cardImage,
+    NavBarBurgerMenu
   },
   data() {
     return {

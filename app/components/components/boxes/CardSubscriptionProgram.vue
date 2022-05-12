@@ -8,6 +8,7 @@
       :backgroundColor="data.color"
       borderRadius="16"
       padding="12"
+      @tap=" data.url ? $navigator.navigate('/pay-subscription') : false"
       class="box-shadow"
     >
       <FlexboxLayout justifyContent="space-between">

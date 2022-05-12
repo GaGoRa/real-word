@@ -68,7 +68,7 @@
             textDecoration="underline"
             horizontalAlignment="center"
             @tap="$navigator.navigate('/popular-programs')"
-            text="ViburgerMenuew all"
+            text="View all"
           />
         </StackLayout>
         <StackLayout
@@ -153,6 +153,14 @@
             :data="item"
             marginBottom="16"
           />
+
+   <CardProgram
+            v-for="(item, key) in cardExample"
+            :key="`cardProgram-${key}`"
+            :data="item"
+            marginBottom="16"
+          />
+
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -161,10 +169,13 @@
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
+import CardProgram from "~/components/components/boxes/CardProgram.vue";
+
 export default {
   components: {
     cardImage,
     BurgerMenu,
+    CardProgram,
   },
   data() {
     return {
@@ -254,6 +265,15 @@ export default {
           url: "/add-programs",
         },
       ],
+      cardExample: [
+        {
+          img: "~/assets/images/File_000.JPG",
+          text: "ARM BLASTER",
+          width: "100%",
+          colorText: "white",
+          height: 173,
+        },
+        ],
       drawerState: false,
     };
   },

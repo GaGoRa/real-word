@@ -1,18 +1,16 @@
 <template>
-  <Page class="seccion-register-bg-invert">
-    <ActionBar
-      marginTop="16"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-      marginBottom="16"
-    >
+  <Page class="seccion-register-bg-invert" actionBarHidden="true">
+      <StackLayout 
+      backgroundColor="trasparent"
+      marginLeft="16"
+      >
+    <!-- <StackLayout>
       <FlexboxLayout
         marginTop="32"
         class="bg-label"
-        justifyContent="flex-start"
-      >
-        <StackLayout marginRight="64">
+        justifyContent="flex-start">
+
+        <StackLayout  marginRight="32">
           <Image
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
@@ -21,7 +19,7 @@
           />
         </StackLayout>
         <StackLayout
-          width="100%"
+          width="80%"
           backgroundImage="~/assets/icons/Group_403.png"
           class="bg-label"
           height="14"
@@ -36,8 +34,11 @@
           />
         </StackLayout>
       </FlexboxLayout>
-    </ActionBar>
+   
+      </StackLayout> 
 
+  <NavBarTittle :data="navbarTittle"/>
+-->
     <StackLayout>
       <CardSubscription
         v-for="(item, key) in subscriptions"
@@ -46,17 +47,27 @@
         marginBottom="16"
       />
     </StackLayout>
+    </StackLayout>
   </Page>
 </template>
 
 <script>
 import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue";
+
+import NavBarTittle from "~/components/components/NavBar.vue";
 export default {
   components: {
     CardSubscription,
+    NavBarTittle,
+    NavBarBurgerMenu
   },
   data() {
-    return {
+    return { 
+      
+      navbarTittle:{
+        title:"Subscription"
+      },
       subscriptions: [
         {
           tittle: "Gold Subscription",

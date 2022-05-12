@@ -1,50 +1,104 @@
 <template>
   <Page class="seccion-register-bg-invert">
-    <ActionBar
-      marginTop="16"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <FlexboxLayout
-        marginTop="32"
-        class="bg-label"
-        justifyContent="flex-start"
-      >
-        <StackLayout marginRight="64">
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-        </StackLayout>
-        <StackLayout
-          width="100%"
-          backgroundImage="~/assets/icons/Group_403.png"
-          class="bg-label"
-          height="12"
-        >
-          <Label
-            textAlignment="center"
-            text="Purchase History"
-            fontSize="20"
-            color="white"
-            fontWeight="900"
-            paddingTop="2"
-          />
-        </StackLayout>
-      </FlexboxLayout>
-    </ActionBar>
-
-    <Label text="Purchase History"></Label>
+    <NavBar :data="navbar"/>
+        <ScrollView
+          scrollBarIndicatorVisible="false" 
+          >
+          <StackLayout paddingBottom="48" >
+          <CardHistoryPayment
+            v-for="(item, key) in historyPayments"
+            :key="`history-${key}`"
+            :data="item"
+            />
+            
+     
+      </StackLayout>
+       </ScrollView>
   </Page>
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue'
+import CardHistoryPayment from '../components/boxes/CardHistoryPayment .vue'
 export default {
+  components:{
+NavBar, 
+    CardHistoryPayment ,
+  },
   data() {
-    return {};
+    return {
+      navbar:{
+        title:"Purchase History    "
+      },
+      historyPayments : [
+        
+        {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },{
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      
+      ]
+
+
+    };
   },
 };
 </script>

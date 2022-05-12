@@ -1,10 +1,11 @@
 <template>
   <Page
+    actionBarHidden="true"
     class="page-home"
     xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:VideoPlayer="nativescript-videoplayer"
   >
-    <ActionBar
+    <!-- <ActionBar
       marginTop="16"
       height="64"
       title=""
@@ -26,7 +27,10 @@
           <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
         </FlexboxLayout>
       </StackLayout>
-    </ActionBar>
+    </ActionBar> -->
+    <StackLayout marginTop="32"  marginRight="16" >
+    <NavBarBurgerMenu/>
+
     <ScrollView>
       <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
         <StackLayout
@@ -131,7 +135,7 @@
         </FlexboxLayout>
 
         <StackLayout col="0" row="6" marginTop="16" marginRight="16">
-          <StackLayout v-if="true">
+          <StackLayout v-if="false">
             <CardSubscriptionProgram
               v-for="(item, key) in subscriptions"
               :key="`subscription-${key}`"
@@ -150,15 +154,18 @@
         </StackLayout>
       </GridLayout>
     </ScrollView>
+    </StackLayout>
   </Page>
 </template>
 <script>
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
 import CardExercise from "~/components/components/boxes/CardExercise.vue";
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
 export default {
   components: {
     CardSubscriptionProgram,
     CardExercise,
+    NavBarBurgerMenu
   },
   data() {
     return {
@@ -177,13 +184,16 @@ export default {
           mount: "$25.32",
           color: "#EAB813",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          url: '/pay-subscription'
+
         },
         {
           tittle: "One Time Purchase",
           mount: "$199.42",
           color: "#838383",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-        },
+          url: false
+       },
       ],
       exercises: [
         {
@@ -192,6 +202,7 @@ export default {
           color: "#838383",
           body: "Legs",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          url:'/'
         },
         {
           completed: false,
