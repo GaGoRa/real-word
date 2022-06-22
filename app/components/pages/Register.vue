@@ -19,22 +19,24 @@
                         <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
                     </StackLayout>
 
-                
-                <Label text="or" fontSize="24" fontWeight="900"
+                <!-- <Label text="or" fontSize="24" fontWeight="900"
+                    textAlignment="center" color="white" marginBottom="16" /> -->
+
+                <Label :text="data.errorMessage" fontSize="24" fontWeight="900"
                     textAlignment="center" color="white" marginBottom="16" />
 
-                <TextField height="38" v-model="textFieldValue"
+                <TextField height="38" v-model="textFieldValue.firstName"
                     hint="First Name" backgroundColor="white"
                     borderRadius="10" />
-                <TextField height="38" v-model="textFieldValue"
+                <TextField height="38" v-model="textFieldValue.lastName"
                     hint="Last Name" backgroundColor="white" borderRadius="10"
                     />
-                <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue" hint="Email"
+                <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
                     backgroundColor="white" borderRadius="10" marginBottom="6"/>
 
                <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="white" height="36"  />
 
-                <TextField height="38" v-model="textFieldValue" hint="Phone #"
+                <TextField height="38" v-model="textFieldValue.phone" hint="Phone #"
                     backgroundColor="white" borderRadius="10"
                     marginBottom="16" />
 
@@ -50,7 +52,7 @@
                     <Label text="Already Register?" color="black"
                         marginRight="8" />
                     <Label text="Login" textDecoration="underline"
-                        fontWeight="900" color="black" @tap="$navigator.navigate('/login')" />
+                        fontWeight="900" color="black" @tap="processCreateLogin()" />
                      <StackLayout>
                   <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
                      </StackLayout>
@@ -62,7 +64,7 @@
 </template>
 
 <script>
-
+import { createUser } from '~/resource/http'; 
   export default {
       data(){
           return {
@@ -86,6 +88,13 @@
                     "Russia",
                     "United States"
               ]
+              ,textFieldValue:{
+                firstName:'',
+                lastName:'',
+                email:'',
+                phone:''
+              },
+              errorMessage:''
           }
 
       },
@@ -95,9 +104,18 @@
       }
     },
     methods:{
+
         myFuncion(){
-            console.log('LLgue')
             this.$navigator.navigate('/home')
+        },
+        processCreateLogin(){
+            createUser(this.data.textFieldValue,this.onSuccess,this.onError)
+        },
+        onSuccess(response){
+            navigate('/verification-code')
+        },
+        onError(response){
+
         }
     }
     

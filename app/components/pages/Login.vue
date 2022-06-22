@@ -39,7 +39,6 @@
     },
     methods:{
         myFuncion(){
-            console.log('LLgue')
             this.$navigator.navigate('/home')
         }
     }
