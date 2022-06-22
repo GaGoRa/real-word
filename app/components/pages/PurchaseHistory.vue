@@ -1,39 +1,116 @@
 <template>
-    <Page class="seccion-register-bg-invert" actionBarHidden="true" >
-        <GridLayout columns="*" rows="=auto,auto">
-    <StackLayout marginTop="32" marginBottom="16" col="0" row="0">
-             <FlexboxLayout  justifyContent="right">
-           
-                <Image @tap="$navigator.navigate('/home')"
-                src="~/assets/icons/icon_arrow_next.png" height="48" width="48" />
-            </FlexboxLayout>
-    </StackLayout>  
-        <StackLayout col="0" row="1"  marginRight="32" marginLeft="32" class="home-panel">
-            <!--Add your page content here-->
-            <Label horizontalAlignment="left" color="#949494" fontSize="24" fontWeight="700"
-                textWrap="true" text="Purchase History" />
-           \
-    </StackLayout>
-    </GridLayout>
-    </Page>
+  <Page class="seccion-register-bg-invert">
+    <NavBar :data="navbar"/>
+        <ScrollView
+          scrollBarIndicatorVisible="false" 
+          >
+          <StackLayout paddingBottom="48" >
+          <CardHistoryPayment
+            v-for="(item, key) in historyPayments"
+            :key="`history-${key}`"
+            :data="item"
+            />
+            
+     
+      </StackLayout>
+       </ScrollView>
+  </Page>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {};
-        }
+import NavBar from '../components/NavBar.vue'
+import CardHistoryPayment from '../components/boxes/CardHistoryPayment .vue'
+export default {
+  components:{
+NavBar, 
+    CardHistoryPayment ,
+  },
+  data() {
+    return {
+      navbar:{
+        title:"Purchase History    "
+      },
+      historyPayments : [
+        
+        {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123.32",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },{
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      {
+        subscription:"Gold Subscription",
+        mount:"123",
+        date:"Nov 23, 2021",
+        card:"***23123",
+        typeCard:"visa"
+      },
+      
+      ]
+
+
     };
+  },
+};
 </script>
 
 <style scoped>
-    .home-panel {
-        vertical-align: center;
-        font-size: 20;
-        margin: 15;
-    }
+.home-panel {
+  vertical-align: center;
+  font-size: 20;
+  margin: 15;
+}
 
-    .description-label {
-        margin-bottom: 15;
-    }
+.description-label {
+  margin-bottom: 15;
+}
 </style>

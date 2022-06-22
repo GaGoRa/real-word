@@ -14,6 +14,15 @@ import SubscriptionPage from './components/pages/Subscription.vue'
 import ChooseBestPrograms from './components/pages/ChooseBestPrograms.vue'
 import LoginAplication from './components/pages/LoginAplication.vue'
 import ResetPassword from './components/pages/ResetPassword.vue'
+import PopularPrograms from './components/pages/PopularPrograms.vue'
+import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
+
+import AddPrograms from './components/pages/AddPrograms.vue'
+import Program from './components/pages/Program.vue'
+import SubscriptionCancel from './components/pages/SubscriptionCancel.vue'
+import PaySubscriptions from './components/pages/PaySubscriptions.vue'
+import PageDay from './components/pages/PageDay.vue'
+
 export const routes = {
   '/home': {
     component: HomePage,
@@ -48,6 +57,10 @@ export const routes = {
   '/subscription': {
     component: SubscriptionPage,
   },
+  '/subscription-cancel': {
+    component: SubscriptionCancel,
+  },
+
   '/welcome': {
     component: WelcomePage,
   },
@@ -60,5 +73,25 @@ export const routes = {
   '/reset-password': {
     component: ResetPassword,
   },
-  
+
+  '/popular-programs': {
+    component: PopularPrograms,
+  },
+  '/recommended-programs': {
+    component: RecommendedPrograms,
+  },
+
+  '/add-programs': {
+    component: AddPrograms,
+  },
+  '/program': {
+    component: Program,
+  },
+
+  '/pay-subscription': {
+    component: PaySubscriptions,
+  },
+  '/day-exercise': {
+    component: PageDay,
+  },
 }

@@ -1,40 +1,38 @@
-@import '@nativescript/theme/core';
-@import '@nativescript/theme/default';
-
+@import "@nativescript/theme/core";
+@import "@nativescript/theme/default";
 
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
 
 // Font icon class
 .fab {
-  font-family: 'Font Awesome 5 Brands', 'fa-brands-400';
+  font-family: "Font Awesome 5 Brands", "fa-brands-400";
   font-weight: 400;
 }
 
 .fas {
-  font-family: 'Font Awesome 5 Free', 'fa-solid-900';
+  font-family: "Font Awesome 5 Free", "fa-solid-900";
   font-weight: 900;
 }
 
 .far {
-  font-family: 'Font Awesome 5 Free', 'fa-regular-400';
+  font-family: "Font Awesome 5 Free", "fa-regular-400";
   font-weight: 400;
 }
 
 .page-home {
-  background-image: url('~/assets/images/bg_comun.png');
-background-repeat: no-repeat;
-background-position: center;
-background-size: cover;
+  background-image: url("~/assets/images/bg_comun.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-
 .page-login {
-  background-image: url('~/assets/images/background.png');
-background-repeat: no-repeat;
-background-position: center;
-background-size: cover;
-} 
+  background-image: url("~/assets/images/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 .bg {
   background-repeat: no-repeat;
@@ -48,8 +46,8 @@ background-size: cover;
   background-size: cover;
 }
 
-.seccion-register-bg-invert{
-  background-image: url('~/assets/images/bg_comun_invert.png');
+.seccion-register-bg-invert {
+  background-image: url("~/assets/images/bg_comun_invert.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -62,14 +60,35 @@ TextField {
   box-shadow: 0 4px 6px -2px gray;
 }
 
-DropDown{
-padding-left: 4;
-padding-top: 4;
-font-weight: 800;
-box-shadow: 0 4px 6px -2px gray;
+.comment-TextView {
+  padding-left: 16;
+  padding-top: 16;
+  placeholder-color: grey;
+  font-weight: 800;
+  box-shadow: 0 4px 6px -2px gray;
+}
+
+DropDown {
+  padding-left: 4;
+  padding-top: 4;
+  font-weight: 800;
+  box-shadow: 0 4px 6px -2px gray;
 }
 
 .stack-layout-btn {
+  box-shadow: 0 6px 8px -2px gray;
+}
 
-  box-shadow: 0 4px 6px -2px gray;
+.box-shadow {
+  box-shadow: 0 6px 8px -2px gray;
+}
+
+.detail-sets {
+  border-radius: 0 0 60px 60px;
+}
+
+
+.label-cardProgramResult {
+  text-align:center;
+
 }

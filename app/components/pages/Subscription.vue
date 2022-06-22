@@ -1,39 +1,94 @@
 <template>
-    <Page class="seccion-register-bg-invert" actionBarHidden="true" >
-        <GridLayout columns="*" rows="=auto,auto">
-    <StackLayout marginTop="32" marginBottom="16" col="0" row="0">
-             <FlexboxLayout  justifyContent="right">
-           
-                <Image @tap="$navigator.navigate('/home')"
-                src="~/assets/icons/icon_arrow_next.png" height="48" width="48" />
-            </FlexboxLayout>
-    </StackLayout>  
-        <StackLayout col="0" row="1"  marginRight="32" marginLeft="32" class="home-panel">
-            <!--Add your page content here-->
-            <Label horizontalAlignment="left" color="#949494" fontSize="24" fontWeight="700"
-                textWrap="true" text="Subscription" />
-           \
+  <Page class="seccion-register-bg-invert" actionBarHidden="true">
+      <StackLayout 
+      backgroundColor="trasparent"
+      marginLeft="16"
+      >
+    <!-- <StackLayout>
+      <FlexboxLayout
+        marginTop="32"
+        class="bg-label"
+        justifyContent="flex-start">
+
+        <StackLayout  marginRight="32">
+          <Image
+            src="~/assets/icons/Icon feather-arrow-left-circle.png"
+            height="40"
+            width="40"
+            @tap="$navigator.navigate('/home')"
+          />
+        </StackLayout>
+        <StackLayout
+          width="80%"
+          backgroundImage="~/assets/icons/Group_403.png"
+          class="bg-label"
+          height="14"
+        >
+          <Label
+            textAlignment="center"
+            text="Subscription"
+            fontSize="24"
+            color="white"
+            fontWeight="900"
+            paddingTop="0"
+          />
+        </StackLayout>
+      </FlexboxLayout>
+   
+      </StackLayout> 
+
+  <NavBarTittle :data="navbarTittle"/>
+-->
+    <StackLayout>
+      <CardSubscription
+        v-for="(item, key) in subscriptions"
+        :key="`subscription-${key}`"
+        :data="item"
+        marginBottom="16"
+      />
     </StackLayout>
-    </GridLayout>
-    </Page>
+    </StackLayout>
+  </Page>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {};
-        }
+import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue";
+
+import NavBarTittle from "~/components/components/NavBar.vue";
+export default {
+  components: {
+    CardSubscription,
+    NavBarTittle,
+    NavBarBurgerMenu
+  },
+  data() {
+    return { 
+      
+      navbarTittle:{
+        title:"Subscription"
+      },
+      subscriptions: [
+        {
+          tittle: "Gold Subscription",
+          mount: "$27.99",
+          color: "#EAB813",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        },
+      ],
     };
+  },
+};
 </script>
 
 <style scoped>
-    .home-panel {
-        vertical-align: center;
-        font-size: 20;
-        margin: 15;
-    }
+.home-panel {
+  vertical-align: center;
+  font-size: 20;
+  margin: 15;
+}
 
-    .description-label {
-        margin-bottom: 15;
-    }
+.description-label {
+  margin-bottom: 15;
+}
 </style>
