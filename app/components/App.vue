@@ -3,6 +3,7 @@
     <StackLayout slot="right">
       <RightDrawer />
     </StackLayout>
+     
     <Navigator :defaultRoute="false ? '/home' : '/login'" />
   </MultiDrawer>
 </template>
@@ -14,7 +15,7 @@ import { mapState, mapMutations } from "vuex";
 export default {
   components: {
     RightDrawer,
-  },
+},
   computed: {
     ...mapState(["drawerState"]),
     onDrawer: {

@@ -1,6 +1,10 @@
 <template>
     <Page  class="seccion-register-bg-invert" actionBarHidden="true">
-       
+        <MultiDrawer>
+            <StackLayout  slot="bottom">
+                 <SelectDrawer />
+            </StackLayout>
+        
         <FlexboxLayout flexDirection="column" justifyContent="center">
             <StackLayout marginRight="24" marginLeft="24">
 
@@ -19,31 +23,39 @@
                         <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
                     </StackLayout>
 
-                <!-- <Label text="or" fontSize="24" fontWeight="900"
-                    textAlignment="center" color="white" marginBottom="16" /> -->
-
-                <Label :text="data.errorMessage" fontSize="24" fontWeight="900"
+                <Label text="or" fontSize="24" fontWeight="900"
                     textAlignment="center" color="white" marginBottom="16" />
 
                 <TextField height="38" v-model="textFieldValue.firstName"
                     hint="First Name" backgroundColor="white"
                     borderRadius="10" />
+                    <Label  v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
+
                 <TextField height="38" v-model="textFieldValue.lastName"
                     hint="Last Name" backgroundColor="white" borderRadius="10"
                     />
+                    <Label  v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+
+
                 <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
                     backgroundColor="white" borderRadius="10" marginBottom="6"/>
+                    <Label  v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="white" height="36"  />
 
                 <TextField height="38" v-model="textFieldValue.phone" hint="Phone #"
                     backgroundColor="white" borderRadius="10"
                     marginBottom="16" />
+                    <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                 <Button borderRadius="16" marginTop="" fontSize="16"
                     text="Register" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="white"
-                    marginBottom="32" @tap="$navigator.navigate('/verification-code')"/>
+                    marginBottom="32" @tap="processCreateUser"/>
 
                 <FlexboxLayout justifyContent="center">
                     <StackLayout>
@@ -52,7 +64,7 @@
                     <Label text="Already Register?" color="black"
                         marginRight="8" />
                     <Label text="Login" textDecoration="underline"
-                        fontWeight="900" color="black" @tap="processCreateLogin()" />
+                        fontWeight="900" color="black" @tap="$navigator.navigate('/verification-code')" />
                      <StackLayout>
                   <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
                      </StackLayout>
@@ -60,12 +72,21 @@
 
             </StackLayout>
         </FlexboxLayout>
+        </MultiDrawer>
     </Page>
 </template>
 
 <script>
-import { createUser } from '~/resource/http'; 
+import { apiPost } from '~/resource/http';
+import cache from '~/store/cache/cache.android'
+import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
+    
+
   export default {
+    components: {
+        SelectDrawer,
+    //CustomTextField
+  },
       data(){
           return {
               items_selectPicker:[
@@ -92,9 +113,16 @@ import { createUser } from '~/resource/http';
                 firstName:'',
                 lastName:'',
                 email:'',
-                phone:''
+                phone:'',
+                country:'1'
               },
-              errorMessage:''
+              errorsMessages:{
+                ErrorFirstName:'',
+                ErrorLastName:'',
+                ErrorEmail:'',
+                ErrorPhone:'',
+                ErrorCountry:''
+              },
           }
 
       },
@@ -104,18 +132,71 @@ import { createUser } from '~/resource/http';
       }
     },
     methods:{
-
         myFuncion(){
             this.$navigator.navigate('/home')
+
         },
-        processCreateLogin(){
-            createUser(this.data.textFieldValue,this.onSuccess,this.onError)
+        processCreateUser(){       
+             const body = 
+                                    
+              {
+    "name": "Asd",
+    "middle_name": "Asd",
+    "last_name": "Asd",
+    "gender_id": "1",
+    "date_of_birth": "1983-01-07",
+    "email": "As111aa12211aasda123d@gmail",
+    "password": "N/A",
+    "address": "N/A",
+    "telephone": "Asd",
+    "country_id": "1"
+        }
+            //  const body = 
+                                    
+            //         {
+            //     "name":this.textFieldValue.firstName,
+            //     "middle_name":this.textFieldValue.firstName,
+            //     "last_name":this.textFieldValue.lastName,
+            //     "gender_id":"1",
+            //     "date_of_birth":"1983-01-07",
+            //     "email":this.textFieldValue.email,
+            //     "password":"N/A",
+            //     "address":"N/A",
+            //     "telephone":this.textFieldValue.phone,
+            //     "country_id":'1' }
+            
+           apiResource(body,'/register')
+            .then(this.onSuccess)
+            .catch(this.onError)
+    
         },
         onSuccess(response){
-            navigate('/verification-code')
-        },
-        onError(response){
+             if(response.message === "User Registered"){
+                //savee token and id and email
+                const token = response.data.token
+                const userId = response.data.user.id
+                const email = response.data.user.email
+ 
+                cache.set("token",token)
+                cache.set("email",email)
+                cache.get("userId",userId)          
 
+                this.$navigator.navigate('/verification-code')
+
+             }
+            //navigate('/home')
+        },
+        onError(error){
+        console.log("error user", error.content.jso);
+        this.errorsMessages.ErrorEmail =
+        (
+        error.statusCode === 422 
+        //&& 
+        //error.content === "User already exists"
+        )
+        ? error.content
+        : ''
+                             
         }
     }
     

@@ -7,7 +7,6 @@ import store from './store/index'
 
 Vue.use(Navigator, { routes })
 Vue.use(MultiDrawer)
-
 Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
 Vue.registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
 

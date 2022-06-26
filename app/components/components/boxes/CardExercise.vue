@@ -5,7 +5,7 @@
       left="0"
       width="100%"
       height="auto"
-      completed: true
+      completed:true
       :backgroundColor="data.completed ? '#EAB813' : '#838383' "
       borderRadius="16"
       padding="16"

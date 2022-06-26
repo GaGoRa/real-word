@@ -38,8 +38,7 @@
                     <Label marginLeft="16" marginTop="8" color="#949494" text="What’s your main reason for joining?" fontSize="16" 
                     textAlignment="left"  />
 
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
-    b             marginLeft="14" marginRight="16" 
+                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"             marginLeft="14" marginRight="16" 
                 borderRadius="10" selectedIndex="0" :items="items_selectPicker_reason"
                  backgroundColor="white" height="36"  />
 
@@ -68,11 +67,13 @@
 </template>
 
 <script>
+import { apiPost,apiGet} from '~/resource/http';
+import cache from '~/store/cache/cache.android';
 
   export default {
       data(){
           return {
-             
+
               items_selectPicker_gender:[
                   "Gender",
                   "Male",
@@ -103,9 +104,17 @@
                   "2",
                   "3",
               ],
-              
-          }
+            
+            textValue:{
+                gender_id:"",
+                date_of_birth:"",
+                experience_id:"",
+                reason_id:"",
+                frequency_id:"",
+                exercise_place_id:"",
+            }
 
+          }
       },
     computed: {
       message() {
@@ -113,11 +122,62 @@
       }
     },
     methods:{
-        myFuncion(){
-            console.log('LLgue')
+        processUserUpdate(){
+            
+            const body = {
+                    "user_id":cache.get("userId"),
+                    "gender_id":"1",
+                    "date_of_birth":"1983-01-07",
+                    "experience_id":"1",
+                    "reason_id":"1",
+                    "frequency_id":"1",
+                    "exercise_place_id":"1"
+                }
+
+
+            apiPost(body,"/update_user")
+            .then(onSuccess)
+            .catch(onError)
+        },
+        onSuccess(res){
             this.$navigator.navigate('/home')
+        },
+        onError(err){
+                alert({
+                        title: "Error Message",
+                        message: "there is an error to update",
+                        okButtonText: "ok"
+                    }).then(function () {
+                        console.log("Error",err);
+                    });
         }
+    },
+    mounted(){
+        const genderResource = apiGet("/gender")
+        const experienceResource = apiGet("/experience")
+        const exercisePlaceResource = apiGet("/exercise_place")
+        const reasonResource = apiGet("/reason")
+        const concurrenceResource = apiGet("/frequency")
+        console.log("init",reasonResource)
+       
+       
+       Promise.all([
+            genderResource,
+            experienceResource,
+            exercisePlaceResource,
+            reasonResource,
+            concurrenceResource
+            ]).then( (values )=>{
+                this.items_selectPicker_gender = value[0][0]
+                this.items_selectPicker_experience = value[0][1]
+                this.items_selectPicker_reason = value[0][2]
+                this.items_selectPicker_where_exercise = value[0][3]
+                this.items_selectPicker_concurrence = value[0][4]
+            }).catch(err =>{
+                    console.log('err',err,typeof err);
+            })
     }
+
     
   };
 
