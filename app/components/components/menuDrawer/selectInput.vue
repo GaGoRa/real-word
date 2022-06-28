@@ -1,22 +1,39 @@
 <template>
-  <StackLayout marginTop="4" marginLeft="24" marginRight="24"> 
-       <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model=".email" hint="Email"
-                    backgroundColor="white" borderRadius="10" marginBottom="6"/>
-  </StackLayout>
+ <StackLayout>
+    <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="white"
+                    color="white" marginBottom="0" paddingLeft="16" paddingRight="32" class="stack-layout-btn" @tap="toggleSelectDrawer">
+                        <Label verticalAlignment="middle"  horizontalAlignment="center" :text="hint" marginTop="4"  fontSize="12" color="black" />
+                    </StackLayout>
+ 
+ </StackLayout>
+
 </template>
 <script>
+import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
+
 export default {
+  components: {
+    SelectDrawer
+  },
   props: {
-     data: {
-      type: Object,
-      default: {},
+     hint: {
+      type: String,
+      default: '',
+    },
+     drawerState: {
+      default: false,
     },
   },
   data() {
-    return {};
+    return {
+        selectDrawerState: false
+    };
   },
   methods: {
-   
+     toggleSelectDrawer(){
+        this.$emit('toggleSelectDrawer','bottom')
+        this.drawerState = true
+    }
   },
 };
 </script>

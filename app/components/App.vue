@@ -4,17 +4,20 @@
       <RightDrawer />
     </StackLayout>
      
-    <Navigator :defaultRoute="false ? '/home' : '/login'" />
+    <Navigator :defaultRoute=" getToken() ? '/home' : '/login'" />
   </MultiDrawer>
 </template>
 
 <script>
 import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
+import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { mapState, mapMutations } from "vuex";
+import cache from "~/store/cache/cache.android";
 
 export default {
   components: {
     RightDrawer,
+    SelectDrawer
 },
   computed: {
     ...mapState(["drawerState"]),
@@ -27,7 +30,14 @@ export default {
       },
     },
   },
-  methods: { ...mapMutations(["toggleSwitchMenu"]) },
+  methods: {
+  ...mapMutations(["toggleSwitchMenu"]),
+  getToken(){
+    let data = {}
+    const cacheData = cache.get('userProfile')
+     data = JSON.parse(cacheData)
+      return !!data
+  }},
 };
 </script>
 

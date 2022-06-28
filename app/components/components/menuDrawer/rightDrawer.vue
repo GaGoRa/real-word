@@ -76,6 +76,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import cache from "~/store/cache/cache.android";
 export default {
   props: {
     data: {
@@ -95,7 +96,10 @@ export default {
               okButtonText: "Logout",
               theme:5
       }).then(() => {
-        console.log("Alert dialog closed");
+        this.toggleSwitchMenu(false)
+        cache.delete('userProfile')
+      this.$navigator.navigate('/login')
+
       });
           }
   },

@@ -71,10 +71,13 @@ import { apiPost} from '~/resource/http';
             }
         },
         mounted(){ 
-            console.log("cache.get",cache.get("email"));
-                this.email = cache.get("email")
-                this.id = cache.get("id")
-                this.token = cache.get("token")
+
+                const cacheData = cache.get("userProfile")
+                const data = JSON.parse(cacheData)
+
+                this.email = data.user.email
+                this.id = data.user.id
+                this.token = data.token
              }
         
         

@@ -6,7 +6,7 @@
               :key="`recomended-${key}`"
               :data="item"
                 borderBottomWidth="1" borderBottomColor="#E5E5E5" >
-            <label marginTop="4" marginBottom="4" color="black" horizontalAlignment="center" fontSize="24" fontWeight="600" :text="item.description" /> 
+            <abel id="value" ref="value" marginTop="4" marginBottom="4" color="black" horizontalAlignment="center" fontSize="24" fontWeight="600" :text="item.description" /> 
        </StackLayout>
   </StackLayout>
           </ScrollView> 
@@ -15,84 +15,21 @@
 export default {
   props: {
      data: {
-      type: Object,
-      default: [
-        {
-            "id": 1,
-            "description": "Femenino",
-            "created_at": "2022-03-17T18:40:21.000000Z",
-            "updated_at": "2022-03-17T18:40:21.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 2,
-            "description": "Masculino",
-            "created_at": "2022-03-17T20:23:06.000000Z",
-            "updated_at": "2022-03-17T20:23:06.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 1,
-            "description": "Femenino",
-            "created_at": "2022-03-17T18:40:21.000000Z",
-            "updated_at": "2022-03-17T18:40:21.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 2,
-            "description": "Masculino",
-            "created_at": "2022-03-17T20:23:06.000000Z",
-            "updated_at": "2022-03-17T20:23:06.000000Z",
-            "deleted_at": null
-        },{
-            "id": 1,
-            "description": "Femenino",
-            "created_at": "2022-03-17T18:40:21.000000Z",
-            "updated_at": "2022-03-17T18:40:21.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 2,
-            "description": "Masculino",
-            "created_at": "2022-03-17T20:23:06.000000Z",
-            "updated_at": "2022-03-17T20:23:06.000000Z",
-            "deleted_at": null
-        },{
-            "id": 1,
-            "description": "Femenino",
-            "created_at": "2022-03-17T18:40:21.000000Z",
-            "updated_at": "2022-03-17T18:40:21.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 2,
-            "description": "Masculino",
-            "created_at": "2022-03-17T20:23:06.000000Z",
-            "updated_at": "2022-03-17T20:23:06.000000Z",
-            "deleted_at": null
-        },{
-            "id": 1,
-            "description": "Femenino",
-            "created_at": "2022-03-17T18:40:21.000000Z",
-            "updated_at": "2022-03-17T18:40:21.000000Z",
-            "deleted_at": null
-        },
-        {
-            "id": 2,
-            "description": "Masculino",
-            "created_at": "2022-03-17T20:23:06.000000Z",
-            "updated_at": "2022-03-17T20:23:06.000000Z",
-            "deleted_at": null
-        }
-    ],
+      type: Array,
+      default: [{}],
     },
-  },
+  }, 
   data() {
-    return {};
+    return {
+      hint:''
+    };
   },
   methods: {
+    
     myFuncion(){
-      console.log('AHORAA SI');
+       console.log('this.$refs.myDiv.nativeView',this.$refs.value.nativeView);
+      this.$emit('changeHint',this.hint)
+      this.$emit('toggleSelectDrawerClose',false)
     }
   },
 };

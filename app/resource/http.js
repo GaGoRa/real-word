@@ -1,6 +1,6 @@
 import { Http,HttpResponse } from '@nativescript/core'
 
-const baseUrl = "https://realworld.uscreativity.com/api"
+export const baseUrl = "https://realworld.uscreativity.com"
 
 const EXPREG_HTTP_CODE ={
   success : new RegExp(/^[2][0-9]{0,2}$/),
@@ -13,7 +13,7 @@ export function apiPost(body,path){
   return  new Promise((resolve, reject) => {
     Http.request({
       method: "post",
-      url: `${baseUrl}${path}`,
+      url: `${baseUrl}/api${path}`,
       headers: {
           "Content-Type": "application/json",
       },
@@ -37,7 +37,7 @@ export function apiGet(path){
     return  new Promise((resolve, reject) => {
       Http.request({
         method: "GET",
-        url: `${baseUrl}${path}`,
+        url: `${baseUrl}/api${path}`,
         headers: {
             "Content-Type": "application/json",
         },

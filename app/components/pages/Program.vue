@@ -46,7 +46,7 @@
             color="white"
             fontSize="24"
             fontWeight="900"
-            text="Arm Blaster"
+            :text="textValue.title"
           />
         </StackLayout>
         <StackLayout
@@ -90,7 +90,7 @@
         <TextView row="3" col="0" editable="false">
           <FormattedString>
             <Span
-              text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
+              :text="textValue.description"
             />
           </FormattedString>
         </TextView>
@@ -161,23 +161,29 @@
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
 import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
+import { apiGet } from "~/resource/http";
+
 export default {
   components: {
     CardSubscriptionProgram,
     CardExercise,
     NavBarBurgerMenu
   },
+
+  props:{
+    id:{
+      type:String,
+      default:"0"
+    }
+  },
+
   data() {
     return {
-      program: [
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: " ",
-          width: "100%",
-          colorText: "#949494",
-          height: 248,
-        },
-      ],
+      textValue:{
+        description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+        title:"arm Blaster"
+      },
+
       subscriptions: [
         {
           tittle: "Gold Subscription",
@@ -221,6 +227,41 @@ export default {
       ],
     };
   },
+  created(){
+
+    apiGet(`/program_detail?program_id=${this.id}`)
+    .then(this.onSuccess)
+    .catch(this.onError)
+  },
+  methods:{
+
+    onSuccess(res){
+      console.log('ress',res[0]);
+      this.textValue.description = res[0].description
+      this.textValue.title = res[0].name
+
+      getExercises(res[0])
+      
+
+    },
+    onError(err){
+      console.log("Have Error");
+    },
+    getExercises(res){
+        return res.map(()=>({
+          completed: true,
+          day: "1",
+          color: "#838383",
+          body: "Legs",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          url:'/'
+        }))
+
+
+    },
+    getSubscriptions(res){}
+
+  }
 };
 </script>
 

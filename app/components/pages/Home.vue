@@ -40,6 +40,7 @@
             @tap="$refs.drawer.open(right)"
           />
         </FlexboxLayout>
+        <!-- Populars Programs -->
         <ScrollView
           col="0"
           row="1"
@@ -87,6 +88,7 @@
             text="Recommended For You"
           />
         </StackLayout>
+        <!-- Recomendated for you -->
         <ScrollView
           col="0"
           row="4"
@@ -139,6 +141,8 @@
             paddingRight="0"
           />
         </FlexboxLayout>
+        <!-- My programs Programs -->
+
         <StackLayout
           marginLeft="8"
           col="0"
@@ -154,13 +158,6 @@
             marginBottom="16"
           />
 
-   <CardProgram
-            v-for="(item, key) in cardExample"
-            :key="`cardProgram-${key}`"
-            :data="item"
-            marginBottom="16"
-          />
-
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -170,6 +167,10 @@
 import cardImage from "~/components/components/boxes/cardImage";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
+import { apiGet ,baseUrl } from "~/resource/http";
+import cache from "~/store/cache/cache.android";
+import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS,
+} from "../../resource/constans"
 
 export default {
   components: {
@@ -179,6 +180,7 @@ export default {
   },
   data() {
     return {
+      loading:false,
       poular_programs: [
         {
           img: "~/assets/images/File_010.JPG",
@@ -256,27 +258,54 @@ export default {
           url: "/program",
           height: 173,
         },
-        {
-          img: "~/assets/images/background_white.JPG",
-          text: "Add Program",
-          width: "100%",
-          colorText: "#949494",
-          height: 173,
-          url: "/add-programs",
-        },
+        
       ],
-      cardExample: [
-        {
-          img: "~/assets/images/File_000.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          height: 173,
-        },
-        ],
-      drawerState: false,
+     
     };
   },
+  methods:{
+    onSuccess(res){
+      console.log("!!res[2].length",!!res[0].length);
+      this.poular_programs = !!res[0].length ? this.generateImageCard(res[0]): DEFAULT_POPULAR_PROGRAMS
+      this.recommended = !!res[1].length ? this.generateImageCard(res[1]) : DEFAULT_RECOMMENDATED
+      this.myprograms = !!res[2].length ?  this.generateImageCard(res[2]) : DEFAULT_MY_PROGRAMS
+
+
+    },
+    onError(err){
+        console.log('err',err);
+                    alert({
+              cancelable:true,
+              message: "Sorry have Error",
+              okButtonText: "OK",
+              theme:5
+      }).then(() => {
+            console.log("error" , err);
+          });
+    },
+
+     generateImageCard(res){
+         return res.map( (res) => ({
+          img: `${baseUrl}/storage/${res.image}`, 
+          text: `${res.name}`,
+          width: 275,
+          colorText: "white",
+          height: 192,
+          url: "/program",
+          props:{id:res.id}
+        }))
+      
+       
+
+    },
+  },
+  created(){
+    const dataCache = cache.get("userProfile")
+    let data = JSON.parse(dataCache)
+      apiGet(`/home_display?user=${data.user.id}`)
+      .then(this.onSuccess)
+      .catch(this.onError)
+  }
 };
 </script>
 

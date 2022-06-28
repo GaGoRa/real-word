@@ -12,25 +12,54 @@
                  marginRight="32"
                 marginLeft="32"/>
                 <StackLayout marginBottom="32">
-                   
-                    <TextField height="40" hint="Phone # or Email"
-                        secure="true" v-model="textFieldValue"
+                        <Label  v-if="!!message.message" :text="message.message" fontSize="16" fontWeight="400"
+                        textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
+
+                    <TextField height="40" hint=" Email"
+                         v-model="textFieldValue.email"
                         backgroundColor="white" color="949494" borderRadius="8" />
                 </StackLayout>
                
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
-                    fontWeight="900" color="white" @tap="$navigator.navigate('/welcome')" marginBottom="32" />
+                    fontWeight="900" color="white" @tap="processResetPassword" marginBottom="32" />
             </StackLayout>
         </FlexboxLayout>
     </Page>
 </template>
 
 <script>
+import { apiPost } from '~/resource/http';
     export default {
         data() {
-            return {};
+            return {
+                textFieldValue:{
+                    email:''
+                },
+                 message:{
+                    message:''
+                }
+            };
+        },
+        methods:{
+            processResetPassword(){
+                const email = String(this.textFieldValue.email).trim().toLowerCase()
+                apiPost({},`/olvide_clave?email=${email}`)
+                .then(this.onSuccess)
+                .catch(this.onError)
+
+            },
+            onSuccess(res){
+                if(res.status === "We have emailed your password reset link!"){
+                    this.message.message = res.status
+                       this.$navigator.navigate('/create-password')
+                }
+            },
+            onError(err){
+                this.message.message = "Have Error"
+            },
         }
+    
     };
 </script>
 
