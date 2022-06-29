@@ -11,7 +11,7 @@
                     <Label text="Register" fontSize="24" fontWeight="900"
                         textAlignment="center" color="#949494" marginBottom="16" />
 
-                    <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
+                    <!-- <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
                         color="white" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                                 <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
                             <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="white" />
@@ -24,7 +24,7 @@
                         </StackLayout>
 
                     <Label text="or" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="white" marginBottom="16" />
+                        textAlignment="center" color="white" marginBottom="16" /> -->
 
                     <TextField height="38" v-model="textFieldValue.firstName"
                         hint="First Name" backgroundColor="white"
@@ -161,7 +161,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     "last_name": "Asd",
     "gender_id": "1",
     "date_of_birth": "1983-01-07",
-    "email": "As111aa1a2211aasda123d@gmail",
+    "email": "As11aa1aaa1a2211aasda123d@gmail",
     "password": "N/A",
     "address": "N/A",
     "telephone": "Asd",
@@ -197,14 +197,13 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
             //navigate('/home')
         },
         onError(error){
-        console.log("error user", error.content.jso);
         this.errorsMessages.ErrorEmail =
         (
         error.statusCode === 422 
         //&& 
         //error.content === "User already exists"
         )
-        ? error.content
+        ?  JSON.parse(error.content).message
         : ''
                              
         }

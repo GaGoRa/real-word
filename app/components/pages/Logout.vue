@@ -12,7 +12,7 @@
             <!--Add your page content here-->
             <Label horizontalAlignment="left" color="#949494" fontSize="24" fontWeight="700"
                 textWrap="true" text="Logout.vue" />
-           \
+           
     </StackLayout>
     </GridLayout>
     </Page>

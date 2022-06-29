@@ -161,6 +161,7 @@
         </StackLayout>
       </GridLayout>
     </ScrollView>
+
   </Page>
 </template>
 <script>
@@ -169,7 +170,7 @@ import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import cache from "~/store/cache/cache.android";
-import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS,
+import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS,DEFAULT_MY_PROGRAMS_LOADING
 } from "../../resource/constans"
 
 export default {
@@ -181,95 +182,43 @@ export default {
   data() {
     return {
       loading:false,
-      poular_programs: [
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          height: 192,
-          url: "/program",
-        },
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          url: "/program",
-          height: 192,
-        },
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          url: "/program",
-          height: 192,
-        },
-      ],
-      recommended: [
-        {
-          img: "~/assets/images/File_014.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/SQUAT.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/File_014.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-      ],
-      myprograms: [
-        {
-          img: "~/assets/images/File_000.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        {
-          img: "~/assets/images/IMG_2215.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        {
-          img: "~/assets/images/File_019.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        
-      ],
+       poular_programs:DEFAULT_POPULAR_PROGRAMS,
+        // [
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     height: 192,
+      //     url: "/program",
+      //   },
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     url: "/program",
+      //     height: 192,
+      //   },
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     url: "/program",
+      //     height: 192,
+      //   },
+      // ],
+      recommended: DEFAULT_RECOMMENDATED,
+      myprograms: DEFAULT_MY_PROGRAMS_LOADING,
      
     };
   },
   methods:{
     onSuccess(res){
-      console.log("!!res[2].length",!!res[0].length);
-      this.poular_programs = !!res[0].length ? this.generateImageCard(res[0]): DEFAULT_POPULAR_PROGRAMS
-      this.recommended = !!res[1].length ? this.generateImageCard(res[1]) : DEFAULT_RECOMMENDATED
-      this.myprograms = !!res[2].length ?  this.generateImageCard(res[2]) : DEFAULT_MY_PROGRAMS
-
+      this.poular_programs = !!res[0].length ? this.generateImageCard(res[0],275,192): DEFAULT_POPULAR_PROGRAMS
+      this.recommended = !!res[1].length ? this.generateImageCard(res[1],275,96) : DEFAULT_RECOMMENDATED
+      this.myprograms = !!res[2].length ?  this.generateImageCard(res[2],275,192) : DEFAULT_MY_PROGRAMS
 
     },
     onError(err){
@@ -284,13 +233,13 @@ export default {
           });
     },
 
-     generateImageCard(res){
+     generateImageCard(res,width,height){
          return res.map( (res) => ({
           img: `${baseUrl}/storage/${res.image}`, 
           text: `${res.name}`,
-          width: 275,
+          width: width,
           colorText: "white",
-          height: 192,
+          height: height,
           url: "/program",
           props:{id:res.id}
         }))
@@ -302,9 +251,11 @@ export default {
   created(){
     const dataCache = cache.get("userProfile")
     let data = JSON.parse(dataCache)
+
       apiGet(`/home_display?user=${data.user.id}`)
       .then(this.onSuccess)
       .catch(this.onError)
+
   }
 };
 </script>

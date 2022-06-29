@@ -7,7 +7,9 @@
         <FlexboxLayout col="0" row="1" flexDirection="column" marginLeft="16" justifyContent="center">
             <StackLayout marginRight="24" marginLeft="24">
            
-                 <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
+                
+
+                 <!-- <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
                     color="white" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
                         <Label verticalAlignment="middle"  horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="white" />
@@ -17,9 +19,12 @@
                     color="white" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                         <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
                         <Label verticalAlignment="middle" horizontalAlignment="center"  text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
-                    </StackLayout>
+                    </StackLayout> -->
                      
                      <!-- error messagee -->
+                     <Label text="Login" fontSize="24" fontWeight="900"
+                        textAlignment="center" color="#949494" marginBottom="32" />
+
 
                     <Label  v-if="!!errorsMessages.errorMessage" :text="errorsMessages.errorMessage" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
@@ -34,7 +39,22 @@
                 <Button borderRadius="16" marginTop="" fontSize="16"
                     text="Login" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="white"
-                    marginBottom="32" @tap="processLogin"/>              
+                    marginBottom="32" @tap="processLogin"/>     
+
+                        <FlexboxLayout marginBottom="32" justifyContent="center">
+                        <StackLayout>
+                        <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
+                        </StackLayout>
+                        <Label text="New user?" color="black"
+                            marginRight="8" />
+                        <Label text="Register Now" textDecoration="underline"
+                            fontWeight="900" color="black" @tap="$navigator.navigate('/register')" />
+                        <StackLayout>
+                    <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
+                        </StackLayout>
+                    </FlexboxLayout>
+                    
+
             </StackLayout>
         </FlexboxLayout>
         </GridLayout>

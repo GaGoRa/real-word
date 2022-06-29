@@ -92,3 +92,41 @@ DropDown {
   text-align:center;
 
 }
+
+
+
+.animation-pulse{
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+.label_skeleton{
+  background-color: #EEEEEE;
+  height: 22;
+  width: 180;
+  border-radius: 3;
+  @extend .animation-pulse;
+  &.small{
+      height: 12;
+  }
+}
+
+
+@keyframes pulse {
+  0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}

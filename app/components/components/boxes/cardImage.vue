@@ -1,12 +1,14 @@
 <template>
   <AbsoluteLayout marginLeft="16">
     <image
+    :class="data.class || ''"
       :width="data.width"
       :height="data.height"
       :src="data.img"
       stretch="aspectFill"
       borderRadius="20"
-      @tap="$navigator.navigate(data.url,{props:data.props})"
+      @tap=" data.url ?  $navigator.navigate(data.url,{props:data.props}) : ''
+      "
     ></image>
     <FlexboxLayout
       top="0"
@@ -37,6 +39,12 @@ export default {
   data() {
     return {};
   },
+  methods:{
+
+    processToGoPage(){
+
+    }
+  }
 };
 </script>
 

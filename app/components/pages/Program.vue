@@ -28,10 +28,20 @@
         </FlexboxLayout>
       </StackLayout>
     </ActionBar> -->
+    
     <StackLayout marginTop="32"  marginRight="16" >
     <NavBarBurgerMenu/>
 
-    <ScrollView>
+    <StackLayout v-if="false" marginTop="32"  marginRight="16" >
+     <GridLayout marginTop="24" columns="*" rows="*,*,*">
+
+       <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
+
+     </GridLayout>
+    </StackLayout>
+
+    
+    <ScrollView v-else>
       <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
         <StackLayout
           col="0"
@@ -87,13 +97,15 @@
             text="DETAILS"
           />
         </FlexboxLayout>
-        <TextView row="3" col="0" editable="false">
+
+        <HtmlView   marginLeft="16" row="3" col="0" :html="textValue.description" />
+        <!-- <TextView row="3" col="0" editable="false">
           <FormattedString>
             <Span
               :text="textValue.description"
             />
           </FormattedString>
-        </TextView>
+        </TextView> -->
 
         <FlexboxLayout
           col="0"
@@ -179,8 +191,9 @@ export default {
 
   data() {
     return {
+      loadingState:false,
       textValue:{
-        description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation',
+        description:'',
         title:"arm Blaster"
       },
 
@@ -236,30 +249,38 @@ export default {
   methods:{
 
     onSuccess(res){
-      console.log('ress',res[0]);
       this.textValue.description = res[0].description
       this.textValue.title = res[0].name
 
-      getExercises(res[0])
+      this.exercises = this.getExercises(res[0].details)
       
 
     },
     onError(err){
-      console.log("Have Error");
+      console.log("Have Error",err);
     },
     getExercises(res){
-        return res.map(()=>({
+        return res.map((exe)=>({
+          id:exe.id,
           completed: true,
-          day: "1",
+          day: exe.number,
           color: "#838383",
           body: "Legs",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          text: exe.description,
           url:'/'
         }))
 
 
     },
-    getSubscriptions(res){}
+    getSubscriptions(res){
+      return res.map((res)=>({
+          tittle: "Gold Subscription",
+          mount: "$25.32",
+          color: "#EAB813",
+          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          url: '/pay-subscription'
+      }))
+    }
 
   }
 };

@@ -4,55 +4,55 @@ export const ERROR_MESSAGE_REGISTER = {
 
 export const DEFAULT_POPULAR_PROGRAMS =  [
     {
-      img: "~/assets/images/File_010.JPG",
-      text: "ARM BLASTER",
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
-      colorText: "white",
+      colorText: "",
       height: 192,
-      url: "/program",
+      class:'label_skeleton'
     },
     {
-      img: "~/assets/images/File_010.JPG",
-      text: "ARM BLASTER",
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
-      colorText: "white",
-      url: "/program",
+      colorText: "",
       height: 192,
-    },
-    {
-      img: "~/assets/images/File_010.JPG",
-      text: "ARM BLASTER",
+      class:'label_skeleton'
+    }, {
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
-      colorText: "white",
-      url: "/program",
+      colorText: "",
       height: 192,
+      class:'label_skeleton'
     },
   ]
 
 export const DEFAULT_RECOMMENDATED = [
     {
-      img: "~/assets/images/File_014.JPG",
-      text: "ARM BLASTER",
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
       height: 96,
-      url: "/program",
       colorText: "white",
+      class:'label_skeleton'
     },
     {
-      img: "~/assets/images/SQUAT.JPG",
-      text: "ARM BLASTER",
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
       height: 96,
-      url: "/program",
+      
       colorText: "white",
+      class:'label_skeleton'
     },
     {
-      img: "~/assets/images/File_014.JPG",
-      text: "ARM BLASTER",
+      img: "~/assets/images/eskeleton.png",
+      text: "",
       width: 275,
       height: 96,
-      url: "/program",
       colorText: "white",
+      class:'label_skeleton'
     },
   ]
 export const DEFAULT_MY_PROGRAMS = [
@@ -63,5 +63,24 @@ export const DEFAULT_MY_PROGRAMS = [
         colorText: "#949494",
         height: 173,
         url: "/add-programs",
+      }
+  ]
+
+  export const DEFAULT_MY_PROGRAMS_LOADING = [
+    {
+        img: "~/assets/images/eskeleton.png",
+        text: "",
+        width: "100%",
+        colorText: "#949494",
+        height: 173,
+        class:'label_skeleton'
+      },
+      {
+        img: "~/assets/images/eskeleton.png",
+        text: "",
+        width: "100%",
+        colorText: "#949494",
+        height: 173,
+        class:'label_skeleton'
       }
   ]
