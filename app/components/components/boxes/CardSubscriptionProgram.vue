@@ -5,7 +5,7 @@
       left="0"
       width="100%"
       height="auto"
-      :backgroundColor="data.color"
+      :backgroundColor="data.color ? '#EAB813' : '#838383'"
       borderRadius="16"
       padding="12"
       @tap=" data.url ? $navigator.navigate('/pay-subscription') : false"
@@ -29,13 +29,14 @@
         />
       </FlexboxLayout>
 
-      <Label
+       <HtmlView color="white" fontSize="24" marginLeft="16" :html="data.text" />
+      <!-- <Label
         color="white"
         fontSize="14"
         horizontalAlignment="left"
         textWrap="true"
         :text="data.text"
-      />
+      /> -->
     </StackLayout>
   </AbsoluteLayout>
 </template>

@@ -7,7 +7,7 @@
       :src="data.img"
       stretch="aspectFill"
       borderRadius="20"
-      @tap=" data.url ?  $navigator.navigate(data.url,{props:data.props}) : ''
+      @tap=" data.url ? $navigator.navigate(data.url,{props:data.props}) : ''
       "
     ></image>
     <FlexboxLayout
@@ -39,12 +39,7 @@ export default {
   data() {
     return {};
   },
-  methods:{
-
-    processToGoPage(){
-
-    }
-  }
+  methods:{}
 };
 </script>
 

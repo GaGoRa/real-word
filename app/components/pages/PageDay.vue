@@ -37,6 +37,12 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
           components:{CardProgram,
          NavBarBurgerMenu
     },
+      props:{
+        data:{
+          type:Object,
+          default:{}
+        }
+      },
         data() {
             return {
                 day:{

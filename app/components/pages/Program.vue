@@ -32,7 +32,7 @@
     <StackLayout marginTop="32"  marginRight="16" >
     <NavBarBurgerMenu/>
 
-    <StackLayout v-if="false" marginTop="32"  marginRight="16" >
+    <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
      <GridLayout marginTop="24" columns="*" rows="*,*,*">
 
        <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
@@ -40,7 +40,7 @@
      </GridLayout>
     </StackLayout>
 
-    
+
     <ScrollView v-else>
       <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
         <StackLayout
@@ -107,7 +107,7 @@
           </FormattedString>
         </TextView> -->
 
-        <FlexboxLayout
+        <!-- <FlexboxLayout
           col="0"
           row="4"
           marginTop="8"
@@ -123,7 +123,7 @@
           />
 
           <Image src="~/assets/icons/btn_icon_plus.png" height="40" />
-        </FlexboxLayout>
+        </FlexboxLayout> -->
 
         <FlexboxLayout
           col="0"
@@ -133,29 +133,24 @@
           justifyContent="center"
         >
           <Button
+          v-if="subscriptionState"
             borderRadius="16"
             marginTop=""
             fontSize="20"
-            text="Stop"
-            backgroundColor="red"
+            :text="buttomPlay.registered ? 'Stop' : 'Start'  "
+            :backgroundColor="buttomPlay.registered ? 'red' : 'green'"
             width="200"
             height="48"
             fontWeight="900"
             color="white"
             marginBottom="8"
+            @tap="processPressButtomPlay"
           />
         </FlexboxLayout>
 
         <StackLayout col="0" row="6" marginTop="16" marginRight="16">
-          <StackLayout v-if="false">
-            <CardSubscriptionProgram
-              v-for="(item, key) in subscriptions"
-              :key="`subscription-${key}`"
-              :data="item"
-              marginBottom="16"
-            />
-          </StackLayout>
-          <StackLayout v-else>
+         
+         <StackLayout  v-if="subscriptionState" >
             <CardExercise
               v-for="(item, key) in exercises"
               :key="`exercise-${key}`"
@@ -163,6 +158,15 @@
               marginBottom="12"
             />
           </StackLayout>
+            <StackLayout v-else>
+              <CardSubscriptionProgram
+                v-for="(item, key) in subscriptions"
+                :key="`subscription-${key}`"
+                :data="item"
+                marginBottom="16"
+              />
+            </StackLayout>
+
         </StackLayout>
       </GridLayout>
     </ScrollView>
@@ -173,7 +177,8 @@
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
 import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
-import { apiGet } from "~/resource/http";
+import { apiGet, apiPost } from "~/resource/http";
+import { dataTest, apiMock } from "~/resource/mockdataPrograms.js"
 
 export default {
   components: {
@@ -191,12 +196,15 @@ export default {
 
   data() {
     return {
-      loadingState:false,
+      loadingState:true,
+      subscriptionState:false,
+      buttomPlay:{
+        registered:true,
+      },
       textValue:{
         description:'',
         title:"arm Blaster"
       },
-
       subscriptions: [
         {
           tittle: "Gold Subscription",
@@ -221,7 +229,7 @@ export default {
           color: "#838383",
           body: "Legs",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-          url:'/'
+          url:'/day-exercise'
         },
         {
           completed: false,
@@ -240,47 +248,92 @@ export default {
       ],
     };
   },
-  created(){
+  async created(){
+    
+    // apiGet(`/program_detail?program_id=${this.id}`)
+    // .then(this.onSuccess)
+    // .catch(this.onError)
 
-    apiGet(`/program_detail?program_id=${this.id}`)
-    .then(this.onSuccess)
+    apiMock(dataTest.package_gold_activate_program_no_registered)
+    .then(await this.onSuccess)
     .catch(this.onError)
+
+
   },
   methods:{
 
-    onSuccess(res){
-      this.textValue.description = res[0].description
-      this.textValue.title = res[0].name
+   async onSuccess(res){
+      console.log("res",res);
+       this.textValue.description = res.description
+       this.textValue.title = res.name
+      if (!res.hasOwnProperty('status_package')) {
+          this.subscriptionState = false
+          await apiGet('/package')
+          .then(this.getSubscriptions)
+          .catch(this.onError)
+      }else{
+        this.subscriptionState = true
+        this.buttomPlay.registered = res.status_program.status
+        if(res.status_package.status){
 
-      this.exercises = this.getExercises(res[0].details)
-      
+            if(res.status_program.status){
+              this.exercises = this.getExercises(res.details, '/day-exercise')
+            }else{
+              this.exercises = this.getExercises(res.details, undefined)
+            } 
+        }else{
+             //si se vencio sa sub
+          this.exercises = this.getExercises(res.details,'/pay-subscription')
+          
+        }
+
+     
+      }
+    
+       this.loadingState = false
 
     },
     onError(err){
       console.log("Have Error",err);
     },
-    getExercises(res){
+    getExercises(res,url){
+
+
         return res.map((exe)=>({
           id:exe.id,
           completed: true,
           day: exe.number,
-          color: "#838383",
-          body: "Legs",
+          body: exe.muscular_group,
           text: exe.description,
-          url:'/'
+          url:url,
+          props:{data:res}
         }))
 
 
     },
     getSubscriptions(res){
-      return res.map((res)=>({
-          tittle: "Gold Subscription",
-          mount: "$25.32",
-          color: "#EAB813",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-          url: '/pay-subscription'
+      this.subscriptions = res[0].map((sub)=>({
+          id:sub.id,
+          tittle: sub.name,
+          mount:  `$${sub.amount}`,
+          color: true,
+          text: sub.description,
+          url: '/pay-subscription',
+          props:{},
+          stripe_id:sub.stripe_id
       }))
-    }
+    },
+    processPressButtomPlay(){
+
+        this.onSuccessPressButtom()
+        // apiPost('',body)
+        // .then(this.onSuccessPressButtom)
+        // .catch(this.onError)
+    },
+    onSuccessPressButtom(){
+      this.buttomPlay.registered = !this.buttomPlay.registered
+    },
+    
 
   }
 };
