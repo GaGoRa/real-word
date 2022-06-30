@@ -16,7 +16,7 @@ import LoginAplication from './components/pages/LoginAplication.vue'
 import ResetPassword from './components/pages/ResetPassword.vue'
 import ListPrograms from './components/pages/ListPrograms.vue'
 import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
-
+import PDFView from './components/pages/PDFView.vue'
 import AddPrograms from './components/pages/AddPrograms.vue'
 import Program from './components/pages/Program.vue'
 import SubscriptionCancel from './components/pages/SubscriptionCancel.vue'
@@ -102,5 +102,8 @@ export const routes = {
   },
   '/day-exercise': {
     component: PageDay,
+  },
+  '/pdf-view': {
+    component: PDFView,
   },
 }

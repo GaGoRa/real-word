@@ -1,4 +1,5 @@
-import { Http,HttpResponse } from '@nativescript/core'
+import { Http, knownFolders, path } from '@nativescript/core'
+import { openFile} from '@nativescript/core/utils/utils'
 import cache from '../store/cache/cache.android'
 
 
@@ -15,10 +16,7 @@ function getHeaders() {
       'token': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
   }
 }
-
-
 export function apiPost(body,path){
-
 // export function createUser(body,onSucces,onError){
   return  new Promise((resolve, reject) => {
     Http.request({
@@ -64,3 +62,13 @@ export function apiGet(path){
     
   }
 
+export function getFileResource(pathResource) {
+  const filePath = path.join(knownFolders.currentApp().path, 'test.pdf')
+  return  new Promise((resolve, reject) => {
+    Http.getFile(pathResource,filePath)
+    .then(res=> { openFile(filePath)  ;console.log("rasdasdes",res); resolve(res)})
+    .catch(err=> {console.log('errrr',err); reject(err)})
+  });
+  
+  
+}

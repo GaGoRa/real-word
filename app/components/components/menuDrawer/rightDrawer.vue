@@ -37,13 +37,13 @@
       marginBottom="16"
       fontWeight="900"
     />
-    <Label
+    <!-- <Label
       text="Payments"
       fontSize="16"
       @tap="$navigator.navigate('/payments'), toggleSwitchMenu(false)"
       marginBottom="16"
       fontWeight="900"
-    />
+    /> -->
     <Label
       text="Purchase History"
       fontSize="16"

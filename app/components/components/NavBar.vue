@@ -9,7 +9,7 @@
         class="bg-label"
         justifyContent="flex-start"
       >
-        <StackLayout marginRight="40">
+        <StackLayout marginLeft="32" marginRight="40">
           <Image
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
@@ -18,7 +18,7 @@
           />
         </StackLayout>
         <StackLayout
-          width="80%"
+          width="75%"
           backgroundImage="~/assets/icons/Group_403.png"
           class="bg-label"
           height="12"
@@ -40,7 +40,12 @@
 
 
 export default {
-  
+  props:{
+    data:{
+      type:Object,
+      default:{}
+    },
+  },
   data() {
     return {
       
