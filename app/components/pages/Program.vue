@@ -254,7 +254,7 @@ export default {
     // .then(this.onSuccess)
     // .catch(this.onError)
 
-    apiMock(dataTest.package_was_not_purchased)
+    apiMock(dataTest.package_gold_activate_program_registered)
     .then(await this.onSuccess)
     .catch(this.onError)
 
@@ -298,7 +298,7 @@ export default {
     },
     getExercises(res,url){
 
-
+        
         return res.map((exe)=>({
           id:exe.id,
           completed: exe.status,

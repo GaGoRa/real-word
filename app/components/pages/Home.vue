@@ -249,8 +249,10 @@ export default {
     },
   },
   created(){
+    // cache.delete("userProfile")
     const dataCache = cache.get("userProfile")
     let data = JSON.parse(dataCache)
+    console.log(data)
 
       apiGet(`/home_display?user=${data.user.id}`)
       .then(this.onSuccess)

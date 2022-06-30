@@ -45,7 +45,6 @@ export function apiPost(body,path){
 }
 
 export function apiGet(path){
-console.log("cache.get('userProfile')",JSON.parse(cache.get('userProfile')).token);
 
   // export function createUser(body,onSucces,onError){
     return  new Promise((resolve, reject) => {

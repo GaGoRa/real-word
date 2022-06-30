@@ -161,7 +161,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     "last_name": "Asd",
     "gender_id": "1",
     "date_of_birth": "1983-01-07",
-    "email": "As11aa1aaa1a2211aasda123d@gmail",
+    "email": "As11aa1aaa1a12211aasda123d@gmail",
     "password": "N/A",
     "address": "N/A",
     "telephone": "Asd",
