@@ -29,7 +29,7 @@
       </StackLayout>
     </ActionBar> -->
     
-    <StackLayout marginTop="32"  marginRight="16" >
+    <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
 
     <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
@@ -41,7 +41,7 @@
     </StackLayout>
 
 
-    <ScrollView v-else>
+    <ScrollView width="100%" v-else>
       <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
         <StackLayout
           col="0"
@@ -148,7 +148,7 @@
           />
         </FlexboxLayout>
 
-        <StackLayout col="0" row="6" marginTop="16" marginRight="16">
+        <StackLayout col="0" row="6" marginTop="16" >
          
          <StackLayout  v-if="subscriptionState" >
             <CardExercise
@@ -158,12 +158,11 @@
               marginBottom="12"
             />
           </StackLayout>
-            <StackLayout v-else>
+            <StackLayout  v-else>
               <CardSubscriptionProgram
-                v-for="(item, key) in subscriptions"
+                v-for="(item, key) in dataPackage"
                 :key="`subscription-${key}`"
                 :data="item"
-                marginBottom="16"
               />
             </StackLayout>
 
@@ -193,7 +192,11 @@ export default {
       default:"0"
     }
   },
-
+  watch:{
+    async subscriptions(to){
+      await this.$forceUpdate()
+    }
+  },
   data() {
     return {
       loadingState:true,
@@ -207,18 +210,18 @@ export default {
       },
       subscriptions: [
         {
-          tittle: "Gold Subscription",
-          mount: "$25.32",
+          name: "Gold Subscription",
+          amount: "$25.32",
           color: "#EAB813",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
           url: '/pay-subscription'
 
         },
         {
-          tittle: "One Time Purchase",
-          mount: "$199.42",
+          name: "One Time Purchase",
+          amount: "$199.42",
           color: "#838383",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+          description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
           url: false
        },
       ],
@@ -248,8 +251,25 @@ export default {
       ],
     };
   },
+  computed:{
+    dataPackage(){
+      let arr = []
+
+      this.subscriptions.forEach((e)=>{
+        e.color = '#EAB813'
+        arr.push(e)
+      })
+
+      return arr
+    }
+  },
   async created(){
-    
+
+    const response =  await apiGet(`/package`)
+
+    this.subscriptions = response.data
+     
+    // this.$refs.listView.nativeView.refresh();
     // apiGet(`/program_detail?program_id=${this.id}`)
     // .then(this.onSuccess)
     // .catch(this.onError)

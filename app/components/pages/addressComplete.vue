@@ -117,7 +117,7 @@
         fontWeight="900"
         color="white"
         marginBottom="32"
-        @save="onSave"
+        @tap="onSave"
       />
 
     </StackLayout>
@@ -126,19 +126,36 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
+import cache from "~/store/cache/cache.android";
 
 export default {
+  props:{
+    package:{
+      type: Object,
+      default:{
+        id: 0, 
+        name: ''
+      }
+    },
+    price:{
+      type: Object,
+      default:{
+        id: 1, 
+        recurrence:{description:''}
+      }
+    }
+  },
   components:{
     
   },
   data() {
     return {
-      address:'',
-      state_id: 0 ,
-      city:'',
-      postal_code:'',
+      address:'gffd',
+      state_id: 1 ,
+      city:'miami',
+      postal_code:'2345',
       states: [],
-      state: 'State'
+      state: 'Staste'
     };
   },
   async mounted(){
@@ -153,14 +170,26 @@ export default {
       // },500)
     },
     async onSave(){
+      
       let data = {
         address: this.address,
         state_id: this.state_id,
         city: this.city,
         postal_code: this.postal_code,
       }
+      const response = await apiPost(data,'/update_address')
 
-      
+        let c = JSON.parse(cache.get('userProfile'))
+        c.user = response.data
+        cache.set("userProfile",JSON.stringify(c))
+
+        this.$navigator.navigate('/pay-subscription',{ 
+            props: { 
+              package: this.package,
+              price: this.price
+            },
+            clearHistory: true
+          })
     },
     async onTapState(){
       

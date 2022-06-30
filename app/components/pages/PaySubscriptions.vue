@@ -1,15 +1,15 @@
 <template>
-  <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="false" class="seccion-register-bg-invert">
-    <ActionBar background="white" class="shadow-none" boxShadow="0">
+  <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" class="page-home">
+    <!-- <ActionBar background="white" class="shadow-none" boxShadow="0">
       <GridLayout columns="*,auto" rows="*" width="100%" paddingRight="16" paddingBottom="8" paddingTop="16">
         <StackLayout @tap="$navigator.back()" col="0" row="0" >
-          <image src="~/assets/icons/Icon feather-arrow-left-circle.png" verticalAlignment="left" width="32" height="32"  />
+          <image src="~/assets/icons/Icon feather-arrow-left-circle.png" verticalAlignment="left" width="40" height="40"  />
         </StackLayout>
-        <StackLayout col="1" row="0" s>
-          <!-- <image  src="~/assets/icons/burger_menu_icon.png" verticalAlignment="right" width="36s" height="36s"  /> -->
-        </StackLayout>
+        
       </GridLayout  >
-    </ActionBar>
+    </ActionBar> -->
+    <StackLayout marginTop="32" >
+     <NavBarBurgerMenu :ismenu="false"/>
     <ScrollView >
       <AbsoluteLayout >
         <WebView left="0" top="0" width="100%" :src="url" v-if="url" />
@@ -29,17 +29,32 @@
           <label color="white" marginLeft="24" textWrap="true">
             <FormattedString>
               <span :text="package.name+' '" style="font-size: 24; font-weight: 900;"  />
-              <span :text="price.name" style="font-size: 16; font-weight: 200; margin-left: 8" />
+              <span :text="price.recurrence.description" style="font-size: 16; font-weight: 200; margin-left: 8" />
             </FormattedString>
           </label>
         </StackLayout>
+        <GridLayout  
+          top="0"
+          left="0"
+          width="100%"
+          height="900"
+          backgroundColor="rgba(0,0,0,.9)"
+          v-if="loading"
+        >
+          <StackLayout marginTop="-120" horizontalAlignment="center" verticalAlignment="center">
+            <label  horizontalAlignment="center" verticalAlignment="center" color="white" text="Please wait"/>
+            <ActivityIndicator color="red" marginTop="16" horizontalAlignment="center" verticalAlignment="center" busy="true"  />
+         </StackLayout>
+        </GridLayout >
       </AbsoluteLayout>
     </ScrollView>
-
+  </StackLayout>
   </Page>
 </template>
 
 <script>
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
+
 import NavBar from '../components/NavBar.vue'
 import CardPayment from '../components/boxes/CardPayment.vue'
 import cache from "~/store/cache/cache.android";
@@ -49,25 +64,44 @@ export default {
     package:{
       type: Object,
       default:{
-        id: 1, 
-        name: 'Gold Subscription'
+        id: null, 
+        name: ''
       }
     },
     price:{
       type: Object,
       default:{
-        id: 1, 
-        name: 'Month'
+        id: null, 
+        recurrence:{description:''}
       }
     }
   },
  
   components:{
+    NavBarBurgerMenu,
     CardPayment,
     NavBar
   },
+  watch:{
+    async price(to){
+      this.url = ''
+      this.loading = true
+      const response =  await apiPost({
+        package_id: this.package.id,
+        price_id: this.price.id,
+      },"/subscription/create_subscription")
+
+      this.url = response.data.url
+      setTimeout(()=>{
+        this.loading = false
+      },500)
+      
+
+    }
+  },
   data() {
     return {
+      loading: true,
       url: null, 
       navbar:{
         title:"Payments"
@@ -95,16 +129,18 @@ export default {
       ]
     };
   },
-   mounted(){
-   
+   async mounted(){
+    this.url = ''
+    this.loading = true
+    const response =  await apiPost({
+      package_id: this.package.id,
+      price_id: this.price.id,
+    },"/subscription/create_subscription")
     
-
-    // const response =  await apiPost({
-    //   package_id: this.package.id,
-    //   price_id: this.price.id,
-    // },"/subscription/create_subscription")
-    // console.log(response)
-    // this.url = response.data.url
+    this.url = response.data.url
+    setTimeout(()=>{
+        this.loading = false
+      },500)
   },
 };
 </script>
