@@ -23,9 +23,18 @@ import SubscriptionCancel from './components/pages/SubscriptionCancel.vue'
 import PaySubscriptions from './components/pages/PaySubscriptions.vue'
 import PageDay from './components/pages/PageDay.vue'
 
+import addressComplete from './components/pages/addressComplete.vue'
+import ListSelect from './components/components/ListSelect.vue'
+
 export const routes = {
   '/home': {
     component: HomePage,
+  },
+  '/address_complete':{
+    component: addressComplete
+  },
+  '/list_select':{
+    component: ListSelect
   },
   '/login': {
     component: LoginPage,

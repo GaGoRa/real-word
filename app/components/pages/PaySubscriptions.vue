@@ -1,241 +1,174 @@
 <template>
-  <Page
-    class="page-home"
-  >
-    <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
+  <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" class="page-home">
+    <!-- <ActionBar background="white" class="shadow-none" boxShadow="0">
+      <GridLayout columns="*,auto" rows="*" width="100%" paddingRight="16" paddingBottom="8" paddingTop="16">
+        <StackLayout @tap="$navigator.back()" col="0" row="0" >
+          <image src="~/assets/icons/Icon feather-arrow-left-circle.png" verticalAlignment="left" width="40" height="40"  />
+        </StackLayout>
+        
+      </GridLayout  >
+    </ActionBar> -->
+    <StackLayout marginTop="32" >
+     <NavBarBurgerMenu :ismenu="false"/>
+    <ScrollView >
+      <AbsoluteLayout >
+        <WebView left="0" top="0" width="100%" :src="url" v-if="url" />
+
+
+        <StackLayout
+          top="0"
+          left="0"
+          paddingTop="10"
+          paddingBottom="10"
           width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.back()"
-          />
-          <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar>
-    <StackLayout  marginRight="24" >
-      <GridLayout marginTop="24" columns="*" rows="auto,auto,auto,auto,auto,auto,auto">
-         <StackLayout
-          col="0"
-          row="0"
-          marginTop="4"
           backgroundImage="~/assets/icons/background_label.png"
-          class="bg-label"
+          backgroundPosition="right"
+          class="bg"
         >
-          <Label
-            marginLeft="24"
-            color="white"
-            fontSize="24"
-            fontWeight="900"
-            text="Gold Subscription"
-          />
+
+          <label color="white" marginLeft="24" textWrap="true">
+            <FormattedString>
+              <span :text="package.name+' '" style="font-size: 24; font-weight: 900;"  />
+              <span :text="price.recurrence.description" style="font-size: 16; font-weight: 200; margin-left: 8" />
+            </FormattedString>
+          </label>
         </StackLayout>
-          <StackLayout  col="0"
-          row="1">
-        <FlexboxLayout
-          marginTop="16"
-          marginBottom="14"
+        <GridLayout  
+          top="0"
+          left="0"
+          width="100%"
+          height="900"
+          backgroundColor="rgba(0,0,0,.9)"
+          v-if="loading"
         >
-          <Image
-            marginLeft="24"
-            src="~/assets/icons/icon_details.png"
-            height="24"
-          />
-
-          <Label
-            paddingTop="2"
-            marginLeft="8"
-            color="white"
-            fontSize="17"
-            fontWeight="400"
-            text="DETAILS"
-          />
-        </FlexboxLayout>
-        </StackLayout>
-
-        <TextView col="0"  marginLeft="24" row="2" marginBottom="24" editable="false">
-          <FormattedString>
-            <Span
-              text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
-            />
-          </FormattedString>
-        </TextView>
-        
-        <FlexboxLayout row="3" col="0" marginBottom="16" justifyContent="center" >
-           <StackLayout>
-            <Label 
-
-              padding="14"
-                marginRight="8"
-              color="white"
-              fontSize="16"
-              fontWeight="500"
-              text="Monthly"
-            />
-          </StackLayout>
-
-          <Label
-              marginRight="8"
-              color="white"
-              fontSize="32"
-              fontWeight="900"
-              text="$27.99"
-            />
-        </FlexboxLayout>
-
-      <StackLayout   marginRight="16" marginLeft="16" col="0" row="4">
-      
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Card holder Name"
-        borderRadius="10"
-        backgroundColor="white"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Credit Card #"
-        borderRadius="10"
-        backgroundColor="white"
-        height="36"
-      />
-      <StackLayout>
-          <FlexboxLayout >
-          <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="8"
-        hint="Expiration Date"
-        borderRadius="10"
-        backgroundColor="white"
-        height="36"
-        width="50%"
-      />
-        <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft=""
-        marginRight="16"
-        hint="CVV"
-        borderRadius="10"
-        backgroundColor="white"
-        height="36"
-        width="50%"
-      />
-
-      
-        <!-- Bottoms-->
-
-        
-
-        </FlexboxLayout>
-
-      
-           
-          <FlexboxLayout marginLeft="16" > 
-              <Label  marginRight="8"
-              color="white"
-              fontSize="14"
-              fontWeight="500" text="Save credit card for future purchases"></Label>
-
-
-          </FlexboxLayout>
-          <FlexboxLayout 
-         marginTop="16" marginLeft="16" paddingBottom="8" marginBottom="16" justifyContent="space-between">
-             <StackLayout width="45%" orientation="horizontal"   borderRadius="12" height="40" backgroundColor="#000000"
-                     paddingLeft="32" paddingRight="32" class="stack-layout-btn">
-                            <Image src="~/assets/icons/btn_apple.png" padding="4" height="40"  margin="0" />
-                        
-                    </StackLayout>
-
-                      <StackLayout width="45%"   orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#F7BE37"
-                    paddingLeft="32" paddingRight="32" class="stack-layout-btn">
-                        <Image padding="4" src="~/assets/icons/btn_paypal.png"  height="32" margin="0" />
-                        
-                    </StackLayout>
-                    </FlexboxLayout>
-              
-              <FlexboxLayout > 
-               <Label
-              marginRight="8"
-              color="white"
-              fontSize="16"
-              fontWeight="500"
-              marginLeft="16"
-              text="By clicking on Purchase you accept terms & Conditions"
-            />
-
-          </FlexboxLayout>
-
-
-      </StackLayout>
-        
-       
-        </StackLayout>
-
-        
-        <StackLayout col="0" row="5">
-                   
-       <Button
-        borderRadius="12"
-        marginTop="16"
-        fontSize="16"
-        text="Purchase"
-        backgroundColor="red"
-        width="200"
-        height="40"
-        fontWeight="900"
-        color="white"
-        marginBottom="32"
-        @tap="$navigator.navigate('/home')"
-      />
-        </StackLayout>
-
-       
-
-       
-      </GridLayout>
-       </StackLayout>
+          <StackLayout marginTop="-120" horizontalAlignment="center" verticalAlignment="center">
+            <label  horizontalAlignment="center" verticalAlignment="center" color="white" text="Please wait"/>
+            <ActivityIndicator color="red" marginTop="16" horizontalAlignment="center" verticalAlignment="center" busy="true"  />
+         </StackLayout>
+        </GridLayout >
+      </AbsoluteLayout>
+    </ScrollView>
+  </StackLayout>
   </Page>
 </template>
+
 <script>
+import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
+
+import NavBar from '../components/NavBar.vue'
+import CardPayment from '../components/boxes/CardPayment.vue'
+import cache from "~/store/cache/cache.android";
+import { apiPost,apiGet} from '~/resource/http';
 export default {
-  components: {
+  props:{
+    package:{
+      type: Object,
+      default:{
+        id: null, 
+        name: ''
+      }
+    },
+    price:{
+      type: Object,
+      default:{
+        id: null, 
+        recurrence:{description:''}
+      }
+    }
+  },
+ 
+  components:{
+    NavBarBurgerMenu,
+    CardPayment,
+    NavBar
+  },
+  watch:{
+    async price(to){
+      this.url = ''
+      this.loading = true
+      const response =  await apiPost({
+        package_id: this.package.id,
+        price_id: this.price.id,
+      },"/subscription/create_subscription")
+
+      this.url = response.data.url
+      setTimeout(()=>{
+        this.loading = false
+      },500)
+      
+
+    }
   },
   data() {
     return {
-      }
-    }
+      loading: true,
+      url: null, 
+      navbar:{
+        title:"Payments"
+      },
+      creditCard:[{
+        number:'121123123213123',
+        cvv:'123',
+        person:'real word',
+        date:"12/22"
+      },
+
+      {
+        number:'121123123213123',
+        cvv:'123',
+        person:'real word',
+        date:"12/22"
+      },
+      {
+        number:'121123123213123',
+        cvv:'123',
+        person:'real word',
+        date:"12/22"
+      },
+      
+      ]
+    };
+  },
+   async mounted(){
+    this.url = ''
+    this.loading = true
+    const response =  await apiPost({
+      package_id: this.package.id,
+      price_id: this.price.id,
+    },"/subscription/create_subscription")
+    
+    this.url = response.data.url
+    setTimeout(()=>{
+        this.loading = false
+      },500)
+  },
 };
 </script>
 
 <style scoped>
+
+  .trapecio {
+    width: 250;
+    height: 10;
+    border-right: 60px solid transparent;
+    border-left: 60px solid transparent;
+    border-bottom: 100px solid #4s28bca;
+}
 .home-panel {
   vertical-align: center;
   font-size: 20;
   margin: 15;
 }
-
+.shadow-none{
+    box-shadow: none !important;
+}
 .description-label {
   margin-bottom: 15;
+}
+
+.bg{
+  background: rgb(229,57,53);
+  background: linear-gradient(90deg, rgba(229,57,53,1) 0%, rgba(229,57,53,1) 85%, rgba(255,255,255,0) 100%);
+  background-repeat: no-repeat;
 }
 </style>

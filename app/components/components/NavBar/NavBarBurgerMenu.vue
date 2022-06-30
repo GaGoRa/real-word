@@ -11,7 +11,7 @@
             width="40"
             @tap="$navigator.navigate('/home')"
           />
-         <BurgerMenu/>
+         <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
    
       </StackLayout>
@@ -23,7 +23,10 @@ export default {
 BurgerMenu,
   },
   props: {
-    
+    ismenu:{
+      type: Boolean, 
+      default: true
+    }
   },
   data() {
     return {
