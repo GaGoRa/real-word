@@ -254,7 +254,7 @@ export default {
     // .then(this.onSuccess)
     // .catch(this.onError)
 
-    apiMock(dataTest.package_gold_activate_program_no_registered)
+    apiMock(dataTest.package_was_not_purchased)
     .then(await this.onSuccess)
     .catch(this.onError)
 

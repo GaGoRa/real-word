@@ -1,5 +1,5 @@
 <template>
-  <AbsoluteLayout marginLeft="16" marginTop="8">
+  <AbsoluteLayout  @tap="redirect" marginLeft="16" marginTop="8">
     <StackLayout
       top="0"
       left="0"
@@ -8,7 +8,7 @@
       :backgroundColor="data.color ? '#EAB813' : '#838383'"
       borderRadius="16"
       padding="12"
-      @tap=" data.url ? $navigator.navigate('/pay-subscription') : false"
+     
       class="box-shadow"
     >
       <FlexboxLayout justifyContent="space-between">
@@ -41,6 +41,8 @@
   </AbsoluteLayout>
 </template>
 <script>
+
+import cache from "~/store/cache/cache.android";
 export default {
   props: {
     data: {
@@ -51,6 +53,25 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    redirect(){
+      const user = JSON.parse(cache.get("userProfile")) 
+      console.log(user)
+      if(
+        !user.address ||
+        !user.email ||
+        !user.state_id ||
+        !user.city ||
+        !user.postal_code
+      ){
+        console.log('debe completar su direccion')
+        this.$navigator.navigate('/address_complete')
+      }else{
+        this.$navigator.navigate('/pay-subscription')
+      }
+
+    }
+  }
 };
 </script>
 

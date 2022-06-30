@@ -8,7 +8,6 @@
       flat="true"
     >
       <StackLayout>
-        <label @tap="ontapn" text="hola" /> 
         <FlexboxLayout
           justifyContent="space-between"
           paddingRight="24"
@@ -249,7 +248,16 @@ export default {
 
     },
   },
-}
+  created(){
+    const dataCache = cache.get("userProfile")
+    let data = JSON.parse(dataCache)
+
+      apiGet(`/home_display?user=${data.user.id}`)
+      .then(this.onSuccess)
+      .catch(this.onError)
+
+  }
+};
 </script>
 
 <style scoped>
