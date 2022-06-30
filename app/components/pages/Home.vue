@@ -248,7 +248,6 @@ export default {
     // cache.delete("userProfile")
     const dataCache = cache.get("userProfile")
     let data = JSON.parse(dataCache)
-    console.log(data)
 
       apiGet(`/home_display?user=${data.user.id}`)
       .then(this.onSuccess)
@@ -256,10 +255,7 @@ export default {
 
   },
   mounted(){
-    console.log(
-    this.getPropsListProgram('1','33',"queso")
-
-    );
+    
   }
 };
 

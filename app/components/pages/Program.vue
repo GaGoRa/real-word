@@ -5,29 +5,7 @@
     xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:VideoPlayer="nativescript-videoplayer"
   >
-    <!-- <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.back()"
-          />
-          <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar> -->
+
     
     <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
