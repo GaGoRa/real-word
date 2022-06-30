@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       errorsMessage:{
-        errorMessage:'adasdasdass'
+        errorMessage:''
       },
       list_programs: DEFAULT_LIST_PROGRAMS,
     };
