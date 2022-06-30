@@ -32,8 +32,18 @@
 
                 <TextField height="38" v-model="textFieldValue.email"
                     hint="Email" backgroundColor="white" borderRadius="10"/>
+                
+                <Label  v-if="!!errorsMessages.email" :text="errorsMessages.email" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+    
+
                 <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.password" hint="Password"
                     backgroundColor="white" borderRadius="10" marginBottom="6"  secure="true" />
+                     
+                     <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
+                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+    
+
                 <Label text="Forgot password?" @tap="$navigator.navigate('/reset-password')" marginLeft="16" marginTop="8"  fontWeight="700" color="black" marginBottom="8"/>
                 
                 <Button borderRadius="16" marginTop="" fontSize="16"
@@ -72,7 +82,9 @@ import cache from '~/store/cache/cache.android';
                 password:''
             },
             errorsMessages:{
-                errorMessage:''
+                errorMessage:'',
+                email:'',
+                password:''
             }
           }
 
@@ -84,12 +96,11 @@ import cache from '~/store/cache/cache.android';
     },
     methods:{
         myFuncion(){
-            console.log('LLgue')
             this.$navigator.navigate('/home')
         },
         processLogin(){
             // const body ={
-            //     "email":"userTest@gmail.com",
+            //     "email":"gabo@gmail.com",
             //     "password":"1234123123asdasd5678"
             // }
             const body ={
@@ -101,13 +112,40 @@ import cache from '~/store/cache/cache.android';
             .catch(this.onError)
             },
 
-        onSuccess(resp){
-                cache.set("userProfile",JSON.stringify(resp.data))
-                this.$navigator.navigate('/home')
+            onSuccess(resp){
+
+                if(resp.message === 'User Logged'){
+                    cache.set("userProfile",JSON.stringify(resp.data))
+                        this.$navigator.navigate('/home')
+                }else{
+                    this.errorsMessages={
+                    errorMessage:'',
+                    email:'',
+                    password:''
+                    
+                }
+                this.errorsMessages.errorMessage = resp.message
+                }
             },
 
             onError(err){
-                this.errorsMessage.errorMessage = err
+                this.errorsMessages={
+                    errorMessage:'',
+                    email:'',
+                    password:''
+                    
+                }
+                const error = JSON.parse(err.content)
+                
+                if(!!error.email){    
+                    this.errorsMessages.email = error.email[0]
+                    
+                }
+                if(!!error.password){
+                     this.errorsMessages.password = error.password[0]
+                }
+
+                
             }
     }
     
