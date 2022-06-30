@@ -68,7 +68,7 @@
                         <Label text="Already Register?" color="black"
                             marginRight="8" />
                         <Label text="Login" textDecoration="underline"
-                            fontWeight="900" color="black" @tap="$navigator.navigate('/verification-code')" />
+                            fontWeight="900" color="black" @tap="$navigator.navigate('/login-aplication')" />
                         <StackLayout>
                     <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
                         </StackLayout>

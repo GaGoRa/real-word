@@ -254,7 +254,7 @@ export default {
     // .then(this.onSuccess)
     // .catch(this.onError)
 
-    apiMock(dataTest.package_gold_activate_program_no_registered)
+    apiMock(dataTest.package_was_not_purchased)
     .then(await this.onSuccess)
     .catch(this.onError)
 
@@ -301,7 +301,7 @@ export default {
 
         return res.map((exe)=>({
           id:exe.id,
-          completed: true,
+          completed: exe.status,
           day: exe.number,
           body: exe.muscular_group,
           text: exe.description,
