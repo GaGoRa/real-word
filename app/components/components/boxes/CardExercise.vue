@@ -6,7 +6,7 @@
       width="100%"
       height="auto"
       completed:true
-      :backgroundColor="data.completed ? '#838383' : '#EAB813' "
+      :backgroundColor="data.completed ? '#EAB813' : '#838383'  "
       borderRadius="16"
       padding="16"
       class="box-shadow"

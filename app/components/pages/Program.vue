@@ -298,10 +298,10 @@ export default {
     },
     getExercises(res,url){
 
-
+        
         return res.map((exe)=>({
           id:exe.id,
-          completed: true,
+          completed: exe.status,
           day: exe.number,
           body: exe.muscular_group,
           text: exe.description,

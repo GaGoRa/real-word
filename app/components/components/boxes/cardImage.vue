@@ -24,6 +24,7 @@
         fontWeight="900"
         horizontalAlignment="center"
         :text="data.text"
+        marginBottom="16"
       />
     </FlexboxLayout>
   </AbsoluteLayout>

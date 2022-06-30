@@ -120,9 +120,10 @@ import cache from '~/store/cache/cache.android';
     },
     methods:{
         processUserUpdate(){
-            
+                
+           const dataCache = JSON.parse(cache.get('userProfile'))
             const body = {
-                    "user_id":cache.get("userId"),
+                    "user_id": dataCache.user.id ,
                     "gender_id":"1",
                     "date_of_birth":"1983-01-07",
                     "experience_id":"1",

@@ -1,4 +1,6 @@
 import { Http,HttpResponse } from '@nativescript/core'
+import cache from '../store/cache/cache.android'
+
 
 export const baseUrl = "https://realworld.uscreativity.com"
 
@@ -7,16 +9,26 @@ const EXPREG_HTTP_CODE ={
   bad: new RegExp(/^[4][0-9]{0,2}$/)
 }
 
+function getHeaders() {
+  return {
+      "Content-Type": "application/json",
+      'x-api-key': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
+  }
+}
+
 
 export function apiPost(body,path){
+
 // export function createUser(body,onSucces,onError){
   return  new Promise((resolve, reject) => {
     Http.request({
       method: "post",
       url: `${baseUrl}/api${path}`,
-      headers: {
-          "Content-Type": "application/json",
+      headers:  {
+        "Content-Type": "application/json",
+        'x-api-key': getHeaders()
       },
+
       content: JSON.stringify(body)
     }).then((res) => {
         if(String(res.statusCode).match(EXPREG_HTTP_CODE.success)){
@@ -33,14 +45,13 @@ export function apiPost(body,path){
 }
 
 export function apiGet(path){
+
   // export function createUser(body,onSucces,onError){
     return  new Promise((resolve, reject) => {
       Http.request({
         method: "GET",
         url: `${baseUrl}/api${path}`,
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: getHeaders()
         //content: JSON.stringify(body)
       }).then((res) => {
           if(String(res.statusCode).match(EXPREG_HTTP_CODE.success)){

@@ -68,7 +68,7 @@
                         <Label text="Already Register?" color="black"
                             marginRight="8" />
                         <Label text="Login" textDecoration="underline"
-                            fontWeight="900" color="black" @tap="$navigator.navigate('/verification-code')" />
+                            fontWeight="900" color="black" @tap="$navigator.navigate('/login-aplication')" />
                         <StackLayout>
                     <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
                         </StackLayout>
@@ -161,7 +161,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     "last_name": "Asd",
     "gender_id": "1",
     "date_of_birth": "1983-01-07",
-    "email": "As11aa1aaa1a2211aasda123d@gmail",
+    "email": "As11aa1aaa1a12211aasda123d@gmail",
     "password": "N/A",
     "address": "N/A",
     "telephone": "Asd",
