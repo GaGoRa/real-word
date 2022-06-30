@@ -117,7 +117,7 @@
         fontWeight="900"
         color="white"
         marginBottom="32"
-        
+        @save="onSave"
       />
 
     </StackLayout>
@@ -144,7 +144,6 @@ export default {
   async mounted(){
     const response = await apiGet('/get_country')
     this.states = response.data
-
   },
   methods:{
     onBack(){
@@ -152,6 +151,16 @@ export default {
       // setTimeout(()=>{
       //   this.$modal.close()
       // },500)
+    },
+    async onSave(){
+      let data = {
+        address: this.address,
+        state_id: this.state_id,
+        city: this.city,
+        postal_code: this.postal_code,
+      }
+
+      
     },
     async onTapState(){
       
