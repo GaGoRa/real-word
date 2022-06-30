@@ -54,13 +54,10 @@
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_concurrence"
                   backgroundColor="white" height="36"  />
 
-
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="white"
                     marginBottom="32" @tap="$navigator.navigate('/home')"/>
-
-
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -152,14 +149,12 @@ import cache from '~/store/cache/cache.android';
                     });
         }
     },
-    mounted(){
+    created (){
         const genderResource = apiGet("/gender")
         const experienceResource = apiGet("/experience")
         const exercisePlaceResource = apiGet("/exercise_place")
         const reasonResource = apiGet("/reason")
         const concurrenceResource = apiGet("/frequency")
-        console.log("init",reasonResource)
-       
        
        Promise.all([
             genderResource,
@@ -167,15 +162,18 @@ import cache from '~/store/cache/cache.android';
             exercisePlaceResource,
             reasonResource,
             concurrenceResource
-            ]).then( (values )=>{
+            ]).then( (value )=>{
                 this.items_selectPicker_gender = value[0][0]
-                this.items_selectPicker_experience = value[0][1]
-                this.items_selectPicker_reason = value[0][2]
-                this.items_selectPicker_where_exercise = value[0][3]
-                this.items_selectPicker_concurrence = value[0][4]
+                this.items_selectPicker_experience = value[1][0]
+                this.items_selectPicker_reason = value[2][0]
+                this.items_selectPicker_where_exercise = value[3][0]
+                this.items_selectPicker_concurrence = value[4][0]
+                   
+                  
             }).catch(err =>{
                     console.log('err',err,typeof err);
             })
+             
     }
 
     

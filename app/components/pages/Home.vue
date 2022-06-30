@@ -41,6 +41,7 @@
             @tap="$refs.drawer.open(right)"
           />
         </FlexboxLayout>
+        <!-- Populars Programs -->
         <ScrollView
           col="0"
           row="1"
@@ -88,6 +89,7 @@
             text="Recommended For You"
           />
         </StackLayout>
+        <!-- Recomendated for you -->
         <ScrollView
           col="0"
           row="4"
@@ -140,6 +142,8 @@
             paddingRight="0"
           />
         </FlexboxLayout>
+        <!-- My programs Programs -->
+
         <StackLayout
           marginLeft="8"
           col="0"
@@ -155,22 +159,20 @@
             marginBottom="16"
           />
 
-          <CardProgram
-            v-for="(item, key) in cardExample"
-            :key="`cardProgram-${key}`"
-            :data="item"
-            marginBottom="16"
-          />
-
         </StackLayout>
       </GridLayout>
     </ScrollView>
+
   </Page>
 </template>
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
+import { apiGet ,baseUrl } from "~/resource/http";
+import cache from "~/store/cache/cache.android";
+import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS,DEFAULT_MY_PROGRAMS_LOADING
+} from "../../resource/constans"
 
 export default {
   components: {
@@ -180,114 +182,74 @@ export default {
   },
   data() {
     return {
-      poular_programs: [
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          height: 192,
-          url: "/program",
-        },
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          url: "/program",
-          height: 192,
-        },
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          colorText: "white",
-          url: "/program",
-          height: 192,
-        },
-      ],
-      recommended: [
-        {
-          img: "~/assets/images/File_014.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/SQUAT.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/File_014.JPG",
-          text: "ARM BLASTER",
-          width: 275,
-          height: 96,
-          url: "/program",
-          colorText: "white",
-        },
-      ],
-      myprograms: [
-        {
-          img: "~/assets/images/File_000.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        {
-          img: "~/assets/images/IMG_2215.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        {
-          img: "~/assets/images/File_019.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          url: "/program",
-          height: 173,
-        },
-        {
-          img: "~/assets/images/background_white.JPG",
-          text: "Add Program",
-          width: "100%",
-          colorText: "#949494",
-          height: 173,
-          url: "/add-programs",
-        },
-      ],
-      cardExample: [
-        {
-          img: "~/assets/images/File_000.JPG",
-          text: "ARM BLASTER",
-          width: "100%",
-          colorText: "white",
-          height: 173,
-        },
-        ],
-      drawerState: false,
+      loading:false,
+       poular_programs:DEFAULT_POPULAR_PROGRAMS,
+        // [
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     height: 192,
+      //     url: "/program",
+      //   },
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     url: "/program",
+      //     height: 192,
+      //   },
+      //   {
+      //     img: "~/assets/images/File_010.JPG",
+      //     text: "ARM BLASTER",
+      //     width: 275,
+      //     colorText: "white",
+      //     url: "/program",
+      //     height: 192,
+      //   },
+      // ],
+      recommended: DEFAULT_RECOMMENDATED,
+      myprograms: DEFAULT_MY_PROGRAMS_LOADING,
+     
     };
   },
   methods:{
-    ontapn(){
-      this.$navigator.navigate('/payments',{
-          transition: {
-            name: 'slideLeft',
-            duration: 300,
-            curve: 'easeIn'
-          },
-        })
-    }
+    onSuccess(res){
+      this.poular_programs = !!res[0].length ? this.generateImageCard(res[0],275,192): DEFAULT_POPULAR_PROGRAMS
+      this.recommended = !!res[1].length ? this.generateImageCard(res[1],275,96) : DEFAULT_RECOMMENDATED
+      this.myprograms = !!res[2].length ?  this.generateImageCard(res[2],275,192) : DEFAULT_MY_PROGRAMS
+
+    },
+    onError(err){
+        console.log('err',err);
+                    alert({
+              cancelable:true,
+              message: "Sorry have Error",
+              okButtonText: "OK",
+              theme:5
+      }).then(() => {
+            console.log("error" , err);
+          });
+    },
+
+     generateImageCard(res,width,height){
+         return res.map( (res) => ({
+          img: `${baseUrl}/storage/${res.image}`, 
+          text: `${res.name}`,
+          width: width,
+          colorText: "white",
+          height: height,
+          url: "/program",
+          props:{id:res.id}
+        }))
+      
+       
+
+    },
+  },
+
   }
 };
 </script>

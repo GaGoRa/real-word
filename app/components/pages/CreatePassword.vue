@@ -6,10 +6,10 @@
                     textAlignment="center" marginBottom="16" />
                 <StackLayout marginBottom="32">
                     <TextField height="40" hint="Password" secure="true"
-                        v-model="textFieldValue" backgroundColor="white"
+                        v-model="textFieldValue.password" backgroundColor="white"
                         borderRadius="8" />
                     <TextField height="40" hint="Confirm Password"
-                        secure="true" v-model="textFieldValue"
+                        secure="true" v-model="textFieldValue.repetpassword"
                         backgroundColor="white" borderRadius="8" />
                 </StackLayout>
                 <Label text="Wrong number?" fontSize="14"
@@ -23,10 +23,34 @@
 </template>
 
 <script>
+import { apiPost } from '~/resource/http';
+
     export default {
         data() {
-            return {};
-        }
+            return {
+                textFieldValue:{
+                    password:'',
+                    repetpassword:'',
+                }
+            };
+        },
+         processCreateNewPassword(){
+
+            const body ={
+                password:this.textFieldValue.password,
+                password_confirmation:this.textFieldValue.repetpassword,
+            }
+            // apiPost(body,'')
+            // .then(onSuccess)
+            // .catch(onSuccess)
+
+         },
+         onSuccess(res){
+            this.$navigator.navigate('/login')
+         },
+         onError(err){
+
+         },
     };
 </script>
 

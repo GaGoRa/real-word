@@ -29,8 +29,15 @@
                 </FlexboxLayout>
                 <!-- <Label text="Wrong number?" fontSize="14"
                     textAlignment="center" marginBottom="32"/> -->
-                <Label text="Wrong email?" fontSize="14"
-                    textAlignment="center" marginBottom="32"/>
+                <!-- <Label text="Wrong email?" fontSize="14"
+                    textAlignment="center" marginBottom="32"/> -->
+                     <Label fontSize="14" textAlignment="center" marginBottom="16">
+                    <FormattedString>
+                        <span fontSize="12" text="If you didn´t received the code, please try again" />
+                        <span text="please try again" @tap="reSendCode" fontSize="8" fontWeight="800" textWrap="true"/>
+                    </FormattedString>
+                </Label>
+            
                 <Label  v-if="errorMessage" marginTop="4" :text="errorMessage" fontSize="14"
                     textAlignment="center"  color="red" marginBottom="32"/>
 
@@ -68,13 +75,19 @@ import { apiPost} from '~/resource/http';
             processVerificationsEmails(){
                 
                 apiPost({},"/email")
+            },
+            reSendCode(){
+                console.log('ressendCOde');
             }
         },
         mounted(){ 
-            console.log("cache.get",cache.get("email"));
-                this.email = cache.get("email")
-                this.id = cache.get("id")
-                this.token = cache.get("token")
+
+                const cacheData = cache.get("userProfile")
+                const data = JSON.parse(cacheData)
+
+                this.email = data.user.email
+                this.id = data.user.id
+                this.token = data.token
              }
         
         
