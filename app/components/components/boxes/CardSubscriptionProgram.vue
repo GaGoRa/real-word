@@ -11,17 +11,18 @@
       <StackLayout
       width="100%"
         class="box-shadow"
-        
+        backgroundColor="#838383"
         borderRadius="16"
         padding="12"
       >
         <FlexboxLayout justifyContent="space-between">
           <Label
-            color="black"
+            color="white"
             fontSize="20"
             fontWeight="900"
             horizontalAlignment="left"
             textWrap="true"
+
             :text="data.name"
           />
           <!-- <Label
@@ -33,22 +34,24 @@
           /> -->
         </FlexboxLayout>
 
-        <HtmlView color="black" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
+        <HtmlView color="white" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
 
-        <FlexboxLayout justifyContent="space-around">
-          <StackLayout
+        <StackLayout >
+          <FlexboxLayout 
+            justifyContent="space-between"
+            orientation="horizontal"
             v-for="(price, key) in data.prices"
             :key="`package-${key}`"
-            borderWidth="1"
-            borderColor="white"
-            :backgroundColor="data.color ? '#EAB813' : '#838383'"
+            class="box-shadow"
+            :backgroundColor="data.color ? '#FFC107' : '#838383'"
             borderRadius="10"
+            marginBottom="8"
             @tap="redirect(data, price)"
             padding="16">
             <label textWrap fontSize="14" horizontalAlignment="center" :text="`Subscription ${price.recurrence.description}`" />
-            <label textWrap fontWeight="900" fontSize="16" horizontalAlignment="center" :text="price.amount" />
-          </StackLayout>
-        </FlexboxLayout>
+            <label textWrap fontWeight="900" fontSize="16" horizontalAlignment="center" :text="`$${price.amount}`" />
+          </FlexboxLayout >
+        </StackLayout>
 
         <!-- <Label
           color="white"
