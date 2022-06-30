@@ -3,6 +3,9 @@
     <StackLayout slot="right">
       <RightDrawer />
     </StackLayout>
+     <StackLayout slot="left">
+      <LeftDrawer />
+    </StackLayout>
      
     <Navigator :defaultRoute=" getToken() ? '/home' : '/login'" />
   </MultiDrawer>
@@ -10,6 +13,7 @@
 
 <script>
 import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
+import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { mapState, mapMutations } from "vuex";
 import cache from "~/store/cache/cache.android";
@@ -17,7 +21,8 @@ import cache from "~/store/cache/cache.android";
 export default {
   components: {
     RightDrawer,
-    SelectDrawer
+    SelectDrawer,
+    LeftDrawer
 },
   computed: {
     ...mapState(["drawerState"]),

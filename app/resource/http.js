@@ -12,7 +12,7 @@ const EXPREG_HTTP_CODE ={
 function getHeaders() {
   return {
       "Content-Type": "application/json",
-      'x-api-key': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
+      'token': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
   }
 }
 
@@ -24,10 +24,7 @@ export function apiPost(body,path){
     Http.request({
       method: "post",
       url: `${baseUrl}/api${path}`,
-      headers:  {
-        "Content-Type": "application/json",
-        'x-api-key': getHeaders()
-      },
+      headers: getHeaders(),
 
       content: JSON.stringify(body)
     }).then((res) => {

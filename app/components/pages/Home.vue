@@ -13,7 +13,7 @@
           paddingRight="24"
           width="100%"
         >
-          <Image src="~/assets/icons/bell_icon.png" height="24" />
+          <BellMenu/>
           <BurgerMenu />
         </FlexboxLayout>
       </StackLayout>
@@ -167,6 +167,7 @@
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
+import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import cache from "~/store/cache/cache.android";
@@ -178,6 +179,7 @@ export default {
     cardImage,
     BurgerMenu,
     CardProgram,
+    BellMenu
   },
   data() {
     return {
