@@ -45,12 +45,18 @@
           backgroundColor="white"
           borderRadius="10"
           marginButtom="16"
+          @returnPress="buscar"
         />
 
         <HelpComponent
           v-for="(item, key) in items_FAQ"
           :key="`help-${key}`"
           :data="item"
+          v-show="!loading"
+        />
+        <ActivityIndicator 
+          marginTop="16"
+          :busy="loading" 
         />
       </StackLayout>
     </ScrollView>
@@ -59,37 +65,73 @@
 
 <script>
 import HelpComponent from "~/components/components/HelpComponent.vue";
+import { apiPost,apiGet} from '~/resource/http';
 export default {
   components: {
     HelpComponent,
   },
   data() {
     return {
-      items_FAQ: [
-        {
-          title: "How to register?",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-          open: false,
-        },
-        {
-          title: "How to register?",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-          open: false,
-        },
-        {
-          title: "How to register?",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-          open: false,
-        },
+      frequentlyaskedquestion: [], 
+      loading: true, 
+      textFieldValue: null,
+      // items_FAQ: [
+      //   {
+      //     title: "How to register?",
+      //     text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      //     open: false,
+      //   },
+      //   {
+      //     title: "How to register?",
+      //     text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      //     open: false,
+      //   },
+      //   {
+      //     title: "How to register?",
+      //     text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      //     open: false,
+      //   },
 
-        {
-          title: "How to register?",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
-          open: false,
-        },
-      ],
+      //   {
+      //     title: "How to register?",
+      //     text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.",
+      //     open: false,
+      //   },
+      // ],
     };
   },
+  computed:{
+    items_FAQ(){
+      let arr = []
+      this.frequentlyaskedquestion.forEach((e)=>{
+        arr.push({
+          id: e.id,
+          title: e.question,
+          text: e.answer,
+          open: false,
+        })
+      })
+      return arr
+    }
+  },
+  async mounted(){
+    this.frequentlyaskedquestion = await apiGet("/frequentlyaskedquestion")
+    this.loading = false
+    console.log(frequentlyaskedquestion)
+  },
+  methods:{
+    async buscar(){
+      console.log('buscando')
+      this.loading = true
+      if(this.textFieldValue){
+        this.frequentlyaskedquestion = await apiGet(`/frequentlyaskedquestion?search=${this.textFieldValue}`)
+      }else{
+        this.frequentlyaskedquestion = await apiGet(`/frequentlyaskedquestion`)
+      }
+      console.log('buscando',this.frequentlyaskedquestion)
+      this.loading = false
+    }
+  }
 };
 </script>
 
