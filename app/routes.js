@@ -14,7 +14,7 @@ import SubscriptionPage from './components/pages/Subscription.vue'
 import ChooseBestPrograms from './components/pages/ChooseBestPrograms.vue'
 import LoginAplication from './components/pages/LoginAplication.vue'
 import ResetPassword from './components/pages/ResetPassword.vue'
-import PopularPrograms from './components/pages/PopularPrograms.vue'
+import ListPrograms from './components/pages/ListPrograms.vue'
 import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
 
 import AddPrograms from './components/pages/AddPrograms.vue'
@@ -83,8 +83,8 @@ export const routes = {
     component: ResetPassword,
   },
 
-  '/popular-programs': {
-    component: PopularPrograms,
+  '/list-programs': {
+    component: ListPrograms,
   },
   '/recommended-programs': {
     component: RecommendedPrograms,

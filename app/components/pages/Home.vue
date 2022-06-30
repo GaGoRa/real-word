@@ -68,7 +68,13 @@
             fontSize="14"
             textDecoration="underline"
             horizontalAlignment="center"
-            @tap="$navigator.navigate('/popular-programs')"
+            @tap="$navigator.navigate('/list-programs',
+            {props:
+            {data:
+            getPropsListProgram('popular','all','Popular programs')
+            }
+            
+            })"
             text="View all"
           />
         </StackLayout>
@@ -116,7 +122,8 @@
             fontSize="14"
             horizontalAlignment="center"
             textDecoration="underline"
-            @tap="$navigator.navigate('/recommended-programs')"
+            @tap="$navigator.navigate('/list-programs',{props:{data:
+            getPropsListProgram('recommended','all','Recommended For You')}})"
             text=" View All"
           />
         </StackLayout>
@@ -184,33 +191,7 @@ export default {
   data() {
     return {
       loading:false,
-       poular_programs:DEFAULT_POPULAR_PROGRAMS,
-        // [
-      //   {
-      //     img: "~/assets/images/File_010.JPG",
-      //     text: "ARM BLASTER",
-      //     width: 275,
-      //     colorText: "white",
-      //     height: 192,
-      //     url: "/program",
-      //   },
-      //   {
-      //     img: "~/assets/images/File_010.JPG",
-      //     text: "ARM BLASTER",
-      //     width: 275,
-      //     colorText: "white",
-      //     url: "/program",
-      //     height: 192,
-      //   },
-      //   {
-      //     img: "~/assets/images/File_010.JPG",
-      //     text: "ARM BLASTER",
-      //     width: 275,
-      //     colorText: "white",
-      //     url: "/program",
-      //     height: 192,
-      //   },
-      // ],
+      poular_programs:DEFAULT_POPULAR_PROGRAMS,
       recommended: DEFAULT_RECOMMENDATED,
       myprograms: DEFAULT_MY_PROGRAMS_LOADING,
      
@@ -218,20 +199,21 @@ export default {
   },
   methods:{
     onSuccess(res){
-      this.poular_programs = !!res[0].length ? this.generateImageCard(res[0],275,192): DEFAULT_POPULAR_PROGRAMS
-      this.recommended = !!res[1].length ? this.generateImageCard(res[1],275,96) : DEFAULT_RECOMMENDATED
-      this.myprograms = !!res[2].length ?  this.generateImageCard(res[2],275,192) : DEFAULT_MY_PROGRAMS
+      this.poular_programs = !!res.data.popular.length ? this.generateImageCard(res.data.popular,275,192): DEFAULT_POPULAR_PROGRAMS
+      this.recommended = !!res.data.recommended.length ? this.generateImageCard(res.data.recommended,275,96) : DEFAULT_RECOMMENDATED
+      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,275,192) : DEFAULT_MY_PROGRAMS
 
     },
     onError(err){
         console.log('err',err);
                     alert({
               cancelable:true,
-              message: "Sorry have Error",
+              message: "Sorry have Error , please retry login",
               okButtonText: "OK",
               theme:5
       }).then(() => {
-            console.log("error" , err);
+            cache.delete("userProfile")
+            console.log("error se elimino datos de usuario se neceita re login" , err);
           });
     },
 
@@ -249,6 +231,18 @@ export default {
        
 
     },
+    getIdUser(){
+      return JSON.parse(cache.get('userProfile')).user.id
+    },
+    getPropsListProgram(key,value,title){
+      return {
+          params:{
+            key:key,
+           value:value},
+          id:this.getIdUser(),
+          title:title
+      }
+    } 
   },
   created(){
     // cache.delete("userProfile")
@@ -260,8 +254,15 @@ export default {
       .then(this.onSuccess)
       .catch(this.onError)
 
+  },
+  mounted(){
+    console.log(
+    this.getPropsListProgram('1','33',"queso")
+
+    );
   }
 };
+
 </script>
 
 <style scoped>

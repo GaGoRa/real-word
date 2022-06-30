@@ -1,10 +1,8 @@
 <template>
   <Page class="page-home" actionBarHidden="true">
-    <!-- <StackLayout>
+    <StackLayout marginTop="32">
     <NavBarBurgerMenu/>
-
-    </StackLayout> -->
-    <ActionBar
+    <!-- <ActionBar
       marginTop="16"
       height="64"
       title=""
@@ -26,7 +24,7 @@
           <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
         </FlexboxLayout>
       </StackLayout>
-    </ActionBar>
+    </ActionBar> -->
     <ScrollView>
       <GridLayout marginTop="24" columns="*" rows="*,*">
         <StackLayout
@@ -42,7 +40,7 @@
             color="white"
             fontSize="24"
             fontWeight="900"
-            text="Popular programs"
+            :text="data.title"
           />
         </StackLayout>
         <StackLayout
@@ -53,64 +51,79 @@
           backgroundColor="transparent"
           paddingRight="24"
         >
+
+            <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
+                        textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="16" /> 
+
+          
+
           <cardImage
-            v-for="(item, key) in poular_programs"
-            :key="`popular-${key}`"
+            v-for="(item, key) in list_programs"
+            :key="`list-${key}`"
             :data="item"
             marginBottom="16"
           />
         </StackLayout>
       </GridLayout>
     </ScrollView>
+    </StackLayout>
   </Page>
 </template>
 <script>
 import cardImage from "~/components/components/boxes/cardImage";
-import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
+import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
+import {DEFAULT_LIST_PROGRAMS} from "../../resource/constans"
+import { apiGet,baseUrl } from "~/resource/http";
 export default {
   components: {
     cardImage,
     NavBarBurgerMenu
   },
+  props:{
+    data:{
+      type:Object,
+      default:{}
+    }
+  },
   data() {
     return {
-      poular_programs: [
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "ANIMAL",
-          width: "100%",
-          height: 192,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/SQUAT.JPG",
-          text: "LEG DESTRUCTION",
-          width: "100%",
-          height: 192,
-
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/File_014.JPG",
-          text: "ANIMAL",
-          width: "100%",
-          height: 192,
-          url: "/program",
-          colorText: "white",
-        },
-        {
-          img: "~/assets/images/File_010.JPG",
-          text: "LEG DESTRUCTION",
-          width: "100%",
-          height: 192,
-          url: "/program",
-          colorText: "white",
-        },
-      ],
+      errorsMessage:{
+        errorMessage:'adasdasdass'
+      },
+      list_programs: DEFAULT_LIST_PROGRAMS,
     };
   },
+  created()
+  {
+
+  apiGet(`/home_display?${this.data.params.key}=${this.data.params.value}`)
+  .then(this.onSuccess)
+  .catch(this.onError)
+
+  },
+  methods:{
+    onSuccess(res){
+      this.list_programs = !!res.data.length ? this.generateImageCard(res.data,"100%",192): DEFAULT_LIST_PROGRAMS
+
+    },
+    onError(res){
+      this.errorsMessage.errorMessage = "Hava a error" + res
+    },
+     generateImageCard(res,width,height){
+         return res.map( (res) => ({
+          img: `${baseUrl}/storage/${res.image}`, 
+          text: `${res.name}`,
+          width: width,
+          colorText: "white",
+          height: height,
+          url: "/program",
+          props:{id:res.id}
+        }))
+      
+       
+
+    },
+  }
 };
 </script>
 

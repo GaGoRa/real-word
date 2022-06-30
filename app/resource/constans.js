@@ -28,6 +28,33 @@ export const DEFAULT_POPULAR_PROGRAMS =  [
     },
   ]
 
+  export const DEFAULT_LIST_PROGRAMS =  [
+    {
+      img: "~/assets/images/eskeleton.png",
+      text: "",
+      width: "100%",
+      colorText: "",
+      height: 192,
+      class:'label_skeleton'
+    },
+    {
+      img: "~/assets/images/eskeleton.png",
+      text: "",
+      width: "100%",
+      colorText: "",
+      height: 192,
+      class:'label_skeleton'
+    }, {
+      img: "~/assets/images/eskeleton.png",
+      text: "",
+      width: "100%",
+      colorText: "",
+      height: 192,
+      class:'label_skeleton'
+    },
+  ]
+
+
 export const DEFAULT_RECOMMENDATED = [
     {
       img: "~/assets/images/eskeleton.png",
