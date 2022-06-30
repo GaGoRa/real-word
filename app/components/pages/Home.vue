@@ -8,6 +8,7 @@
       flat="true"
     >
       <StackLayout>
+        <label @tap="ontapn" text="hola" /> 
         <FlexboxLayout
           justifyContent="space-between"
           paddingRight="24"
@@ -154,7 +155,7 @@
             marginBottom="16"
           />
 
-   <CardProgram
+          <CardProgram
             v-for="(item, key) in cardExample"
             :key="`cardProgram-${key}`"
             :data="item"
@@ -277,6 +278,17 @@ export default {
       drawerState: false,
     };
   },
+  methods:{
+    ontapn(){
+      this.$navigator.navigate('/payments',{
+          transition: {
+            name: 'slideLeft',
+            duration: 300,
+            curve: 'easeIn'
+          },
+        })
+    }
+  }
 };
 </script>
 
