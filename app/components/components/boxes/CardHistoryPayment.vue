@@ -1,12 +1,17 @@
 
 <template>
-  <StackLayout padding="12" borderRadius="12" marginTop="16" backgroundColor="white" class="box-shadow " marginLeft="24" marginRight="24">
-  
+  <StackLayout padding="12" borderRadius="12" marginTop="16" 
+  :backgroundColor="data.color" 
+  :class=" !!data.class ? `box-shadow ${data.class}` : 'box-shadow'"
+   marginLeft="24" marginRight="24"
+   :width=" data.width ? data.width: '336' "
+   height="87"
+   @tap=" !!data.props ? getFile(data.props.url)  : null "
+   >
+  <!-- $navigator.navigate('/pdf-view',{props:{data:data.props}}) -->
     <FlexboxLayout
       flexDirection="column"
-
     >
-
       <StackLayout
       left="0"
       bottom="0"
@@ -15,7 +20,7 @@
         <FlexboxLayout
         justifyContent="space-between"
           >
-              <Label
+            <Label
             color="#8E8B8B"
             fontSize="18"
             fontWeight="900"
@@ -34,11 +39,11 @@
 
           <StackLayout   width="50%" horizontalAlignment="center">
           
-              <Label
+            <Label
             color="#8E8B8B"
             fontSize="24"
             fontWeight="900"
-            :text="` $${data.mount}`"
+            :text="!!data.mount ? ` $${data.mount}` : '' "
             horizontalAlignment="center"
             />
           
@@ -46,7 +51,7 @@
 
              <FlexboxLayout width="50%">
                
-                 <Image src="~/assets/icons/btn_icon_plus.png" height="40" />
+                 <Image v-if="!!data.typeCard" :src=" data.typeCard === 'VISA' ? '~/assets/icons/Icon awesome-cc-visa.png' : ''"  height="24" marginRight="4" />
                  
                  <Label
                 color="#8E8B8B"
@@ -68,6 +73,8 @@
   </StackLayout>
 </template>
 <script>
+import {getFileResource} from '../../../resource/http'
+
 export default {
   props: {
     data: {
@@ -78,6 +85,22 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    
+    getFile(url){
+      getFileResource(url)
+      .then(this.onSuccess)
+      .catch(this.onError)
+    },
+    onSuccess(res){
+      console.log('todo bieeeen',res);
+    },
+      onError(err){
+      console.log('todo errrr',err);
+    }
+
+
+  }
 };
 </script>
 

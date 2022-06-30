@@ -2,6 +2,44 @@
 export const ERROR_MESSAGE_REGISTER = {
 }
 
+export const DEFAULT_CARD_HISTORY = [ {
+  subscription:"",
+  mount:"",
+  date:"",
+  card:"",
+  color:"#8E8B8B",
+  typeCard:"",
+  class:'label_skeleton',
+  width:"336",
+  height:"87"
+
+},
+{
+  subscription:"",
+  mount:"",
+  date:"",
+  card:"",
+  color:"#8E8B8B",
+  typeCard:"",
+  class:'label_skeleton',
+  width:"336",
+  height:"87"
+
+},
+{
+  subscription:"",
+  mount:"",
+  date:"",
+  card:"",
+  color:"#8E8B8B",
+  typeCard:"",
+  class:'label_skeleton',
+  width:"336",
+  height:"87"
+
+},
+]
+
 export const DEFAULT_POPULAR_PROGRAMS =  [
     {
       img: "~/assets/images/eskeleton.png",

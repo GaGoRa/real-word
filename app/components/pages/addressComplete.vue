@@ -164,7 +164,7 @@ export default {
   },
   methods:{
     onBack(){
-      // this.$navigator.back()
+       this.$navigator.back()
       // setTimeout(()=>{
       //   this.$modal.close()
       // },500)

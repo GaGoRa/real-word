@@ -2,8 +2,11 @@
   <Page class="seccion-register-bg-invert" actionBarHidden="true">
       <StackLayout 
       backgroundColor="trasparent"
-      marginLeft="16"
+      marginTop="32"
+      
       >
+       <NavBarBurgerMenu />
+
     <!-- <StackLayout>
       <FlexboxLayout
         marginTop="32"
@@ -39,14 +42,13 @@
 
   <NavBarTittle :data="navbarTittle"/>
 -->
-    <StackLayout>
       <CardSubscription
         v-for="(item, key) in subscriptions"
         :key="`subscription-${key}`"
         :data="item"
         marginBottom="16"
+        marginTop="16"
       />
-    </StackLayout>
     </StackLayout>
   </Page>
 </template>
@@ -71,7 +73,7 @@ export default {
       subscriptions: [
         {
           tittle: "Gold Subscription",
-          mount: "$27.99",
+          mount: "$29.99",
           color: "#EAB813",
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
         },

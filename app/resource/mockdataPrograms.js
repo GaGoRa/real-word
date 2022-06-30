@@ -224,6 +224,34 @@ export const dataTest = {
     }
 }
 
+export const dataTestHistory = [{
+               'name' :'cleiber1',
+              'amount' : '2323.222',
+              'date': ' Nov 9, 2009',
+              'invoice_pdf':'https://pay.stripe.com/invoice/acct_1JFMxBFllRtR3x1g/live_YWNjdF8xSkZNeEJGbGxSdFIzeDFnLF9MblhLNDVMRExPbTVaaW9nTDQ4bm1XUmQ3WkJ3NXpKLDQ3MTUzNjY00200XwkbYc2d/pdf?s=ap',
+              'status' :'pay',
+              'pm_last_four' : '3345',
+              'pm_type' :'visa' ,
+},
+{
+    'name' :'cleiber',
+   'amount' : '2323.222',
+   'date': ' Nov 9, 2009',
+   'invoice_pdf':'https://www.ucalp.edu.ar/wp-content/uploads/2022/03/lic-dise%C3%B1o-VISUAL-22.pdf',
+   'status' :'pay',
+   'pm_last_four' : '3345',
+   'pm_type' :'visa' ,
+},
+{
+    'name' :'cleiber',
+   'amount' : '2323.222',
+   'date': ' Nov 9, 2009',
+   'invoice_pdf':'https://google.com',
+   'status' :'pay',
+   'pm_last_four' : '3345',
+   'pm_type' :'visa' ,
+}
+]
 
 export function apiMock(data) {
     return new Promise((resolve, reject)=>{
