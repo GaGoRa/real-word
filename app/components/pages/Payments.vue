@@ -145,6 +145,7 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import CardPayment from '../components/boxes/CardPayment.vue'
+import cache from '~/store/cache/cache.android'
 import { apiPost,apiGet} from '~/resource/http';
 export default {
   props:{
@@ -198,12 +199,28 @@ export default {
     };
   },
   async mounted(){
-    const response =  await apiPost({
-      package_id: this.package.id,
-      price_id: this.price.id,
-    },"/subscription/create_subscription")
-    console.log(response)
-    this.url = response.data.url
+    const user = JSON.parse(cache.gat("userProfile")) 
+    console.log(user)
+if(
+!user.name ||
+!user.country_id ||
+!user.address ||
+!user.email ||
+!user.state_id ||
+!user.city ||
+!user.postal_code
+){
+  console.log('debe completar su direccion')
+// this.$navigator.modal('/path', { fullscreen: true })
+}
+    
+
+    // const response =  await apiPost({
+    //   package_id: this.package.id,
+    //   price_id: this.price.id,
+    // },"/subscription/create_subscription")
+    // console.log(response)
+    // this.url = response.data.url
   },
 };
 </script>
