@@ -37,7 +37,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             :text="data.title"
@@ -114,7 +114,7 @@ export default {
           img: `${baseUrl}/storage/${res.image}`, 
           text: `${res.name}`,
           width: width,
-          colorText: "white",
+          colorText: "#FFFFFF",
           height: height,
           url: "/program",
           props:{id:res.id}

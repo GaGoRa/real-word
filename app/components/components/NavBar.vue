@@ -27,7 +27,7 @@
             textAlignment="center"
             :text="data.title"
             fontSize="24"
-            color="white"
+            color="#FFFFFF"
             fontWeight="900"
             paddingTop="2"
           />

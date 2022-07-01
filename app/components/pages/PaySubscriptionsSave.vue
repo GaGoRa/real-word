@@ -36,7 +36,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             text="Gold Subscription"
@@ -57,7 +57,7 @@
           <Label
             paddingTop="2"
             marginLeft="8"
-            color="white"
+            color="#FFFFFF"
             fontSize="17"
             fontWeight="400"
             text="DETAILS"
@@ -79,7 +79,7 @@
 
               padding="14"
                 marginRight="8"
-              color="white"
+              color="#FFFFFF"
               fontSize="16"
               fontWeight="500"
               text="Monthly"
@@ -88,7 +88,7 @@
 
           <Label
               marginRight="8"
-              color="white"
+              color="#FFFFFF"
               fontSize="32"
               fontWeight="900"
               text="$27.99"
@@ -104,7 +104,7 @@
         marginRight="16"
         hint="Card holder Name"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -114,7 +114,7 @@
         marginRight="16"
         hint="Credit Card #"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <StackLayout>
@@ -126,7 +126,7 @@
         marginRight="8"
         hint="Expiration Date"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
         width="50%"
       />
@@ -137,7 +137,7 @@
         marginRight="16"
         hint="CVV"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
         width="50%"
       />
@@ -153,7 +153,7 @@
            
           <FlexboxLayout marginLeft="16" > 
               <Label  marginRight="8"
-              color="white"
+              color="#FFFFFF"
               fontSize="14"
               fontWeight="500" text="Save credit card for future purchases"></Label>
 
@@ -177,7 +177,7 @@
               <FlexboxLayout > 
                <Label
               marginRight="8"
-              color="white"
+              color="#FFFFFF"
               fontSize="16"
               fontWeight="500"
               marginLeft="16"
@@ -204,7 +204,7 @@
         width="200"
         height="40"
         fontWeight="900"
-        color="white"
+        color="#FFFFFF"
         marginBottom="32"
         @tap="$navigator.navigate('/home')"
       />

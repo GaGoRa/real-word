@@ -65,7 +65,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             textDecoration="underline"
             horizontalAlignment="center"
@@ -89,7 +89,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             text="Recommended For You"
@@ -120,7 +120,7 @@
           backgroundColor="transparent"
         >
           <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             horizontalAlignment="center"
             textDecoration="underline"
@@ -224,7 +224,7 @@ export default {
           img: `${baseUrl}/storage/${res.image}`, 
           text: `${res.name}`,
           width: width,
-          colorText: "white",
+          colorText: "#FFFFFF",
           height: height,
           url: "/program",
           props:{id:res.id}

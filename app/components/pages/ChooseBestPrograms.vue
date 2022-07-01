@@ -27,7 +27,7 @@
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="white" height="36"
+                  backgroundColor="#FFFFFF" height="36"
                   :hint="gender" 
                   editable="false"
                   @tap="onTapGender"
@@ -35,7 +35,7 @@
                 <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16"  
                 borderRadius="10" selectedIndex="0" :items="  items_selectPicker_gender"
-                 backgroundColor="white" height="36"  /> -->
+                 backgroundColor="#FFFFFF" height="36"  /> -->
 
 
                  <TextField 
@@ -47,7 +47,7 @@
                   marginRight="16" 
                   :hint="textValue.date_of_birth == '' ? 'Date of birth':fecha(textValue.date_of_birth)"
                   borderRadius="10" 
-                  backgroundColor="white" 
+                  backgroundColor="#FFFFFF" 
                   height="36"  />
 
                  <TextField 
@@ -56,7 +56,7 @@
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="white" height="36"
+                  backgroundColor="#FFFFFF" height="36"
                   :hint="experience" 
                   editable="false"
                   @tap="onTapExperience"
@@ -65,7 +65,7 @@
                 <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_experience"
-                  backgroundColor="white" height="36"  /> -->
+                  backgroundColor="#FFFFFF" height="36"  /> -->
                 
                     <Label marginLeft="16" marginTop="8" color="#949494" text="What’s your main reason for joining?" fontSize="16" 
                     textAlignment="left"  />
@@ -76,7 +76,7 @@
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="white" height="36"
+                  backgroundColor="#FFFFFF" height="36"
                   :hint="reason" 
                   editable="false"
                   @tap="onTapReason"
@@ -88,7 +88,7 @@
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="white" height="36"
+                  backgroundColor="#FFFFFF" height="36"
                   :hint="exercise" 
                   editable="false"
                   @tap="onTapExcersice"
@@ -98,12 +98,12 @@
 
                <!--  <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"             marginLeft="14" marginRight="16" 
                 borderRadius="10" selectedIndex="0" :items="items_selectPicker_reason"
-                 backgroundColor="white" height="36"  /> -->
+                 backgroundColor="#FFFFFF" height="36"  /> -->
 
                 <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_where_exercise"
-                  backgroundColor="white" height="36"  /> -->
+                  backgroundColor="#FFFFFF" height="36"  /> -->
 
                    <Label  marginLeft="16" marginTop="8" color="#949494" text="How often do you want to work out?" fontSize="16" 
                     textAlignment="left" />
@@ -114,7 +114,7 @@
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="white" height="36"
+                  backgroundColor="#FFFFFF" height="36"
                   :hint="frequency" 
                   editable="false"
                   @tap="onTapFrecuence"
@@ -122,11 +122,11 @@
               <!--   <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_concurrence"
-                  backgroundColor="white" height="36"  /> -->
+                  backgroundColor="#FFFFFF" height="36"  /> -->
 
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
-                    height="40" fontWeight="900" color="white"
+                    height="40" fontWeight="900" color="#FFFFFF"
                     marginBottom="32" @tap="processUserUpdate"/>
             </StackLayout>
         </FlexboxLayout>
@@ -220,7 +220,7 @@ import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
         },
         onSuccess(res){
             cache.set("userProfile",JSON.stringify(res.data))
-            this.$navigator.navigate('/home')
+            this.$navigator.navigate('/home',{clearHistory:true})
 
 
         },

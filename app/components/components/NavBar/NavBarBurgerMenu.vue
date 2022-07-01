@@ -9,7 +9,7 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
             width="40"
-            @tap="$navigator.navigate('/home')"
+            @tap="$navigator.back('/home')"
           />
          <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>

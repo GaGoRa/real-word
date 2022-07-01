@@ -20,7 +20,7 @@
     >
      <StackLayout>
       <Label
-        color="white"
+        color="#FFFFFF"
         fontSize="18"
         fontWeight="500"
         marginBottom="4"
@@ -36,7 +36,7 @@
         >
         <StackLayout>
             <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             fontWeight="500"
             :text="data.date"
@@ -44,7 +44,7 @@
        </StackLayout>
         <StackLayout>
             <Label
-                color="white"
+                color="#FFFFFF"
                 fontSize="14"
                 fontWeight="500"
                 :text="data.person"

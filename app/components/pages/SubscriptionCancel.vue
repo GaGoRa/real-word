@@ -30,7 +30,7 @@
             textAlignment="center"
             text="Subscription"
             fontSize="24"
-            color="white"
+            color="#FFFFFF"
             fontWeight="900"
             paddingTop="0"
           />
@@ -47,7 +47,7 @@
         borderRadius="10"
         selectedIndex="0"
         :items="reason_items"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
 
@@ -58,7 +58,7 @@
         hint="Comments"
         width="100%"
         color="grey"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="128 "
       />
 
@@ -75,7 +75,7 @@
           width="240"
           height="48"
           fontWeight="900"
-          color="white"
+          color="#FFFFFF"
           marginBottom="8"
         />
       </FlexboxLayout>

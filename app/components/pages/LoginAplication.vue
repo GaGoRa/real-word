@@ -10,13 +10,13 @@
                 
 
                  <!-- <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
-                    color="white" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                    color="#FFFFFF" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
-                        <Label verticalAlignment="middle"  horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="white" />
+                        <Label verticalAlignment="middle"  horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
                     </StackLayout>
 
-                      <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="white"
-                    color="white" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                      <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#FFFFFF"
+                    color="#FFFFFF" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                         <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
                         <Label verticalAlignment="middle" horizontalAlignment="center"  text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
                     </StackLayout> -->
@@ -31,14 +31,14 @@
 
 
                 <TextField height="38" v-model="textFieldValue.email"
-                    hint="Email" backgroundColor="white" borderRadius="10"/>
+                    hint="Email" backgroundColor="#000000" borderRadius="10"/>
                 
                 <Label  v-if="!!errorsMessages.email" :text="errorsMessages.email" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
     
 
                 <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.password" hint="Password"
-                    backgroundColor="white" borderRadius="10" marginBottom="6"  secure="true" />
+                    backgroundColor="#FFFFFF" borderRadius="10" marginBottom="6"  secure="true" />
                      
                      <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
@@ -48,7 +48,7 @@
                 
                 <Button borderRadius="16" marginTop="" fontSize="16"
                     text="Login" backgroundColor="red" width="200"
-                    height="40" fontWeight="900" color="white"
+                    height="40" fontWeight="900" color="#FFFFFF"
                     marginBottom="32" @tap="processLogin"/>     
 
                         <FlexboxLayout marginBottom="32" justifyContent="center">

@@ -6,17 +6,17 @@
                     textAlignment="center" marginBottom="16" />
                 <StackLayout marginBottom="32">
                     <TextField height="40" hint="Password" secure="true"
-                        v-model="textFieldValue.password" backgroundColor="white"
+                        v-model="textFieldValue.password" backgroundColor="#FFFFFF"
                         borderRadius="8" />
                     <TextField height="40" hint="Confirm Password"
                         secure="true" v-model="textFieldValue.repetpassword"
-                        backgroundColor="white" borderRadius="8" />
+                        backgroundColor="#FFFFFF" borderRadius="8" />
                 </StackLayout>
                 <Label text="Wrong number?" fontSize="14"
                     textAlignment="center" marginBottom="32" />
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
-                    fontWeight="900" color="white" @tap="$navigator.navigate('/welcome')" marginBottom="32" />
+                    fontWeight="900" color="#FFFFFF" @tap="$navigator.navigate('/welcome')" marginBottom="32" />
             </StackLayout>
         </FlexboxLayout>
     </Page>

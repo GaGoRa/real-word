@@ -99,7 +99,7 @@ export const DEFAULT_RECOMMENDATED = [
       text: "",
       width: 275,
       height: 96,
-      colorText: "white",
+      colorText: "#FFFFFF",
       class:'label_skeleton'
     },
     {
@@ -108,7 +108,7 @@ export const DEFAULT_RECOMMENDATED = [
       width: 275,
       height: 96,
       
-      colorText: "white",
+      colorText: "#FFFFFF",
       class:'label_skeleton'
     },
     {
@@ -116,7 +116,7 @@ export const DEFAULT_RECOMMENDATED = [
       text: "",
       width: 275,
       height: 96,
-      colorText: "white",
+      colorText: "#FFFFFF",
       class:'label_skeleton'
     },
   ]

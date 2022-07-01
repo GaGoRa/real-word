@@ -12,42 +12,42 @@
                         textAlignment="center" color="#949494" marginBottom="16" />
 
                     <!-- <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
-                        color="white" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                        color="#FFFFFF" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                                 <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
-                            <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="white" />
+                            <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
                         </StackLayout>
 
-                    <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="white"
-                        color="white" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
+                    <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#FFFFFF"
+                        color="#FFFFFF" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
                             <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
                         </StackLayout>
 
                     <Label text="or" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="white" marginBottom="16" /> -->
+                        textAlignment="center" color="#FFFFFF" marginBottom="16" /> -->
 
                      <Label  v-if="!!errorsMessages.errorMessage" :text="errorsMessages.errorMessage" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
                     <TextField height="38" v-model="textFieldValue.firstName"
-                        hint="First Name" backgroundColor="white"
+                        hint="First Name" backgroundColor="#FFFFFF"
                         borderRadius="10" marginBottom="6"  />
                         <Label  v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
 
                     <TextField height="38" v-model="textFieldValue.lastName" marginBottom="6" 
-                        hint="Last Name" backgroundColor="white" borderRadius="10"
+                        hint="Last Name" backgroundColor="#FFFFFF" borderRadius="10"
                         />
                         <Label  v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                     <!-- <SelectInput :hint="hint" @toggleSelectDrawer="miFuncion" :drawerState="drawerState"/> -->
-                    <!-- <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="white" height="36"  /> -->
+                    <!-- <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="#FFFFFF" height="36"  /> -->
 
                    
                     <TextField 
                       height="38" 
                       :hint="country"
-                      backgroundColor="white" 
+                      backgroundColor="#FFFFFF" 
                       borderRadius="10"
                       marginBottom="6" 
                       editable="false"
@@ -59,27 +59,27 @@
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                     <TextField keyboardType="email"  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
-                        backgroundColor="white" borderRadius="10" marginBottom="6"/>
+                        backgroundColor="#FFFFFF" borderRadius="10" marginBottom="6"/>
                         <Label  v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
 
                     <TextField keyboardType="number" height="38" v-model="textFieldValue.phone" hint="Phone #"
-                        backgroundColor="white" borderRadius="10"
+                        backgroundColor="#FFFFFF" borderRadius="10"
                         marginBottom="6" />
                         <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
                     
                     <TextField  height="38" v-model="textFieldValue.password" hint="password"
                      secure="true"
-                        backgroundColor="white" borderRadius="10"
+                        backgroundColor="#FFFFFF" borderRadius="10"
                         marginBottom="16" />
                         <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="8" />
 
                     <Button borderRadius="16" marginTop="" fontSize="16"
                         text="Register" backgroundColor="red" width="200"
-                        height="40" fontWeight="900" color="white"
+                        height="40" fontWeight="900" color="#FFFFFF"
                         marginBottom="32" @tap="processCreateUser"/>
 
                         

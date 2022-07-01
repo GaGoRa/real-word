@@ -29,7 +29,7 @@
             textAlignment="center"
             text="Address"
             fontSize="24"
-            color="white"
+            color="#FFFFFF"
             fontWeight="900"
             paddingTop="2"
           />
@@ -41,7 +41,7 @@
       <Label
         marginLeft="16"
         marginTop="8"
-        color="white"
+        color="#FFFFFF"
         text="General Information?"
         fontWeight="900"
         fontSize="16"
@@ -52,7 +52,7 @@
       <!-- <Label
         marginLeft="16"
         marginTop="8"
-        color="white"
+        color="#FFFFFF"
         text="General Information?"
         fontWeight="900"
         fontSize="16"
@@ -66,7 +66,7 @@
         v-model="address"
         hint="Address"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -77,7 +77,7 @@
         :hint="state"
         @tap="onTapState"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         editable="false"
         height="36"
       />
@@ -90,7 +90,7 @@
         v-model="city"
         hint="City"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -101,7 +101,7 @@
         v-model="postal_code"
         hint="Postal Code"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
         keyboardType="number"
       />
@@ -115,7 +115,7 @@
         width="200"
         height="40"
         fontWeight="900"
-        color="white"
+        color="#FFFFFF"
         marginBottom="32"
         @tap="onSave"
       />
@@ -152,8 +152,8 @@ export default {
     return {
       address:'',
       state_id: 1 ,
-      city:'miami',
-      postal_code:'2345',
+      city:'City',
+      postal_code:'',
       states: [],
       state: 'Staste'
     };

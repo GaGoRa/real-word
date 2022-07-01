@@ -5,7 +5,7 @@
       marginTop="32"
       
       >
-       <NavBarBurgerMenu />
+       <NavBar  :data="navbar"/>
 
     <!-- <StackLayout>
       <FlexboxLayout
@@ -21,27 +21,15 @@
             @tap="$navigator.navigate('/home')"
           />
         </StackLayout>
-        <StackLayout
-          width="80%"
-          backgroundImage="~/assets/icons/Group_403.png"
-          class="bg-label"
-          height="14"
-        >
-          <Label
-            textAlignment="center"
-            text="Subscription"
-            fontSize="24"
-            color="white"
-            fontWeight="900"
-            paddingTop="0"
-          />
-        </StackLayout>
+        
       </FlexboxLayout>
    
       </StackLayout> 
 
   <NavBarTittle :data="navbarTittle"/>
 -->
+    
+
       <CardSubscription
         v-for="(item, key) in subscriptions"
         :key="`subscription-${key}`"
@@ -55,6 +43,8 @@
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue'
+
 import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue";
 import { apiGet } from '~/resource/http';
@@ -62,12 +52,17 @@ import { apiGet } from '~/resource/http';
 import NavBarTittle from "~/components/components/NavBar.vue";
 export default {
   components: {
+    NavBar,
     CardSubscription,
     NavBarTittle,
     NavBarBurgerMenu
   },
   data() {
     return { 
+      navbar:{
+        title:"Purchase History"
+      },
+
       navbarTittle:{
         title:"Subscription"
       },

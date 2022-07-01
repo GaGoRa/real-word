@@ -10,7 +10,7 @@
       padding="16"
     >
       <Label
-        color="white"
+        color="#FFFFFF"
         fontSize="24"
         fontWeight="900"
         horizontalAlignment="left"
@@ -18,11 +18,11 @@
         :text="data.tittle"
       />
 
-      <HtmlView color="white" fontSize="24" marginLeft="8" marginTop="8" :html="data.text" />
+      <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text" />
 
       <FlexboxLayout justifyContent="space-between">
         <Label
-          color="white"
+          color="#FFFFFF"
           fontSize="20"
           fontWeight="900"
           horizontalAlignment="left"
@@ -39,10 +39,10 @@
             width="152"
             height="31"
             fontWeight="800"
-            color="white"
+            color="#FFFFFF"
             @tap="onTapCancel"
           />
-          <Label color="white"
+          <Label color="#FFFFFF"
           fontSize="13"
           fontWeight="900" v-if="data.status == 'canceled'" text="Subscription Canceled" />
 
@@ -56,7 +56,7 @@
             width="152"
             height="31"
             fontWeight="800"
-            color="white"
+            color="#FFFFFF"
             @tap="onTapReanudar"
           /> -->
         </StackLayout>

@@ -29,7 +29,7 @@
             textAlignment="center"
             text="Profile"
             fontSize="24"
-            color="white"
+            color="#FFFFFF"
             fontWeight="900"
             paddingTop="2"
           />
@@ -45,7 +45,7 @@
       <Label
         marginLeft="16"
         marginTop="8"
-        color="white"
+        color="#FFFFFF"
         text="General Information?"
         fontWeight="900"
         fontSize="16"
@@ -60,7 +60,7 @@
         marginRight="16"
         hint="First Name"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -71,7 +71,7 @@
         marginRight="16"
         hint="Middle Name"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -82,7 +82,7 @@
         marginRight="16"
         hint="Last Name"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       
@@ -95,7 +95,7 @@
                   marginRight="16" 
                   :hint="textValue.date_of_birth == bindMoment() ? 'Date of birth':fecha(textValue.date_of_birth)"
                   borderRadius="10" 
-                  backgroundColor="white" 
+                  backgroundColor="#FFFFFF" 
                   height="36"  />
 
       
@@ -107,7 +107,7 @@
         :hint="textValue.gender"
         @tap="onTapGender"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         editable="false"
         height="36"
       />
@@ -116,7 +116,7 @@
       <Label
         marginLeft="16"
         marginTop="8"
-        color="white"
+        color="#FFFFFF"
         text="Contact Information"
         fontWeight="900"
         fontSize="16"
@@ -130,7 +130,7 @@
         marginRight="16"
         hint="Phone #"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -141,7 +141,7 @@
         marginRight="16"
         hint="Email"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
           editable="false"
       />
@@ -153,7 +153,7 @@
         marginRight="16"
         hint="Address"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       
@@ -165,7 +165,7 @@
         :hint="textValue.state"
         @tap="onTapState"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         editable="false"
         height="36"
       />
@@ -177,7 +177,7 @@
         :hint="textValue.country"
         @tap="onTapCountry"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         editable="false"
         height="36"
       />
@@ -190,7 +190,7 @@
         v-model="textValue.city"
         hint="City"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -201,7 +201,7 @@
         v-model="textValue.postal_code"
         hint="Postal Code"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
         keyboardType="number"
       />
@@ -209,7 +209,7 @@
       <Label
         marginLeft="16"
         marginTop="8"
-        color="white"
+        color="#FFFFFF"
         text="Fitness information"
         fontWeight="900"
         fontSize="16"
@@ -225,7 +225,7 @@
         width="200"
         height="40"
         fontWeight="900"
-        color="white"
+        color="#FFFFFF"
         marginBottom="32"
         @tap="proccessUpdateProfile"
       />
