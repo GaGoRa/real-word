@@ -10,7 +10,7 @@
       padding="16"
       class="box-shadow"
       @tap="data.url 
-        ? $navigator.navigate(data.url, {props:data.props}) 
+        ? $navigator.navigate(data.url, { props: { data:data, status_program_id: status_program_id} }) 
        : alertDialog()"
     >
       <FlexboxLayout justifyContent="space-between">
@@ -20,7 +20,7 @@
           fontWeight="900"
           horizontalAlignment="left"
           textWrap="true"
-          :text="`Day ${data.day}`"
+          :text="`${data.day}`"
         />
         <Label
           color="white"
@@ -46,6 +46,9 @@ export default {
       type: Object,
       default: {},
     },
+    status_program_id:{
+      type: Number
+    }
   },
   data() {
     return {
@@ -53,6 +56,9 @@ export default {
           alertMessage:"Please press the 'start' button, to start the program.",
       }
     };
+  },
+  mounted(){
+    // console.log('Card this.data',this.data)
   },
   methods:{
     alertDialog(){

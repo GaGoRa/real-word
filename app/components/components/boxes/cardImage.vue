@@ -1,12 +1,13 @@
 <template>
-  <AbsoluteLayout marginLeft="16">
+  <AbsoluteLayout >
     <image
-    :class="data.class || ''"
+      :class="data.class || ''"
       :width="data.width"
       :height="data.height"
       :src="data.img"
       stretch="aspectFill"
       borderRadius="20"
+      horizontalAlignment="center"
       @tap=" data.url ? $navigator.navigate(data.url,{props:data.props}) : ''
       "
     ></image>

@@ -1,29 +1,45 @@
 <template>
-    <Page class="seccion-register-bg-invert" actionBarHidden="true">
+    <Page  xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:VideoPlayer="nativescript-videoplayer" class="seccion-register-bg-invert" actionBarHidden="true">
         <StackLayout marginTop="32"  marginRight="16" >
             <NavBarBurgerMenu/>
-             <StackLayout
+            
+        <StackLayout
           col="0"
           row="0"
-          marginTop="4"
+          marginTop="0"
           backgroundColor="transparent"
           backgroundImage="~/assets/icons/background_label.png"
           class="bg-label"
         >
+
+        
           <Label
             marginLeft="24"
             color="white"
             fontSize="24"
             fontWeight="900"
-            :text="`Day ${day.day} - ${day.bodyPart}`"
+            :text="`${data.day}`"
           />
         </StackLayout>
+        <HtmlView marginLeft="24"
+            color="black"
+            fontSize="24"
+            marginTop="4"
+            marginBottom="0"
+            fontWeight="900" :html="data.text" />
+<ScrollView>
+  <StackLayout>
             <CardProgram
-              v-for="(item, key) in day.exercise"
+              v-for="(item, key) in data.props.data"
               :key="`exercise-${key}`"
               :data="item"
+              :program_days_id="data.id"
+              :subscription_programs_id="status_program_id"
               marginBottom="12"
             />
+            </StackLayout>
+</ScrollView>
         </StackLayout>
         
     </Page>
@@ -41,14 +57,17 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
         data:{
           type:Object,
           default:{}
+        },
+        status_program_id:{
+          type: Number
         }
       },
-        data() {
-            return {
-                day:{
-                    day:"1",
-                    bodyPart:"Legs",
-                    exercise:[
+      data() {
+        return {
+          day:{
+            day:"1",
+            bodyPart:"Legs",
+            exercise:[
         {
           text: "Squat",
           sets: 4,
@@ -73,6 +92,9 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
 
                 }
             };
+        },
+        mounted(){
+          // console.log('pageDay this data',this.data)
         }
     };
 </script>

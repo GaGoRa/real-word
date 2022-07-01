@@ -52,6 +52,7 @@
               v-for="(item, key) in poular_programs"
               :key="`popular-${key}`"
               :data="item"
+              marginLeft="18"
             />
           </StackLayout>
         </ScrollView>
@@ -106,6 +107,7 @@
               v-for="(item, key) in recommended"
               :key="`recomended-${key}`"
               :data="item"
+              marginLeft="18"
             />
           </StackLayout>
         </ScrollView>
@@ -132,7 +134,6 @@
           col="0"
           row="6"
           marginTop="8"
-          backgroundColor="transparent"
         >
           <Image
             marginLeft="24"
@@ -151,18 +152,19 @@
         <!-- My programs Programs -->
 
         <StackLayout
-          marginLeft="8"
+          paddingLeft="8"
           col="0"
           row="7"
           marginTop="16"
-          backgroundColor="transparent"
-          paddingRight="24"
+          paddingRight="8"
         >
           <cardImage
             v-for="(item, key) in myprograms"
             :key="`recomended-${key}`"
             :data="item"
             marginBottom="16"
+            horizontalAlignment="center"
+            marginLeft="8"
           />
 
         </StackLayout>
@@ -201,7 +203,7 @@ export default {
     onSuccess(res){
       this.poular_programs = !!res.data.popular.length ? this.generateImageCard(res.data.popular,275,192): DEFAULT_POPULAR_PROGRAMS
       this.recommended = !!res.data.recommended.length ? this.generateImageCard(res.data.recommended,275,96) : DEFAULT_RECOMMENDATED
-      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,275,192) : getDefaultMyPrograms({data:this.getPropsListProgram('todos','all','Add programs')})
+      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,300,192) : getDefaultMyPrograms({data:this.getPropsListProgram('todos','all','Add programs')})
 
     },
     onError(err){
