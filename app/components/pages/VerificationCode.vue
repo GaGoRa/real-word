@@ -43,7 +43,7 @@
 
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
-                    fontWeight="900" color="white" marginBottom="32" @tap="$navigator.navigate('/choose-best-progrmans')" />
+                    fontWeight="900" color="white" marginBottom="32" @tap="processVerificationsEmails" />
                     <!-- fontWeight="900" color="white" marginBottom="32" @tap="$navigator.navigate('/create-password')" /> -->
             </StackLayout>
         </FlexboxLayout>
@@ -71,12 +71,30 @@ import { apiPost} from '~/resource/http';
                 errorMessage:''
             };
         },
+        computed:{
+            code(){
+                return this.stringCode.code1+this.stringCode.code2+this.stringCode.code3+this.stringCode.code4+this.stringCode.code5+this.stringCode.code6
+            }
+        },
         methods:{
             processVerificationsEmails(){
-                
-                apiPost({},"/email")
+                const body = {
+                    code: this.code,
+                    user_id: this.id
+                }
+                console.log('code', body)
+                apiPost(body,"/validate_code")
+
+                //TODO validar el succes y el errors
+                this.$navigator.navigate('/choose-best-progrmans')
             },
             reSendCode(){
+                const body = {
+                    user_id: this.id
+                }
+                apiPost(body,"/resend_code")
+
+                //TODO validar respuesta
                 console.log('ressendCOde');
             }
         },
