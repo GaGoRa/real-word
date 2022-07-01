@@ -34,7 +34,7 @@
                      <Label fontSize="14" textAlignment="center" marginBottom="16">
                     <FormattedString>
                         <span fontSize="12" text="If you didn´t received the code, please try again" />
-                        <span text="please try again" @tap="reSendCode" fontSize="8" fontWeight="800" textWrap="true"/>
+                        <span text="   please try again" @tap="reSendCode" fontSize="12" fontWeight="800" textWrap="true"/>
                     </FormattedString>
                 </Label>
             
@@ -82,7 +82,6 @@ import { apiPost} from '~/resource/http';
                     code: this.code,
                     user_id: this.id
                 }
-                console.log('code', body)
                 apiPost(body,"/validate_code")
                 .then(this.onSuccess)
                 .catch(this.onError)
@@ -94,16 +93,18 @@ import { apiPost} from '~/resource/http';
                 this.$navigator.navigate('/choose-best-programs')
             },
             onError(err){
-                this.errorMessage = 'Have a error'
+                this.errorMessage = 'Have a error' + err
             },
             reSendCode(){
                 const body = {
                     user_id: this.id
                 }
                 apiPost(body,"/resend_code")
+                .then((res)=> console.log('ressendCOde'))
+                .catch((err)=> console.log('err',err))
 
                 //TODO validar respuesta
-                console.log('ressendCOde');
+                ;
             }
         },
         mounted(){ 

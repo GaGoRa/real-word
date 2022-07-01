@@ -160,7 +160,6 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     },
     methods:{
         async onTapState(){
-          
           const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                             props:{ 
                               data: this.items_selectPicker, 

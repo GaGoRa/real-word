@@ -127,7 +127,7 @@
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="white"
-                    marginBottom="32" @tap="$navigator.navigate('/home')"/>
+                    marginBottom="32" @tap="processUserUpdate"/>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -137,6 +137,7 @@
 import { apiPost,apiGet} from '~/resource/http';
 import cache from '~/store/cache/cache.android';
 import moment from 'moment'
+import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
   export default {
       data(){
           return {
@@ -202,23 +203,26 @@ import moment from 'moment'
         processUserUpdate(){
                 
            const dataCache = JSON.parse(cache.get('userProfile'))
+
             const body = {
                     "user_id": dataCache.user.id ,
-                    "gender_id":"1",
-                    "date_of_birth":"1983-01-07",
-                    "experience_id":"1",
-                    "reason_id":"1",
-                    "frequency_id":"1",
-                    "exercise_place_id":"1"
+                    "gender_id":this.textValue.gender_id ,
+                    "date_of_birth":dateFormat_YYYY_DD_MM(this.textValue.date_of_birth) ,
+                    "experience_id":this.textValue.experience_id ,
+                    "reason_id":this.textValue.reason_id ,
+                    "frequency_id":this.textValue.frequency_id ,
+                    "exercise_place_id":this.textValue.exercise_place_id 
                 }
 
-
             apiPost(body,"/update_user")
-            .then(onSuccess)
-            .catch(onError)
+            .then(this.onSuccess)
+            .catch(this.onError)
         },
         onSuccess(res){
+            cache.set("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home')
+
+
         },
         onError(err){
                 alert({
@@ -252,7 +256,7 @@ import moment from 'moment'
                             } })
 
           this.textValue.experience_id = data.id
-          this.gender = data.description
+          this.experience = data.description
 
         },
         async onTapReason(){
@@ -265,7 +269,7 @@ import moment from 'moment'
                             } })
 
           this.textValue.reason_id = data.id
-          this.gender = data.description
+          this.reason = data.description
 
         },
 
