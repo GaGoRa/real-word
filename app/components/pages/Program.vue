@@ -49,7 +49,7 @@
         > 
           <VideoPlayer 
             :src="`${baseUrl}/storage/${video}`"
-            autoplay="false"
+            autoplay="true"
             height="300"
             fill="true"
           >
@@ -328,11 +328,13 @@ export default {
 
     },
     onSuccessPressButtom(res){
-
+          console.log("onSuccessPressButtom",res);
       this.buttomPlay.registered = res.status
       this.buttomPlay.message = res.message
 
-       await this.$forceUpdate()
+     // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
+
+        await this.$forceUpdate()
     },
     onTapN(){
       // console.log('info')
