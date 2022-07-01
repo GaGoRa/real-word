@@ -48,6 +48,7 @@
         :data="item"
         marginBottom="16"
         marginTop="16"
+        @onCancel="onCancel"
       />
     </StackLayout>
   </Page>
@@ -56,6 +57,7 @@
 <script>
 import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue";
+import { apiGet } from '~/resource/http';
 
 import NavBarTittle from "~/components/components/NavBar.vue";
 export default {
@@ -66,20 +68,31 @@ export default {
   },
   data() {
     return { 
-      
       navbarTittle:{
         title:"Subscription"
       },
       subscriptions: [
-        {
-          tittle: "Gold Subscription",
-          mount: "$29.99",
-          color: "#EAB813",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-        },
+        // {
+        //   tittle: "Gold Subscription",
+        //   mount: "$29.99",
+        //   color: "#EAB813",
+        //   text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
+        // },
       ],
     };
   },
+  async mounted(){
+    const data = await apiGet('/get_subscription')
+
+    this.subscriptions.push(data.data)
+  },
+  methods:{
+    async onCancel(){
+      this.subscriptions = []
+      const data = await apiGet('/get_subscription')
+      this.subscriptions.push(data.data)
+    }
+  }
 };
 </script>
 

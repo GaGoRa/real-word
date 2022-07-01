@@ -5,26 +5,20 @@
       left="0"
       width="100%"
       height="auto"
-      :backgroundColor="data.color"
+      backgroundColor="#EAB813"
       borderRadius="16"
       padding="16"
     >
       <Label
         color="white"
-        fontSize="16"
+        fontSize="24"
         fontWeight="900"
         horizontalAlignment="left"
         textWrap="true"
         :text="data.tittle"
       />
 
-      <Label
-        color="white"
-        fontSi352ze="14"
-        horizontalAlignment="left"
-        textWrap="true"
-        :text="data.text"
-      />
+      <HtmlView color="white" fontSize="24" marginLeft="8" marginTop="8" :html="data.text" />
 
       <FlexboxLayout justifyContent="space-between">
         <Label
@@ -33,10 +27,11 @@
           fontWeight="900"
           horizontalAlignment="left"
           textWrap="true"
-          :text="`Monthly ${data.mount}`"
+          :text="`${data.recurrence} ${data.mount}`"
         />
         <StackLayout>
           <Button
+            v-if="data.status == 'active'"
             borderRadius="8"
             fontSize="14"
             text="Cancel Subscription"
@@ -45,24 +40,66 @@
             height="31"
             fontWeight="800"
             color="white"
-            @tap="$navigator.navigate('/subscription-cancel')"
+            @tap="onTapCancel"
           />
+          <Label color="white"
+          fontSize="13"
+          fontWeight="900" v-if="data.status == 'canceled'" text="Subscription Canceled" />
+
+          
+          <!-- <Button
+            v-if="data.status == 'canceled'"
+            borderRadius="8"
+            fontSize="14"
+            text="Renew subscription"
+            backgroundColor="#388E3C"
+            width="152"
+            height="31"
+            fontWeight="800"
+            color="white"
+            @tap="onTapReanudar"
+          /> -->
         </StackLayout>
       </FlexboxLayout>
+
     </StackLayout>
+    <ActivityIndicator  color="red" marginTop="16" horizontalAlignment="center" verticalAlignment="center" :busy="isLoading"  />
   </AbsoluteLayout>
 </template>
 <script>
+
+import { apiPost } from '~/resource/http';
 export default {
   props: {
     data: {
       type: Object,
       default: {},
+      isLoading: false
     },
   },
   data() {
     return {};
   },
+  methods:{
+    async onTapCancel(){
+      
+      const data = await apiPost({package_id: this.data.package_id},'/subscription/cancel_subscription')
+      this.isLoading = true
+      setTimeout(()=>{
+        this.$emit('onCancel', true)
+        this.isLoading = false
+
+      }, 3000)
+        
+      // console.log(data)
+    },
+    async onTapReanudar(){
+      
+      const data = await apiPost({package_id: this.data.package_id},'/subscription/reanudar_subscription')
+
+      console.log(data)
+    }
+  }
 };
 </script>
 
