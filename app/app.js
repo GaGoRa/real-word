@@ -4,7 +4,7 @@ import Navigator from 'nativescript-vue-navigator'
 import { routes } from './routes'
 import MultiDrawer from 'nativescript-vue-multi-drawer'
 import store from './store/index'
-
+Vue.config.silent = false;
 Vue.use(Navigator, { routes })
 Vue.use(MultiDrawer)
 Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
