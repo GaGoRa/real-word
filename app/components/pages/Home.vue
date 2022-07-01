@@ -19,7 +19,7 @@
       </StackLayout>
     </ActionBar>
     <ScrollView>
-      <GridLayout columns="*" rows="*,*,*,*,*,*,*,*">
+      <GridLayout  columns="*" rows="*,*,*,*,*,*,*,*">
         <FlexboxLayout
           col="0"
           row="0"
@@ -203,7 +203,7 @@ export default {
     onSuccess(res){
       this.poular_programs = !!res.data.popular.length ? this.generateImageCard(res.data.popular,275,192): DEFAULT_POPULAR_PROGRAMS
       this.recommended = !!res.data.recommended.length ? this.generateImageCard(res.data.recommended,275,96) : DEFAULT_RECOMMENDATED
-      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,300,192) : getDefaultMyPrograms({data:this.getPropsListProgram('todos','all','Add programs')})
+      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,'90%',192) : getDefaultMyPrograms({data:this.getPropsListProgram('todos','all','Add programs')})
 
     },
     onError(err){

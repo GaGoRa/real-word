@@ -3,10 +3,9 @@
     <StackLayout slot="right">
       <RightDrawer />
     </StackLayout>
-     <StackLayout slot="left">
+    <StackLayout slot="left">
       <LeftDrawer />
     </StackLayout>
-     
     <Navigator :defaultRoute=" getToken() ? '/home' : '/login'" />
   </MultiDrawer>
 </template>
