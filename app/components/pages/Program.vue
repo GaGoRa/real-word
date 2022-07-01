@@ -10,12 +10,14 @@
     <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
 
+    <!-- <label @tap="onTapN" text="jols"/> -->
+
     <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
-     <GridLayout marginTop="24" columns="*" rows="*,*,*">
+      <GridLayout marginTop="24" columns="*" rows="*,*,*">
 
-       <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
+        <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
 
-     </GridLayout>
+      </GridLayout>
     </StackLayout>
 
 
@@ -337,7 +339,10 @@ export default {
     onSuccessPressButtom(){
       this.buttomPlay.registered = !this.buttomPlay.registered
     },
-    
+    onTapN(){
+      // console.log('info')
+      // this.$navigator.navigate('/day-exercise')
+    }
 
   }
 };
