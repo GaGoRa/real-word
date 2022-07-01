@@ -322,9 +322,15 @@ export default {
       }))
     },
     processPressButtomPlay(){
-
+        const body = {
+                "subscription_id":6,
+                "program_id":1,
+                "status_id":1,
+                "is_active":1
+            }
+        
         this.onSuccessPressButtom()
-        // apiPost('',body)
+        // apiPost('/register_user_program',body)
         // .then(this.onSuccessPressButtom)
         // .catch(this.onError)
     },

@@ -84,9 +84,17 @@ import { apiPost} from '~/resource/http';
                 }
                 console.log('code', body)
                 apiPost(body,"/validate_code")
+                .then(this.onSuccess)
+                .catch(this.onError)
 
-                //TODO validar el succes y el errors
-                this.$navigator.navigate('/choose-best-progrmans')
+               
+            },
+            onSuccess(res){
+                 //TODO validar el succes y el errors
+                this.$navigator.navigate('/choose-best-programs')
+            },
+            onError(err){
+                this.errorMessage = 'Have a error'
             },
             reSendCode(){
                 const body = {

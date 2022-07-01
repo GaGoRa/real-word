@@ -77,7 +77,7 @@ export const routes = {
   '/welcome': {
     component: WelcomePage,
   },
-  '/choose-best-progrmans': {
+  '/choose-best-programs': {
     component: ChooseBestPrograms,
   },
   '/login-aplication': {

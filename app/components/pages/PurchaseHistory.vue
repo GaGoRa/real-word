@@ -56,7 +56,6 @@ NavBar,
   },
   methods:{
     onSuccess(res){
-      console.log(res);
       this.historyPayments = this.getCardHistory(res)   
     },
     onError(err){

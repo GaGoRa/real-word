@@ -117,8 +117,8 @@ export default {
     this.CardPostsSearch = this.getCardPost(res[0])
   },
   onError(err){
-    console.log(err);
-    this.errorsMessage.errorMessage = err
+    console.log("err",err);
+    this.errorsMessage.errorMessage = "Have a error"
   },
   getCardPost(res){
     return res.map( data=>({

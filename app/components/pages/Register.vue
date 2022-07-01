@@ -26,6 +26,8 @@
                     <Label text="or" fontSize="24" fontWeight="900"
                         textAlignment="center" color="white" marginBottom="16" /> -->
 
+                     <Label  v-if="!!errorsMessages.errorMessage" :text="errorsMessages.errorMessage" fontSize="16" fontWeight="400"
+                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
                     <TextField height="38" v-model="textFieldValue.firstName"
                         hint="First Name" backgroundColor="white"
                         borderRadius="10" />
@@ -64,9 +66,16 @@
 
                     <TextField keyboardType="number" height="38" v-model="textFieldValue.phone" hint="Phone #"
                         backgroundColor="white" borderRadius="10"
-                        marginBottom="16" />
+                        marginBottom="6" />
                         <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+                    
+                    <TextField  height="38" v-model="textFieldValue.password" hint="password"
+                     secure="true"
+                        backgroundColor="white" borderRadius="10"
+                        marginBottom="16" />
+                        <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
+                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="8" />
 
                     <Button borderRadius="16" marginTop="" fontSize="16"
                         text="Register" backgroundColor="red" width="200"
@@ -123,14 +132,17 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
               lastName:'',
               email:'',
               phone:'',
-              country:'1'
+              country:'1',
+              password:''
             },
             errorsMessages:{
               ErrorFirstName:'',
               ErrorLastName:'',
               ErrorEmail:'',
               ErrorPhone:'',
-              ErrorCountry:''
+              ErrorCountry:'',
+              ErrorPassword:'',
+              errorMessage:''
             },
           }
 
@@ -141,11 +153,9 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
       }
     },
     async mounted(){
-      console.log('vive')
       const response = await apiGet('/get_country')
       if(response.status){
         this.items_selectPicker = response.data
-        console.log(response.data)
       }
     },
     methods:{
@@ -166,7 +176,6 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
             this.hint = hintName
         },
         miFuncion(event){
-            console.log("ebente",event);
             this.drawerState = event
         },
         close(event){
@@ -195,7 +204,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 // "gender_id":     "1",
                 // "date_of_birth": "1983-01-07",
                 "email":         this.textFieldValue.email,
-                // "password":      "puesto123",
+                 "password":      this.textFieldValue.password,
                 // "address":       "N/A",
                 "telephone":     this.textFieldValue.phone,
                 "country_id":    this.country_id 
@@ -216,17 +225,45 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
              }
             //navigate('/home')
         },
-        onError(error){
-        this.errorsMessages.ErrorEmail =
-        (
-        error.statusCode === 422 
-        //&& 
-        //error.content === "User already exists"
-        )
-        ?  JSON.parse(error.content).message
-        : ''
-                             
-        }
+        onError(err){
+
+
+        const error = JSON.parse(err.content)
+
+                this.errorsMessages={
+                        ErrorFirstName:'',
+                        ErrorLastName:'',
+                        ErrorEmail:'',
+                        ErrorPhone:'',
+                        ErrorCountry:'',
+                        ErrorPassword:'',
+                        errorMessage:''
+                        } 
+             
+             if(!!error.message){    
+                    this.errorsMessages.errorMessage = error.message
+                }
+
+             if(!!error.email){    
+                    this.errorsMessages.ErrorEmail = error.email[0] 
+                }
+            if(!!error.password){
+                     this.errorsMessages.ErrorPassword = error.password[0]
+                }
+            if(!!error.name){
+                     this.errorsMessages.ErrorFirstName = error.name[0]
+                }
+            if(!!error.last_name){
+                     this.errorsMessages.ErrorLastName = error.last_name[0]
+                }
+            if(!!error.telephone){
+                     this.errorsMessages.ErrorPhone = error.telephone[0]
+                }
+            if(!!error.country){
+                     this.errorsMessages.ErrorCountry = error.country[0]
+                }
+        
+        },
     }
     
   };
