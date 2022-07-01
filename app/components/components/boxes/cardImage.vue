@@ -21,7 +21,7 @@
     >
       <Label
         :color="data.colorText"
-        fontSize="32"
+        fontSize="26"
         fontWeight="900"
         horizontalAlignment="center"
         :text="data.text"

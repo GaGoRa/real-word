@@ -49,7 +49,7 @@
           row="1"
           marginTop="16"
           backgroundColor="transparent"
-          paddingRight="24"
+          paddingRight="8"
         >
 
             <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
