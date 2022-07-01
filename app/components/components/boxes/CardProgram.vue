@@ -268,7 +268,6 @@ export default {
     }
     this.setsList = this.data.list
     this.$forceUpdate()
-    console.log('s', this.sets)
   },
   computed:{
     

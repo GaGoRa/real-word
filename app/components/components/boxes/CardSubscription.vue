@@ -91,7 +91,6 @@ export default {
 
       }, 3000)
         
-      // console.log(data)
     },
     async onTapReanudar(){
       

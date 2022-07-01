@@ -51,6 +51,7 @@
         fontSize="16"
         textAlignment="left"
        
+
       />
       <TextField
         v-model="textValue.firstName"
@@ -273,7 +274,6 @@ export default {
       const responseState = await apiGet('/get_state')
       
       this.textValue.states = responseState
-      console.log(' this.textValue.states', this.textValue.states);
     const responseGender = await apiGet('/gender')
     this.textValue.genders = responseGender[0]
 
@@ -342,7 +342,6 @@ export default {
         },
     getDataUser(){
       const dataUser = JSON.parse(cache.get('userProfile')).user
-      console.log('dataUser',dataUser);
         this.textValue.firstName = dataUser.name
         this.textValue.middleName = dataUser.middle_name
         this.textValue.lastName = dataUser.last_name
@@ -356,7 +355,6 @@ export default {
         this.textValue.postal_code = dataUser.postal_code
         this.textValue.state = getValueById(this.textValue.states.data,dataUser.state_id,'name')
 
-        console.log(dataUser,'getValueById(this.textValue.states.data,dataUser.state_id,)',getValueById(this.textValue.states.data,dataUser.state_id,'name'));
         this.$forceUpdate()
     },
 

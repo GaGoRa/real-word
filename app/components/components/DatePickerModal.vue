@@ -54,7 +54,6 @@ export default {
   },
   methods:{
     dateChange(value){
-      console.log(value)
       // this.date = value
     },
     Selected(){

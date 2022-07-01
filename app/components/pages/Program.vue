@@ -292,19 +292,27 @@ export default {
         this.subscriptionState = true
 
 
-        this.subscription_id = res.date.status_package.subscription_id
-        this.program_id= res.date.id
+        this.subscription_id = String(res.date.status_package.subscription_id)
+        this.program_id= String(res.date.id)
 
         if(res.date.status_package.status){
 
-
             if(res.date.status_program === null){
+                
               this.exercises = this.getExercises(res.date.details, false)
+
             }else{
-              this.buttomPlay.registered = true
-              this.status_program_id = res.date.status_program.id
-              this.exercises = this.getExercises(res.date.details, '/day-exercise')
               
+              if(res.date.status_program.status){
+
+              this.buttomPlay.registered = true
+              this.status_program_id = String(res.date.status_program.id)
+              this.exercises = this.getExercises(res.date.details, '/day-exercise')
+              }else{
+                this.buttomPlay.registered = false
+                this.exercises = this.getExercises(res.date.details, false)
+                this.status_program_id = String(res.date.status_program.id)
+              }
             } 
         }else{
              //si se vencio sa sub

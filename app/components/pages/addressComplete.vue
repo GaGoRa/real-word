@@ -151,8 +151,8 @@ export default {
   data() {
     return {
       address:'',
-      state_id: 1 ,
-      city:'City',
+      state_id:'',
+      city:'',
       postal_code:'',
       states: [],
       state: 'Staste'

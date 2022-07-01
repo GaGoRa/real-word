@@ -251,7 +251,7 @@ export default {
     const dataCache = cache.get("userProfile")
     let data = JSON.parse(dataCache)
 
-      apiGet(`/home_display?user=${data.user.id}`)
+      apiGet(`/home_display`)
       .then(this.onSuccess)
       .catch(this.onError)
 

@@ -16,7 +16,6 @@
 export function getValueById(objeto,id,key){
         const index = objeto.findIndex( e => e.id === id)
 
-        console.log('datadatadata', "index" , index, objeto[index][key]);
     return objeto[index][key]
 }
 
