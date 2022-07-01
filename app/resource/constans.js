@@ -120,16 +120,19 @@ export const DEFAULT_RECOMMENDATED = [
       class:'label_skeleton'
     },
   ]
-export const DEFAULT_MY_PROGRAMS = [
-    {
+export const  getDefaultMyPrograms = (props)=>{
+  return [
+        {
         img: "~/assets/images/background_white.JPG",
         text: "Add Program",
         width: "100%",
         colorText: "#949494",
         height: 173,
-        url: "/add-programs",
+        url: "/list-programs",
+        props: props
       }
-  ]
+    ]
+}
 
   export const DEFAULT_MY_PROGRAMS_LOADING = [
     {

@@ -172,13 +172,13 @@
   </Page>
 </template>
 <script>
-import cardImage from "~/components/components/boxes/cardImage";
+import cardImage from "~/components/components/boxes/cardImage.vue";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import cache from "~/store/cache/cache.android";
-import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS,DEFAULT_MY_PROGRAMS_LOADING
+import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
 export default {
@@ -201,7 +201,7 @@ export default {
     onSuccess(res){
       this.poular_programs = !!res.data.popular.length ? this.generateImageCard(res.data.popular,275,192): DEFAULT_POPULAR_PROGRAMS
       this.recommended = !!res.data.recommended.length ? this.generateImageCard(res.data.recommended,275,96) : DEFAULT_RECOMMENDATED
-      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,275,192) : DEFAULT_MY_PROGRAMS
+      this.myprograms = !!res.data.my_programs.length ?  this.generateImageCard(res.data.my_programs,275,192) : getDefaultMyPrograms({data:this.getPropsListProgram('todos','all','Add programs')})
 
     },
     onError(err){
