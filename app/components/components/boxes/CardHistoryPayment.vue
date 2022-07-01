@@ -81,6 +81,9 @@ export default {
       type: Object,
       default: {},
     },
+    errorsMessage:{
+      errorMessage:''
+    }
   },
   data() {
     return {};
@@ -93,10 +96,10 @@ export default {
       .catch(this.onError)
     },
     onSuccess(res){
-      console.log('todo bieeeen',res);
+      console.log("File Open")
     },
       onError(err){
-      console.log('todo errrr',err);
+      console.log('Hava a error ',err);
     }
 
 

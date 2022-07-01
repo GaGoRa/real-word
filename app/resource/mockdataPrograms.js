@@ -237,7 +237,7 @@ export const dataTestHistory = [{
     'name' :'cleiber',
    'amount' : '2323.222',
    'date': ' Nov 9, 2009',
-   'invoice_pdf':'https://www.ucalp.edu.ar/wp-content/uploads/2022/03/lic-dise%C3%B1o-VISUAL-22.pdf',
+   'invoice_pdf':'https://media.revistagq.com/photos/5d35929de887bb000828e8f3/16:9/w_4000,h_2250,c_limit/GettyImages-982408932-(1).jpg',
    'status' :'pay',
    'pm_last_four' : '3345',
    'pm_type' :'visa' ,

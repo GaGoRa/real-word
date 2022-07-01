@@ -25,6 +25,8 @@
         horizontalAlignment="center"
         :text="data.text"
         marginBottom="16"
+        marginLeft="8"
+        textWrap="true"
       />
     </FlexboxLayout>
   </AbsoluteLayout>

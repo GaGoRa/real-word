@@ -65,9 +65,11 @@ export function apiGet(path){
 export function getFileResource(pathResource) {
   const filePath = path.join(knownFolders.currentApp().path, 'test.pdf')
   return  new Promise((resolve, reject) => {
-    Http.getFile(pathResource,filePath)
-    .then(res=> { openFile(filePath)  ;console.log("rasdasdes",res); resolve(res)})
-    .catch(err=> {console.log('errrr',err); reject(err)})
+    Http.getFile(pathResource)
+    .then(res=> { 
+      openFile(res.path)
+      resolve(res)})
+    .catch(err=> {reject(err)})
   });
   
   
