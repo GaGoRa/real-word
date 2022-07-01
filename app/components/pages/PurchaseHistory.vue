@@ -24,7 +24,7 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import CardHistoryPayment from '../components/boxes/CardHistoryPayment.vue'
-import { apiGet } from '~/resource/http';
+import { apiGet, apiPost } from '~/resource/http';
 import {apiMock,dataTestHistory} from '../../resource/mockdataPrograms'
 import {DEFAULT_CARD_HISTORY} from "../../resource/constans"
 //import {dateFormat} from '../../resource/helper'     
@@ -46,17 +46,18 @@ NavBar,
     };
   },
   created(){
-    // apiGet('/')
-    // .then(this.onSuccess)
-    // .catch(this.onError)
+    apiPost({},'/subscription/get_invoices')
+    .then(this.onSuccess)
+    .catch(this.onError)
 
-  apiMock(dataTestHistory)
-  .then(this.onSuccess)
-  .catch(this.onError)
+  // apiMock(dataTestHistory)
+  // .then(this.onSuccess)
+  // .catch(this.onError)
+  // 
   },
   methods:{
     onSuccess(res){
-      this.historyPayments = this.getCardHistory(res)   
+      this.historyPayments = this.getCardHistory(res.data)   
     },
     onError(err){
       console.log('have a errors', err);
@@ -69,9 +70,9 @@ NavBar,
         subscription:card.name,
         mount:card.amount,
         date:card.date,
-        card:`****${card.pm_last_four}`,
+        card: card.pm_last_four ? `****${card.pm_last_four}` :`**** ****` ,
         color:"#FFFFFF",
-        typeCard:String(card.pm_type).toUpperCase(),
+        typeCard:card.pm_type ? String(card.pm_type).toUpperCase() :'Card' ,
         class:'',
         width:"336",
         height:"87",
