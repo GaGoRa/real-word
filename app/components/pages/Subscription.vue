@@ -60,7 +60,7 @@ export default {
   data() {
     return { 
       navbar:{
-        title:"Purchase History"
+        title:"Subscription"
       },
 
       navbarTittle:{

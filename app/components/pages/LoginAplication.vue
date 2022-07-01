@@ -31,7 +31,7 @@
 
 
                 <TextField height="38" v-model="textFieldValue.email"
-                    hint="Email" backgroundColor="#000000" borderRadius="10"/>
+                    hint="Email" backgroundColor="#FFFFFF" borderRadius="10"/>
                 
                 <Label  v-if="!!errorsMessages.email" :text="errorsMessages.email" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />

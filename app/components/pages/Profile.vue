@@ -50,7 +50,7 @@
         fontWeight="900"
         fontSize="16"
         textAlignment="left"
-        @tap="$navigator.navigate('/address_complete')"
+       
       />
       <TextField
         v-model="textValue.firstName"

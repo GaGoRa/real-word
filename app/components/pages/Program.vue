@@ -224,7 +224,60 @@ export default {
     }
   },
   async created(){
-    try {
+
+
+    await this.createMain()
+
+    // try {
+    //   this.loadingState = true
+    //   const res = await apiGet(`/program_detail?program_id=${this.id}`)
+    //   //console.log("detalle",res)
+    //   this.textValue.description = res.date.description
+    //   this.textValue.title = res.date.name
+    //   this.video = res.date.video
+
+    //   if(res.date.status_package === null){
+    //     const packageData =  await apiGet('/package')
+    //     this.subscriptions = packageData.data
+    //   }else{
+    //     this.subscriptionState = true
+
+
+    //     this.subscription_id = res.date.status_package.subscription_id
+    //     this.program_id= res.date.id
+
+    //     if(res.date.status_package.status){
+
+
+    //         if(res.date.status_program === null){
+    //           this.exercises = this.getExercises(res.date.details, false)
+    //         }else{
+    //           this.buttomPlay.registered = true
+    //           this.status_program_id = res.date.status_program.id
+    //           this.exercises = this.getExercises(res.date.details, '/day-exercise')
+              
+    //         } 
+    //     }else{
+    //          //si se vencio sa sub
+    //       this.exercises = this.getExercises(res.date.details,'/pay-subscription')
+    //     }
+
+    //   }
+
+    //   this.loadingState = false
+
+    //   // console.log('this.exercises',this.exercises)
+
+    // } catch (error) {
+    //   console.log('error',error);
+    //   this.onError(error)
+    // }
+   
+  },
+  methods:{
+
+  async createMain(){
+     try {
       this.loadingState = true
       const res = await apiGet(`/program_detail?program_id=${this.id}`)
       //console.log("detalle",res)
@@ -268,10 +321,9 @@ export default {
       console.log('error',error);
       this.onError(error)
     }
-   
-  },
-  methods:{
 
+  },
+  
   onSuccess(res){
     console.log('res',res);
 
@@ -333,8 +385,9 @@ export default {
       this.buttomPlay.message = res.message
 
      // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
-        this.$refs.SliderPrincipal.nativeView.refresh()
-        await this.$forceUpdate()
+        // this.$refs.SliderPrincipal.nativeView.refresh()
+        await this.createMain()
+        //await this.$forceUpdate()
     },
     onTapN(){
       // console.log('info')
