@@ -12,18 +12,18 @@
                     </FormattedString>
                 </Label>
                 <FlexboxLayout justifyContent="center" marginBottom="32">
-                    <TextField  maxLength="1" v-model="stringCode.code1" width="32" height="40"
+                    <TextField keyboardType="number"  maxLength="1" v-model="stringCode.code1" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="4"/>
-                    <TextField  maxLength="1" v-model="stringCode.code2" width="32" height="40"
+                    <TextField keyboardType="number"  maxLength="1" v-model="stringCode.code2" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="4"/>
-                    <TextField  maxLength="1"  v-model="stringCode.code3" width="32" height="40"
+                    <TextField keyboardType="number"  maxLength="1"  v-model="stringCode.code3" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="16" />
 
-                    <TextField  maxLength="10" v-model="stringCode.code4" width="32" height="40"
+                    <TextField keyboardType="number"  maxLength="10" v-model="stringCode.code4" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="4"/>
-                    <TextField  maxLength="10" v-model="stringCode.code5" width="32" height="40"
+                    <TextField keyboardType="number"  maxLength="10" v-model="stringCode.code5" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="4" />
-                    <TextField maxLength="10"  v-model="stringCode.code6" width="32" height="40"
+                    <TextField keyboardType="number" maxLength="10"  v-model="stringCode.code6" width="32" height="40"
                         backgroundColor="white" borderRadius="8" marginRight="4"/>
 
                 </FlexboxLayout>
