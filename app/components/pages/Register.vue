@@ -30,11 +30,11 @@
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
                     <TextField height="38" v-model="textFieldValue.firstName"
                         hint="First Name" backgroundColor="white"
-                        borderRadius="10" />
+                        borderRadius="10" marginBottom="6"  />
                         <Label  v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
 
-                    <TextField height="38" v-model="textFieldValue.lastName"
+                    <TextField height="38" v-model="textFieldValue.lastName" marginBottom="6" 
                         hint="Last Name" backgroundColor="white" borderRadius="10"
                         />
                         <Label  v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" fontSize="16" fontWeight="400"
@@ -49,7 +49,7 @@
                       :hint="country"
                       backgroundColor="white" 
                       borderRadius="10"
-                      marginBottom="16" 
+                      marginBottom="6" 
                       editable="false"
                       @tap="onTapState"
                     />
