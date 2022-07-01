@@ -9,7 +9,10 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
             width="40"
-            @tap="$navigator.back()"
+            @tap="  program_id ?
+             $navigator.navigate('/program',{props:{id:program_id}}) :
+             $navigator.back()
+             "
           />
          <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
@@ -26,6 +29,10 @@ BurgerMenu,
     ismenu:{
       type: Boolean, 
       default: true
+    },
+    program_id:{
+      type: Number, 
+      default:null
     }
   },
   data() {
@@ -33,6 +40,9 @@ BurgerMenu,
       
     };
   },
+created(){
+},
+
   methods: {},
 };
 </script>

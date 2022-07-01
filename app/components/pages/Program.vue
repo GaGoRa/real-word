@@ -216,6 +216,7 @@ export default {
       let arr = []
 
       this.subscriptions.forEach((e)=>{
+        e.program_id = this.id
         e.color = '#EAB813'
         arr.push(e)
       })
@@ -225,53 +226,7 @@ export default {
   },
   async created(){
 
-
     await this.createMain()
-
-    // try {
-    //   this.loadingState = true
-    //   const res = await apiGet(`/program_detail?program_id=${this.id}`)
-    //   //console.log("detalle",res)
-    //   this.textValue.description = res.date.description
-    //   this.textValue.title = res.date.name
-    //   this.video = res.date.video
-
-    //   if(res.date.status_package === null){
-    //     const packageData =  await apiGet('/package')
-    //     this.subscriptions = packageData.data
-    //   }else{
-    //     this.subscriptionState = true
-
-
-    //     this.subscription_id = res.date.status_package.subscription_id
-    //     this.program_id= res.date.id
-
-    //     if(res.date.status_package.status){
-
-
-    //         if(res.date.status_program === null){
-    //           this.exercises = this.getExercises(res.date.details, false)
-    //         }else{
-    //           this.buttomPlay.registered = true
-    //           this.status_program_id = res.date.status_program.id
-    //           this.exercises = this.getExercises(res.date.details, '/day-exercise')
-              
-    //         } 
-    //     }else{
-    //          //si se vencio sa sub
-    //       this.exercises = this.getExercises(res.date.details,'/pay-subscription')
-    //     }
-
-    //   }
-
-    //   this.loadingState = false
-
-    //   // console.log('this.exercises',this.exercises)
-
-    // } catch (error) {
-    //   console.log('error',error);
-    //   this.onError(error)
-    // }
    
   },
   methods:{
@@ -281,6 +236,8 @@ export default {
       this.loadingState = true
       const res = await apiGet(`/program_detail?program_id=${this.id}`)
       //console.log("detalle",res)
+      this.program_id= String(res.date.id)
+
       this.textValue.description = res.date.description
       this.textValue.title = res.date.name
       this.video = res.date.video
@@ -293,7 +250,6 @@ export default {
 
 
         this.subscription_id = String(res.date.status_package.subscription_id)
-        this.program_id= String(res.date.id)
 
         if(res.date.status_package.status){
 

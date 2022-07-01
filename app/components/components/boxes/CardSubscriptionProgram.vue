@@ -94,10 +94,10 @@ export default {
           } 
            })
       }else{
-        console.log(this.data)
         this.$navigator.navigate('/pay-subscription', { props: { 
             package: packagedata,
-            price: price
+            price: price,
+            program_id:this.data.program_id
           } 
            })
       }

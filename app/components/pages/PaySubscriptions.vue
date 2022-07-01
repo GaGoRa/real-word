@@ -9,7 +9,7 @@
       </GridLayout  >
     </ActionBar> -->
     <StackLayout marginTop="32" >
-     <NavBarBurgerMenu :ismenu="false"/>
+     <NavBarBurgerMenu :ismenu="false" :program_id="navbar.program_id"/>
     <ScrollView >
       <AbsoluteLayout >
         <WebView left="0" top="0" width="100%" :src="url" v-if="url" />
@@ -74,6 +74,10 @@ export default {
         id: null, 
         recurrence:{description:''}
       }
+    },
+    program_id:{
+      type:Number,
+      default:null
     }
   },
  
@@ -102,9 +106,12 @@ export default {
   data() {
     return {
       loading: true,
-      url: null, 
+      url: null,
+
       navbar:{
-        title:"Payments"
+        title:"Payments",
+        program_id:this.program_id
+        
       },
       creditCard:[{
         number:'121123123213123',
@@ -129,7 +136,13 @@ export default {
       ]
     };
   },
+  created(){
+    this.navbar.program_id = this.program_id
+  },
+  
    async mounted(){
+    
+
     this.url = ''
     this.loading = true
     const response =  await apiPost({
