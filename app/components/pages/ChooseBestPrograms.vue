@@ -21,38 +21,108 @@
                 <Label textWrap="true" text="Choose the right program for you" fontSize="40" fontWeight="900"
                     textAlignment="center" color="#949494" marginBottom="16" />
                 
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
+                <TextField 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14" 
+                  marginRight="16" 
+                  borderRadius="10" 
+                  backgroundColor="white" height="36"
+                  :hint="gender" 
+                  editable="false"
+                  @tap="onTapGender"
+                />
+                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16"  
                 borderRadius="10" selectedIndex="0" :items="  items_selectPicker_gender"
-                 backgroundColor="white" height="36"  />
+                 backgroundColor="white" height="36"  /> -->
 
-                 <TextField  color="#949494" marginBottom="6"
-                 marginLeft="14" marginRight="16" hint="Date of birth"
-                 borderRadius="10" backgroundColor="white" height="36"  />
 
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
+                 <TextField 
+                  editable="false" 
+                  @tap="onTapDataPicker" 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14"
+                  marginRight="16" 
+                  :hint="textValue.date_of_birth"
+                  borderRadius="10" 
+                  backgroundColor="white" 
+                  height="36"  />
+
+                 <TextField 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14" 
+                  marginRight="16" 
+                  borderRadius="10" 
+                  backgroundColor="white" height="36"
+                  :hint="experience" 
+                  editable="false"
+                  @tap="onTapExperience"
+                />
+
+                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_experience"
-                  backgroundColor="white" height="36"  />
+                  backgroundColor="white" height="36"  /> -->
                 
                     <Label marginLeft="16" marginTop="8" color="#949494" text="What’s your main reason for joining?" fontSize="16" 
                     textAlignment="left"  />
 
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"             marginLeft="14" marginRight="16" 
-                borderRadius="10" selectedIndex="0" :items="items_selectPicker_reason"
-                 backgroundColor="white" height="36"  />
+                <TextField 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14" 
+                  marginRight="16" 
+                  borderRadius="10" 
+                  backgroundColor="white" height="36"
+                  :hint="reason" 
+                  editable="false"
+                  @tap="onTapReason"
+                />
 
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
+                <TextField 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14" 
+                  marginRight="16" 
+                  borderRadius="10" 
+                  backgroundColor="white" height="36"
+                  :hint="exercise" 
+                  editable="false"
+                  @tap="onTapExcersice"
+                />
+
+
+
+               <!--  <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"             marginLeft="14" marginRight="16" 
+                borderRadius="10" selectedIndex="0" :items="items_selectPicker_reason"
+                 backgroundColor="white" height="36"  /> -->
+
+                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_where_exercise"
-                  backgroundColor="white" height="36"  />
+                  backgroundColor="white" height="36"  /> -->
 
                    <Label  marginLeft="16" marginTop="8" color="#949494" text="How often do you want to work out?" fontSize="16" 
                     textAlignment="left" />
-                <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
+
+                    <TextField 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14" 
+                  marginRight="16" 
+                  borderRadius="10" 
+                  backgroundColor="white" height="36"
+                  :hint="frequency" 
+                  editable="false"
+                  @tap="onTapFrecuence"
+                />
+              <!--   <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
                  marginLeft="14" marginRight="16" 
                  borderRadius="10" selectedIndex="0" :items="items_selectPicker_concurrence"
-                  backgroundColor="white" height="36"  />
+                  backgroundColor="white" height="36"  /> -->
 
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
@@ -103,14 +173,19 @@ import cache from '~/store/cache/cache.android';
               ],
             
             textValue:{
-                gender_id:"",
-                date_of_birth:"",
+                gender_id: 0 ,
+                date_of_birth:"Date of birth",
                 experience_id:"",
                 reason_id:"",
                 frequency_id:"",
                 exercise_place_id:"",
-            }
-
+            },
+            gender: 'Gender',
+            experience: "How experienced are you?",
+            reason: "Select one",
+            exercise: "Where do you exercise",
+            frequency: "Select one",
+            // birth: "Date of birth"
           }
       },
     computed: {
@@ -148,7 +223,80 @@ import cache from '~/store/cache/cache.android';
                     }).then(function () {
                         console.log("Error",err);
                     });
-        }
+        },
+        async onTapGender(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker_gender, 
+                              key: 'description',
+                              value: this.textValue.gender_id
+                            } })
+
+          this.textValue.gender_id = data.id
+          this.gender = data.description
+
+        },
+        async onTapExperience(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker_experience, 
+                              key: 'description',
+                              value: this.textValue.experience_id
+                            } })
+
+          this.textValue.experience_id = data.id
+          this.gender = data.description
+
+        },
+        async onTapReason(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker_reason, 
+                              key: 'description',
+                              value: this.textValue.reason_id
+                            } })
+
+          this.textValue.reason_id = data.id
+          this.gender = data.description
+
+        },
+
+        async onTapExcersice(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker_where_exercise, 
+                              key: 'description',
+                              value: this.textValue.exercise_place_id
+                            } })
+
+          this.textValue.exercise_place_id = data.id
+          this.exercise = data.description
+
+        },
+        async onTapFrecuence(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker_concurrence, 
+                              key: 'description',
+                              value: this.textValue.frequency_id
+                            } })
+
+          this.textValue.frequency_id = data.id
+          this.frequency = data.description
+
+        },
+        async onTapDataPicker(){
+          console.log('ajdhgd',this.textValue.date_of_birth )
+          const data = await this.$navigator.modal('/date_picker_modal',{ frame: 'modalNavigator' })
+            console.log(data)
+          this.textValue.date_of_birth = data
+
+        },
     },
     created (){
         const genderResource = apiGet("/gender")

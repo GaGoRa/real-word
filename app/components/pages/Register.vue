@@ -39,15 +39,30 @@
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                     <!-- <SelectInput :hint="hint" @toggleSelectDrawer="miFuncion" :drawerState="drawerState"/> -->
-                    <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="white" height="36"  />
+                    <!-- <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="white" height="36"  /> -->
 
-                    <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
+                   
+                    <TextField 
+                      height="38" 
+                      :hint="country"
+                      backgroundColor="white" 
+                      borderRadius="10"
+                      marginBottom="16" 
+                      editable="false"
+                      @tap="onTapState"
+                    />
+
+
+                        <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
+                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+
+                    <TextField keyboardType="email"  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
                         backgroundColor="white" borderRadius="10" marginBottom="6"/>
                         <Label  v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
 
-                    <TextField height="38" v-model="textFieldValue.phone" hint="Phone #"
+                    <TextField keyboardType="number" height="38" v-model="textFieldValue.phone" hint="Phone #"
                         backgroundColor="white" borderRadius="10"
                         marginBottom="16" />
                         <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
@@ -82,7 +97,7 @@
 </template>
 
 <script>
-import { apiPost } from '~/resource/http';
+import { apiPost, apiGet } from '~/resource/http';
 import cache from '~/store/cache/cache.android'
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
@@ -98,39 +113,25 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
           return {
             drawerState:false,
             hint:'Country',
-              items_selectPicker:[
-                    {description:"Australia",      id:1},
-                    {description:"Belgium",      id:1},
-                    {description:"Bulgaria",       id:1},
-                    {description:"Canada",       id:1},
-                    {description:"Switzerland",      id:1},
-                    {description:"China",       id:1},
-                    {description:"CzechRepublic",id:1},
-                    {description:"Germany",       id:1},
-                    {description:"Spain",     id:1},
-                    {description:"Ethiopia",       id:1},
-                    {description:"Croatia",       id:1},
-                    {description:"Hungary",       id:1},
-                    {description:"Italy",      id:1},
-                    {description:"Jamaica",       id:1},
-                    {description:"Romania",       id:1},
-                    {description:"Russia",       id:1},
-                    {description:"United State",       id:1}
-              ]
-              ,textFieldValue:{
-                firstName:'',
-                lastName:'',
-                email:'',
-                phone:'',
-                country:'1'
-              },
-              errorsMessages:{
-                ErrorFirstName:'',
-                ErrorLastName:'',
-                ErrorEmail:'',
-                ErrorPhone:'',
-                ErrorCountry:''
-              },
+            country_id: 0,
+            country: 'Country',
+            items_selectPicker:[
+              { description:"United State", id: 1}
+            ]
+            ,textFieldValue:{
+              firstName:'',
+              lastName:'',
+              email:'',
+              phone:'',
+              country:'1'
+            },
+            errorsMessages:{
+              ErrorFirstName:'',
+              ErrorLastName:'',
+              ErrorEmail:'',
+              ErrorPhone:'',
+              ErrorCountry:''
+            },
           }
 
       },
@@ -139,7 +140,28 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         return "Blank {N}-Vue app";
       }
     },
+    async mounted(){
+      console.log('vive')
+      const response = await apiGet('/get_country')
+      if(response.status){
+        this.items_selectPicker = response.data
+        console.log(response.data)
+      }
+    },
     methods:{
+        async onTapState(){
+          
+          const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                            props:{ 
+                              data: this.items_selectPicker, 
+                              key: 'description',
+                              value: this.country_id
+                            } })
+
+          this.country_id = data.id
+          this.country = data.description
+
+        },
         changeHint(hintName){
             this.hint = hintName
         },
@@ -152,35 +174,33 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
              console.log("pepe",event);
             this.drawerState = event
         },
-        processCreateUser(){       
-             const body = 
-                                    
-              {
-    "name": "Asd",
-    "middle_name": "Asd",
-    "last_name": "Asd",
-    "gender_id": "1",
-    "date_of_birth": "1983-01-07",
-    "email": "As11aa1aaa1a12211aasda123d@gmail",
-    "password": "N/A",
-    "address": "N/A",
-    "telephone": "Asd",
-    "country_id": "1"
-        }
-            //  const body = 
-                                    
-            //         {
-            //     "name":this.textFieldValue.firstName,
-            //     "middle_name":this.textFieldValue.firstName,
-            //     "last_name":this.textFieldValue.lastName,
-            //     "gender_id":"1",
-            //     "date_of_birth":"1983-01-07",
-            //     "email":this.textFieldValue.email,
-            //     "password":"N/A",
-            //     "address":"N/A",
-            //     "telephone":this.textFieldValue.phone,
-            //     "country_id":'1' }
-            
+        processCreateUser(){   
+   
+          // const body = {
+          //   "name": "Asd",
+          //   "middle_name": "Asd",
+          //   "last_name": "Asd",
+          //   "gender_id": "1",
+          //   "date_of_birth": "1983-01-07",
+          //   "email": "As11aa1aaa1a12211aasda123d@gmail",
+          //   "password": "N/A",
+          //   "address": "N/A",
+          //   "telephone": "Asd",
+          //   "country_id": "1"
+          // }
+            const body = {
+                "name":          this.textFieldValue.firstName,
+                // "middle_name":   this.textFieldValue.firstName,
+                "last_name":     this.textFieldValue.lastName,
+                // "gender_id":     "1",
+                // "date_of_birth": "1983-01-07",
+                "email":         this.textFieldValue.email,
+                // "password":      "puesto123",
+                // "address":       "N/A",
+                "telephone":     this.textFieldValue.phone,
+                "country_id":    this.country_id 
+            }
+              
            apiPost(body,'/register')
             .then(this.onSuccess)
             .catch(this.onError)
