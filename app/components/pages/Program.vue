@@ -4,9 +4,9 @@
     class="page-home"
     xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:VideoPlayer="nativescript-videoplayer"
+    ref="SliderPrincipal"
   >
 
-    
     <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
 
@@ -327,13 +327,13 @@ export default {
        }
 
     },
-    onSuccessPressButtom(res){
+   async onSuccessPressButtom(res){
           console.log("onSuccessPressButtom",res);
       this.buttomPlay.registered = res.status
       this.buttomPlay.message = res.message
 
      // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
-
+        this.$refs.SliderPrincipal.nativeView.refresh()
         await this.$forceUpdate()
     },
     onTapN(){
