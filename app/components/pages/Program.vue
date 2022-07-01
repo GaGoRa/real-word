@@ -143,6 +143,7 @@
               v-for="(item, key) in exercises"
               :key="`exercise-${key}`"
               :data="item"
+              :status_program_id="status_program_id"
               marginBottom="12"
             />
           </StackLayout>
@@ -257,6 +258,8 @@ export default {
 
       this.loadingState = false
 
+      // console.log('this.exercises',this.exercises)
+
     } catch (error) {
       console.log('error',error);
       this.onError(error)
@@ -270,7 +273,7 @@ export default {
 
     },
     onError(err){
-Dialogs.alert({
+      Dialogs.alert({
               title: "Error Message",
               message: "Have a error , please try again",
               okButtonText: "OK"
@@ -279,6 +282,7 @@ Dialogs.alert({
           });
     },
     getExercises(res,url){
+      // console.log('res', res)
         return res.map((exe)=>({
           id:exe.id,
           completed: exe.status,
@@ -286,7 +290,7 @@ Dialogs.alert({
           body: exe.muscular_group,
           text: exe.description || "<p></p>",
           url:url,
-          props:{data:res.exercise}
+          props:{data:exe.exercise}
         }))
 
 
