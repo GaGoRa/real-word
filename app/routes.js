@@ -26,13 +26,16 @@ import PageDay from './components/pages/PageDay.vue'
 import addressComplete from './components/pages/addressComplete.vue'
 import ListSelect from './components/components/ListSelect.vue'
 import DatePickerModal from './components/components/DatePickerModal.vue'
-
+import date from '~/components/components/nuevodate.vue'
 export const routes = {
   '/home': {
     component: HomePage,
   },
   '/address_complete':{
     component: addressComplete
+  },
+  '/date':{
+    component: date
   },
   '/list_select':{
     component: ListSelect

@@ -45,7 +45,7 @@
                   marginBottom="6"
                   marginLeft="14"
                   marginRight="16" 
-                  :hint="textValue.date_of_birth"
+                  :hint="textValue.date_of_birth == '' ? 'Date of birth':fecha(textValue.date_of_birth)"
                   borderRadius="10" 
                   backgroundColor="white" 
                   height="36"  />
@@ -136,7 +136,7 @@
 <script>
 import { apiPost,apiGet} from '~/resource/http';
 import cache from '~/store/cache/cache.android';
-
+import moment from 'moment'
   export default {
       data(){
           return {
@@ -174,7 +174,7 @@ import cache from '~/store/cache/cache.android';
             
             textValue:{
                 gender_id: 0 ,
-                date_of_birth:"Date of birth",
+                date_of_birth:"",
                 experience_id:"",
                 reason_id:"",
                 frequency_id:"",
@@ -191,6 +191,11 @@ import cache from '~/store/cache/cache.android';
     computed: {
       message() {
         return "Blank {N}-Vue app";
+      }
+    },
+    filters: {
+      datefilter: function (value) {
+        return moment(value).format('MM-DD-YYYY')
       }
     },
     methods:{
@@ -290,13 +295,14 @@ import cache from '~/store/cache/cache.android';
           this.frequency = data.description
 
         },
-        async onTapDataPicker(){
-          console.log('ajdhgd',this.textValue.date_of_birth )
-          const data = await this.$navigator.modal('/date_picker_modal',{ frame: 'modalNavigator' })
-            console.log(data)
+        async  onTapDataPicker(){
+          const data = await this.$navigator.modal('/date',{id:"mimodal",props:{value: this.textValue.date_of_birth  }})
           this.textValue.date_of_birth = data
-
+          this.$forceUpdate()
         },
+        fecha(value){
+           return moment(value).format('MM/DD/YYYY')
+        }
     },
     created (){
         const genderResource = apiGet("/gender")
