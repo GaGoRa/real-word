@@ -1,10 +1,11 @@
 <template>
-  <Page actionBarHidden="true" class="page-home">
+  <Page actionBarHidden="true" >
     <StackLayout marginTop="32" >
      <NavBarBurgerMenu :ismenu="false"/>
     <ScrollView >
       <AbsoluteLayout >
-        <WebView left="0" top="0" width="100%" :src="data.url" v-if="data.url" />
+
+        <WebView left="0" top="0" width="100%" height="100%" :src="data.url"  />
       </AbsoluteLayout>
     </ScrollView>
   </StackLayout>

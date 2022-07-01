@@ -6,8 +6,9 @@
    marginLeft="24" marginRight="24"
    :width=" data.width ? data.width: '336' "
    height="87"
-   @tap=" !!data.props ? getFile(data.props.url)  : null "
+   @tap=" !!data.props ? $navigator.navigate('/pdf-view',{props:{data:data.props}})  : null "
    >
+   <!-- @tap=" !!data.props ? getFile(data.props.url)  : null " -->
   <!-- $navigator.navigate('/pdf-view',{props:{data:data.props}}) -->
     <FlexboxLayout
       flexDirection="column"
@@ -73,7 +74,7 @@
   </StackLayout>
 </template>
 <script>
-import {getFileResource} from '../../../resource/http'
+import { getFileResource } from '../../../resource/http'
 
 export default {
   props: {
@@ -81,6 +82,9 @@ export default {
       type: Object,
       default: {},
     },
+    loading:false,
+    pathFile:''
+    ,
     errorsMessage:{
       errorMessage:''
     }
@@ -96,7 +100,8 @@ export default {
       .catch(this.onError)
     },
     onSuccess(res){
-      console.log("File Open")
+      this.pathFile = res.path
+      console.log("File Open", this.pathFile)
     },
       onError(err){
       console.log('Hava a error ',err);
