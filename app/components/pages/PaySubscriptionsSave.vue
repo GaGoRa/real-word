@@ -1,6 +1,7 @@
 <template>
   <Page
-    class="page-home"
+  backgroundColor="white"
+    class=""
   >
     <ActionBar
       marginTop="16"

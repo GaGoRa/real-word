@@ -88,16 +88,17 @@
       />
       
         <TextField 
-                  editable="false" 
-                  @tap="onTapDataPicker" 
-                  color="#949494" 
-                  marginBottom="6"
-                  marginLeft="14"
-                  marginRight="16" 
-                  :hint="textValue.date_of_birth == bindMoment() ? 'Date of birth':fecha(textValue.date_of_birth)"
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" 
-                  height="36"  />
+          editable="false" 
+          @tap="onTapDataPicker" 
+          color="#949494" 
+          marginBottom="6"
+          marginLeft="14"
+          marginRight="16" 
+          :hint="textValue.date_of_birth == '' ? 'Date of birth' : fecha(textValue.date_of_birth)"
+          borderRadius="10" 
+          backgroundColor="#FFFFFF" 
+          height="36"  
+        />
 
       
         <TextField
@@ -157,7 +158,6 @@
         backgroundColor="#FFFFFF"
         height="36"
       />
-      
       <TextField
         color="#949494"
         marginBottom="6"
@@ -182,7 +182,6 @@
         editable="false"
         height="36"
       />
-
       <TextField
         color="#949494"
         marginBottom="6"
@@ -249,7 +248,7 @@ export default {
         firstName:'',
         middleName:'',
         lastName:'',
-        date_of_birth: moment(),
+        date_of_birth: '',
         state_id:'',
         gender_id:'',
         gender:'Gender',
@@ -269,52 +268,60 @@ export default {
       }
     };
   },
-   async mounted(){
+  async mounted(){
     try {
       const responseState = await apiGet('/get_state')
-      
       this.textValue.states = responseState
-    const responseGender = await apiGet('/gender')
-    this.textValue.genders = responseGender[0]
-
-     const responseCountry = await apiGet('/get_country')
+      const responseGender = await apiGet('/gender')
+      this.textValue.genders = responseGender[0]
+      const responseCountry = await apiGet('/get_country')
       this.textValue.countrys = responseCountry
-
+      this.getUser()
     } catch (error) {
       console.log('ERROr', error);
-          alert({
-              title: "Error Message",
-              message: "Have a error , please try again",
-              okButtonText: "OK"
-          }).then( ()=> {
-              console.log("Error",new Error(err));
-          });
-        
-
+      alert({
+        title: "Error Message",
+        message: "Have a error , please try again",
+        okButtonText: "OK"
+      }).then( ()=> {
+        console.log("Error",new Error(err));
+      });
     }
-    
-    this.getDataUser()
+    // this.getDataUser()
   },
-      
-
   methods:{
-     ...mapMutations(["toggleSwitchMenu"]),
+    ...mapMutations(["toggleSwitchMenu"]),
+    async getUser(){
+      const response = await apiGet('/get_user')
 
-   
-
+      this.textValue.firstName     = response.data.user.name
+      this.textValue.middleName    = response.data.user.middle_name
+      this.textValue.lastName      = response.data.user.last_name
+      if(response.data.user.date_of_birth){
+        this.textValue.date_of_birth = response.data.user.date_of_birth
+      }
+      this.textValue.state_id      = response.data.user.state_id
+      this.textValue.state         = this.textValue.states.data.find((e)=> e.id == this.textValue.state_id ).name
+      this.textValue.gender_id     = response.data.user.gender_id
+      this.textValue.gender        = this.textValue.genders.find((e)=> e.id == this.textValue.gender_id ).description
+      this.textValue.phone         = response.data.user.telephone
+      this.textValue.email         = response.data.user.email
+      this.textValue.address       = response.data.user.address
+      this.textValue.postal_code   = response.data.user.postal_code
+      this.textValue.city          = response.data.user.city
+      this.textValue.country_id    = response.data.user.country_id
+      this.textValue.country         = this.textValue.countrys.data.find((e)=>e.id == this.textValue.country_id).description
+    },
     onError(err){
       this.errorsMessage.errorMessage = "A ocurrido un error"
     },
-     fecha(value){
-          return moment(value).format('MM/DD/YYYY')
-        },
-      
-      bindMoment(){
-        return moment()
-      },
-
+    fecha(value){
+      return moment(value).format('MM/DD/YYYY')
+    },
+    bindMoment(){
+      return moment()
+    },
     proccessUpdateProfile(){
-
       const dataCache = JSON.parse(cache.get("userProfile"))
       const body ={
             "user_id":dataCache.user.id,
@@ -336,10 +343,10 @@ export default {
         .catch(this.onError)
     },
     async onTapDataPicker(){
-          const data = await this.$navigator.modal('/date',{id:"mimodal",props:{value: this.textValue.date_of_birth}})
-          this.textValue.date_of_birth = data
-          this.$forceUpdate()
-        },
+      const data = await this.$navigator.modal('/date',{id:"mimodal",props:{value: this.textValue.date_of_birth}})
+      this.textValue.date_of_birth = data
+      this.$forceUpdate()
+    },
     getDataUser(){
       const dataUser = JSON.parse(cache.get('userProfile')).user
         this.textValue.firstName = dataUser.name
@@ -357,14 +364,12 @@ export default {
 
         this.$forceUpdate()
     },
-
     onSuccessUpdate(res){
       cache.set('userProfile',JSON.stringify(res.data))
       this.toggleSwitchMenu(false)
       this.$navigator.navigate('/home')
     },
-
-     async onTapState(){
+    async onTapState(){
 
       const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                         props:{ 
@@ -375,9 +380,8 @@ export default {
 
       this.textValue.state_id = data.id
       this.textValue.state = data.name
-
     },
-     async onTapGender(){
+    async onTapGender(){
       
       const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                         props:{ 
@@ -387,10 +391,8 @@ export default {
                         } })
       this.textValue.gender_id = data.id
       this.textValue.gender = data.description
-
     },
     async onTapCountry(){
-      
       const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                         props:{ 
                           data: this.textValue.countrys.data, /////
@@ -399,13 +401,8 @@ export default {
                         } })
       this.textValue.country_id = data.id
       this.textValue.country = data.description
-
     }
-
-
-
   },
-
 };
 </script>
 
