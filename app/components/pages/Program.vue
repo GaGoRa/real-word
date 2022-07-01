@@ -224,6 +224,7 @@ export default {
     try {
       this.loadingState = true
       const res = await apiGet(`/program_detail?program_id=${this.id}`)
+      //console.log("detalle",res)
       this.textValue.description = res.date.description
       this.textValue.title = res.date.name
       

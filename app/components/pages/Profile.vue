@@ -37,7 +37,7 @@
       </FlexboxLayout>
     </ActionBar>
 
-    
+     <ScrollView  scrollBarIndicatorVisible="false" > 
     <StackLayout marginRight="24" marginTop="32" marginLeft="24">
         <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
                   textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
@@ -50,6 +50,7 @@
         fontWeight="900"
         fontSize="16"
         textAlignment="left"
+        @tap="$navigator.navigate('/address_complete')"
       />
       <TextField
         v-model="textValue.firstName"
@@ -84,28 +85,34 @@
         backgroundColor="white"
         height="36"
       />
-      <TextField
-        v-model="textValue.dateBirth"
+      
+        <TextField 
+                  editable="false" 
+                  @tap="onTapDataPicker" 
+                  color="#949494" 
+                  marginBottom="6"
+                  marginLeft="14"
+                  marginRight="16" 
+                  :hint="textValue.date_of_birth == bindMoment() ? 'Date of birth':fecha(textValue.date_of_birth)"
+                  borderRadius="10" 
+                  backgroundColor="white" 
+                  height="36"  />
+
+      
+        <TextField
         color="#949494"
         marginBottom="6"
         marginLeft="14"
         marginRight="16"
-        hint="Date of birth"
+        :hint="textValue.gender"
+        @tap="onTapGender"
         borderRadius="10"
         backgroundColor="white"
+        editable="false"
         height="36"
       />
-      <TextField
-        v-model="textValue.gender"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Gender"
-        borderRadius="10"
-        backgroundColor="white"
-        height="36"
-      />
+
+
       <Label
         marginLeft="16"
         marginTop="8"
@@ -136,6 +143,7 @@
         borderRadius="10"
         backgroundColor="white"
         height="36"
+          editable="false"
       />
       <TextField
         v-model="textValue.address"
@@ -147,6 +155,55 @@
         borderRadius="10"
         backgroundColor="white"
         height="36"
+      />
+      
+      <TextField
+        color="#949494"
+        marginBottom="6"
+        marginLeft="14"
+        marginRight="16"
+        :hint="textValue.state"
+        @tap="onTapState"
+        borderRadius="10"
+        backgroundColor="white"
+        editable="false"
+        height="36"
+      />
+      <TextField
+        color="#949494"
+        marginBottom="6"
+        marginLeft="14"
+        marginRight="16"
+        :hint="textValue.country"
+        @tap="onTapCountry"
+        borderRadius="10"
+        backgroundColor="white"
+        editable="false"
+        height="36"
+      />
+
+      <TextField
+        color="#949494"
+        marginBottom="6"
+        marginLeft="14"
+        marginRight="16"
+        v-model="textValue.city"
+        hint="City"
+        borderRadius="10"
+        backgroundColor="white"
+        height="36"
+      />
+      <TextField
+        color="#949494"
+        marginBottom="6"
+        marginLeft="14"
+        marginRight="16"
+        v-model="textValue.postal_code"
+        hint="Postal Code"
+        borderRadius="10"
+        backgroundColor="white"
+        height="36"
+        keyboardType="number"
       />
 
       <Label
@@ -173,6 +230,7 @@
         @tap="proccessUpdateProfile"
       />
     </StackLayout>
+     </ScrollView> 
   </Page>
 </template>
 
@@ -180,42 +238,81 @@
 import { mapMutations } from "vuex";
 import { apiGet, apiPost } from '~/resource/http';
 import cache from '~/store/cache/cache.android';
-
+import { dateFormat_YYYY_DD_MM, getValueById } from "~/resource/helper";
+import moment from 'moment'
 export default {
   data() {
     return {
       textValue:{
+        state:'State',
         firstName:'',
         middleName:'',
         lastName:'',
-        dateBirth:'',
-        gender:[{}],
+        date_of_birth: moment(),
+        state_id:'1',
+        gender_id:'1',
+        gender:'Gender',
+        genders:[],
         phone:'',
         email:'',
-        adress:'',
+        address:'',
+        postal_code:'',
+        city:'',
+        country:'Country',
+        countrys:[],
+        country_id:'',
+        states:[],
       },
       errorsMessage:{
         errorMessage:""
       }
     };
   },
-  created(){
+   async mounted(){
+    try {
+      const responseState = await apiGet('/get_state')
+      
+      this.textValue.states = responseState
+      console.log(' this.textValue.states', this.textValue.states);
+    const responseGender = await apiGet('/gender')
+    this.textValue.genders = responseGender[0]
 
+     const responseCountry = await apiGet('/get_country')
+      this.textValue.countrys = responseCountry
+
+    } catch (error) {
+      console.log('ERROr', error);
+          alert({
+              title: "Error Message",
+              message: "Have a error , please try again",
+              okButtonText: "OK"
+          }).then( ()=> {
+              console.log("Error",new Error(err));
+          });
+        
+
+    }
+    
     this.getDataUser()
-
-     apiGet("/gender")
-     .then( () =>this.onSuccessGender)
-     .catch(this.onError)
-
   },
+      
+
   methods:{
      ...mapMutations(["toggleSwitchMenu"]),
-    onSuccessGender(res){
-      this.gender = res[0]
-    },
+
+   
+
     onError(err){
       this.errorsMessage.errorMessage = "A ocurrido un error"
     },
+     fecha(value){
+          return moment(value).format('MM/DD/YYYY')
+        },
+      
+      bindMoment(){
+        return moment()
+      },
+
     proccessUpdateProfile(){
 
       const dataCache = JSON.parse(cache.get("userProfile"))
@@ -226,33 +323,89 @@ export default {
             "middle_name":this.textValue.middleName,
             "last_name":this.textValue.lastName,
             "address":this.textValue.address,
-            "gender_id":"2",
-            "date_of_birth":"1983-01-07",
+            "gender_id":this.textValue.gender_id,
+            "city":this.textValue.city,
+            "country_id":this.textValue.country_id,
+            "state_id":this.textValue.state_id,
+            "postal_code":this.textValue.postal_code,
+            "date_of_birth":dateFormat_YYYY_DD_MM(this.textValue.date_of_birth),
             "telephone":this.textValue.phone,
         }
         apiPost(body,"/update_user")
         .then(this.onSuccessUpdate)
         .catch(this.onError)
     },
+    async onTapDataPicker(){
+          const data = await this.$navigator.modal('/date',{id:"mimodal",props:{value: this.textValue.date_of_birth}})
+          this.textValue.date_of_birth = data
+          this.$forceUpdate()
+        },
     getDataUser(){
       const dataUser = JSON.parse(cache.get('userProfile')).user
+      console.log('dataUser',dataUser);
+        this.textValue.firstName = dataUser.name
+        this.textValue.middleName = dataUser.middle_name
+        this.textValue.lastName = dataUser.last_name
+        this.textValue.date_of_birth = dataUser.date_of_birth
+        this.textValue.gender = getValueById(this.textValue.genders,dataUser.gender_id,'description')
+        this.textValue.phone = dataUser.telephone
+        this.textValue.email = dataUser.email
+        this.textValue.address = dataUser.address
+        this.textValue.city = dataUser.city
+        this.textValue.country = getValueById(this.textValue.countrys.data,dataUser.country_id,'description')
+        this.textValue.postal_code = dataUser.postal_code
+        this.textValue.state = getValueById(this.textValue.states.data,dataUser.state_id,'name')
 
-      this.textValue = {
-        firstName:dataUser.name,
-        middleName:dataUser.middle_name,
-        lastName:dataUser.last_name,
-        dateBirth:dataUser.date_of_birth,
-        gender:dataUser.gender,
-        phone:dataUser.telephone,
-        email:dataUser.email,
-        adress:dataUser.address
-      }
+        console.log(dataUser,'getValueById(this.textValue.states.data,dataUser.state_id,)',getValueById(this.textValue.states.data,dataUser.state_id,'name'));
+        this.$forceUpdate()
     },
+
     onSuccessUpdate(res){
       cache.set('userProfile',JSON.stringify(res.data))
       this.toggleSwitchMenu(false)
       this.$navigator.navigate('/home')
+    },
+
+     async onTapState(){
+
+      const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                        props:{ 
+                          data: this.textValue.states.data, 
+                          key: 'name',
+                          value: this.textValue.state_id
+                        } })
+
+      this.textValue.state_id = data.id
+      this.textValue.state = data.name
+
+    },
+     async onTapGender(){
+      
+      const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                        props:{ 
+                          data: this.textValue.genders, 
+                          key: 'description',
+                          value: this.textValue.gender_id
+                        } })
+      this.textValue.gender_id = data.id
+      this.textValue.gender = data.description
+
+    },
+    async onTapCountry(){
+      
+      const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
+                        props:{ 
+                          data: this.textValue.countrys.data, /////
+                          key: 'description',
+                          value: this.textValue.country_id
+                        } })
+      this.textValue.country_id = data.id
+      this.textValue.country = data.description
+
     }
+
+
+
   },
 
 };

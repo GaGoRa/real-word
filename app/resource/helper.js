@@ -12,3 +12,13 @@
 
         return String(date.toISOString().split('T')[0])
 }
+
+export function getValueById(objeto,id,key){
+        console.log('objetoobjeto',objeto,id,key);
+        const index = objeto.findIndex( e => e.id === id)
+
+        console.log('datadatadata', "index" , index, objeto[index][key]);
+    return objeto[index][key]
+}
+
+
