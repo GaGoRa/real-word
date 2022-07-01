@@ -33,7 +33,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             :text="textValue.title"
@@ -46,10 +46,10 @@
           marginTop="16"
           backgroundColor="transparent"
           paddingRight="8"
-        >
-          <VideoPlayer
-            src="~/assets/videos/pexels-tima-miroshnichenko-5319759.mp4"
-            autoplay="false"
+        > 
+          <VideoPlayer 
+            :src="`${baseUrl}/storage/${video}`"
+            autoplay="true"
             height="300"
             fill="true"
           >
@@ -71,14 +71,14 @@
           <Label
             paddingTop="2"
             marginLeft="8"
-            color="white"
+            color="#FFFFFF"
             fontSize="20"
             fontWeight="400"
             text="DETAILS"
           />
         </FlexboxLayout>
 
-        <HtmlView   marginLeft="16" row="3" col="0" :html="textValue.description" />
+        <HtmlView  marginTop="8" marginLeft="16" row="3" col="0" :html="textValue.description" />
         <!-- <TextView row="3" col="0" editable="false">
           <FormattedString>
             <Span
@@ -96,7 +96,7 @@
         >
           <Label
             marginRight="8"
-            color="white"
+            color="#FFFFFF"
             fontSize="16"
             fontWeight="900"
             text="Add to My Programs"
@@ -124,7 +124,7 @@
             width="200"
             height="48"
             fontWeight="900"
-            color="white"
+            color="#FFFFFF"
             marginBottom="8"
             @tap="processPressButtomPlay"
             />
@@ -165,7 +165,7 @@
 import CardSubscriptionProgram from "~/components/components/boxes/CardSubscriptionProgram.vue";
 import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
-import { apiGet, apiPost } from "~/resource/http";
+import { apiGet, apiPost,baseUrl } from "~/resource/http";
 import { Dialogs } from "@nativescript/core";
 export default {
   components: {
@@ -187,6 +187,8 @@ export default {
   },
   data() {
     return {
+      video:'',
+      baseUrl:baseUrl,
       loadingState:false,
       subscriptionState:false,
       subscription_id:null,
@@ -228,7 +230,8 @@ export default {
       //console.log("detalle",res)
       this.textValue.description = res.date.description
       this.textValue.title = res.date.name
-      
+      this.video = res.date.video
+
       if(res.date.status_package === null){
         const packageData =  await apiGet('/package')
         this.subscriptions = packageData.data
@@ -325,11 +328,13 @@ export default {
 
     },
     onSuccessPressButtom(res){
-
+          console.log("onSuccessPressButtom",res);
       this.buttomPlay.registered = res.status
       this.buttomPlay.message = res.message
 
-      // await this.$forceUpdate()
+     // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
+
+        await this.$forceUpdate()
     },
     onTapN(){
       // console.log('info')

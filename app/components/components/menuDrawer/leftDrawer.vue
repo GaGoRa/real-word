@@ -35,7 +35,7 @@
         marginRight="16"
         hint="Search"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="44"
         @textChange="onChangeFilter"
       />
@@ -127,7 +127,7 @@ export default {
          colorText:"black",
          title:data.title,
          text:data.content,
-         color:"white",
+         color:"#FFFFFF",
          class: '',
          img: data.banner_url
 

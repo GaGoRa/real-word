@@ -35,7 +35,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             text="Add Program"
@@ -74,7 +74,7 @@ export default {
           text: "ANIMAL",
           width: "100%",
           height: 192,
-          colorText: "white",
+          colorText: "#FFFFFF",
           url: "/program",
         },
         {
@@ -82,7 +82,7 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
-          colorText: "white",
+          colorText: "#FFFFFF",
           url: "/program",
         },
         {
@@ -90,7 +90,7 @@ export default {
           text: "ANIMAL",
           width: "100%",
           height: 192,
-          colorText: "white",
+          colorText: "#FFFFFF",
           url: "/program",
         },
         {
@@ -98,7 +98,7 @@ export default {
           text: "LEG DESTRUCTION",
           width: "100%",
           height: 192,
-          colorText: "white",
+          colorText: "#FFFFFF",
           url: "/program",
         },
       ],

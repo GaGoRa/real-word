@@ -13,18 +13,18 @@
                 </Label>
                 <FlexboxLayout justifyContent="center" marginBottom="32">
                     <TextField keyboardType="number"  maxLength="1" v-model="stringCode.code1" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="4"/>
                     <TextField keyboardType="number"  maxLength="1" v-model="stringCode.code2" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="4"/>
                     <TextField keyboardType="number"  maxLength="1"  v-model="stringCode.code3" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="16" />
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="16" />
 
                     <TextField keyboardType="number"  maxLength="10" v-model="stringCode.code4" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="4"/>
                     <TextField keyboardType="number"  maxLength="10" v-model="stringCode.code5" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="4" />
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="4" />
                     <TextField keyboardType="number" maxLength="10"  v-model="stringCode.code6" width="32" height="40"
-                        backgroundColor="white" borderRadius="8" marginRight="4"/>
+                        backgroundColor="#FFFFFF" borderRadius="8" marginRight="4"/>
 
                 </FlexboxLayout>
                 <!-- <Label text="Wrong number?" fontSize="14"
@@ -43,8 +43,8 @@
 
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
-                    fontWeight="900" color="white" marginBottom="32" @tap="processVerificationsEmails" />
-                    <!-- fontWeight="900" color="white" marginBottom="32" @tap="$navigator.navigate('/create-password')" /> -->
+                    fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="processVerificationsEmails" />
+                    <!-- fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="$navigator.navigate('/create-password')" /> -->
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -90,7 +90,7 @@ import { apiPost} from '~/resource/http';
             },
             onSuccess(res){
                  //TODO validar el succes y el errors
-                this.$navigator.navigate('/choose-best-programs')
+                this.$navigator.navigate('/choose-best-programs',{clearHistory:true})
             },
             onError(err){
                 this.errorMessage = 'Have a error' + err

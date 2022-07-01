@@ -15,7 +15,7 @@
     >
       <FlexboxLayout justifyContent="space-between">
         <Label
-          color="white"
+          color="#FFFFFF"
           fontSize="20"
           fontWeight="900"
           horizontalAlignment="left"
@@ -23,7 +23,7 @@
           :text="`${data.day}`"
         />
         <Label
-          color="white"
+          color="#FFFFFF"
           fontSize="20"
           fontWeight="900"
           horizontalAlignment="left"
@@ -32,7 +32,7 @@
         />
       </FlexboxLayout>
 
-        <HtmlView color="white" fontSize="24" marginLeft="16" :html="data.text" />
+        <HtmlView color="#FFFFFF" fontSize="24" marginLeft="16" :html="data.text" />
 
     
     </StackLayout>

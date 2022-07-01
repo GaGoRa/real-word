@@ -14,7 +14,7 @@
         width="200"
         height="40"
         fontWeight="900"
-        color="white"
+        color="#FFFFFF"
         marginBottom="32"
         row="1" col="0"
         @tap="Selected"

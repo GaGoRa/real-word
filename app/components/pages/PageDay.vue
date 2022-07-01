@@ -16,7 +16,7 @@
         
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             :text="`${data.day}`"

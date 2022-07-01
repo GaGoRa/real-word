@@ -24,7 +24,7 @@
           marginLeft="64"
           text="Menu"
           fontSize="24"
-          color="white"
+          color="#FFFFFF"
           fontWeight="900"
         />
       </StackLayout>

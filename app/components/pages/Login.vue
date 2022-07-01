@@ -5,12 +5,12 @@
             <FlexboxLayout flexDirection="column" justifyContent="flex-end"
                 row="0" col="0" alignItems="center">
                 <StackLayout>
-                    <Label color="white" class="label" fontSize="24" horizontalAlignment="left"
+                    <Label color="#FFFFFF" class="label" fontSize="24" horizontalAlignment="left"
                         text="Get In" />
-                    <Label  color="white" horizontalAlignment="center" fontSize="32" fontWeight="900"
+                    <Label  color="#FFFFFF" horizontalAlignment="center" fontSize="32" fontWeight="900"
                         verticalAlignment="bottom" class="tittle"
                         text="WARRIOR SHAPE"/>
-                    <Label  color="white" horizontalAlignment="center" fontSize="24" marginBottom="32"
+                    <Label  color="#FFFFFF" horizontalAlignment="center" fontSize="24" marginBottom="32"
                         verticalAlignment="bottom" class="label"
                         text="over the next 30 days" />
                     <!--  <Image
@@ -20,11 +20,11 @@
             </FlexboxLayout>
             <StackLayout row="1" col="0" marginBottom="24" marginTop="32">
                 <Button borderRadius="82" fontSize="16" text="Register"
-                    backgroundColor="white" width="200" height="40"
+                    backgroundColor="#FFFFFF" width="200" height="40"
                     fontWeight="900" color="red" @tap="$navigator.navigate('/register')" />
                 <Button borderRadius="82" fontSize="16" height="40"
                     fontWeight="900" marginTop="16" text="Login"
-                    backgroundColor="red" width="200" color="white" @tap="$navigator.navigate('/login-aplication')" />
+                    backgroundColor="red" width="200" color="#FFFFFF" @tap="$navigator.navigate('/login-aplication')" />
             </StackLayout>
         </GridLayout>
     </Page>

@@ -1,6 +1,6 @@
 <template>
   <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" class="page-home">
-    <!-- <ActionBar background="white" class="shadow-none" boxShadow="0">
+    <!-- <ActionBar background="#FFFFFF" class="shadow-none" boxShadow="0">
       <GridLayout columns="*,auto" rows="*" width="100%" paddingRight="16" paddingBottom="8" paddingTop="16">
         <StackLayout @tap="$navigator.back()" col="0" row="0" >
           <image src="~/assets/icons/Icon feather-arrow-left-circle.png" verticalAlignment="left" width="40" height="40"  />
@@ -26,7 +26,7 @@
           class="bg"
         >
 
-          <label color="white" marginLeft="24" textWrap="true">
+          <label color="#FFFFFF" marginLeft="24" textWrap="true">
             <FormattedString>
               <span :text="package.name+' '" style="font-size: 24; font-weight: 900;"  />
               <span :text="price.recurrence.description" style="font-size: 16; font-weight: 200; margin-left: 8" />
@@ -42,7 +42,7 @@
           v-if="loading"
         >
           <StackLayout marginTop="-120" horizontalAlignment="center" verticalAlignment="center">
-            <label  horizontalAlignment="center" verticalAlignment="center" color="white" text="Please wait"/>
+            <label  horizontalAlignment="center" verticalAlignment="center" color="#FFFFFF" text="Please wait"/>
             <ActivityIndicator color="red" marginTop="16" horizontalAlignment="center" verticalAlignment="center" busy="true"  />
          </StackLayout>
         </GridLayout >

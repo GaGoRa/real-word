@@ -29,7 +29,7 @@
             textAlignment="center"
             text="Help"
             fontSize="22"
-            color="white"
+            color="#FFFFFF"
             fontWeight="900"
             paddingTop="0"
           />
@@ -42,7 +42,7 @@
           height="38"
           v-model="textFieldValue"
           hint="Search"
-          backgroundColor="white"
+          backgroundColor="#FFFFFF"
           borderRadius="10"
           marginButtom="16"
           @returnPress="buscar"

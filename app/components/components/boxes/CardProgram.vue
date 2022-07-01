@@ -21,7 +21,7 @@
             />
 
             <Label
-              color="white"
+              color="#FFFFFF"
               fontSize="14"
               fontWeight="900"
               :text="data.title"
@@ -34,14 +34,14 @@
         <StackLayout col="0" row="0"  width="33%">
           
           <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="16"
             fontWeight="500"
             :text="`Sets: ${data.sets} `"
             marginTop="16"></Label>
           
           <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="16"
             fontWeight="500"
             :text="`Reps: ${data.repetitions}`"
@@ -51,7 +51,7 @@
           
           <Button borderRadius="8" marginTop="" fontSize="16"
               :text="!data.completed ? 'Log':'Edit'" :backgroundColor="!data.completed ? 'red':'#388E3C'" width="180"
-              height="28" fontWeight="900" color="white"
+              height="28" fontWeight="900" color="#FFFFFF"
               marginBottom="32" @tap="toggleSwitchMenu" />
         </StackLayout> 
 
@@ -88,7 +88,7 @@
             <Label 
               marginBottom="16"
               marginTop="4"
-              color="white"
+              color="#FFFFFF"
               fontSize="14"
               fontWeight="500"
               paddingTop="4"
@@ -103,7 +103,7 @@
               v-model="i.repetitions"
               hint="Reps #"
               keyboardType="number"
-              backgroundColor="white"
+              backgroundColor="#FFFFFF"
               height="18"
               width="33%"
               key
@@ -115,7 +115,7 @@
               marginRight="8"
               borderRadius="12"
              v-model="i.weight"
-              backgroundColor="white"
+              backgroundColor="#FFFFFF"
               height="18"
               hint="Weight"
               keyboardType="number"
@@ -133,7 +133,7 @@
         width="180"
         height="28" 
         fontWeight="900" 
-        color="white"
+        color="#FFFFFF"
         marginBottom="4" 
         @tap="onTapLog"/>
         
@@ -141,7 +141,7 @@
         <Label 
           marginBottom="0"
           marginTop="4"
-          color="white"
+          color="#FFFFFF"
           fontSize="16"
           fontWeight="500"
           paddingTop="4"
@@ -150,7 +150,7 @@
         <Label 
           marginBottom="0"
           marginTop="4"
-          color="white"
+          color="#FFFFFF"
           fontSize="14"
           fontWeight="500"
           paddingTop="4"
@@ -159,7 +159,7 @@
         <Label 
           marginBottom="0"
           marginTop="4"
-          color="white"
+          color="#FFFFFF"
           fontSize="14"
           fontWeight="500"
           paddingTop="4"
@@ -174,7 +174,7 @@
           <Label 
             marginBottom="4"
             marginTop="4"
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             fontWeight="300"
             paddingTop="4"
@@ -184,7 +184,7 @@
           <Label 
             marginBottom="4"
             marginTop="4"
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             fontWeight="300"
             class="label-cardProgramResult"
@@ -195,7 +195,7 @@
           <Label 
             marginBottom="4"
             marginTop="4"
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             class="label-cardProgramResult"
             fontWeight="300"

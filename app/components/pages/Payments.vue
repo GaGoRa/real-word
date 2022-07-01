@@ -21,7 +21,7 @@
         <StackLayout col="0" row="1" >
           <FlexBoxLayout flexDirection="horizontal" justifyContent="center">
            <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="14"
             fontWeight="600"
             paddingTop="4"
@@ -39,7 +39,7 @@
       <Label
         marginLeft="16"
         marginTop=""
-        color="white"
+        color="#FFFFFF"
         text="Card Information"
         fontWeight="900"
         fontSize="16"
@@ -52,7 +52,7 @@
         marginRight="16"
         hint="Name on Card"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -62,7 +62,7 @@
         marginRight="16"
         hint="Card #"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -72,7 +72,7 @@
         marginRight="16"
         hint="Expiration Date"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
       <TextField
@@ -83,7 +83,7 @@
         marginRight="16"
         hint="CVV"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor="#FFFFFF"
         height="36"
       />
        <Button
@@ -95,7 +95,7 @@
         width="200"
         height="40"
         fontWeight="900"
-        color="white"
+        color="#FFFFFF"
         marginBottom="32"
         @tap="$navigator.navigate('/home')"
       />

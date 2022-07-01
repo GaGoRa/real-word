@@ -17,12 +17,12 @@
 
                     <TextField height="40" hint=" Email"
                          v-model="textFieldValue.email"
-                        backgroundColor="white" color="949494" borderRadius="8" />
+                        backgroundColor="#FFFFFF" color="949494" borderRadius="8" />
                 </StackLayout>
                
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
-                    fontWeight="900" color="white" @tap="processResetPassword" marginBottom="32" />
+                    fontWeight="900" color="#FFFFFF" @tap="processResetPassword" marginBottom="32" />
             </StackLayout>
         </FlexboxLayout>
     </Page>

@@ -35,7 +35,7 @@
         >
           <Label
             marginLeft="24"
-            color="white"
+            color="#FFFFFF"
             fontSize="24"
             fontWeight="900"
             text="Recommended For You"
@@ -75,7 +75,7 @@ export default {
           width: "100%",
           height: 192,
           url: "/program",
-          colorText: "white",
+          colorText: "#FFFFFF",
         },
         {
           img: "~/assets/images/SQUAT.JPG",
@@ -83,7 +83,7 @@ export default {
           width: "100%",
           height: 192,
           url: "/program",
-          colorText: "white",
+          colorText: "#FFFFFF",
         },
         {
           img: "~/assets/images/File_014.JPG",
@@ -91,7 +91,7 @@ export default {
           width: "100%",
           height: 192,
           url: "/program",
-          colorText: "white",
+          colorText: "#FFFFFF",
         },
         {
           img: "~/assets/images/File_010.JPG",
@@ -99,7 +99,7 @@ export default {
           width: "100%",
           height: 192,
           url: "/program",
-          colorText: "white",
+          colorText: "#FFFFFF",
         },
       ],
     };

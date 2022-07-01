@@ -17,7 +17,7 @@
       >
         <FlexboxLayout justifyContent="space-between">
           <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="20"
             fontWeight="900"
             horizontalAlignment="left"
@@ -26,7 +26,7 @@
             :text="data.name"
           />
           <!-- <Label
-            color="white"
+            color="#FFFFFF"
             fontSize="20"
             fontWeight="900"
             textWrap="true"
@@ -34,7 +34,7 @@
           /> -->
         </FlexboxLayout>
 
-        <HtmlView color="white" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
+        <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
 
         <StackLayout >
           <FlexboxLayout 
@@ -54,7 +54,7 @@
         </StackLayout>
 
         <!-- <Label
-          color="white"
+          color="#FFFFFF"
           fontSize="14"
           horizontalAlignment="left"
           textWrap="true"
