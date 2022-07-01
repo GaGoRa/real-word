@@ -1,5 +1,5 @@
 <template>
-  <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" class="page-home">
+  <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" backgroundColor="white">
     <!-- <ActionBar background="#FFFFFF" class="shadow-none" boxShadow="0">
       <GridLayout columns="*,auto" rows="*" width="100%" paddingRight="16" paddingBottom="8" paddingTop="16">
         <StackLayout @tap="$navigator.back()" col="0" row="0" >

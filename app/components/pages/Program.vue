@@ -3,10 +3,9 @@
     actionBarHidden="true"
     class="page-home"
     xmlns="http://schemas.nativescript.org/tns.xsd"
-    xmlns:VideoPlayer="nativescript-videoplayer"
-    ref="SliderPrincipal"
+     xmlns:VideoPlayer="nativescript-videoplayer">
   >
-
+<!-- xmlns:VideoPlayer="nativescript-videoplayer" -->
     <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
 
@@ -47,13 +46,18 @@
           backgroundColor="transparent"
           paddingRight="8"
         > 
-          <VideoPlayer 
+          <StackLayout>
+          <VideoPlayer
+            @playbackReady="videoCompleted"
+            id="Video"
+            controls="true"
+            loop="true"
             :src="`${baseUrl}/storage/${video}`"
             autoplay="true"
             height="300"
-            fill="true"
-          >
-          </VideoPlayer>
+           />
+           </StackLayout>
+          
         </StackLayout>
 
         <FlexboxLayout
@@ -242,6 +246,9 @@ export default {
   },
   methods:{
 
+    videoCompleted(){
+      console.log('readyToPLayback');
+    },
   async createMain(){
      try {
       this.loadingState = true
