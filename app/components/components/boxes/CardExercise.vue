@@ -58,7 +58,6 @@ export default {
     };
   },
   mounted(){
-    // console.log('Card this.data',this.data)
   },
   methods:{
     alertDialog(){

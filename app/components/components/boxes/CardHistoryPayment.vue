@@ -43,7 +43,7 @@
             color="#8E8B8B"
             fontSize="24"
             fontWeight="900"
-            :text="!!data.mount ? ` $${data.mount}` : '' "
+            :text="!!data.mount ? ` ${data.mount}` : '' "
             horizontalAlignment="center"
             />
           

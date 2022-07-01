@@ -140,7 +140,7 @@
 
          <StackLayout  marginTop="16" marginRight="16"  v-if="subscriptionState" >
             <CardExercise
-              v-for="(item, key) in exercises"
+              v-for="(item, key) in dataPackageExercise"
               :key="`exercise-${key}`"
               :data="item"
               :status_program_id="status_program_id"
@@ -222,6 +222,17 @@ export default {
       })
 
       return arr
+    },
+
+    dataPackageExercise(){
+      let arre = []
+
+      this.exercises.forEach((e)=>{
+        e.program_id = this.id
+        arre.push(e)
+      })
+
+      return arre
     }
   },
   async created(){

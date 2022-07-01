@@ -2,7 +2,7 @@
     <Page  xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:VideoPlayer="nativescript-videoplayer" class="seccion-register-bg-invert" actionBarHidden="true">
         <StackLayout marginTop="32"  marginRight="16" >
-            <NavBarBurgerMenu/>
+            <NavBarBurgerMenu :ismenu="false" :program_id="data.program_id" />
             
         <StackLayout
           col="0"
@@ -94,7 +94,7 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
             };
         },
         mounted(){
-          // console.log('pageDay this data',this.data)
+           console.log('pageDay this data',this.data)
         }
     };
 </script>
