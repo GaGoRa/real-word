@@ -111,6 +111,8 @@
           marginTop="8"
           backgroundColor="transparent"
           justifyContent="center"
+          
+          
         >
           <Button
           v-if="subscriptionState"
@@ -125,12 +127,18 @@
             color="white"
             marginBottom="8"
             @tap="processPressButtomPlay"
-          />
-        </FlexboxLayout>
+            />
+            <StackLayout v-else>
+            </StackLayout>
+           
+        </FlexboxLayout>  
+      
+        <StackLayout col="0" row="6"> 
 
-        <StackLayout col="0" row="6" marginTop="16" >
-         
-         <StackLayout  v-if="subscriptionState" >
+          <Label textWrap="true"  v-if="!!buttomPlay.message" :text="buttomPlay.message" fontSize="16" fontWeight="600"
+            textAlignment="center" :color="buttomPlay.registered ? 'green' :'red'" marginLeft="32" marginRight="32" marginTop="0" marginBottom="0" />
+
+         <StackLayout  marginTop="16" marginRight="16"  v-if="subscriptionState" >
             <CardExercise
               v-for="(item, key) in exercises"
               :key="`exercise-${key}`"
@@ -138,7 +146,7 @@
               marginBottom="12"
             />
           </StackLayout>
-            <StackLayout  v-else>
+            <StackLayout v-else>
               <CardSubscriptionProgram
                 v-for="(item, key) in dataPackage"
                 :key="`subscription-${key}`"
@@ -157,8 +165,7 @@ import CardSubscriptionProgram from "~/components/components/boxes/CardSubscript
 import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
 import { apiGet, apiPost } from "~/resource/http";
-import { dataTest, apiMock } from "~/resource/mockdataPrograms.js"
-
+import { Dialogs } from "@nativescript/core";
 export default {
   components: {
     CardSubscriptionProgram,
@@ -179,56 +186,26 @@ export default {
   },
   data() {
     return {
-      loadingState:true,
+      loadingState:false,
       subscriptionState:false,
+      subscription_id:null,
+      program_id:null,
+      status_id:"1",
+      is_active:"1",
+      status_program_id:null,
+
+
       buttomPlay:{
-        registered:true,
+        registered:false,
+        message:"",
       },
       textValue:{
         description:'',
         title:"arm Blaster"
       },
-      subscriptions: [
-        {
-          name: "Gold Subscription",
-          amount: "$25.32",
-          color: "#EAB813",
-          description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-          url: '/pay-subscription'
+      subscriptions: [],
 
-        },
-        {
-          name: "One Time Purchase",
-          amount: "$199.42",
-          color: "#838383",
-          description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-          url: false
-       },
-      ],
-      exercises: [
-        {
-          completed: true,
-          day: "1",
-          color: "#838383",
-          body: "Legs",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-          url:'/day-exercise'
-        },
-        {
-          completed: false,
-          day: "2",
-          color: "#838383",
-          body: "Arms",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-        },
-        {
-          completed: false,
-          day: "2",
-          color: "#838383",
-          body: "Back",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-        },
-      ],
+      exercises: [],
     };
   },
   computed:{
@@ -244,100 +221,110 @@ export default {
     }
   },
   async created(){
-
-    const response =  await apiGet(`/package`)
-
-    this.subscriptions = response.data
-     
-    // this.$refs.listView.nativeView.refresh();
-    // apiGet(`/program_detail?program_id=${this.id}`)
-    // .then(this.onSuccess)
-    // .catch(this.onError)
-
-    apiMock(dataTest.package_was_not_purchased)
-    .then(await this.onSuccess)
-    .catch(this.onError)
-
-
-  },
-  methods:{
-
-   async onSuccess(res){
-      console.log("res",res);
-       this.textValue.description = res.description
-       this.textValue.title = res.name
-      if (!res.hasOwnProperty('status_package')) {
-          this.subscriptionState = false
-          await apiGet('/package')
-          .then(this.getSubscriptions)
-          .catch(this.onError)
+    try {
+      this.loadingState = true
+      const res = await apiGet(`/program_detail?program_id=${this.id}`)
+      this.textValue.description = res.date.description
+      this.textValue.title = res.date.name
+      
+      if(res.date.status_package === null){
+        const packageData =  await apiGet('/package')
+        this.subscriptions = packageData.data
       }else{
         this.subscriptionState = true
-        this.buttomPlay.registered = res.status_program.status
-        if(res.status_package.status){
 
-            if(res.status_program.status){
-              this.exercises = this.getExercises(res.details, '/day-exercise')
+
+        this.subscription_id = res.date.status_package.subscription_id
+        this.program_id= res.date.id
+
+        if(res.date.status_package.status){
+
+
+            if(res.date.status_program === null){
+              this.exercises = this.getExercises(res.date.details, false)
             }else{
-              this.exercises = this.getExercises(res.details, undefined)
+              this.buttomPlay.registered = true
+              this.status_program_id = res.date.status_program.id
+              this.exercises = this.getExercises(res.date.details, '/day-exercise')
+              
             } 
         }else{
              //si se vencio sa sub
-          this.exercises = this.getExercises(res.details,'/pay-subscription')
-          
+          this.exercises = this.getExercises(res.date.details,'/pay-subscription')
         }
 
-     
       }
-    
-       this.loadingState = false
+
+      this.loadingState = false
+
+    } catch (error) {
+      console.log('error',error);
+      this.onError(error)
+    }
+   
+  },
+  methods:{
+
+  onSuccess(res){
+    console.log('res',res);
 
     },
     onError(err){
-      console.log("Have Error",err);
+Dialogs.alert({
+              title: "Error Message",
+              message: "Have a error , please try again",
+              okButtonText: "OK"
+          }).then( ()=> {
+              console.log("Error",new Error(err));
+          });
     },
     getExercises(res,url){
-
-        
         return res.map((exe)=>({
           id:exe.id,
           completed: exe.status,
           day: exe.number,
           body: exe.muscular_group,
-          text: exe.description,
+          text: exe.description || "<p></p>",
           url:url,
-          props:{data:res}
+          props:{data:res.exercise}
         }))
 
 
     },
-    getSubscriptions(res){
-      this.subscriptions = res[0].map((sub)=>({
-          id:sub.id,
-          tittle: sub.name,
-          mount:  `$${sub.amount}`,
-          color: true,
-          text: sub.description,
-          url: '/pay-subscription',
-          props:{},
-          stripe_id:sub.stripe_id
-      }))
-    },
-    processPressButtomPlay(){
+    
+     processPressButtomPlay(){
+
+      if(!this.buttomPlay.registered){
+
         const body = {
-                "subscription_id":6,
-                "program_id":1,
-                "status_id":1,
-                "is_active":1
+                "subscription_id":this.subscription_id,
+                "program_id":this.program_id,
+                "status_id":this.status_id,
+                "is_active":this.is_active
             }
-        
-        this.onSuccessPressButtom()
-        // apiPost('/register_user_program',body)
-        // .then(this.onSuccessPressButtom)
-        // .catch(this.onError)
+         apiPost(body,'/register_user_program')
+         .then(this.onSuccessPressButtom)
+         .catch(this.onError)
+       }else{
+
+          const body ={
+               "status_program_id": this.status_program_id
+            }
+
+
+         apiPost(body,'/cancel_user_program')
+         .then( (res) => this.onSuccessPressButtom({...res,status:!res.status}))
+         .catch(this.onError)
+
+       }
+
     },
-    onSuccessPressButtom(){
-      this.buttomPlay.registered = !this.buttomPlay.registered
+    onSuccessPressButtom(res){
+
+      this.buttomPlay.registered = res.status
+      this.buttomPlay.message = res.message
+
+      // await this.$forceUpdate()
     },
     onTapN(){
       // console.log('info')

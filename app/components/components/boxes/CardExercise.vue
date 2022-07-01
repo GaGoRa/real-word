@@ -5,14 +5,13 @@
       left="0"
       width="100%"
       height="auto"
-      completed:true
       :backgroundColor="data.completed ? '#EAB813' : '#838383'  "
       borderRadius="16"
       padding="16"
       class="box-shadow"
       @tap="data.url 
         ? $navigator.navigate(data.url, {props:data.props}) 
-       : alertDialog(alertDialogState.alertMessage)"
+       : alertDialog()"
     >
       <FlexboxLayout justifyContent="space-between">
         <Label
@@ -35,13 +34,7 @@
 
         <HtmlView color="white" fontSize="24" marginLeft="16" :html="data.text" />
 
-      <!-- <Label
-        color="white"
-        fontSize="14"
-        horizontalAlignment="left"
-        textWrap="true"
-        :text="data.text"
-      /> -->
+    
     </StackLayout>
   </AbsoluteLayout>
 </template>
@@ -62,13 +55,13 @@ export default {
     };
   },
   methods:{
-    alertDialog(text){
+    alertDialog(){
             Dialogs.alert({
-              message: text,
+              message: this.alertDialogState.alertMessage,
               okButtonText: 'OK',
               theme:5
       }).then(()=>{
-  
+          console.log("Please press the 'start' button, to start the program.");
       });
 
           }
