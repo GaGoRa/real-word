@@ -116,27 +116,7 @@
                     fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="processVerificationsEmails" />
             </StackLayout>
         </FlexboxLayout>
-        <!-- <Label text="Wrong number?" fontSize="14"
-            textAlignment="center" marginBottom="32"/> -->
-        <!-- <Label text="Wrong email?" fontSize="14"
-            textAlignment="center" marginBottom="32"/> -->
-             <Label fontSize="14" textAlignment="center" marginBottom="16">
-            <FormattedString>
-                <span fontSize="12" text="If you didn´t received the code, please try again" />
-                <span text="   please try again" @tap="reSendCode" fontSize="12" fontWeight="800" textWrap="true"/>
-            </FormattedString>
-        </Label>
-    
-        <Label  v-if="errorMessage" marginTop="4" :text="errorMessage" fontSize="14"
-            textAlignment="center"  color="red" marginBottom="32"/>
-
-        <Button borderRadius="10" marginTop="" fontSize="16"
-            text="Next" backgroundColor="red" width="200" height="40"
-            fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="processVerificationsEmails" />
-            <!-- fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="$navigator.navigate('/create-password')" /> -->
-      </StackLayout>
-    </FlexboxLayout>
-  </Page>
+    </Page>
 </template>
 
 <script>
