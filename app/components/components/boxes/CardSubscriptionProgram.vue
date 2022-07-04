@@ -11,7 +11,7 @@
       <StackLayout
       width="100%"
         class="box-shadow"
-        backgroundColor="#838383"
+        backgroundColor="#B9B9B9"
         borderRadius="16"
         padding="12"
       >

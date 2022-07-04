@@ -1,174 +1,180 @@
 <template>
   <Page
     actionBarHidden="true"
-    class="page-home"
-    xmlns="http://schemas.nativescript.org/tns.xsd"
-     
-  >
-<!--   
-  xmlns:VideoPlayer="nativescript-videoplayer">
-  xmlns:VideoPlayer="nativescript-videoplayer" -->
-    <StackLayout marginTop="32"  >
-    <NavBarBurgerMenu/>
+    class="page-home">
 
-    <!-- <label @tap="onTapN" text="jols"/> -->
+    <GridLayout 
+      marginTop="32" 
+      width="100%"  
+      columns="*" 
+      rows="auto,auto,*">
 
-    <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
-      <GridLayout marginTop="24" columns="*" rows="*,*,*">
-      <ActivityIndicator 
-          marginTop="16"
-          :busy="loadingState" 
-            />
-      </GridLayout>
-    </StackLayout>
-
-
-    <ScrollView width="100%" v-else>
-      <GridLayout marginTop="24" columns="*" rows="*,*,*,*,*,*,*">
-        <StackLayout
-          col="0"
-          row="0"
-          marginTop="4"
-          backgroundColor="transparent"
-          backgroundImage="~/assets/icons/background_label.png"
-          class="bg-label"
-        >
-          <Label
-            marginLeft="24"
-            color="#FFFFFF"
-            fontSize="24"
-            fontWeight="900"
-            :text="textValue.title"
-          />
-        </StackLayout>
-        <StackLayout
-          col="0"
-          row="1"
-          marginLeft="8"
-          marginTop="16"
-          backgroundColor="transparent"
-          paddingRight="8"
-        > 
-            
-
-          <VideoPlayer v-if="loadingVideo"
-            @playbackReady="videoCompleted"
-            id="Video"
-            :controls="loadingVideo ? true : false"
-            loop="true"
-            :src="`${baseUrl}/storage/${video}`"
-            autoplay="true"
-            height="300"
-           />
-
-          <CardImage v-else :data="cardImageData"/>
-
-          
-        </StackLayout>
-
+      <!-- <NavBarBurgerMenu row="0"/> -->
+      <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
         <FlexboxLayout
-          col="0"
-          row="2"
-          marginTop="8"
-          backgroundColor="transparent"
+          justifyContent="space-between"
+          paddingRight="24"
+          width="100%"
         >
           <Image
-            marginLeft="24"
-            src="~/assets/icons/icon_details.png"
-            height="24"
+            src="~/assets/icons/Icon feather-arrow-left-circle.png"
+            height="40"
+            width="40"
+            @tap="$navigator.navigate('/home')"
           />
-
-          <Label
-            paddingTop="2"
-            marginLeft="8"
-            color="#FFFFFF"
-            fontSize="20"
-            fontWeight="400"
-            text="DETAILS"
-          />
+         <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
+   
+      </StackLayout>
 
-        <HtmlView  marginTop="8" marginLeft="16" row="3" col="0" :html="textValue.description" />
-        <!-- <TextView row="3" col="0" editable="false">
-          <FormattedString>
-            <Span
-              :text="textValue.description"
-            />
-          </FormattedString>
-        </TextView> -->
+      <StackLayout row="1"
+        marginTop="4"
+        backgroundColor="transparent"
+        backgroundImage="~/assets/icons/background_label.png"
+        class="bg-label"
+        paddingTop="2"
+        paddingBottom="2"
+      >
+        <Label
+          horizontalAlignment="left"
+          color="#FFFFFF"
+          fontSize="20"
+          fontWeight="900"
+          width="80%"
+          marginLeft="16"
+          :text="textValue.title"
+        />
+      </StackLayout>
 
-        <!-- <FlexboxLayout
-          col="0"
-          row="4"
-          marginTop="8"
-          backgroundColor="transparent"
-          justifyContent="center"
-        >
-          <Label
-            marginRight="8"
-            color="#FFFFFF"
-            fontSize="16"
-            fontWeight="900"
-            text="Add to My Programs"
-          />
-
-          <Image src="~/assets/icons/btn_icon_plus.png" height="40" />
-        </FlexboxLayout> -->
-
-        <FlexboxLayout
-          col="0"
-          row="5"
-          marginTop="8"
-          backgroundColor="transparent"
-          justifyContent="center"
-          
-          
-        >
-          <Button
-          v-if="subscriptionState"
-            borderRadius="16"
-            marginTop=""
-            fontSize="20"
-            :text="buttomPlay.registered ? 'Stop' : 'Start'  "
-            :backgroundColor="buttomPlay.registered ? 'red' : 'green'"
-            width="200"
-            height="48"
-            fontWeight="900"
-            color="#FFFFFF"
-            marginBottom="8"
-            @tap="processPressButtomPlay"
-            />
-            <StackLayout v-else>
+      <StackLayout row="2">
+        <ScrollView >
+          <StackLayout>
+            <StackLayout>
+              <AbsoluteLayout  width="100%"  >
+                <StackLayout
+                  padding="16"
+                  height="250"
+                  width="100%"
+                  top="0"
+                  left="0"
+                >
+                  <image
+                    ref="imagevideo"
+                    width="100%"
+                    minHeight="250"
+                    borderRadius="25"
+                    :src="imagevideo"
+                    stretch="aspectFill"
+                  />
+                </StackLayout>
+                <FlexboxLayout
+                  @tap="onTapOpenVideo"
+                  justifyContent="center"
+                  alignItems="center"
+                  padding="16"
+                  height="250"
+                  width="100%"
+                  rorate="90"
+                  top="0"
+                  left="0"
+                >
+                  <image
+                    width="20%"
+                    src="res://iconplay"
+                    stretch="aspectFit"
+                  />
+                </FlexboxLayout>
+              </AbsoluteLayout >
             </StackLayout>
-           
-        </FlexboxLayout>  
-      
-        <StackLayout col="0" row="6"> 
 
-          <Label textWrap="true"  v-if="!!buttomPlay.message" :text="buttomPlay.message" fontSize="16" fontWeight="600"
-            textAlignment="center" :color="buttomPlay.registered ? 'green' :'red'" marginLeft="32" marginRight="32" marginTop="0" marginBottom="0" />
+            <StackLayout >
 
-         <StackLayout  marginTop="16" marginRight="16"  v-if="subscriptionState" >
-            <CardExercise
-              v-for="(item, key) in dataPackageExercise"
-              :key="`exercise-${key}`"
-              :data="item"
-              :status_program_id="status_program_id"
-              marginBottom="12"
-            />
-          </StackLayout>
-            <StackLayout v-else>
-              <CardSubscriptionProgram
-                v-for="(item, key) in dataPackage"
-                :key="`subscription-${key}`"
-                :data="item"
+              <FlexboxLayout
+                marginTop="8"
+                backgroundColor="transparent"
+              >
+                <Image
+                  marginLeft="24"
+                  src="~/assets/icons/icon_details.png"
+                  height="24"
+                />
+
+                <Label
+                  paddingTop="2"
+                  marginLeft="8"
+                  color="#FFFFFF"
+                  fontSize="20"
+                  fontWeight="400"
+                  text="DETAILS"
+                />
+              </FlexboxLayout>
+
+              <HtmlView  marginTop="8" marginLeft="16" :html="textValue.description" />
+            </StackLayout>
+
+              
+
+            <StackLayout row="4"> 
+              <FlexboxLayout
+                marginTop="8"
+                backgroundColor="transparent"
+                justifyContent="center"
+                v-if="subscriptionState"
+              >
+                <Button
+                  borderRadius="16"
+                  marginTop=""
+                  fontSize="20"
+                  :text="buttomPlay.registered ? 'Stop' : 'Start'  "
+                  :backgroundColor="buttomPlay.registered ? 'red' : 'green'"
+                  width="200"
+                  height="48"
+                  fontWeight="900"
+                  color="#FFFFFF"
+                  marginBottom="8"
+                  @tap="processPressButtomPlay"
+                  />               
+              </FlexboxLayout>
+              <Label 
+                textWrap="true"  
+                v-if="!!buttomPlay.message" 
+                :text="buttomPlay.message" 
+                fontSize="16" fontWeight="600"
+                textAlignment="center" 
+                :color="buttomPlay.registered ? 'green' :'red'" 
+                marginLeft="32" 
+                marginRight="32" 
+                marginTop="0" 
+                marginBottom="0" 
               />
+
+              <StackLayout  
+                marginTop="16" 
+                v-if="subscriptionState" >
+                <CardExercise
+                  v-for="(item, key) in dataPackageExercise"
+                  :key="`exercise-${key}`"
+                  :data="item"
+                  :status_program_id="status_program_id"
+                  :programButtom="buttomPlay.registered "
+                />
+              </StackLayout>
+              <StackLayout v-else>
+                <CardSubscriptionProgram
+                  v-for="(item, key) in dataPackage"
+                  :key="`subscription-${key}`"
+                  :data="item"
+                />
+              </StackLayout>
             </StackLayout>
 
-        </StackLayout>
-      </GridLayout>
-    </ScrollView>
-    </StackLayout>
+          </StackLayout>
+        </ScrollView>
+       
+      </StackLayout>
+
+    </GridLayout>
+    
   </Page>
 </template>
 <script>
@@ -200,8 +206,9 @@ export default {
   },
   data() {
     return {
-      cardImageData:DEFAULT_POPULAR_PROGRAMS,
-      loadingVideo:false,
+      showvideo: false,
+      video:'',
+      imagevideo:'res://eskeleton',
       baseUrl:baseUrl,
       loadingState:false,
       subscriptionState:false,
@@ -210,34 +217,28 @@ export default {
       status_id:"1",
       is_active:"1",
       status_program_id:null,
-
-
       buttomPlay:{
         registered:false,
         message:"",
       },
       textValue:{
         description:'',
-        title:"arm Blaster"
+        title:""
       },
       subscriptions: [],
-
       exercises: [],
     };
   },
   computed:{
     dataPackage(){
       let arr = []
-
       this.subscriptions.forEach((e)=>{
         e.program_id = this.id
         e.color = '#EAB813'
         arr.push(e)
       })
-
       return arr
     },
-
     dataPackageExercise(){
       let arre = []
 
@@ -249,59 +250,49 @@ export default {
       return arre
     }
   },
-  async mounted(){
-
-    
-
-
+  async created(){
     await this.createMain()
-   
+  },
+  mounted(){
   },
   methods:{
-
     videoCompleted(){
-      this.loadingVideo = true
+      console.log('readyToPLayback');
+    },
+    onTapOpenVideo(){
 
-},
-  async createMain(){
-     try {
-      this.loadingState = true
-      const res = await apiGet(`/program_detail?program_id=${this.id}`)
+      this.$navigator.modal('/view_video',
+        { fullscreen: true, 
+          id:'viewvideo',
+          props:{
+            video: this.video
+          } 
+        })
+    },
+    async createMain(){
+      try {
+        this.loadingState = true
+        const res = await apiGet(`/program_detail?program_id=${this.id}`)
+        //console.log("detalle",res)
+        this.program_id= String(res.date.id)
 
-      this.cardImageData = {
-      img: `${baseUrl}/storage/${res.date.image}`,
-      text: "",
-      width:340,
-      colorText: "",
-      height: 200,
-      class:''
-
-      }
-      this.program_id= String(res.date.id)
-
-      this.textValue.description = res.date.description
-      this.textValue.title = res.date.name
-      this.video = res.date.video
-
-      if(res.date.status_package === null){
-        const packageData =  await apiGet('/package')
-        this.subscriptions = packageData.data
-      }else{
-        this.subscriptionState = true
+        this.textValue.description = res.date.description
+        this.textValue.title = res.date.name
+        this.video = res.date.video
+        this.imagevideo = this.baseUrl+'/storage/'+res.date.image
 
 
-        this.subscription_id = String(res.date.status_package.subscription_id)
-
-        if(res.date.status_package.status){
-
+        if(res.date.status_package === null){
+          const packageData =  await apiGet('/package')
+          this.subscriptions = packageData.data
+        }else{
+          this.subscriptionState = true
+          this.subscription_id = String(res.date.status_package.subscription_id)
+          if(res.date.status_package.status){
             if(res.date.status_program === null){
-                
               this.exercises = this.getExercises(res.date.details, false)
-
             }else{
-              
               if(res.date.status_program.status){
-
               this.buttomPlay.registered = true
               this.status_program_id = String(res.date.status_program.id)
               this.exercises = this.getExercises(res.date.details, '/day-exercise')
@@ -311,27 +302,20 @@ export default {
                 this.status_program_id = String(res.date.status_program.id)
               }
             } 
-        }else{
-             //si se vencio sa sub
-          this.exercises = this.getExercises(res.date.details,'/pay-subscription')
+          }else{
+               //si se vencio sa sub
+            this.exercises = this.getExercises(res.date.details,'/pay-subscription')
+          }
         }
-
+        this.$forceUpdate()
+        this.loadingState = false
+      } catch (error) {
+        console.log('error',error);
+        this.onError(error)
       }
-
-      this.loadingState = false
-
-      // console.log('this.exercises',this.exercises)
-
-    } catch (error) {
-      console.log('error',error);
-      this.onError(error)
-    }
-
-  },
-  
-  onSuccess(res){
-    console.log('res',res);
-
+    },
+    onSuccess(res){
+      // console.log('res',res);
     },
     onError(err){
       Dialogs.alert({
@@ -351,14 +335,11 @@ export default {
           body: exe.muscular_group,
           text: exe.description || "<p></p>",
           url:url,
+          image: this.imagevideo,
           props:{data:exe.exercise}
         }))
-
-
     },
-    
-     processPressButtomPlay(){
-
+    processPressButtomPlay(){
       if(!this.buttomPlay.registered){
 
         const body = {
@@ -375,21 +356,16 @@ export default {
           const body ={
                "status_program_id": this.status_program_id
             }
-
-
          apiPost(body,'/cancel_user_program')
          .then( (res) => this.onSuccessPressButtom({...res,status:!res.status}))
          .catch(this.onError)
-
        }
-
     },
-   async onSuccessPressButtom(res){
-          console.log("onSuccessPressButtom",res);
+    async onSuccessPressButtom(res){
+      console.log("onSuccessPressButtom",res);
       this.buttomPlay.registered = res.status
       this.buttomPlay.message = res.message
-
-     // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
+      // this.$navigator.navigate('/program',{props:{id:this.id},clearHistory:true})
         // this.$refs.SliderPrincipal.nativeView.refresh()
         await this.createMain()
         //await this.$forceUpdate()
@@ -398,7 +374,6 @@ export default {
       // console.log('info')
       // this.$navigator.navigate('/day-exercise')
     }
-
   }
 };
 </script>
