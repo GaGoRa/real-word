@@ -208,7 +208,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 "telephone":     this.textFieldValue.phone,
                 "country_id":    this.country_id 
             }
-              
+              console.log('asdadasdasd',body);
            apiPost(body,'/register')
             .then(this.onSuccess)
             .catch(this.onError)

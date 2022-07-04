@@ -3,15 +3,17 @@
     actionBarHidden="true"
     class="page-home"
     xmlns="http://schemas.nativescript.org/tns.xsd"
-     xmlns:VideoPlayer="nativescript-videoplayer">
+     
   >
-<!-- xmlns:VideoPlayer="nativescript-videoplayer" -->
+<!--   
+  xmlns:VideoPlayer="nativescript-videoplayer">
+  xmlns:VideoPlayer="nativescript-videoplayer" -->
     <StackLayout marginTop="32"  >
     <NavBarBurgerMenu/>
 
     <!-- <label @tap="onTapN" text="jols"/> -->
 
-    <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
+    <StackLayout v-if="false" marginTop="32"  marginRight="16" >
       <GridLayout marginTop="24" columns="*" rows="*,*,*">
 
         <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
@@ -46,17 +48,20 @@
           backgroundColor="transparent"
           paddingRight="8"
         > 
-          <StackLayout>
-          <VideoPlayer
+            
+
+          <VideoPlayer v-if="loadingVideo"
             @playbackReady="videoCompleted"
             id="Video"
-            controls="true"
+            :controls="loadingVideo ? true : false"
             loop="true"
             :src="`${baseUrl}/storage/${video}`"
             autoplay="true"
             height="300"
            />
-           </StackLayout>
+
+          <CardImage v-else :data="cardImageData"/>
+
           
         </StackLayout>
 
@@ -171,12 +176,15 @@ import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
 import { apiGet, apiPost,baseUrl } from "~/resource/http";
 import { Dialogs } from "@nativescript/core";
+import { DEFAULT_POPULAR_PROGRAMS} from "../../resource/constans"
+import  CardImage  from "../components/boxes/cardImage.vue"
 export default {
   components: {
     CardSubscriptionProgram,
     CardExercise,
-    NavBarBurgerMenu
-  },
+    NavBarBurgerMenu,
+    CardImage
+},
 
   props:{
     id:{
@@ -191,7 +199,8 @@ export default {
   },
   data() {
     return {
-      video:'',
+      cardImageData:DEFAULT_POPULAR_PROGRAMS,
+      loadingVideo:false,
       baseUrl:baseUrl,
       loadingState:false,
       subscriptionState:false,
@@ -239,7 +248,10 @@ export default {
       return arre
     }
   },
-  async created(){
+  async mounted(){
+
+    
+
 
     await this.createMain()
    
@@ -247,13 +259,23 @@ export default {
   methods:{
 
     videoCompleted(){
-      console.log('readyToPLayback');
-    },
+      this.loadingVideo = true
+
+},
   async createMain(){
      try {
       this.loadingState = true
       const res = await apiGet(`/program_detail?program_id=${this.id}`)
-      //console.log("detalle",res)
+
+      this.cardImageData = {
+      img: `${baseUrl}/storage/${res.date.image}`,
+      text: "",
+      width:340,
+      colorText: "",
+      height: 200,
+      class:''
+
+      }
       this.program_id= String(res.date.id)
 
       this.textValue.description = res.date.description

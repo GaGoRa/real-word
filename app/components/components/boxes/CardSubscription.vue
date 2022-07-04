@@ -1,11 +1,11 @@
 <template>
-  <AbsoluteLayout marginLeft="16" marginTop="8" marginRight="16">
+  <AbsoluteLayout marginLeft="16" marginTop="8" :class="data.class" marginRight="16">
     <StackLayout
       top="0"
       left="0"
-      width="100%"
-      height="auto"
-      backgroundColor="#EAB813"
+      :width=" data.text ?'100%' : data.width"
+      :height="data.text  ?'auto' : data.height"
+      :backgroundColor=" !data.color ? data.color : '#EArt  uyB813'"
       borderRadius="16"
       padding="16"
     >

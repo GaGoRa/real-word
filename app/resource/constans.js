@@ -2,6 +2,20 @@
 export const ERROR_MESSAGE_REGISTER = {
 }
 
+export const DEFAULT_CARD_SUBSCRIPTION = {
+  
+      tittle: "",
+      class:'label_skeleton',
+      mount: "",
+      color: "#8E8B8B",
+      text: "<p></p>",
+      width:'250',
+      height:'148'
+
+    
+}
+
+
 export const DEFAULT_CARD_HISTORY = [ {
   subscription:"",
   mount:"",
@@ -39,6 +53,8 @@ export const DEFAULT_CARD_HISTORY = [ {
 
 },
 ]
+
+
 
 export const DEFAULT_POPULAR_PROGRAMS =  [
     {
