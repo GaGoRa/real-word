@@ -1,6 +1,6 @@
 import { Http, knownFolders, path } from '@nativescript/core'
 import { openFile} from '@nativescript/core/utils/utils'
-import cache from '../store/cache/cache.android'
+import cache from '../store/cache'
 
 
 export const baseUrl = "https://realworld.uscreativity.com"

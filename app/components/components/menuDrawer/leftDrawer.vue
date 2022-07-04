@@ -51,7 +51,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { apiGet } from "~/resource/http";
-import cache from "~/store/cache/cache.android";
+import cache from "~/store/cache";
 import CardPost from "../boxes/cardPost.vue"
 
 export default {

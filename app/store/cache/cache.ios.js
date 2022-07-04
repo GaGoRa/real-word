@@ -23,4 +23,4 @@ cache.clear = function() {
   tmCache.removeAllObjects();
 };
 
-module.exports = cache;
+export default cache

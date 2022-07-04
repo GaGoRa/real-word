@@ -114,7 +114,7 @@
 
 <script>
 import { apiPost, apiGet } from '~/resource/http';
-import cache from '~/store/cache/cache.android'
+import cache from '~/store/cache'
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     

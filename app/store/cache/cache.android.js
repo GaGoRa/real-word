@@ -6,6 +6,7 @@ var sharedPreferences = Utils.ad.getApplicationContext().getSharedPreferences("c
 
 // Get the value of an item by key
 cache.get = function(key) {
+
   return sharedPreferences.getString(key, undefined);
 };
 
@@ -24,4 +25,4 @@ cache.clear = function() {
   sharedPreferences.edit().clear().commit();
 };
 
-module.export = {cache}
+export default cache

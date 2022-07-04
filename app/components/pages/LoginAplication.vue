@@ -78,7 +78,7 @@
 
 <script>
  import { apiPost } from '~/resource/http'
-import cache from '~/store/cache/cache.android';
+import cache from '~/store/cache';
   export default {
       data(){
           return {

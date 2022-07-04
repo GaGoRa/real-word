@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import cache from '~/store/cache/cache.android'
+import cache from '~/store/cache'
 import { apiPost} from '~/resource/http';
 import { ref } from 'vue';
 

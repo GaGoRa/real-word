@@ -147,7 +147,7 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import cache from '~/store/cache/cache.android';
+import cache from '~/store/cache';
 import moment from 'moment'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {

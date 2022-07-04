@@ -76,7 +76,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
-import cache from "~/store/cache/cache.android";
+import cache from "~/store/cache";
 export default {
   props: {
     data: {

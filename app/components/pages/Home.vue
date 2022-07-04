@@ -179,7 +179,7 @@ import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
-import cache from "~/store/cache/cache.android";
+import cache from "~/store/cache";
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
@@ -247,7 +247,7 @@ export default {
     } 
   },
   created(){
-    // cache.delete("userProfile")
+
     const dataCache = cache.get("userProfile")
     let data = JSON.parse(dataCache)
 

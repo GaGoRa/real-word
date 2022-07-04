@@ -1,19 +1,12 @@
 
-import {cache as android }   from "./cache.android";
-import {cache as ios }   from "./cache.ios";
-import {} from 'nativescript/core/'
+// import {cache as cacheAndroid} from"./cache.android";
+// import {cache as cacheIOS} from"./cache.ios";
+let cache;
 
-
-
-let cache = {}
-if (global.isIOS) {
-
-     cache = ios
-
-  }else{
-     cache = android
+if (global.isIOS) {  
+     cache = require('./cache.ios')
+}else{
+     cache = require('./cache.android')
   }
 
-module.exports = {
-    cache
-}
+module.exports = cache

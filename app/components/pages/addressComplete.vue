@@ -126,7 +126,7 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import cache from "~/store/cache/cache.android";
+import cache from "~/store/cache";
 
 export default {
   props:{

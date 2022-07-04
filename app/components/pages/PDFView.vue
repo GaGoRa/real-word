@@ -17,7 +17,7 @@ import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vu
 
 import NavBar from '../components/NavBar.vue'
 import CardPayment from '../components/boxes/CardPayment.vue'
-import cache from "~/store/cache/cache.android";
+import cache from "~/store/cache";
 import { apiPost,apiGet} from '~/resource/http';
 export default {
   props:{

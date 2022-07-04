@@ -255,7 +255,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { apiGet, apiPost } from '~/resource/http';
-import cache from '~/store/cache/cache.android';
+import cache from '~/store/cache/index';
 import { dateFormat_YYYY_DD_MM, getValueById } from "~/resource/helper";
 import moment from 'moment'
 export default {
