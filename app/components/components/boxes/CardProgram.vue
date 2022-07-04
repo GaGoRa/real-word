@@ -105,7 +105,15 @@
               borderTopWidth="1"
               borderColor="rgba(0,0,0,.4)"
             >
-              <StackLayout  width="100%">
+
+              <StackLayout v-if="saveLoading"  marginBottom="16" marginTop="16"  marginRight="16" >
+         
+                <ActivityIndicator 
+                  :busy="saveLoading" 
+                    />
+                </StackLayout>
+
+              <StackLayout v-else width="100%">
                 <GridLayout 
                   v-for="(i, key) in sets"
                   :key="`exercice-${key}`" 
@@ -321,7 +329,6 @@ export default {
     };
   },
   mounted(){
-    console.log('pr', this.data)
     for (var i = 0; i < this.data.sets; i++) {
       let num = i+1
       let index = this.data.log.findIndex((e)=> e.set == num)
@@ -349,9 +356,8 @@ export default {
       this.showLogs = !this.showLogs
     },
     async onTapLog(){
-      console.log('ddedfs',this.data)
-      console.log('program_days_id', this.program_days_id)
-      console.log('subscription_programs_id', this.subscription_programs_id)
+      this.saveLoading = true
+
       const data = await apiPost({
         program_days_id : this.program_days_id, 
         program_day_routines_id : this.data.id,
@@ -360,6 +366,8 @@ export default {
       },'/create_log')
       this.data = data.data
       this.setsList = data.data.list
+      this.saveLoading = false
+
     },
     onTapOpenVideo(){
       this.$navigator.modal('/view_video',

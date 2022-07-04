@@ -46,6 +46,11 @@
 
                 <Label text="Forgot password?" @tap="$navigator.navigate('/reset-password')" marginLeft="16" marginTop="8"  fontWeight="700" color="black" marginBottom="8"/>
                 
+                 <StackLayout v-if="loadingLogin" marginTop="16" marginBottom="16"  marginRight="16" >
+         
+                <ActivityIndicator :busy="loadingLogin"  />
+                </StackLayout>
+
                 <Button borderRadius="16" marginTop="" fontSize="16"
                     text="Login" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="#FFFFFF"
@@ -77,6 +82,7 @@ import cache from '~/store/cache/cache.android';
   export default {
       data(){
           return {
+            loadingLogin:false,
             textFieldValue: {
                 email:'',
                 password:''
@@ -99,10 +105,7 @@ import cache from '~/store/cache/cache.android';
             this.$navigator.navigate('/home')
         },
         processLogin(){
-            // const body ={
-            //     "email":"gabo@gmail.com",
-            //     "password":"1234123123asdasd5678"
-            // }
+            this.loadingLogin = true
             const body ={
                 "email": String(this.textFieldValue.email).trim().toLocaleLowerCase(),
                 "password":this.textFieldValue.password
@@ -113,10 +116,11 @@ import cache from '~/store/cache/cache.android';
             },
 
             onSuccess(resp){
-
                 if(resp.message === 'User Logged'){
                     cache.set("userProfile",JSON.stringify(resp.data))
+                        this.loadingLogin = false
                         this.$navigator.navigate('/home',{clearHistory:true})
+
                 }else{
                     this.errorsMessages={
                     errorMessage:'',
@@ -125,7 +129,10 @@ import cache from '~/store/cache/cache.android';
                     
                 }
                 this.errorsMessages.errorMessage = resp.message
+                this.loadingLogin = false
+
                 }
+
             },
 
             onError(err){
