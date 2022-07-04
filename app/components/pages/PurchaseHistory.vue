@@ -1,7 +1,9 @@
 <template>
   <Page class="seccion-register-bg-invert" actionBarHidden="true">
-   <StackLayout marginTop="32">
+   <StackLayout :marginTop="getMarginOS">
    <NavBar :data="navbar"/>
+
+
         <ScrollView
           scrollBarIndicatorVisible="false" 
           >
@@ -85,6 +87,11 @@ NavBar,
         
     },
     
+  },
+  computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    }
   }
 
 };

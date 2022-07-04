@@ -5,7 +5,9 @@
           paddingRight="24"
           width="100%"
         >
+        <BellMenu v-if="isBell"/>
           <Image
+           v-else
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
             width="40"
@@ -14,6 +16,7 @@
              $navigator.back()
              "
           />
+          
          <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
    
@@ -21,12 +24,19 @@
 </template>
 <script>
 import BurgerMenu from '../menuDrawer/burgerMenu.vue'
+import BellMenu from '../menuDrawer/bellMenu.vue'
+
 export default {
   components:{
+    BellMenu,
 BurgerMenu,
   },
   props: {
     ismenu:{
+      type: Boolean, 
+      default: true
+    },
+    isBell:{
       type: Boolean, 
       default: true
     },

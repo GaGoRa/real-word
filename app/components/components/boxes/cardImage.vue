@@ -1,5 +1,7 @@
 <template>
-  <AbsoluteLayout >
+  <AbsoluteLayout
+      @tap=" data.url ? $navigator.navigate(data.url,{props:data.props}) : '' "
+   >
     <image
       :class="data.class || ''"
       :width="data.width"
@@ -8,8 +10,6 @@
       stretch="aspectFill"
       borderRadius="20"
       horizontalAlignment="center"
-      @tap=" data.url ? $navigator.navigate(data.url,{props:data.props}) : ''
-      "
     ></image>
     <FlexboxLayout
       top="0"

@@ -1,6 +1,6 @@
 <template>
-  <Page class="page-home">
-    <ActionBar
+  <Page class="page-home"  actionBarHidden="true">
+    <!-- <ActionBar
       marginTop="16"
       height="64"
       title=""
@@ -17,7 +17,12 @@
           <BurgerMenu />
         </FlexboxLayout>
       </StackLayout>
-    </ActionBar>
+    </ActionBar> -->
+
+      <StackLayout :marginTop="getMarginOS">
+      <NavBarBurgerMenu :isBell="true" :ismenu="true" />
+
+
     <ScrollView>
       <GridLayout  columns="*" rows="*,*,*,*,*,*,*,*">
         <FlexboxLayout
@@ -170,7 +175,7 @@
         </StackLayout>
       </GridLayout>
     </ScrollView>
-
+    </StackLayout>
   </Page>
 </template>
 <script>
@@ -179,16 +184,23 @@ import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
+import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 import cache from "~/store/cache";
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
 export default {
   components: {
+    NavBarBurgerMenu,
     cardImage,
     BurgerMenu,
     CardProgram,
     BellMenu
+  },
+  computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    }
   },
   data() {
     return {
@@ -257,10 +269,9 @@ export default {
 
   },
   mounted(){
-    
-  }
+  },
+   
 };
-
 </script>
 
 <style scoped>

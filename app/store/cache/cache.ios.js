@@ -9,7 +9,7 @@ cache.get = function(key) {
 };
 
 // Set an item in the storage
-cache.set = function(key, value) {d
+cache.set = function(key, value) {
   tmCache.setObjectForKey(value, key);
 };
 

@@ -1,11 +1,11 @@
 <template>
   <StackLayout
       marginTop="16"
-      marginBottom="16"
+      marginBottom="16" 
       backgroundColor="transparent"
     >
       <FlexboxLayout
-        marginTop="32"
+        :marginTop="getMarginOS"
         class="bg-label"
         justifyContent="flex-start"
       >
@@ -45,6 +45,11 @@ export default {
       type:Object,
       default:{}
     },
+  },
+  computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+  }
   },
   data() {
     return {

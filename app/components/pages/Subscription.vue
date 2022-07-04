@@ -2,33 +2,8 @@
   <Page class="seccion-register-bg-invert" actionBarHidden="true">
       <StackLayout 
       backgroundColor="trasparent"
-      marginTop="32"
-      
-      >
+      :marginTop="getMarginOS" >
        <NavBar  :data="navbar"/>
-
-    <!-- <StackLayout>
-      <FlexboxLayout
-        marginTop="32"
-        class="bg-label"
-        justifyContent="flex-start">
-
-        <StackLayout  marginRight="32">
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-        </StackLayout>
-        
-      </FlexboxLayout>
-   
-      </StackLayout> 
-
-  <NavBarTittle :data="navbarTittle"/>
--->
-    
 
       <CardSubscription
         v-for="(item, key) in subscriptions"
@@ -51,7 +26,7 @@ import { apiGet } from '~/resource/http';
 import {DEFAULT_CARD_SUBSCRIPTION} from "../../resource/constans"
 import NavBarTittle from "~/components/components/NavBar.vue";
 export default {
-  components: {
+  components:{
     NavBar,
     CardSubscription,
     NavBarTittle,
@@ -80,8 +55,15 @@ export default {
       const data = await apiGet('/get_subscription')
       this.subscriptions.push(data.data)
     }
-  }
+  },
+  computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+  },
+
+  },
 };
+
 </script>
 
 <style scoped>

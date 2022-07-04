@@ -15,7 +15,7 @@ import ChooseBestPrograms from './components/pages/ChooseBestPrograms.vue'
 import LoginAplication from './components/pages/LoginAplication.vue'
 import ResetPassword from './components/pages/ResetPassword.vue'
 import ListPrograms from './components/pages/ListPrograms.vue'
-import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
+// import RecommendedPrograms from './components/pages/RecommendedPrograms.vue'
 import PDFView from './components/pages/PDFView.vue'
 import AddPrograms from './components/pages/AddPrograms.vue'
 import Program from './components/pages/Program.vue'
@@ -98,9 +98,9 @@ export const routes = {
   '/list-programs': {
     component: ListPrograms,
   },
-  '/recommended-programs': {
-    component: RecommendedPrograms,
-  },
+  // '/recommended-programs': {
+  //   component: RecommendedPrograms,
+  // },
 
   '/add-programs': {
     component: AddPrograms,
