@@ -171,9 +171,11 @@
                 borderTopWidth="1"
                 borderColor="rgba(0,0,0,.4)"
                 marginTop="16" 
-                justifyContent="space-between" 
-                paddingLeft="4" paddingRight="4"
+                paddingLeft="4" 
+                paddingRight="4"
               > 
+                <StackLayout width="33%" >
+
                 <Label 
                   marginBottom="0"
                   marginTop="4"
@@ -182,7 +184,12 @@
                   fontWeight="500"
                   paddingTop="4"
                   text="Max Weight"
+                   textAlignment="center"
                 />
+                </StackLayout>
+
+                 <StackLayout width="33%" >
+
                 <Label 
                   marginBottom="0"
                   marginTop="4"
@@ -191,8 +198,13 @@
                   fontWeight="500"
                   paddingTop="4"
                   text="Max Reps"
+                   textAlignment="center"
                 />
-                <Label 
+                 </StackLayout>
+
+              <StackLayout width="33%" >
+
+                <Label
                   marginBottom="0"
                   marginTop="4"
                   color="#FFFFFF"
@@ -200,14 +212,22 @@
                   fontWeight="500"
                   paddingTop="4"
                   text="Date"
+                  textAlignment="center"
+                  
                 />
+              </StackLayout>
+
               </FlexboxLayout>
 
               <StackLayout>
                 <FlexboxLayout
                   v-for="(i, key) in setsList"
                   :key="`list-${key}`"
-                   marginTop="6" justifyContent="space-between" paddingLeft="4" paddingRight="4"> 
+                   marginTop="6"
+                   paddingLeft="4" paddingRight="4"> 
+
+                     <StackLayout  width="33%" >
+
                   <Label 
                     marginBottom="4"
                     marginTop="4"
@@ -215,9 +235,13 @@
                     fontSize="14"
                     fontWeight="300"
                     paddingTop="4"
+                     textAlignment="center"
                     class="label-cardProgramResult"
                     :text="i.maxweight"
-                  />
+                  /> 
+                    </StackLayout>
+                   <StackLayout  width="33%" >
+
                   <Label 
                     marginBottom="4"
                     marginTop="4"
@@ -226,9 +250,12 @@
                     fontWeight="300"
                     class="label-cardProgramResult"
                     paddingTop="4"
-                    text-align="center"
+                     textAlignment="center"
                     :text="i.maxreps"
                   />
+                       </StackLayout>
+                    <StackLayout   width="33%" >
+
                   <Label 
                     marginBottom="4"
                     marginTop="4"
@@ -237,9 +264,10 @@
                     class="label-cardProgramResult"
                     fontWeight="300"
                     paddingTop="4"
-                    text-align="center"
+                   textAlignment="center"
                     :text="i.date"
                   />
+                     </StackLayout>
                 </FlexboxLayout>
               </StackLayout>
             </StackLayout>
@@ -286,6 +314,7 @@ export default {
   },
   data() {
     return {
+      saveLoading:false,
       showLogs:false, 
       sets: [],
       setsList:[]
