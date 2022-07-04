@@ -6,8 +6,8 @@
     <StackLayout slot="left">
       <LeftDrawer />
     </StackLayout>
-    <Navigator :defaultRoute=" getToken() ? '/home' : '/login'" />
   </MultiDrawer>
+    <Navigator :defaultRoute=" getToken() ? '/home' : '/login'" />
 </template>
 
 <script>

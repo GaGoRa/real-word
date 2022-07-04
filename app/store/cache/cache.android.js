@@ -24,4 +24,4 @@ cache.clear = function() {
   sharedPreferences.edit().clear().commit();
 };
 
-export default cache
+module.export = {cache}
