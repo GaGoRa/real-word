@@ -30,7 +30,7 @@
                     textAlignment="left" textWrap="true" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
 
-                <TextField height="38" v-model="textFieldValue.email"
+                <TextField keyboardType="email" height="38" v-model="textFieldValue.email"
                     hint="Email" backgroundColor="#FFFFFF" borderRadius="10"/>
                 
                 <Label  v-if="!!errorsMessages.email" :text="errorsMessages.email" fontSize="16" fontWeight="400"
@@ -116,7 +116,7 @@ import cache from '~/store/cache/cache.android';
 
                 if(resp.message === 'User Logged'){
                     cache.set("userProfile",JSON.stringify(resp.data))
-                        this.$navigator.navigate('/home')
+                        this.$navigator.navigate('/home',{clearHistory:true})
                 }else{
                     this.errorsMessages={
                     errorMessage:'',

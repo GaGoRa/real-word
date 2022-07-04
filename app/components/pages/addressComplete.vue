@@ -188,7 +188,6 @@ export default {
               package: this.package,
               price: this.price
             },
-            clearHistory: true
           })
     },
     async onTapState(){

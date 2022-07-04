@@ -28,7 +28,7 @@
                  justifyContent="center" >
                      <Label text="SKIP" fontSize="16" marginRight="4" fontWeight="300"
                     color="#949494" />
-                <Image @tap="$navigator.navigate('/home')"
+                <Image @tap="$navigator.navigate('/home',{clearHistory:true})"
                 src="~/assets/icons/icon_arrow_next.png" height="48" width="48" />
                 </FlexboxLayout>
 

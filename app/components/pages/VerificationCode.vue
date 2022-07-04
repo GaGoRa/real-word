@@ -183,7 +183,7 @@ import { ref } from 'vue';
 
             onSuccess(res){
                  //TODO validar el succes y el errors
-                this.$navigator.navigate('/choose-best-programs',{clearHistory:true})
+                this.$navigator.navigate('/choose-best-programs')
             },
             onError(err){
                 this.errorMessage = 'Have a error' + err
