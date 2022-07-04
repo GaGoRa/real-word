@@ -56,6 +56,7 @@ import { apiPost } from '~/resource/http';
                 }
             },
             onError(err){
+                console.log('err',err);
                 this.message.message = "Have Error"
             },
         }

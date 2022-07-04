@@ -1,83 +1,120 @@
 <template>
-  <Page actionBarHidden="true" class="seccion-register-bg-invert">
-     
-    <FlexboxLayout flexDirection="column" justifyContent="center">
-      <StackLayout marginRight="24" marginLeft="24">
-        <Label text="Enter verification code" fontSize="32"
-            fontWeight="900" textAlignment="center" marginBottom="16" />
-        <Label fontSize="12" textAlignment="center" marginBottom="16">
-            <FormattedString>
-                <span fontSize="12" text="We have sent a 6 digit verification code to " />
-                <span :text="email" fontSize="8" fontWeight="800" textWrap="true"/>
-            </FormattedString>
-        </Label>
-        <FlexboxLayout justifyContent="center" marginBottom="32">
+    <Page actionBarHidden="true" class="seccion-register-bg-invert">
+       
+        <FlexboxLayout flexDirection="column" justifyContent="center">
+            <StackLayout marginRight="24" marginLeft="24">
+                <Label text="Enter verification code" fontSize="32"
+                    fontWeight="900" textAlignment="center" marginBottom="16" />
+                <Label fontSize="12" textAlignment="center" marginBottom="16">
+                    <FormattedString>
+                        <span fontSize="12" text="We have sent a 6 digit verification code to " />
+                        <span :text="email" fontSize="8" fontWeight="800" textWrap="true"/>
+                    </FormattedString>
+                </Label>
+                <FlexboxLayout justifyContent="center" marginBottom="32">
 
-            <TextField 
-                keyboardType="number"  
-                maxLength="1" 
-                v-model="stringCode.code1" 
-                width="32" 
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="4"
-            />
+                    <TextField
+                        ref="1"
+                        keyboardType="number"  
+                        maxLength="1" 
+                        v-model="stringCode.code1" 
+                        width="32" 
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="4"
+                        @textChange="passTextfield1"
+                    />
 
-            <TextField 
-                keyboardType="number"  
-                maxLength="1" 
-                v-model="stringCode.code2" 
-                width="32" 
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="4"
-            />
+                    <TextField 
+                        ref="2"
 
-            <TextField 
-                keyboardType="number"  
-                maxLength="1"  
-                v-model="stringCode.code3" 
-                width="32"
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="16" />
+                        keyboardType="number"  
+                        maxLength="1" 
+                        v-model="stringCode.code2" 
+                        width="32" 
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="4"
+                        @textChange="passTextfield2"
 
-            <TextField 
-                keyboardType="number"  
-                maxLength="10" 
-                v-model="stringCode.code4" 
-                width="32" 
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="4"
-            />
+                    />
 
-            <TextField 
-                keyboardType="number"  
-                maxLength="10" 
-                v-model="stringCode.code5" 
-                width="32" 
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="4"
-            />
+                    <TextField 
+                        ref="3"
 
-            <TextField 
-                keyboardType="number" 
-                maxLength="10"  
-                v-model="stringCode.code6" 
-                width="32" 
-                height="40"
-                backgroundColor="#FFFFFF" 
-                borderRadius="8" 
-                marginRight="4"
-            />
+                        keyboardType="number"  
+                        maxLength="1"  
+                        v-model="stringCode.code3" 
+                        width="32"
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="16" 
+                        @textChange="passTextfield3"
+                        />
+                        
+                    <TextField 
+                        ref="4"
 
+                        keyboardType="number"  
+                        maxLength="10" 
+                        v-model="stringCode.code4" 
+                        width="32" 
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="4"
+                        @textChange="passTextfield4"
+
+                    />
+
+                    <TextField 
+                        ref="5"
+
+                        keyboardType="number"  
+                        maxLength="10" 
+                        v-model="stringCode.code5" 
+                        width="32" 
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="4"
+                        @textChange="passTextfield5"
+
+                    />
+
+                    <TextField 
+                        ref="6"
+
+                        keyboardType="number" 
+                        maxLength="10"  
+                        v-model="stringCode.code6" 
+                        width="32" 
+                        height="40"
+                        backgroundColor="#FFFFFF" 
+                        borderRadius="8" 
+                        marginRight="4"
+                        @textChange="passTextfield"
+
+                    />
+
+                </FlexboxLayout>
+                     <Label fontSize="14" textAlignment="center" marginBottom="16">
+                    <FormattedString>
+                        <span fontSize="12" text="If you didn´t received the code, please try again" />
+                        <span text="   please try again" @tap="reSendCode" fontSize="12" fontWeight="800" textWrap="true"/>
+                    </FormattedString>
+                </Label>
+            
+                <Label  v-if="errorMessage" marginTop="4" :text="errorMessage" fontSize="14"
+                    textAlignment="center"  color="red" marginBottom="32"/>
+
+                <Button borderRadius="10" marginTop="" fontSize="16"
+                    text="Next" backgroundColor="red" width="200" height="40"
+                    fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="processVerificationsEmails" />
+            </StackLayout>
         </FlexboxLayout>
         <!-- <Label text="Wrong number?" fontSize="14"
             textAlignment="center" marginBottom="32"/> -->
@@ -105,6 +142,7 @@
 <script>
 import cache from '~/store/cache/cache.android'
 import { apiPost} from '~/resource/http';
+import { ref } from 'vue';
 
     export default {
         data() {
@@ -140,6 +178,29 @@ import { apiPost} from '~/resource/http';
 
                
             },
+            passTextfield1(event){
+                const textInput = this.$refs['2'].nativeView
+                textInput.focus()   
+            },
+            passTextfield2(event){
+                const textInput = this.$refs['3'].nativeView
+                textInput.focus()   
+            },
+            passTextfield3(event){
+                const textInput = this.$refs['4'].nativeView
+                textInput.focus()   
+            },
+            passTextfield4(event){
+                const textInput = this.$refs['5'].nativeView
+                textInput.focus()   
+            },
+             passTextfield5(event){
+                const textInput = this.$refs['6'].nativeView
+                textInput.focus()   
+            },
+
+
+
             onSuccess(res){
                  //TODO validar el succes y el errors
                 this.$navigator.navigate('/choose-best-programs',{clearHistory:true})

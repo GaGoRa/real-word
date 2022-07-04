@@ -26,8 +26,15 @@
                     <Label text="or" fontSize="24" fontWeight="900"
                         textAlignment="center" color="#FFFFFF" marginBottom="16" /> -->
 
-                     <Label  v-if="!!errorsMessages.errorMessage" :text="errorsMessages.errorMessage" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
+                     <Label  v-if="!!errorsMessages.errorMessage" fontSize="16" fontWeight="400"
+                        textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0">
+                         <FormattedString>
+                             <span fontSize="12" :text="errorsMessages.errorMessage" />
+                             <!-- 
+                             <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
+                    </FormattedString>
+                        </Label> 
+
                     <TextField height="38" v-model="textFieldValue.firstName"
                         hint="First Name" backgroundColor="#FFFFFF"
                         borderRadius="10" marginBottom="6"  />
@@ -90,9 +97,9 @@
                         <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
                         </StackLayout>
                         <Label text="Already Register?" color="black"
-                            marginRight="8" />
+                            marginRight="8" @tap="passPrueba" />
                         <Label text="Login" textDecoration="underline"
-                            fontWeight="900" color="black" @tap="$navigator.navigate('/login-aplication')" />
+                            fontWeight="900"  color="black" @tap="$navigator.navigate('/login-aplication')" />
                         <StackLayout>
                     <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
                         </StackLayout>
@@ -120,6 +127,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
   },
       data(){
           return {
+            haveCode:false,
             drawerState:false,
             hint:'Country',
             country_id: 0,
@@ -132,7 +140,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
               lastName:'',
               email:'',
               phone:'',
-              country:'1',
+              country:'',
               password:''
             },
             errorsMessages:{
@@ -153,12 +161,52 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
       }
     },
     async mounted(){
+        
+            
+
       const response = await apiGet('/get_country')
       if(response.status){
         this.items_selectPicker = response.data
       }
     },
     methods:{
+        passPrueba(){
+            const userCache ={
+                "user": {
+            "id": 75,
+            "name": "Asdasdasd",
+            "middle_name": "Fffff",
+            "last_name": "123123213",
+            "gender_id": 2,
+            "date_of_birth": "2022-12-21",
+            "email": "gabo3@gmail.com",
+            "email_verified_at": null,
+            "token": "127|M9cv9cpjY4DHkng2yW7ajahHTKVf3sb5ZcJUV6k2",
+            "country_id": 1,
+            "address": "123123123",
+            "telephone": "123123rr123123",
+            "current_team_id": null,
+            "profile_photo_path": null,
+            "experience_id": 1,
+            "reason_id": 1,
+            "frequency_id": 1,
+            "exercise_place_id": 1,
+            "pm_type": null,
+            "pm_last_four": null,
+            "trial_ends_at": null,
+            "utype": "USR",
+            "state_id": 56,
+            "city": "Hhhh",
+            "postal_code": "222",
+            "code": 718603,
+            "profile_photo_url": "https://ui-avatars.com/api/?name=A&color=7F9CF5&background=EBF4FF"
+                     },
+                "token": "127|M9cv9cpjY4DHkng2yW7ajahHTKVf3sb5ZcJUV6k2"
+                }
+
+            cache.set("userProfile",JSON.stringify(userCache))
+           this.$navigator.navigate('/choose-best-programs')
+        },
         async onTapState(){
           const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                             props:{ 
@@ -169,7 +217,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 
           this.country_id = data.id
           this.country = data.description
-
+          await this.$forceUpdate()
         },
         changeHint(hintName){
             this.hint = hintName
@@ -182,33 +230,24 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
              console.log("pepe",event);
             this.drawerState = event
         },
-        processCreateUser(){   
-   
-          // const body = {
-          //   "name": "Asd",
-          //   "middle_name": "Asd",
-          //   "last_name": "Asd",
-          //   "gender_id": "1",
-          //   "date_of_birth": "1983-01-07",
-          //   "email": "As11aa1aaa1a12211aasda123d@gmail",
-          //   "password": "N/A",
-          //   "address": "N/A",
-          //   "telephone": "Asd",
-          //   "country_id": "1"
-          // }
+        processCreateUser(){ 
+        //     const body = {
+        //     "name": "Asd",
+        //     "last_name": "Asd",
+        //     "email": "As11aa1aaa1a12211aasda123d@gmail",
+        //     "password": "N/A",
+        //     "country_id": "1"
+        //   }  
             const body = {
                 "name":          this.textFieldValue.firstName,
-                // "middle_name":   this.textFieldValue.firstName,
                 "last_name":     this.textFieldValue.lastName,
-                // "gender_id":     "1",
-                // "date_of_birth": "1983-01-07",
                 "email":         this.textFieldValue.email,
                  "password":      this.textFieldValue.password,
-                // "address":       "N/A",
                 "telephone":     this.textFieldValue.phone,
                 "country_id":    this.country_id 
             }
-              
+
+
            apiPost(body,'/register')
             .then(this.onSuccess)
             .catch(this.onError)
@@ -216,7 +255,6 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         },
         onSuccess(response){
              if(response.message === "User Registered"){
-                //savee token and id and email
                 const token = response.data.token
                 cache.set("userProfile",JSON.stringify(response.data))
                 this.$navigator.navigate('/verification-code')
@@ -224,7 +262,12 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
              }
             //navigate('/home')
         },
-        onError(err){
+        
+
+            
+            
+            
+            onError(err){
 
 
         const error = JSON.parse(err.content)
@@ -239,7 +282,11 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                         errorMessage:''
                         } 
              
-             if(!!error.message){    
+             if(!!error.message){ 
+                    console.log('error mesagge',error.message);
+                    if (String(error.message).toLowerCase() === 'user already exists') {
+                        this.haveCode = true                      
+                    }   
                     this.errorsMessages.errorMessage = error.message
                 }
 

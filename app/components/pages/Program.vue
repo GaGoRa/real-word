@@ -183,12 +183,15 @@ import CardExercise from "~/components/components/boxes/CardExercise.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue"
 import { apiGet, apiPost,baseUrl } from "~/resource/http";
 import { Dialogs } from "@nativescript/core";
+import { DEFAULT_POPULAR_PROGRAMS} from "../../resource/constans"
+import  CardImage  from "../components/boxes/cardImage.vue"
 export default {
   components: {
     CardSubscriptionProgram,
     CardExercise,
-    NavBarBurgerMenu
-  },
+    NavBarBurgerMenu,
+    CardImage
+},
 
   props:{
     id:{

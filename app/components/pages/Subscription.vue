@@ -48,7 +48,7 @@ import NavBar from '../components/NavBar.vue'
 import CardSubscription from "~/components/components/boxes/CardSubscription.vue";
 import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vue";
 import { apiGet } from '~/resource/http';
-
+import {DEFAULT_CARD_SUBSCRIPTION} from "../../resource/constans"
 import NavBarTittle from "~/components/components/NavBar.vue";
 export default {
   components: {
@@ -66,20 +66,13 @@ export default {
       navbarTittle:{
         title:"Subscription"
       },
-      subscriptions: [
-        // {
-        //   tittle: "Gold Subscription",
-        //   mount: "$29.99",
-        //   color: "#EAB813",
-        //   text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.",
-        // },
-      ],
+      subscriptions: [DEFAULT_CARD_SUBSCRIPTION],
     };
   },
   async mounted(){
     const data = await apiGet('/get_subscription')
-
-    this.subscriptions.push(data.data)
+    console.log("data",data);
+    this.subscriptions = [data.data]
   },
   methods:{
     async onCancel(){

@@ -1,8 +1,25 @@
 <template>
     <Page  class="seccion-register-bg-invert" actionBarHidden="true">
-       
-        <FlexboxLayout flexDirection="column" justifyContent="center">
+
+          <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
+      <GridLayout marginTop="24" columns="*" rows="*,*,*">
+         
+         <ActivityIndicator 
+          marginTop="16"
+          :busy="loadingState" 
+            />
+      </GridLayout>
+    </StackLayout>
+
+
+
+        <FlexboxLayout v-else exDirection="column" justifyContent="center">
+            
+
+            
             <StackLayout marginRight="24" marginLeft="24">
+
+
 
                 <FlexboxLayout   
                   marginRight="12"
@@ -32,12 +49,7 @@
                   editable="false"
                   @tap="onTapGender"
                 />
-                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
-                 marginLeft="14" marginRight="16"  
-                borderRadius="10" selectedIndex="0" :items="  items_selectPicker_gender"
-                 backgroundColor="#FFFFFF" height="36"  /> -->
-
-
+               
                  <TextField 
                   editable="false" 
                   @tap="onTapDataPicker" 
@@ -137,7 +149,7 @@
 import { apiPost,apiGet} from '~/resource/http';
 import cache from '~/store/cache/cache.android';
 import moment from 'moment'
-import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
+import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
       data(){
           return {
@@ -186,7 +198,8 @@ import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
             reason: "Select one",
             exercise: "Where do you exercise",
             frequency: "Select one",
-            // birth: "Date of birth"
+            loadingState:true
+
           }
       },
     computed: {
@@ -207,13 +220,15 @@ import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
             const body = {
                     "user_id": dataCache.user.id ,
                     "gender_id":this.textValue.gender_id ,
-                    "date_of_birth":dateFormat_YYYY_DD_MM(this.textValue.date_of_birth) ,
+                    "date_of_birth":dateFormat_YYYYMMDD(this.textValue.date_of_birth) ,
                     "experience_id":this.textValue.experience_id ,
                     "reason_id":this.textValue.reason_id ,
                     "frequency_id":this.textValue.frequency_id ,
                     "exercise_place_id":this.textValue.exercise_place_id 
                 }
 
+
+            console.log(body);
             apiPost(body,"/update_user")
             .then(this.onSuccess)
             .catch(this.onError)
@@ -327,15 +342,14 @@ import { dateFormat_YYYY_DD_MM} from '../../resource/helper'
                 this.items_selectPicker_reason = value[2][0]
                 this.items_selectPicker_where_exercise = value[3][0]
                 this.items_selectPicker_concurrence = value[4][0]
-                   
-                  
+                  this.loadingState = false  
             }).catch(err =>{
                     console.log('err',err,typeof err);
             })
              
     }
 
-    
+     
   };
 
 
