@@ -121,7 +121,15 @@
                 justifyContent="center"
                 v-if="subscriptionState"
               >
+
+                <StackLayout v-if="loadingState"  marginBottom="16" marginTop="16"  marginRight="16" >
+                <ActivityIndicator 
+                  :busy="loadingState" 
+                    />
+                </StackLayout>
+
                 <Button
+                  v-else
                   borderRadius="16"
                   marginTop=""
                   fontSize="20"
@@ -133,7 +141,9 @@
                   color="#FFFFFF"
                   marginBottom="8"
                   @tap="processPressButtomPlay"
-                  />               
+                  />      
+                  
+                  
               </FlexboxLayout>
               <Label 
                 textWrap="true"  

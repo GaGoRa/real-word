@@ -228,7 +228,13 @@
         textAlignment="left"
       />
 
-      <Button
+        <StackLayout v-if="loadingStateButtom"  marginBottom="16" marginTop="16"  marginRight="16" >
+                <ActivityIndicator 
+                  :busy="loadingStateButtom" 
+                    />
+                </StackLayout>
+
+      <Button v-else
         borderRadius="16"
         marginTop="32"
         fontSize="16"
@@ -256,6 +262,7 @@ export default {
   data() {
     return {
       loadingState:true,
+      loadingStateButtom:false,
       textValue:{
         state:'State',
         firstName:'',
@@ -291,7 +298,7 @@ export default {
       this.textValue.countrys = responseCountry
       this.getUser()
 
-      this.loadingState= false
+      this.loadingState = false
 
     } catch (error) {
       console.log('ERROr', error);
@@ -338,6 +345,7 @@ export default {
       return moment()
     },
     proccessUpdateProfile(){
+      this.loadingStateButtom = true
       const dataCache = JSON.parse(cache.get("userProfile"))
       const body ={
             "user_id":dataCache.user.id,
@@ -383,7 +391,8 @@ export default {
     onSuccessUpdate(res){
       cache.set('userProfile',JSON.stringify(res.data))
       this.toggleSwitchMenu(false)
-      this.$navigator.navigate('/home')
+      this.loadingStateButtom = false
+        this.$navigator.navigate('/home')
     },
     async onTapState(){
 

@@ -106,14 +106,8 @@
               borderColor="rgba(0,0,0,.4)"
             >
 
-              <StackLayout v-if="saveLoading"  marginBottom="16" marginTop="16"  marginRight="16" >
-         
-                <ActivityIndicator 
-                  :busy="saveLoading" 
-                    />
-                </StackLayout>
 
-              <StackLayout v-else width="100%">
+              <StackLayout width="100%">
                 <GridLayout 
                   v-for="(i, key) in sets"
                   :key="`exercice-${key}`" 
@@ -161,8 +155,14 @@
                   </StackLayout>
                 </GridLayout>
               </StackLayout>
-            
-              <Button 
+
+                  <StackLayout v-if="saveLoading"  marginBottom="16" marginTop="16"  marginRight="16" >
+         
+                <ActivityIndicator 
+                  :busy="saveLoading" 
+                    />
+                </StackLayout>
+              <Button  v-else
                 borderRadius="8" 
                 marginTop="8" 
                 fontSize="16"
