@@ -1,26 +1,25 @@
+import { ApplicationSettings } from '@nativescript/core'
 
 let cache = {};
 
-let tmCache = TMCache.sharedCache();
-
 // Get the value of an item by key
 cache.get = function(key) {
-  return tmCache.objectForKey(key) || undefined;
+
+  return  ApplicationSettings.getString(key) || undefined;
 };
 
 // Set an item in the storage
-cache.set = function(key, value) {d
-  tmCache.setObjectForKey(value, key);
+cache.set = function(key, value) {
+    ApplicationSettings.setString(key,value);
 };
 
 // Delete an item by key
 cache.delete = function(key) {
-  tmCache.removeObjectForKey(key);
+    ApplicationSettings.remove(key);
 };
 
 // Clear all items
 cache.clear = function() {
-  tmCache.removeAllObjects();
-};
-
+    ApplicationSettings.clear();
+}
 export default cache

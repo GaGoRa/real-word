@@ -15,7 +15,7 @@ import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
 import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { mapState, mapMutations } from "vuex";
-import cache from "~/store/cache/index.js"
+import cache from "~/store/cache/index.js";
 
 export default {
   components: {
