@@ -13,11 +13,12 @@
 
     <!-- <label @tap="onTapN" text="jols"/> -->
 
-    <StackLayout v-if="false" marginTop="32"  marginRight="16" >
+    <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
       <GridLayout marginTop="24" columns="*" rows="*,*,*">
-
-        <image class="animation-pulse" backgroundColor="transparent" col="0" row="1" src="~/assets/images/eskeleton_circle.png"  />
-
+      <ActivityIndicator 
+          marginTop="16"
+          :busy="loadingState" 
+            />
       </GridLayout>
     </StackLayout>
 

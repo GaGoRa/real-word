@@ -8,10 +8,10 @@ export const DEFAULT_CARD_SUBSCRIPTION = {
       class:'label_skeleton',
       mount: "",
       color: "#8E8B8B",
-      text: "<p></p>",
+      text: "",
       width:'250',
-      height:'148'
-
+      height:'2008',
+      recurrence:''
     
 }
 

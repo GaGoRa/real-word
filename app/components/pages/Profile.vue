@@ -38,7 +38,19 @@
     </ActionBar>
 
      <ScrollView  scrollBarIndicatorVisible="false" > 
-    <StackLayout marginRight="24" marginTop="32" marginLeft="24">
+
+      <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
+      <GridLayout marginTop="24" columns="*" rows="*,*,*">
+         
+         <ActivityIndicator 
+          marginTop="16"
+          :busy="loadingState" 
+            />
+      </GridLayout>
+    </StackLayout>
+
+
+    <StackLayout v-else marginRight="24" marginTop="32" marginLeft="24">
         <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
                   textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
 
@@ -243,6 +255,7 @@ import moment from 'moment'
 export default {
   data() {
     return {
+      loadingState:true,
       textValue:{
         state:'State',
         firstName:'',
@@ -277,6 +290,9 @@ export default {
       const responseCountry = await apiGet('/get_country')
       this.textValue.countrys = responseCountry
       this.getUser()
+
+      this.loadingState= false
+
     } catch (error) {
       console.log('ERROr', error);
       alert({

@@ -33,7 +33,7 @@
     <Label
       text="Profile"
       fontSize="16"
-      @tap="$navigator.navigate('/profile'), toggleSwitchMenu(false)"
+      @tap="$navigator.navigate('/profile'), proccessChangeMenu()"
       marginBottom="16"
       fontWeight="900"
     />
@@ -47,21 +47,21 @@
     <Label
       text="Purchase History"
       fontSize="16"
-      @tap="$navigator.navigate('/purchase-history'), toggleSwitchMenu(false)"
+      @tap="$navigator.navigate('/purchase-history'),proccessChangeMenu() "
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="Subscription"
       fontSize="16"
-      @tap="$navigator.navigate('/subscription'), toggleSwitchMenu(false)"
+      @tap="$navigator.navigate('/subscription'), proccessChangeMenu()"
       marginBottom="16"
       fontWeight="900"
     />
     <Label
       text="help"
       fontSize="16"
-      @tap="$navigator.navigate('/help'), toggleSwitchMenu(false)"
+      @tap="$navigator.navigate('/help'), proccessChangeMenu()"
       marginBottom="16"
       fontWeight="900"
     />
@@ -101,8 +101,14 @@ export default {
       this.$navigator.navigate('/login')
 
       });
-          }
+          },
+    proccessChangeMenu(){
+        this.toggleSwitchMenu(false)
+        this.$forceUpdate()
+    }
+
   },
+
 };
 </script>
 

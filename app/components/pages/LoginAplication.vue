@@ -27,7 +27,7 @@
 
 
                     <Label  v-if="!!errorsMessages.errorMessage" :text="errorsMessages.errorMessage" fontSize="16" fontWeight="400"
-                    textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+                    textAlignment="left" textWrap="true" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
 
                 <TextField height="38" v-model="textFieldValue.email"
@@ -105,7 +105,7 @@ import cache from '~/store/cache/cache.android';
             // }
             const body ={
                 "email": String(this.textFieldValue.email).trim().toLocaleLowerCase(),
-                "password":String(this.textFieldValue.password).trim().toLocaleLowerCase()
+                "password":this.textFieldValue.password
             }
             apiPost(body,"/login")
             .then(this.onSuccess)

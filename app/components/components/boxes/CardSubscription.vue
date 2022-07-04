@@ -1,11 +1,11 @@
 <template>
-  <AbsoluteLayout marginLeft="16" marginTop="8" :class="data.class" marginRight="16">
+  <AbsoluteLayout marginLeft="16" marginTop="8" :class="data.class" :width="!data.text ? 350 : 'auto'" :height="!data.text ? 120 : 'auto'"  marginRight="16">
     <StackLayout
       top="0"
       left="0"
-      :width=" data.text ?'100%' : data.width"
-      :height="data.text  ?'auto' : data.height"
-      :backgroundColor=" !data.color ? data.color : '#EArt  uyB813'"
+      :width=" data.text ? '100%' : '100%'"
+      :height=" data.text  ? 'auto' : '100%'"
+      :backgroundColor=" data.color ? data.color: '#EAB813'"
       borderRadius="16"
       padding="16"
     >
@@ -18,7 +18,7 @@
         :text="data.tittle"
       />
 
-      <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text" />
+      <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text ? data.text :'<p></p>'" />
 
       <FlexboxLayout justifyContent="space-between">
         <Label

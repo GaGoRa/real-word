@@ -13,7 +13,8 @@
                 </Label>
                 <FlexboxLayout justifyContent="center" marginBottom="32">
 
-                    <TextField 
+                    <TextField
+                        ref="1"
                         keyboardType="number"  
                         maxLength="1" 
                         v-model="stringCode.code1" 
@@ -22,9 +23,12 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
+                        @textChange="passTextfield1"
                     />
 
                     <TextField 
+                        ref="2"
+
                         keyboardType="number"  
                         maxLength="1" 
                         v-model="stringCode.code2" 
@@ -33,9 +37,13 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
+                        @textChange="passTextfield2"
+
                     />
 
                     <TextField 
+                        ref="3"
+
                         keyboardType="number"  
                         maxLength="1"  
                         v-model="stringCode.code3" 
@@ -43,9 +51,13 @@
                         height="40"
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
-                        marginRight="16" />
-
+                        marginRight="16" 
+                        @textChange="passTextfield3"
+                        />
+                        
                     <TextField 
+                        ref="4"
+
                         keyboardType="number"  
                         maxLength="10" 
                         v-model="stringCode.code4" 
@@ -54,9 +66,13 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
+                        @textChange="passTextfield4"
+
                     />
 
                     <TextField 
+                        ref="5"
+
                         keyboardType="number"  
                         maxLength="10" 
                         v-model="stringCode.code5" 
@@ -65,9 +81,13 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
+                        @textChange="passTextfield5"
+
                     />
 
                     <TextField 
+                        ref="6"
+
                         keyboardType="number" 
                         maxLength="10"  
                         v-model="stringCode.code6" 
@@ -76,13 +96,11 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
+                        @textChange="passTextfield"
+
                     />
 
                 </FlexboxLayout>
-                <!-- <Label text="Wrong number?" fontSize="14"
-                    textAlignment="center" marginBottom="32"/> -->
-                <!-- <Label text="Wrong email?" fontSize="14"
-                    textAlignment="center" marginBottom="32"/> -->
                      <Label fontSize="14" textAlignment="center" marginBottom="16">
                     <FormattedString>
                         <span fontSize="12" text="If you didn´t received the code, please try again" />
@@ -96,7 +114,6 @@
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
                     fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="processVerificationsEmails" />
-                    <!-- fontWeight="900" color="#FFFFFF" marginBottom="32" @tap="$navigator.navigate('/create-password')" /> -->
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -105,6 +122,7 @@
 <script>
 import cache from '~/store/cache/cache.android'
 import { apiPost} from '~/resource/http';
+import { ref } from 'vue';
 
     export default {
         data() {
@@ -140,6 +158,29 @@ import { apiPost} from '~/resource/http';
 
                
             },
+            passTextfield1(event){
+                const textInput = this.$refs['2'].nativeView
+                textInput.focus()   
+            },
+            passTextfield2(event){
+                const textInput = this.$refs['3'].nativeView
+                textInput.focus()   
+            },
+            passTextfield3(event){
+                const textInput = this.$refs['4'].nativeView
+                textInput.focus()   
+            },
+            passTextfield4(event){
+                const textInput = this.$refs['5'].nativeView
+                textInput.focus()   
+            },
+             passTextfield5(event){
+                const textInput = this.$refs['6'].nativeView
+                textInput.focus()   
+            },
+
+
+
             onSuccess(res){
                  //TODO validar el succes y el errors
                 this.$navigator.navigate('/choose-best-programs',{clearHistory:true})

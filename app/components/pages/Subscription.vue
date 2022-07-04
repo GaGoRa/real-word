@@ -71,7 +71,7 @@ export default {
   },
   async mounted(){
     const data = await apiGet('/get_subscription')
-
+    console.log("data",data);
     this.subscriptions = [data.data]
   },
   methods:{
