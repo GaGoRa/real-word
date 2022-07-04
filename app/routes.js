@@ -27,6 +27,8 @@ import addressComplete from './components/pages/addressComplete.vue'
 import ListSelect from './components/components/ListSelect.vue'
 import DatePickerModal from './components/components/DatePickerModal.vue'
 import date from '~/components/components/nuevodate.vue'
+import ViewVideo from '~/components/components/ViewVideo.vue'
+
 export const routes = {
   '/home': {
     component: HomePage,
@@ -36,6 +38,9 @@ export const routes = {
   },
   '/date':{
     component: date
+  },
+  '/view_video':{
+    component: ViewVideo
   },
   '/list_select':{
     component: ListSelect

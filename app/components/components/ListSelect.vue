@@ -1,5 +1,5 @@
 <template>
-  <Page height="60%" borderRadius="50"  actionBarHidden="true" >
+  <Page height="60%" backgroundColor="white" borderRadius="50"  actionBarHidden="true" >
   
     <GridLayout width="100%"  columns="*" rows="*,auto">
       <ListPicker

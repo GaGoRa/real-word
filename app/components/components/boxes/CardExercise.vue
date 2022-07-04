@@ -1,11 +1,16 @@
 <template>
-  <AbsoluteLayout marginLeft="16" marginTop="8">
+  <StackLayout 
+    paddingLeft="16" 
+    paddingRight="16"
+    paddingBottom="16" 
+  >
+
     <StackLayout
       top="0"
       left="0"
       width="100%"
       height="auto"
-      :backgroundColor="data.completed ? '#EAB813' : '#838383'  "
+      :backgroundColor="colorCard"
       borderRadius="16"
       padding="16"
       class="box-shadow"
@@ -36,7 +41,8 @@
 
     
     </StackLayout>
-  </AbsoluteLayout>
+
+  </StackLayout>
 </template>
 <script>
 import { Dialogs } from '@nativescript/core'
@@ -48,7 +54,8 @@ export default {
     },
     status_program_id:{
       type: Number
-    }
+    },
+    programButtom:{}
   },
   data() {
     return {
@@ -56,6 +63,18 @@ export default {
           alertMessage:"Please press the 'start' button, to start the program.",
       }
     };
+  },
+  computed:{
+    colorCard(){
+      if(this.programButtom){
+        if(this.data.completed){
+          return '#EAB813'
+        }else{
+          return '#00ACC1'
+        }
+      }
+      return '#B9B9B9'
+    }
   },
   mounted(){
   },

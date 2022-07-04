@@ -1,48 +1,54 @@
 <template>
-    <Page  xmlns="http://schemas.nativescript.org/tns.xsd"
-    xmlns:VideoPlayer="nativescript-videoplayer" class="seccion-register-bg-invert" actionBarHidden="true">
-        <StackLayout marginTop="32"  marginRight="16" >
-            <NavBarBurgerMenu :ismenu="false" :program_id="data.program_id" />
+  <Page  
+    class="seccion-register-bg-invert" 
+    actionBarHidden="true"
+  >
+    <StackLayout marginTop="32"  >
+      
+      <NavBarBurgerMenu 
+        :ismenu="true" 
+        :program_id="data.program_id" />
             
-        <StackLayout
-          col="0"
-          row="0"
-          marginTop="0"
-          backgroundColor="transparent"
-          backgroundImage="~/assets/icons/background_label.png"
-          class="bg-label"
-        >
+      <StackLayout
+        col="0"
+        row="0"
+        marginTop="0"
+        backgroundColor="transparent"
+        backgroundImage="~/assets/icons/background_label.png"
+        class="bg-label"
+      >
+        <Label
+          marginLeft="24"
+          color="#FFFFFF"
+          fontSize="24"
+          fontWeight="900"
+          :text="`${data.day}`"
+        />
+      </StackLayout>
 
-        
-          <Label
-            marginLeft="24"
-            color="#FFFFFF"
-            fontSize="24"
-            fontWeight="900"
-            :text="`${data.day}`"
+      <HtmlView marginLeft="24"
+        color="black"
+        fontSize="24"
+        marginTop="4"
+        marginBottom="0"
+        fontWeight="900" 
+        :html="data.text" 
+      />
+
+      <ScrollView>
+        <StackLayout>
+          <CardProgram
+            v-for="(item, key) in data.props.data"
+            :key="`exercise-${key}`"
+            :data="item"
+            :program_days_id="data.id"
+            :subscription_programs_id="status_program_id"
+            :imagevideo="data.image"
           />
         </StackLayout>
-        <HtmlView marginLeft="24"
-            color="black"
-            fontSize="24"
-            marginTop="4"
-            marginBottom="0"
-            fontWeight="900" :html="data.text" />
-<ScrollView>
-  <StackLayout>
-            <CardProgram
-              v-for="(item, key) in data.props.data"
-              :key="`exercise-${key}`"
-              :data="item"
-              :program_days_id="data.id"
-              :subscription_programs_id="status_program_id"
-              marginBottom="12"
-            />
-            </StackLayout>
-</ScrollView>
-        </StackLayout>
-        
-    </Page>
+      </ScrollView>
+    </StackLayout>        
+  </Page>
 </template>
 
 <script>
@@ -63,39 +69,39 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
         }
       },
       data() {
-        return {
-          day:{
+      return {
+        day:{
             day:"1",
             bodyPart:"Legs",
             exercise:[
-        {
-          text: "Squat",
-          sets: 4,
-          reps: 15,
-          minReps: 10,
-          maxWeight:0,
-          maxReps:0,
-          completeDate:'12/10/2022'
+              {
+                text: "Squat",
+                sets: 4,
+                reps: 15,
+                minReps: 10,
+                maxWeight:0,
+                maxReps:0,
+                completeDate:'12/10/2022'
 
-        },{
-          text: "Squat",
-          sets: 4,
-          reps: 15,
-          minReps: 10,
-          maxWeight:0,
-          maxReps:0,
-          completeDate:'12/10/2022'
+              },{
+                text: "Squat",
+                sets: 4,
+                reps: 15,
+                minReps: 10,
+                maxWeight:0,
+                maxReps:0,
+                completeDate:'12/10/2022'
 
-        },
-        ],
+            },
+            ] ,
                     
 
                 }
             };
-        },
-        mounted(){
-           console.log('pageDay this data',this.data)
-        }
+      },
+      mounted(){
+         console.log('pageDay this data',this.data)
+      }
     };
 </script>
 

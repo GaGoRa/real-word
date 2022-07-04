@@ -159,7 +159,7 @@ export default {
     };
   },
   async mounted(){
-    const response = await apiGet('/get_country')
+    const response = await apiGet('/get_state')
     this.states = response.data
   },
   methods:{
@@ -196,12 +196,12 @@ export default {
       const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                         props:{ 
                           data: this.states, 
-                          key: 'description',
+                          key: 'name',
                           value: this.state_id
                         } })
 
       this.state_id = data.id
-      this.state = data.description
+      this.state = data.name
 
     }
   }
