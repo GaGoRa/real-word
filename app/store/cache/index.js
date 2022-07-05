@@ -4,7 +4,9 @@
 let cache;
 
 if (global.isIOS) {  
+
      cache = require('./cache.ios')
+     module.exports = cache
 }else{
      cache = require('./cache.android')
   }
