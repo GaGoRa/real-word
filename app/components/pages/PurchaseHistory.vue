@@ -1,6 +1,8 @@
 <template>
   <Page class="seccion-register-bg-invert" actionBarHidden="true">
-   <StackLayout :marginTop="getMarginOS">
+   <StackLayout 
+   backgroundColor="trasparent"
+   :marginTop="getMarginOS">
    <NavBar :data="navbar"/>
 
 

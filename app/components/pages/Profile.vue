@@ -1,5 +1,5 @@
 <template>
-  <Page class="page-home">
+  <Page class="page-home" actionBarHidden="true">
     <StackLayout :marginTop="getMarginOS">
    <NavBar :data="navbar" :ismenu="false" />
     <!-- <ActionBar

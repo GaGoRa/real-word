@@ -1,5 +1,5 @@
 <template>
-  <Page class="seccion-register-bg-invert">
+  <Page class="seccion-register-bg-invert" actionBarHidden="true">
     <!-- <ActionBar
       marginTop="16"
       title=""

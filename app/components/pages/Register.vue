@@ -26,12 +26,15 @@
                     <Label text="or" fontSize="24" fontWeight="900"
                         textAlignment="center" color="#FFFFFF" marginBottom="16" /> -->
 
-                     <Label  v-if="!!errorsMessages.errorMessage" fontSize="16" fontWeight="400"
+                     <Label  v-if="!!errorsMessages.errorMessage" 
+                     
+                    @tap="haveCode ? $navigator.navigate('/verification-code') :null"
+                     fontSize="16" fontWeight="400"
                         textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0">
                          <FormattedString>
                              <span fontSize="12" :text="errorsMessages.errorMessage" />
-                             <!-- 
-                             <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
+                             <span v-if="haveCode" text=", do you have a code? Tap here"  fontSize="12" fontWeight="900" textWrap="true"/>
+                             <!-- <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
                     </FormattedString>
                         </Label> 
 
@@ -62,7 +65,7 @@
                     />
 
 
-                        <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
+                        <Label  v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                     <TextField keyboardType="email"  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
@@ -234,8 +237,9 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         //     const body = {
         //     "name": "Asd",
         //     "last_name": "Asd",
-        //     "email": "As11aa1aaa1a12211aasda123d@gmail",
+        //     "email": "As1b2a1a12211aasd2a123d@gmail",
         //     "password": "N/A",
+        //          "telephone": "123123123123",
         //     "country_id": "1"
         //   }  
             const body = {
@@ -255,7 +259,6 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         },
         onSuccess(response){
              if(response.message === "User Registered"){
-                const token = response.data.token
                 cache.set("userProfile",JSON.stringify(response.data))
                 this.$navigator.navigate('/verification-code')
 
@@ -281,18 +284,20 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                         ErrorPassword:'',
                         errorMessage:''
                         } 
-             
+                     
              if(!!error.message){ 
-                    console.log('error mesagge',error.message);
-                    if (String(error.message).toLowerCase() === 'user already exists') {
-                        this.haveCode = true                      
-                    }   
-                    this.errorsMessages.errorMessage = error.message
+
+            if (String(error.message).toLowerCase() === 'user already exists' && !!cache.get('userProfile') ) {
+                this.haveCode = true                      
+            }   
+             this.errorsMessages.errorMessage = error.message
+        
                 }
 
              if(!!error.email){    
                     this.errorsMessages.ErrorEmail = error.email[0] 
                 }
+
             if(!!error.password){
                      this.errorsMessages.ErrorPassword = error.password[0]
                 }
@@ -307,6 +312,9 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 }
             if(!!error.country){
                      this.errorsMessages.ErrorCountry = error.country[0]
+                }
+                if(!!error.password){
+                     this.errorsMessages.ErrorPassword = error.password[0]
                 }
         
         },

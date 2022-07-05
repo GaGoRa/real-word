@@ -9,7 +9,7 @@
       </GridLayout  >
     </ActionBar> -->
     <StackLayout marginTop="32" >
-     <NavBarBurgerMenu :ismenu="false" :program_id="navbar.program_id"/>
+     <NavBarBurgerMenu :isBell="false" :ismenu="false" :program_id="navbar.program_id"/>
     <ScrollView >
       <AbsoluteLayout >
         <WebView left="0" top="0" width="100%" :src="url" v-if="url" />

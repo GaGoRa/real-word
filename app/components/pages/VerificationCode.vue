@@ -96,7 +96,6 @@
                         backgroundColor="#FFFFFF" 
                         borderRadius="8" 
                         marginRight="4"
-                        @textChange="passTextfield"
 
                     />
 
