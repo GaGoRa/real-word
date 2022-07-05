@@ -34,7 +34,7 @@
           /> -->
         </FlexboxLayout>
 
-        <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
+        <HtmlView backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
 
         <StackLayout >
           <FlexboxLayout 

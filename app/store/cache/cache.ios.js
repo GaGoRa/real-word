@@ -1,7 +1,7 @@
 
-let cache = {};
+var cache = {};
 
-let tmCache = TMCache.sharedCache();
+var tmCache = TMCache.sharedCache();
 
 // Get the value of an item by key
 cache.get = function(key) {
@@ -23,4 +23,5 @@ cache.clear = function() {
   tmCache.removeAllObjects();
 };
 
-export default cache
+module.exports = cache
+ 

@@ -9,8 +9,8 @@
       columns="*" 
       rows="auto,auto,*">
 
-      <!-- <NavBarBurgerMenu row="0"/> -->
-      <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
+       <NavBarBurgerMenu :isBell="false" :ismenu="true" row="0"/> 
+      <!-- <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
         <FlexboxLayout
           justifyContent="space-between"
           paddingRight="24"
@@ -25,7 +25,7 @@
          <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
    
-      </StackLayout>
+      </StackLayout> -->
 
       <StackLayout row="1"
         marginTop="4"
@@ -109,7 +109,7 @@
                 />
               </FlexboxLayout>
 
-              <HtmlView  marginTop="8" marginLeft="16" :html="textValue.description" />
+              <HtmlView backgroundColor="transparent"  marginTop="8" marginLeft="16" :html="textValue.description" />
             </StackLayout>
 
               

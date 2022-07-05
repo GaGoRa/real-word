@@ -27,7 +27,7 @@
       </StackLayout>
     </FlexboxLayout>
     <!-- <TextView v-if="faq.open" editable="false"> -->
-      <HtmlView marginLeft="18" fontSize="18" v-if="faq.open" :html="faq.text" />
+      <HtmlView backgroundColor="transparent" marginLeft="18" fontSize="18" v-if="faq.open" :html="faq.text" />
       <!-- <FormattedString>
         <Span :text="faq.text" />
       </FormattedString> -->

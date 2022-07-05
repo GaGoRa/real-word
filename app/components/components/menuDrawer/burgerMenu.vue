@@ -2,7 +2,8 @@
   <Image
     src="~/assets/icons/burger_menu_icon.png"
     @tap="toggleSwitchMenu('right')"
-    height="24"
+    height="20"
+    marginRight="8"
   />
 </template>
 <script>

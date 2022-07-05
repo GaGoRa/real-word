@@ -26,7 +26,7 @@
         />
       </StackLayout>
 
-      <HtmlView marginLeft="24"
+      <HtmlView backgroundColor="transparent" marginLeft="24"
         color="black"
         fontSize="24"
         marginTop="4"

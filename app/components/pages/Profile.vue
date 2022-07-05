@@ -1,6 +1,8 @@
 <template>
   <Page class="page-home">
-    <ActionBar
+    <StackLayout :marginTop="getMarginOS">
+   <NavBar :data="navbar" :ismenu="false" />
+    <!-- <ActionBar
       marginTop="16"
       title=""
       backgroundColor="transparent"
@@ -35,7 +37,7 @@
           />
         </StackLayout>
       </FlexboxLayout>
-    </ActionBar>
+    </ActionBar> -->
 
      <ScrollView  scrollBarIndicatorVisible="false" > 
 
@@ -248,19 +250,29 @@
         @tap="proccessUpdateProfile"
       />
     </StackLayout>
-     </ScrollView> 
+     </ScrollView>
+     </StackLayout>
   </Page>
+
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue'
+
 import { mapMutations } from "vuex";
 import { apiGet, apiPost } from '~/resource/http';
 import cache from '~/store/cache/index';
 import { dateFormat_YYYY_DD_MM, getValueById } from "~/resource/helper";
 import moment from 'moment'
 export default {
+  components:{
+    NavBar,
+  },
   data() {
     return {
+      navbar:{
+        title:"Profile"
+      },
       loadingState:true,
       loadingStateButtom:false,
       textValue:{
@@ -428,6 +440,11 @@ export default {
       this.textValue.country = data.description
     }
   },
+  computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    }
+  }
 };
 </script>
 

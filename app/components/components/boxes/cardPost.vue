@@ -20,7 +20,7 @@
         marginBottom="8"
       />
       
-  <HtmlView  color="black"  marginLeft="8"  marginBottom="4" :html="data.text" />
+  <HtmlView backgroundColor="transparent"  color="black"  marginLeft="8"  marginBottom="4" :html="data.text" />
 
   
    <image alignSelf="center" v-if="data.img"

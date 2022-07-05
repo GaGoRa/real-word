@@ -18,7 +18,7 @@
         :text="data.tittle"
       />
 
-      <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text ? data.text :'<p></p>'" />
+      <HtmlView backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text ? data.text :'<p></p>'" />
 
       <FlexboxLayout justifyContent="space-between">
         <Label

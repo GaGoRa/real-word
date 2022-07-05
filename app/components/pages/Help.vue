@@ -1,6 +1,6 @@
 <template>
   <Page class="seccion-register-bg-invert">
-    <ActionBar
+    <!-- <ActionBar
       marginTop="16"
       title=""
       backgroundColor="transparent"
@@ -36,6 +36,10 @@
         </StackLayout>
       </FlexboxLayout>
     </ActionBar>
+ -->
+    <StackLayout :marginTop="getMarginOS">
+   <NavBar :data="navbar" :ismenu="false" />
+
     <ScrollView>
       <StackLayout marginRight="16" marginTop="16" marginLeft="16">
         <TextField
@@ -60,18 +64,24 @@
         />
       </StackLayout>
     </ScrollView>
+    </StackLayout>
   </Page>
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue'
 import HelpComponent from "~/components/components/HelpComponent.vue";
 import { apiPost,apiGet} from '~/resource/http';
 export default {
   components: {
     HelpComponent,
+    NavBar
   },
   data() {
     return {
+      navbar:{
+        title:"History"
+      },
       frequentlyaskedquestion: [], 
       loading: true, 
       textFieldValue: null,
@@ -101,6 +111,10 @@ export default {
     };
   },
   computed:{
+    getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    },
+
     items_FAQ(){
       let arr = []
       this.frequentlyaskedquestion.forEach((e)=>{
