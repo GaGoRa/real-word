@@ -1,23 +1,29 @@
 <template>
   <StackLayout marginTop="16" marginLeft="16" marginBottom="16">
-        <FlexboxLayout
+        <FlexboxLayout 
           justifyContent="space-between"
           paddingRight="24"
           width="100%"
         >
-        <BellMenu v-if="isBell"/>
+        <StackLayout v-if="isBell">
+        <BellMenu />
+        </StackLayout>
+
+        <StackLayout  v-else>
           <Image
-           v-else
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="20"
-            width="40"
+            height="35"
+            width="35"
             @tap="  program_id ?
              $navigator.navigate('/program',{props:{id:program_id}}) :
              $navigator.back()
              "
           />
-          
-         <BurgerMenu v-if="ismenu"/>
+          </StackLayout>
+           <StackLayout>
+
+             <BurgerMenu v-if="ismenu"/>
+           </StackLayout>
         </FlexboxLayout>
    
       </StackLayout>
