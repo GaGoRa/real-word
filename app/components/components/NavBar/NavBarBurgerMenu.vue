@@ -20,10 +20,7 @@
              "
           />
           </StackLayout>
-           <StackLayout>
-
              <BurgerMenu v-if="ismenu"/>
-           </StackLayout>
         </FlexboxLayout>
    
       </StackLayout>
