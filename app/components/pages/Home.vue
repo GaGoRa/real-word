@@ -1,24 +1,5 @@
 <template>
   <Page class="page-home"  actionBarHidden="true">
-    <!-- <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <BellMenu/>
-          <BurgerMenu />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar> -->
-
       <StackLayout :marginTop="getMarginOS">
       <NavBarBurgerMenu :isBell="true" :ismenu="true" />
 
@@ -185,7 +166,8 @@ import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
-import cache from "~/store/cache";
+// import cache from "~/store/cache";
+import { ApplicationSettings } from '@nativescript/core';
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
@@ -226,7 +208,7 @@ export default {
               okButtonText: "OK",
               theme:5
       }).then(() => {
-            cache.delete("userProfile")
+            ApplicationSettings.remove("userProfile")
             console.log("error se elimino datos de usuario se neceita re login" , err);
           });
     },
@@ -246,7 +228,7 @@ export default {
 
     },
     getIdUser(){
-      return JSON.parse(cache.get('userProfile')).user.id
+      return JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user.id
     },
     getPropsListProgram(key,value,title){
       return {
@@ -260,8 +242,10 @@ export default {
   },
   created(){
 
-    const dataCache = cache.get("userProfile")
-    let data = JSON.parse(dataCache)
+    //const dataCache = ApplicationSettings.getString('userProfile',"{}")
+    //console.log('==============', dataCache)
+
+    //let data = JSON.parse(dataCache)
 
       apiGet(`/home_display`)
       .then(this.onSuccess)

@@ -1,10 +1,1 @@
- var cache;
-
-if (global.isIOS) {  
-     cache = require('./cache.ios')
-
-}else{
-     cache = require('./cache.android')
-  }
-
-module.exports = cache
+module.exports = global.isIOS ? require('./cache-ios') : require('./cache-android')

@@ -77,6 +77,7 @@
 <script>
 import { mapMutations } from "vuex";
 import cache from "~/store/cache";
+import { ApplicationSettings } from '@nativescript/core'
 export default {
   props: {
     data: {
@@ -97,7 +98,7 @@ export default {
               theme:5
       }).then(() => {
         this.toggleSwitchMenu(false)
-        cache.delete('userProfile')
+        ApplicationSettings.remove('userProfile')
       this.$navigator.navigate('/login')
 
       });

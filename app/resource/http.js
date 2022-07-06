@@ -1,7 +1,7 @@
 import { Http, knownFolders, path } from '@nativescript/core'
 import { openFile} from '@nativescript/core/utils/utils'
 import cache from '../store/cache'
-
+import { ApplicationSettings } from '@nativescript/core';
 
 export const baseUrl = "https://realworld.uscreativity.com"
 
@@ -9,11 +9,11 @@ const EXPREG_HTTP_CODE ={
   success : new RegExp(/^[2][0-9]{0,2}$/),
   bad: new RegExp(/^[4][0-9]{0,2}$/)
 }
-
+console.log("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",ApplicationSettings.getString('userProfile',false));
 function getHeaders() {
   return {
       "Content-Type": "application/json",
-      'token': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
+      'token': ApplicationSettings.getString('userProfile',false) ? JSON.parse(ApplicationSettings.getString('userProfile',"{}")).token : null
   }
 }
 export function apiPost(body,path){

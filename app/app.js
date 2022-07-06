@@ -4,7 +4,7 @@ import Navigator from 'nativescript-vue-navigator'
 import { routes } from './routes'
 import MultiDrawer from 'nativescript-vue-multi-drawer'
 import store from './store/index'
-Vue.config.silent = false;
+Vue.config.silent = true;
 Vue.use(Navigator, { routes })
 Vue.use(MultiDrawer)
 Vue.registerElement('PDFView', () => require('@finanzritter/nativescript-pdf-view').PDFView)

@@ -4,7 +4,7 @@
     class="page-home">
 
     <GridLayout 
-      marginTop="32" 
+      :marginTop="getMarginOS" 
       width="100%"  
       columns="*" 
       rows="auto,auto,*">
@@ -240,6 +240,11 @@ export default {
     };
   },
   computed:{
+
+       getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    },
+      
     dataPackage(){
       let arr = []
       this.subscriptions.forEach((e)=>{

@@ -117,9 +117,10 @@
 
 <script>
 import { apiPost, apiGet } from '~/resource/http';
-import cache from '~/store/cache'
+// import cache from '~/store/cache'
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
+import { ApplicationSettings } from '@nativescript/core';
     
 
   export default {
@@ -207,7 +208,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 "token": "127|M9cv9cpjY4DHkng2yW7ajahHTKVf3sb5ZcJUV6k2"
                 }
 
-            cache.set("userProfile",JSON.stringify(userCache))
+            ApplicationSettings.setString("userProfile",JSON.stringify(userCache))
            this.$navigator.navigate('/choose-best-programs')
         },
         async onTapState(){
@@ -259,7 +260,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         },
         onSuccess(response){
              if(response.message === "User Registered"){
-                cache.set("userProfile",JSON.stringify(response.data))
+                ApplicationSettings.setString("userProfile",JSON.stringify(response.data))
                 this.$navigator.navigate('/verification-code')
 
              }
@@ -287,7 +288,7 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                      
              if(!!error.message){ 
 
-            if (String(error.message).toLowerCase() === 'user already exists' && !!cache.get('userProfile') ) {
+            if (String(error.message).toLowerCase() === 'user already exists' && !!ApplicationSettings.getString('userProfile',false) ) {
                 this.haveCode = true                      
             }   
              this.errorsMessages.errorMessage = error.message
