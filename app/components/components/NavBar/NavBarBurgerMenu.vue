@@ -9,7 +9,7 @@
           <Image
            v-else
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
+            height="20"
             width="40"
             @tap="  program_id ?
              $navigator.navigate('/program',{props:{id:program_id}}) :
