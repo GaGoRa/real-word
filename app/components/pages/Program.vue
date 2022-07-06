@@ -66,8 +66,17 @@
                     :src="imagevideo"
                     stretch="aspectFill"
                   />
+                  
+                   <WebView 
+                    v-if="false"
+                    width="100%"
+                    minHeight="250"
+                    background="#242522"
+                    :src="baseUrl+'/storage/'+video" 
+                  />
                 </StackLayout>
                 <FlexboxLayout
+                v-if="true"
                   @tap="onTapOpenVideo"
                   justifyContent="center"
                   alignItems="center"
