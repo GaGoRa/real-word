@@ -1,10 +1,10 @@
  var cache;
 
 if (global.isIOS) {  
-     cache = require('./cache.ios')
+     import('./cache.ios').then(moduleIos => cache = moduleIos )
 
 }else{
-     cache = require('./cache.android')
+     import('./cache.android').then(moduleIos => cache = moduleIos )
   }
 
-module.exports = cache
+export default cache
