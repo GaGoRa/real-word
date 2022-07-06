@@ -1,30 +1,11 @@
 <template>
   <Page class="page-home"  actionBarHidden="true">
-    <!-- <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <BellMenu/>
-          <BurgerMenu />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar> -->
-
       <StackLayout :marginTop="getMarginOS">
       <NavBarBurgerMenu :isBell="true" :ismenu="true" />
 
 
     <ScrollView>
-      <GridLayout  columns="" rows=",,,,,,,*">
+      <GridLayout  columns="*" rows="*,*,*,*,*,*,*,*">
         <FlexboxLayout
           col="0"
           row="0"
