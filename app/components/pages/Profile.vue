@@ -261,7 +261,8 @@ import NavBar from '../components/NavBar.vue'
 
 import { mapMutations } from "vuex";
 import { apiGet, apiPost } from '~/resource/http';
-import cache from '~/store/cache/index';
+import { ApplicationSettings } from '@nativescript/core';
+// import cache from '~/store/cache/index';
 import { dateFormat_YYYY_DD_MM, getValueById } from "~/resource/helper";
 import moment from 'moment'
 export default {
@@ -302,6 +303,7 @@ export default {
   },
   async mounted(){
     try {
+      console.log('====================================',JSON.parse(ApplicationSettings.getString('userProfile',"{}")))
       const responseState = await apiGet('/get_state')
       this.textValue.states = responseState
       const responseGender = await apiGet('/gender')
@@ -358,7 +360,7 @@ export default {
     },
     proccessUpdateProfile(){
       this.loadingStateButtom = true
-      const dataCache = JSON.parse(cache.get("userProfile"))
+      const dataCache = JSON.parse(ApplicationSettings.getString('userProfile',"{}"))
       const body ={
             "user_id":dataCache.user.id,
             "name":this.textValue.firstName,
@@ -384,7 +386,7 @@ export default {
       this.$forceUpdate()
     },
     getDataUser(){
-      const dataUser = JSON.parse(cache.get('userProfile')).user
+      const dataUser = JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user
         this.textValue.firstName = dataUser.name
         this.textValue.middleName = dataUser.middle_name
         this.textValue.lastName = dataUser.last_name
@@ -401,7 +403,7 @@ export default {
         this.$forceUpdate()
     },
     onSuccessUpdate(res){
-      cache.set('userProfile',JSON.stringify(res.data))
+      ApplicationSettings.setString('userProfile',JSON.stringify(res.data))
       this.toggleSwitchMenu(false)
       this.loadingStateButtom = false
         this.$navigator.navigate('/home')

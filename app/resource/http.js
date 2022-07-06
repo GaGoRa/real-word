@@ -1,7 +1,7 @@
 import { Http, knownFolders, path } from '@nativescript/core'
 import { openFile} from '@nativescript/core/utils/utils'
 import cache from '../store/cache'
-
+import { ApplicationSettings } from '@nativescript/core';
 
 export const baseUrl = "https://realworld.uscreativity.com"
 
@@ -13,7 +13,7 @@ const EXPREG_HTTP_CODE ={
 function getHeaders() {
   return {
       "Content-Type": "application/json",
-      'token': cache.get('userProfile') ? JSON.parse(cache.get('userProfile')).token : null
+      'token': ApplicationSettings.getString('userProfile') ? JSON.parse( ApplicationSettings.getString('userProfile',"{}")).token : null
   }
 }
 export function apiPost(body,path){

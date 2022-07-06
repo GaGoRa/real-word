@@ -185,7 +185,8 @@ import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
-import cache from "~/store/cache";
+// import cache from "~/store/cache";
+import { ApplicationSettings } from '@nativescript/core';
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
@@ -226,7 +227,7 @@ export default {
               okButtonText: "OK",
               theme:5
       }).then(() => {
-            cache.delete("userProfile")
+            ApplicationSettings.remove("userProfile")
             console.log("error se elimino datos de usuario se neceita re login" , err);
           });
     },
@@ -246,7 +247,7 @@ export default {
 
     },
     getIdUser(){
-      return JSON.parse(cache.get('userProfile')).user.id
+      return JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user.id
     },
     getPropsListProgram(key,value,title){
       return {
@@ -260,7 +261,7 @@ export default {
   },
   created(){
 
-    const dataCache = cache.get("userProfile")
+    const dataCache = ApplicationSettings.getString('userProfile',"{}")
     let data = JSON.parse(dataCache)
 
       apiGet(`/home_display`)

@@ -119,7 +119,8 @@
 </template>
 
 <script>
-import cache from '~/store/cache'
+// import cache from '~/store/cache'
+import { ApplicationSettings } from '@nativescript/core';
 import { apiPost} from '~/resource/http';
 import { ref } from 'vue';
 
@@ -201,7 +202,7 @@ import { ref } from 'vue';
         },
         mounted(){ 
 
-                const cacheData = cache.get("userProfile")
+                const cacheData = ApplicationSettings.getString('userProfile',"{}")
                 const data = JSON.parse(cacheData)
 
                 this.email = data.user.email

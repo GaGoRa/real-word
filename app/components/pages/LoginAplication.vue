@@ -78,7 +78,9 @@
 
 <script>
  import { apiPost } from '~/resource/http'
-import cache from '~/store/cache';
+// import cache from '~/store/cache';
+import { ApplicationSettings } from '@nativescript/core';
+
   export default {
       data(){
           return {
@@ -117,7 +119,7 @@ import cache from '~/store/cache';
 
             onSuccess(resp){
                 if(resp.message === 'User Logged'){
-                    cache.set("userProfile",JSON.stringify(resp.data))
+                    ApplicationSettings.setString("userProfile",JSON.stringify(resp.data))
                         this.loadingLogin = false
                         this.$navigator.navigate('/home',{clearHistory:true})
 
@@ -136,6 +138,7 @@ import cache from '~/store/cache';
             },
 
             onError(err){
+                this.loadingLogin = false
                 this.errorsMessages={
                     errorMessage:'',
                     email:'',

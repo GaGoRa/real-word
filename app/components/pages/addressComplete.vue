@@ -126,7 +126,8 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import cache from "~/store/cache";
+// import cache from "~/store/cache";
+import { ApplicationSettings } from '@nativescript/core';
 
 export default {
   props:{
@@ -179,9 +180,9 @@ export default {
       }
       const response = await apiPost(data,'/update_address')
 
-        let c = JSON.parse(cache.get('userProfile'))
+        let c = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
         c.user = response.data
-        cache.set("userProfile",JSON.stringify(c))
+        ApplicationSettings.setString("userProfile",JSON.stringify(c))
 
         this.$navigator.navigate('/pay-subscription',{ 
             props: { 

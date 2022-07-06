@@ -147,7 +147,8 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import cache from '~/store/cache';
+// import cache from '~/store/cache';
+import { ApplicationSettings } from '@nativescript/core';
 import moment from 'moment'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
@@ -215,7 +216,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
     methods:{
         processUserUpdate(){
                 
-           const dataCache = JSON.parse(cache.get('userProfile'))
+           const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
 
             const body = {
                     "user_id": dataCache.user.id ,
@@ -234,7 +235,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
             .catch(this.onError)
         },
         onSuccess(res){
-            cache.set("userProfile",JSON.stringify(res.data))
+            ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home',{clearHistory:true})
 
 
