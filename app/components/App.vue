@@ -6,7 +6,7 @@
     <StackLayout slot="left">
       <LeftDrawer />
     </StackLayout>
-    <Navigator :defaultRoute=" true ? '/home' : '/login'" />
+    <Navigator :defaultRoute=" islog ? '/home' : '/login'" />
   </MultiDrawer>
 </template>
 
@@ -19,15 +19,23 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { mapState, mapMutations } from "vuex";
 //import cache from "~/store/cache/index.js"
 
+
 export default {
   components: {
     RightDrawer,
     SelectDrawer,
     LeftDrawer
-},
-created(){
-  console.log('S++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++',ApplicationSettings.getString('userProfile'));
-},
+  },
+  data() {
+    return {
+      islog: false
+    };
+  },
+  created(){
+    let cacheData = ApplicationSettings.getString('userProfile',"{}")
+    this.islog = Object.keys(JSON.parse(cacheData)).length === 0 ? false:true
+  },
+
   computed: {
     ...mapState(["drawerState"]),
     onDrawer: {
@@ -39,15 +47,13 @@ created(){
       },
     },
   },
+  
+
   methods: {
   ...mapMutations(["toggleSwitchMenu"]),
-  },
-  // getToken(){
-  //   let data = {}
-  //   const cacheData = ApplicationSettings.getString('userProfile',undefined)
-  //    data = JSON.parse(cacheData)
-  //     return !!data
-  // }
+  
+   
+  }
 };
 </script>
 

@@ -9,11 +9,11 @@ const EXPREG_HTTP_CODE ={
   success : new RegExp(/^[2][0-9]{0,2}$/),
   bad: new RegExp(/^[4][0-9]{0,2}$/)
 }
-
+console.log("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",ApplicationSettings.getString('userProfile',false));
 function getHeaders() {
   return {
       "Content-Type": "application/json",
-      'token': ApplicationSettings.getString('userProfile') ? JSON.parse( ApplicationSettings.getString('userProfile',"{}")).token : null
+      'token': ApplicationSettings.getString('userProfile',false) ? JSON.parse(ApplicationSettings.getString('userProfile',"{}")).token : null
   }
 }
 export function apiPost(body,path){

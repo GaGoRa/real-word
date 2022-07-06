@@ -24,7 +24,7 @@
 
 
     <ScrollView>
-      <GridLayout  columns="*" rows="*,*,*,*,*,*,*,*">
+      <GridLayout  columns="" rows=",,,,,,,*">
         <FlexboxLayout
           col="0"
           row="0"
@@ -261,8 +261,10 @@ export default {
   },
   created(){
 
-    const dataCache = ApplicationSettings.getString('userProfile',"{}")
-    let data = JSON.parse(dataCache)
+    //const dataCache = ApplicationSettings.getString('userProfile',"{}")
+    //console.log('==============', dataCache)
+
+    //let data = JSON.parse(dataCache)
 
       apiGet(`/home_display`)
       .then(this.onSuccess)
