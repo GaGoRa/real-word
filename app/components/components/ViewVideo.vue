@@ -9,13 +9,13 @@
 
     <AbsoluteLayout height="100%" width="100%">
 
-
+      
       <WebView 
-        top="0"
-        left="0"
-        height="100%" 
+        :top="medidas.top"
+        :left="medidas.left"
+        :height="medidas.height" 
         background="black"
-        width="100%" 
+        :width="medidas.width" 
         :src="vid" 
       />
 
@@ -58,6 +58,22 @@ export default {
   computed:{
     vid(){
       return baseUrl+'/storage/'+this.video
+    },
+    medidas(){
+      if(global.isIOS){
+        return {
+          top: 100,
+          left: 0,
+          height: 400,
+          width: '100%',
+        }
+      }
+      return {
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+      }
     }
   },
   methods:{
