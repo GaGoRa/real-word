@@ -117,7 +117,6 @@
 
 <script>
 import { apiPost, apiGet } from '~/resource/http';
-// import cache from '~/store/cache'
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { ApplicationSettings } from '@nativescript/core';
@@ -207,7 +206,7 @@ import { ApplicationSettings } from '@nativescript/core';
                 }
 
             ApplicationSettings.setString("userProfile",JSON.stringify(userCache))
-           this.$navigator.navigate('/choose-best-programs')
+           this.$navigator.navigate('/verification-code')
         },
         async onTapState(){
           const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 

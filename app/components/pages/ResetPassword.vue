@@ -1,8 +1,24 @@
 <template>
     <Page class="seccion-register-bg-invert" actionBarHidden="true">
-        <FlexboxLayout flexDirection="column" justifyContent="center">
-            <StackLayout marginRight="24" marginLeft="24">
-                <Label text="Reset Password" fontSize="24" fontWeight="900"
+
+          <GridLayout :marginTop="getMarginOS" columns="*" rows="auto,*"> 
+               <FlexboxLayout  align-items="flex-start" col="0" row="0"  
+                        marginLeft="12">
+                        <Image  @tap="$navigator.back()"
+                        src="~/assets/icons/Icon feather-arrow-left-circle.png" height="30" width="30" />
+                </FlexboxLayout>
+
+
+            <StackLayout col="0" row="1" justifyContent="center"  >
+                  
+
+            <StackLayout   marginRight="24" marginLeft="24">
+
+                <FlexboxLayout flexDirection="column"  justifyContent="center">
+                
+                    <StackLayout marginTop="200" >
+
+                      <Label text="Reset Password" fontSize="24" fontWeight="900"
                     textAlignment="center" color="#949494" marginBottom="16" />
                  <Label textAlignment="center" color="#949494" 
                  textWrap="true"
@@ -23,45 +39,62 @@
                 <Button borderRadius="10" marginTop="" fontSize="16"
                     text="Next" backgroundColor="red" width="200" height="40"
                     fontWeight="900" color="#FFFFFF" @tap="processResetPassword" marginBottom="32" />
+                    </StackLayout>
+
+                </FlexboxLayout>
             </StackLayout>
-        </FlexboxLayout>
+                </StackLayout>
+
+
+
+
+      </GridLayout>
+
+        
+
     </Page>
 </template>
 
 <script>
 import { apiPost } from '~/resource/http';
+import SelectInput from '../components/menuDrawer/selectInput.vue';
     export default {
-        data() {
-            return {
-                textFieldValue:{
-                    email:''
-                },
-                 message:{
-                    message:''
-                }
-            };
-        },
-        methods:{
-            processResetPassword(){
-                const email = String(this.textFieldValue.email).trim().toLowerCase()
-                apiPost({},`/olvide_clave?email=${email}`)
+    data() {
+        return {
+            textFieldValue: {
+                email: ""
+            },
+            message: {
+                message: ""
+            }
+        };
+    },
+    methods: {
+        processResetPassword() {
+            const email = String(this.textFieldValue.email).trim().toLowerCase();
+            apiPost({}, `/olvide_clave?email=${email}`)
                 .then(this.onSuccess)
-                .catch(this.onError)
+                .catch(this.onError);
+        },
+        onSuccess(res) {
+            if (res.status === "We have emailed your password reset link!") {
+                this.message.message = res.status;
+                this.$navigator.navigate("/create-password");
+            }
+        },
+        onError(err) {
+            console.log("err", err);
+            this.message.message = "Have Error";
+        },
+    },
+    components: { SelectInput },
+    computed:{
+        getMarginOS(){
+      return global.isIOS ? '0' : '40' 
+    }
+    }
 
-            },
-            onSuccess(res){
-                if(res.status === "We have emailed your password reset link!"){
-                    this.message.message = res.status
-                       this.$navigator.navigate('/create-password')
-                }
-            },
-            onError(err){
-                console.log('err',err);
-                this.message.message = "Have Error"
-            },
-        }
-    
-    };
+};
 </script>
 
 <style scoped>

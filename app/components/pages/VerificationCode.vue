@@ -14,6 +14,8 @@
                 <FlexboxLayout justifyContent="center" marginBottom="32">
 
                     <TextField
+                        padding="0"
+                        textAlignment="center"
                         ref="1"
                         keyboardType="number"  
                         maxLength="1" 
@@ -28,7 +30,8 @@
 
                     <TextField 
                         ref="2"
-
+                        padding="0"
+                        textAlignment="center"
                         keyboardType="number"  
                         maxLength="1" 
                         v-model="stringCode.code2" 
@@ -43,7 +46,8 @@
 
                     <TextField 
                         ref="3"
-
+                        padding="0"
+                        textAlignment="center"
                         keyboardType="number"  
                         maxLength="1"  
                         v-model="stringCode.code3" 
@@ -57,9 +61,10 @@
                         
                     <TextField 
                         ref="4"
-
+                        padding="0"
+                        textAlignment="center"
                         keyboardType="number"  
-                        maxLength="10" 
+                        maxLength="1" 
                         v-model="stringCode.code4" 
                         width="32" 
                         height="40"
@@ -72,9 +77,10 @@
 
                     <TextField 
                         ref="5"
-
+                        padding="0"
+                        textAlignment="center"
                         keyboardType="number"  
-                        maxLength="10" 
+                        maxLength="1" 
                         v-model="stringCode.code5" 
                         width="32" 
                         height="40"
@@ -87,9 +93,10 @@
 
                     <TextField 
                         ref="6"
-
+                        padding="0"
+                        textAlignment="center"
                         keyboardType="number" 
-                        maxLength="10"  
+                        maxLength="1"  
                         v-model="stringCode.code6" 
                         width="32" 
                         height="40"
@@ -100,10 +107,10 @@
                     />
 
                 </FlexboxLayout>
-                     <Label fontSize="14" textAlignment="center" marginBottom="16">
+                     <Label textWrap="true" fontSize="14" textAlignment="center" marginBottom="16">
                     <FormattedString>
                         <span fontSize="12" text="If you didn´t received the code, please try again" />
-                        <span text="   please try again" @tap="reSendCode" fontSize="12" fontWeight="800" textWrap="true"/>
+                        <span text="   please try again" @tap="reSendCode" fontSize="12" fontWeight="800" />
                     </FormattedString>
                 </Label>
             
@@ -147,6 +154,10 @@ import { ref } from 'vue';
             }
         },
         methods:{
+
+               getPaddingOS(){
+                    return global.isIOS ? '4' : '32' 
+                 },
             processVerificationsEmails(){
                 const body = {
                     code: this.code,
