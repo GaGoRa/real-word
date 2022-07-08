@@ -1,10 +1,10 @@
 <template>
   <Page class="page-home" actionBarHidden="true">
-    <StackLayout marginTop="32">
-    <NavBarBurgerMenu/>
 
+    <StackLayout :marginTop="getMarginOS">
+    <NavBarBurgerMenu :isBell="false"/>
     <ScrollView>
-      <GridLayout marginTop="24" columns="*" rows="*,*">
+      <GridLayout marginTop="0" columns="*" rows="*,*">
         <StackLayout
           col="0"
           row="0"
@@ -52,7 +52,9 @@ import cardImage from "~/components/components/boxes/cardImage";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 import {DEFAULT_LIST_PROGRAMS} from "../../resource/constans"
 import { apiGet,baseUrl } from "~/resource/http";
+import helMixin from "~/mixins/help.js"
 export default {
+mixins:[helMixin],
   components: {
     cardImage,
     NavBarBurgerMenu

@@ -2,8 +2,9 @@
   <Image
     src="~/assets/icons/burger_menu_icon.png"
     @tap="toggleSwitchMenu('right')"
-    :height="getSizeOS"
-    :marginRight="getIsIos ? '24' : '0'"
+    :width="getSizeOS"
+    stretch="aspectFit"
+    :marginRight="getIsIos ? '0' : '0'"
   />
 </template>
 <script>
@@ -18,7 +19,7 @@ export default {
   },
   computed:{
       getSizeOS(){
-      return global.isIOS ? '16' : '24' 
+      return global.isIOS ? '35' : '24' 
     },
     getIsIos(){
       return global.isIOS

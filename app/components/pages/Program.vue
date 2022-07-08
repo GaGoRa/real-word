@@ -9,7 +9,13 @@
       columns="*" 
       rows="auto,auto,*">
 
-       <NavBarBurgerMenu :isBell="false" :ismenu="true" row="0"/> 
+       <NavBarBurgerMenu 
+        :isBell="false" 
+        :ismenu="true"
+        routeBack="/home"
+        row="0"
+      /> 
+     
 
       <StackLayout row="1"
         marginTop="4"
@@ -50,8 +56,17 @@
                     :src="imagevideo"
                     stretch="aspectFill"
                   />
+                  
+                   <WebView 
+                    v-if="false"
+                    width="100%"
+                    minHeight="250"
+                    background="#242522"
+                    :src="baseUrl+'/storage/'+video" 
+                  />
                 </StackLayout>
                 <FlexboxLayout
+                v-if="true"
                   @tap="onTapOpenVideo"
                   justifyContent="center"
                   alignItems="center"
@@ -71,7 +86,7 @@
               </AbsoluteLayout >
             </StackLayout>
 
-            <StackLayout >
+            <StackLayout v-if="textValue && textValue.description">
 
               <FlexboxLayout
                 marginTop="8"
@@ -338,6 +353,7 @@ export default {
           props:{data:exe.exercise}
         }))
     },
+   
     processPressButtomPlay(){
       if(!this.buttomPlay.registered){
 

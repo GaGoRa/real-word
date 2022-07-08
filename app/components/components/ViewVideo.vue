@@ -4,7 +4,7 @@
     ref="viewvideo"
     xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:VideoPlayer="nativescript-videoplayer" 
-    background="black" 
+    background="#242522" 
     actionBarHidden="true" >
 
     <AbsoluteLayout height="100%" width="100%">
@@ -14,7 +14,7 @@
         :top="medidas.top"
         :left="medidas.left"
         :height="medidas.height" 
-        background="black"
+        background="#242522"
         :width="medidas.width" 
         :src="vid" 
       />
@@ -54,6 +54,9 @@ export default {
     };
   },
   watch:{
+    vid(to){
+      this.$forceUpdate()
+    }
   },
   computed:{
     vid(){

@@ -1,23 +1,23 @@
 <template>
   <StackLayout marginTop="16" marginLeft="16" marginBottom="16">
-        <FlexboxLayout
+        <FlexboxLayout 
           justifyContent="space-between"
           paddingRight="24"
           width="100%"
         >
-        <BellMenu v-if="isBell"/>
+        <StackLayout v-if="isBell">
+        <BellMenu />
+        </StackLayout>
+
+        <StackLayout  v-else>
           <Image
-           v-else
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="20"
-            width="40"
-            @tap="  program_id ?
-             $navigator.navigate('/program',{props:{id:program_id}}) :
-             $navigator.back()
-             "
+            height="35"
+            width="35"
+            @tap=" onTapBack "
           />
-          
-         <BurgerMenu v-if="ismenu"/>
+          </StackLayout>
+             <BurgerMenu v-if="ismenu"/>
         </FlexboxLayout>
    
       </StackLayout>
@@ -43,6 +43,10 @@ BurgerMenu,
     program_id:{
       type: Number, 
       default:null
+    },
+    routeBack:{
+      type: String,
+      default: null
     }
   },
   data() {
@@ -50,10 +54,24 @@ BurgerMenu,
       
     };
   },
-created(){
-},
+  created(){
+  },
 
-  methods: {},
+  methods: {
+    onTapBack(){
+      if(this.routeBack){
+        this.$navigator.navigate(this.routeBack)
+      }else{
+        
+        if(this.program_id){
+          this.$navigator.navigate('/program',{props:{id:this.program_id}})
+        } else{
+
+          $navigator.back()
+        }
+      }
+    }
+  },
 };
 </script>
 
