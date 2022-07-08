@@ -1,9 +1,8 @@
 import { GoogleLogin } from 'nativescript-google-login';
 import * as application from "@nativescript/core/application";
 
-function ngOnInit() {
-        // Init your component properties here.
-
+       
+console.log('LLEGO DESDE EL JS');
         if(global.isIOS){
             GoogleLogin.init({
                 google: {
@@ -27,10 +26,8 @@ function ngOnInit() {
             });
         }
         
-        
-    }
-
-   function login() {
+    
+export  function login() {
         GoogleLogin.login(result=>{
             console.dir(result);
         });
