@@ -15,16 +15,16 @@
                         color="#FFFFFF" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                                 <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
                             <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
-                        </StackLayout>
-
+                        </StackLayout> -->
+<!-- 
                     <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#FFFFFF"
                         color="#FFFFFF" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
-                            <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
-                        </StackLayout>
+                            <Label verticalAlignment="middle" @tap="processLoginGoogle" horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
+                        </StackLayout> -->
 
                     <Label text="or" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="#FFFFFF" marginBottom="16" /> -->
+                        textAlignment="center" color="#FFFFFF" marginBottom="16" />
 
                      <Label  v-if="!!errorsMessages.errorMessage" 
                      
@@ -121,7 +121,7 @@ import { apiPost, apiGet } from '~/resource/http';
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { ApplicationSettings } from '@nativescript/core';
-    
+// import {login as GoogleLogin} from '../../resource/google-login'    
 
   export default {
     components: {
@@ -166,8 +166,6 @@ import { ApplicationSettings } from '@nativescript/core';
     },
     async mounted(){
         
-            
-
       const response = await apiGet('/get_country')
       if(response.status){
         this.items_selectPicker = response.data
@@ -258,6 +256,12 @@ import { ApplicationSettings } from '@nativescript/core';
             .catch(this.onError)
     
         },
+        processLoginGoogle(){
+            console.log('llego');
+            GoogleLogin()
+
+        },
+
         onSuccess(response){
              if(response.message === "User Registered"){
                 ApplicationSettings.setString("userProfile",JSON.stringify(response.data))
@@ -266,12 +270,7 @@ import { ApplicationSettings } from '@nativescript/core';
              }
             //navigate('/home')
         },
-        
-
-            
-            
-            
-            onError(err){
+        onError(err){
 
 
         const error = JSON.parse(err.content)

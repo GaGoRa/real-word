@@ -1,8 +1,8 @@
 <template>
   <Page class="page-home" actionBarHidden="true">
+
     <StackLayout :marginTop="getMarginOS">
     <NavBarBurgerMenu :isBell="false"/>
-   
     <ScrollView>
       <GridLayout marginTop="0" columns="*" rows="*,*">
         <StackLayout

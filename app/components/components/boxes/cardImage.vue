@@ -2,7 +2,7 @@
   <AbsoluteLayout
       @tap=" data.url ? $navigator.navigate(data.url,{props:data.props}) : '' "
    >
-    <image
+    <ImageCacheIt
       :class="data.class || ''"
       :width="data.width"
       :height="data.height"
@@ -10,7 +10,7 @@
       stretch="aspectFill"
       borderRadius="20"
       horizontalAlignment="center"
-    ></image>
+    ></ImageCacheIt>
     <FlexboxLayout
       top="0"
       left="0"
@@ -33,6 +33,7 @@
   </AbsoluteLayout>
 </template>
 <script>
+// import {GetImageCache} from "../../../resource/helper"
 export default {
   props: {
     data: {
@@ -41,7 +42,13 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      url:"",
+    };
+  },
+  mounted(){
+    //  const response = GetImageCache()
+    //  console.log(response, "response");
   },
   methods:{}
 };

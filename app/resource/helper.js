@@ -1,4 +1,49 @@
  import moment from "moment";
+ import {Cache} from"@nativescript/core/ui/image-cache";
+ import {fromFile} from"@nativescript/core/image-source";
+
+//  export function GetImageCache() {
+
+// const cache = new Cache();
+//     cache.placeholder = fromFile("../assets/images/eskeleton.png");
+//     cache.maxRequests = 12;
+
+// // set the placeholder while the desired image is downloaded
+// viewModel.set("imageSource", cache.placeholder);
+// // Enable download while not scrolling
+// cache.enableDownload();
+
+// let cachedImageSource;
+// const url = "https://avatars1.githubusercontent.com/u/7392261?v=4";
+// // Try to read the image from the cache
+// const image = cache.get(url);
+
+// if (image) {
+//     // If present -- use it.
+//     cachedImageSource = imageSource.fromNativeSource(image);
+//     viewModel.set("imageSource", cachedImageSource);
+// } else {
+//     // If not present -- request its download + put it in the cache.
+//     cache.push({
+//         key: url,
+//         url: url,
+//         completed: (image, key) => {
+//             if (url === key) {
+//                 cachedImageSource = fromNativeSource(image);
+//                 viewModel.set("imageSource", cachedImageSource); // set the downloaded image
+//             }
+//         }
+//     });
+// }
+
+// // Disable download while scrolling
+// cache.disableDownload();
+// }
+
+
+
+
+
  export function dateFormat(originalDate){
     const options = {  month: 'short', day: 'numeric' ,year: 'numeric',}
     const date = new Date(originalDate);  // 2009-11-10

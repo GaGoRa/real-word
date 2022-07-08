@@ -9,9 +9,9 @@ Vue.use(Navigator, { routes })
 Vue.use(MultiDrawer)
 Vue.registerElement('PDFView', () => require('@finanzritter/nativescript-pdf-view').PDFView)
 Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
+Vue.registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
+Vue.registerElement('ImageCacheIt', () => require('@triniwiz/nativescript-image-cache-it').ImageCacheIt);
 // Vue.registerElement("VideoPlayer", () => require("@nstudio/nativescript-exoplayer").Video);
-  Vue.registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
-
 // ns resources generate splashes App_Resources/iOS/Assets.xcassets/LaunchScreen.Center.imageset/LaunchScreen-Center.png --background "#000000"
 
   

@@ -15,22 +15,7 @@
         routeBack="/home"
         row="0"
       /> 
-      <!-- <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-         <BurgerMenu v-if="ismenu"/>
-        </FlexboxLayout>
-   
-      </StackLayout> -->
+     
 
       <StackLayout row="1"
         marginTop="4"
@@ -63,7 +48,7 @@
                   top="0"
                   left="0"
                 >
-                  <image
+                  <ImageCacheIt
                     ref="imagevideo"
                     width="100%"
                     minHeight="250"
@@ -123,7 +108,7 @@
                 />
               </FlexboxLayout>
 
-              <HtmlView backgroundColor="transparent"  marginTop="8" marginLeft="16" :html="textValue.description" />
+              <Label backgroundColor="transparent"  marginTop="8" marginLeft="16" :html="textValue.description" />
             </StackLayout>
 
               
