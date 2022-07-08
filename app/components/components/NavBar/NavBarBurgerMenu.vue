@@ -14,10 +14,7 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="35"
             width="35"
-            @tap="  program_id ?
-             $navigator.navigate('/program',{props:{id:program_id}}) :
-             $navigator.back()
-             "
+            @tap=" onTapBack "
           />
           </StackLayout>
              <BurgerMenu v-if="ismenu"/>
@@ -46,6 +43,10 @@ BurgerMenu,
     program_id:{
       type: Number, 
       default:null
+    },
+    routeBack:{
+      type: String,
+      default: null
     }
   },
   data() {
@@ -53,10 +54,24 @@ BurgerMenu,
       
     };
   },
-created(){
-},
+  created(){
+  },
 
-  methods: {},
+  methods: {
+    onTapBack(){
+      if(this.routeBack){
+        this.$navigator.navigate(this.routeBack)
+      }else{
+        
+        if(this.program_id){
+          this.$navigator.navigate('/program',{props:{id:this.program_id}})
+        } else{
+
+          $navigator.back()
+        }
+      }
+    }
+  },
 };
 </script>
 

@@ -9,7 +9,8 @@
         <FlexboxLayout
           col="0"
           row="0"
-          marginTop="28"
+          marginTop="8"
+          marginBottom="8"
           backgroundColor="transparent"
         >
           <Label

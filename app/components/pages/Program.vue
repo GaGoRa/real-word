@@ -9,7 +9,12 @@
       columns="*" 
       rows="auto,auto,*">
 
-       <NavBarBurgerMenu :isBell="false" :ismenu="true" row="0"/> 
+       <NavBarBurgerMenu 
+        :isBell="false" 
+        :ismenu="true"
+        routeBack="/home"
+        row="0"
+      /> 
       <!-- <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
         <FlexboxLayout
           justifyContent="space-between"
@@ -96,7 +101,7 @@
               </AbsoluteLayout >
             </StackLayout>
 
-            <StackLayout >
+            <StackLayout v-if="textValue && textValue.description">
 
               <FlexboxLayout
                 marginTop="8"
@@ -363,6 +368,7 @@ export default {
           props:{data:exe.exercise}
         }))
     },
+   
     processPressButtomPlay(){
       if(!this.buttomPlay.registered){
 
