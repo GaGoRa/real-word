@@ -2,29 +2,7 @@
   <Page class="page-home" actionBarHidden="true">
     <StackLayout marginTop="32">
     <NavBarBurgerMenu/>
-    <!-- <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-          <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar> -->
+
     <ScrollView>
       <GridLayout marginTop="24" columns="*" rows="*,*">
         <StackLayout
