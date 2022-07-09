@@ -5,3 +5,5 @@ post_install do |pi|
             end
         end
     end
+
+pod 'SDWebImage', '~>5.8.1', :modular_headers => true

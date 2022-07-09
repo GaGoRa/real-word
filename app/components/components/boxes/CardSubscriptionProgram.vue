@@ -34,7 +34,7 @@
           /> -->
         </FlexboxLayout>
 
-        <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
+        <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :text="data.description" />
 
         <StackLayout >
           <FlexboxLayout 
