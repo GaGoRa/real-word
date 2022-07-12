@@ -58,6 +58,10 @@
 <script>
 import { apiPost } from '~/resource/http';
 import SelectInput from '../components/menuDrawer/selectInput.vue';
+import { ApplicationSettings,Dialogs } from '@nativescript/core';
+import * as application from "@nativescript/core/application";
+
+
     export default {
     data() {
         return {
@@ -72,19 +76,59 @@ import SelectInput from '../components/menuDrawer/selectInput.vue';
     methods: {
         processResetPassword() {
             const email = String(this.textFieldValue.email).trim().toLowerCase();
-            apiPost({}, `/olvide_clave?email=${email}`)
+            const body = {
+                email:email
+            }
+            apiPost(body, `/recover_password`)
                 .then(this.onSuccess)
                 .catch(this.onError);
         },
         onSuccess(res) {
-            if (res.status === "We have emailed your password reset link!") {
-                this.message.message = res.status;
-                this.$navigator.navigate("/create-password");
+            if (res.status === true) {
+                this.message.message = res.message;
+
+                const newCache = {...res.data,
+                                  token: res.data.user.token}
+                ApplicationSettings.setString("userProfile",JSON.stringify(newCache))
+                this.$navigator.navigate("/verification-code",{props:{
+                data:
+                {
+                    typePage:"ResetPassword"
+                }
+                }
+             }
+        );
+            }else{
+                this.message.message = res.message;
             }
         },
         onError(err) {
-            console.log("err", err);
-            this.message.message = "Have Error";
+                console.log(err);
+            const error = JSON.parse(err.content)
+            if(err.statusCode === 403){
+                this.message.message = error.message;
+
+            }else if (err.statusCode === 422) {
+                this.message.message = error.email[0];
+                
+            }else{
+                
+                Dialogs.alert({
+                message: "Have a problem , close the app and try again",
+                okButtonText: 'OK',
+                theme:5
+                }).then(()=>{
+                    console.log("Have a problem", err);
+                            if (application.android) {
+                        application.android.foregroundActivity.finish();
+                    } else {
+                        exit(0);
+                            }
+                });
+
+            }
+
+
         },
     },
     components: { SelectInput },

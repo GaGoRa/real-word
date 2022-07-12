@@ -168,7 +168,9 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 // import cache from "~/store/cache";
-import { ApplicationSettings } from '@nativescript/core';
+import { ApplicationSettings , } from '@nativescript/core';
+import * as application from "@nativescript/core/application";
+
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
@@ -202,7 +204,6 @@ export default {
 
     },
     onError(err){
-        console.log('err',err);
                     alert({
               cancelable:true,
               message: "Sorry have Error , please retry login",
@@ -210,6 +211,11 @@ export default {
               theme:5
       }).then(() => {
             ApplicationSettings.remove("userProfile")
+            if (application.android) {
+                application.android.foregroundActivity.finish();
+              } else {
+                 exit(0);
+                    }
             console.log("error se elimino datos de usuario se neceita re login" , err);
           });
     },
@@ -242,11 +248,6 @@ export default {
     } 
   },
   created(){
-
-    //const dataCache = ApplicationSettings.getString('userProfile',"{}")
-    //console.log('==============', dataCache)
-
-    //let data = JSON.parse(dataCache)
 
       apiGet(`/home_display`)
       .then(this.onSuccess)

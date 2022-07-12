@@ -1,11 +1,7 @@
 <template>
     <Page  class="seccion-register-bg-invert" actionBarHidden="true">
-        <!-- <MultiDrawer  v-model="drawerState">
-                <StackLayout slot="bottom" >
-                            <SelectDrawer @toggleSelectDrawerClose="close" @changeHint="changeHint" :data="items_selectPicker" />
-                        </StackLayout> -->
-                    
             <FlexboxLayout flexDirection="column" justifyContent="center">
+               
                 <StackLayout marginRight="24"  marginLeft="24">
                     
                     <Label text="Register" fontSize="24" fontWeight="900"
@@ -28,7 +24,13 @@
 
                      <Label  v-if="!!errorsMessages.errorMessage" 
                      
-                    @tap="haveCode ? $navigator.navigate('/verification-code') :null"
+                    @tap="haveCode ? $navigator.navigate('/verification-code',{
+                        props:{
+                            data:{
+                                typePage:'CreateUser'
+                                }
+                              }
+                            }) :null"
                      fontSize="16" fontWeight="400"
                         textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0">
                          <FormattedString>
@@ -37,6 +39,7 @@
                              <!-- <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
                     </FormattedString>
                         </Label> 
+             <!-- <PreviousNextView > -->
 
                     <TextField height="38" v-model="textFieldValue.firstName"
                         hint="First Name" backgroundColor="#FFFFFF"
@@ -91,10 +94,7 @@
                         text="Register" backgroundColor="red" width="200"
                         height="40" fontWeight="900" color="#FFFFFF"
                         marginBottom="32" @tap="processCreateUser"/>
-
-                        
-
-
+                    
                     <FlexboxLayout justifyContent="center">
                         <StackLayout>
                         <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
@@ -111,7 +111,6 @@
                 </StackLayout>
             </FlexboxLayout>
             
-         <!-- </MultiDrawer> -->
     </Page>
 </template>
 
@@ -120,7 +119,6 @@ import { apiPost, apiGet } from '~/resource/http';
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { ApplicationSettings } from '@nativescript/core';
-// import {login as GoogleLogin} from '../../resource/google-login'    
 
   export default {
     components: {
@@ -206,7 +204,14 @@ import { ApplicationSettings } from '@nativescript/core';
                 }
 
             ApplicationSettings.setString("userProfile",JSON.stringify(userCache))
-           this.$navigator.navigate('/verification-code')
+           this.$navigator.navigate('/verification-code',{props:{
+            data:
+                {
+                    typePage:"CreateUser"
+                }
+                }
+             }
+        )
         },
         async onTapState(){
           const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
@@ -264,7 +269,13 @@ import { ApplicationSettings } from '@nativescript/core';
         onSuccess(response){
              if(response.message === "User Registered"){
                 ApplicationSettings.setString("userProfile",JSON.stringify(response.data))
-                this.$navigator.navigate('/verification-code')
+                this.$navigator.navigate('/verification-code',{props:{
+            data:
+                {
+                    typePage:"CreateUser"
+                }
+                }
+             })
 
              }
             //navigate('/home')
