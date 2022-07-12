@@ -61,6 +61,29 @@
             height="36"
           />
 
+
+          <StackLayout v-if="!ios">
+            <TextField 
+              editable="false" 
+              @tap="onTapDataPicker" 
+              color="#949494" 
+              marginBottom="6"
+              marginLeft="14"
+              marginRight="16" 
+              :hint="textValue.date_of_birth == '' ? 'Date of birth' : fecha(textValue.date_of_birth)"
+              borderRadius="10" 
+              backgroundColor="#FFFFFF" 
+              height="36"
+             
+            />
+          </StackLayout>
+         
+          <StackLayout v-else marginRight="16" marginLeft="16">
+            <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " />
+            <Label :text="textValue.date_of_birth " />
+          </StackLayout>
+         
+
           <TextField
             v-model="textValue.lastName"
             color="#949494"
@@ -72,6 +95,7 @@
             backgroundColor="#FFFFFF"
             height="36"
           />
+
 
           <StackLayout v-if="!global.isIOS ">
             <TextField 
@@ -254,7 +278,7 @@ export default {
       navbar:{
         title:"Profile"
       },
-      loadingState:true,
+      loadingState:false,
       loadingStateButtom:false,
       textValue:{
         state:'State',
@@ -328,6 +352,8 @@ export default {
       this.textValue.city          = response.data.user.city
       this.textValue.country_id    = response.data.user.country_id
       this.textValue.country         = this.textValue.countrys.data.find((e)=>e.id == this.textValue.country_id).description
+
+      this.loadingState = false
     },
     onError(err){
       this.errorsMessage.errorMessage = "A ocurrido un error"
@@ -425,6 +451,10 @@ export default {
   computed:{
     getMarginOS(){
       return global.isIOS ? '0' : '32' 
+    },
+    ios(){
+      return global.isIOS
+
     }
   }
 };
@@ -440,6 +470,8 @@ export default {
 .description-label {
   margin-bottom: 15;
 }
+
+
 .date-picker {
   vertical-align:middle;
   display: flex;

@@ -39,12 +39,15 @@
         height="44"
         @textChange="onChangeFilter"
       />
-
+      <ScrollView >
+      <StackLayout >
       <CardPost v-for="(item, key) in CardPosts"
             :key="`cardPost-${key}`"
             :data="item"
             marginBottom="16"
-          />/>
+          />
+          </StackLayout >
+          </ScrollView >
 
   </StackLayout>
 </template>

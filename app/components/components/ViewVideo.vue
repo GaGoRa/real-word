@@ -19,6 +19,9 @@
         :src="vid" 
        
       />
+          
+
+
 
         <StackLayout 
           top="32"

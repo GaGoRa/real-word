@@ -1,4 +1,6 @@
+
 post_install do |pi|
+
         pi.pods_project.targets.each do |t|
             t.build_configurations.each do |config|
                 config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.7'
@@ -7,3 +9,4 @@ post_install do |pi|
     end
 
 pod 'SDWebImage', '~>5.8.1', :modular_headers => true
+
