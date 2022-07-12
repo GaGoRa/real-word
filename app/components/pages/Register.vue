@@ -15,23 +15,26 @@
                         color="#FFFFFF" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                                 <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
                             <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
-                        </StackLayout>
-
+                        </StackLayout> -->
+<!-- 
                     <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#FFFFFF"
                         color="#FFFFFF" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
-                            <Label verticalAlignment="middle"  horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
-                        </StackLayout>
+                            <Label verticalAlignment="middle" @tap="processLoginGoogle" horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
+                        </StackLayout> -->
 
                     <Label text="or" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="#FFFFFF" marginBottom="16" /> -->
+                        textAlignment="center" color="#FFFFFF" marginBottom="16" />
 
-                     <Label  v-if="!!errorsMessages.errorMessage" fontSize="16" fontWeight="400"
+                     <Label  v-if="!!errorsMessages.errorMessage" 
+                     
+                    @tap="haveCode ? $navigator.navigate('/verification-code') :null"
+                     fontSize="16" fontWeight="400"
                         textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0">
                          <FormattedString>
                              <span fontSize="12" :text="errorsMessages.errorMessage" />
-                             <!-- 
-                             <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
+                             <span v-if="haveCode" text=", do you have a code? Tap here"  fontSize="12" fontWeight="900" textWrap="true"/>
+                             <!-- <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
                     </FormattedString>
                         </Label> 
 
@@ -62,7 +65,7 @@
                     />
 
 
-                        <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
+                        <Label  v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" fontSize="16" fontWeight="400"
                         textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
 
                     <TextField keyboardType="email"  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
@@ -114,10 +117,10 @@
 
 <script>
 import { apiPost, apiGet } from '~/resource/http';
-import cache from '~/store/cache'
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
-    
+import { ApplicationSettings } from '@nativescript/core';
+// import {login as GoogleLogin} from '../../resource/google-login'    
 
   export default {
     components: {
@@ -162,8 +165,6 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
     },
     async mounted(){
         
-            
-
       const response = await apiGet('/get_country')
       if(response.status){
         this.items_selectPicker = response.data
@@ -204,8 +205,8 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 "token": "127|M9cv9cpjY4DHkng2yW7ajahHTKVf3sb5ZcJUV6k2"
                 }
 
-            cache.set("userProfile",JSON.stringify(userCache))
-           this.$navigator.navigate('/choose-best-programs')
+            ApplicationSettings.setString("userProfile",JSON.stringify(userCache))
+           this.$navigator.navigate('/verification-code')
         },
         async onTapState(){
           const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
@@ -234,8 +235,9 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
         //     const body = {
         //     "name": "Asd",
         //     "last_name": "Asd",
-        //     "email": "As11aa1aaa1a12211aasda123d@gmail",
+        //     "email": "As1b2a1a12211aasd2a123d@gmail",
         //     "password": "N/A",
+        //          "telephone": "123123123123",
         //     "country_id": "1"
         //   }  
             const body = {
@@ -253,21 +255,21 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
             .catch(this.onError)
     
         },
+        processLoginGoogle(){
+            console.log('llego');
+            GoogleLogin()
+
+        },
+
         onSuccess(response){
              if(response.message === "User Registered"){
-                const token = response.data.token
-                cache.set("userProfile",JSON.stringify(response.data))
+                ApplicationSettings.setString("userProfile",JSON.stringify(response.data))
                 this.$navigator.navigate('/verification-code')
 
              }
             //navigate('/home')
         },
-        
-
-            
-            
-            
-            onError(err){
+        onError(err){
 
 
         const error = JSON.parse(err.content)
@@ -281,18 +283,20 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                         ErrorPassword:'',
                         errorMessage:''
                         } 
-             
+                     
              if(!!error.message){ 
-                    console.log('error mesagge',error.message);
-                    if (String(error.message).toLowerCase() === 'user already exists') {
-                        this.haveCode = true                      
-                    }   
-                    this.errorsMessages.errorMessage = error.message
+
+            if (String(error.message).toLowerCase() === 'user already exists' && !!ApplicationSettings.getString('userProfile',false) ) {
+                this.haveCode = true                      
+            }   
+             this.errorsMessages.errorMessage = error.message
+        
                 }
 
              if(!!error.email){    
                     this.errorsMessages.ErrorEmail = error.email[0] 
                 }
+
             if(!!error.password){
                      this.errorsMessages.ErrorPassword = error.password[0]
                 }
@@ -307,6 +311,9 @@ import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
                 }
             if(!!error.country){
                      this.errorsMessages.ErrorCountry = error.country[0]
+                }
+                if(!!error.password){
+                     this.errorsMessages.ErrorPassword = error.password[0]
                 }
         
         },

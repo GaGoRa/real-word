@@ -4,28 +4,18 @@
     class="page-home">
 
     <GridLayout 
-      marginTop="32" 
+      :marginTop="getMarginOS" 
       width="100%"  
       columns="*" 
       rows="auto,auto,*">
 
-      <!-- <NavBarBurgerMenu row="0"/> -->
-      <StackLayout row="0" marginTop="16" marginLeft="16" marginBottom="16">
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-         <BurgerMenu v-if="ismenu"/>
-        </FlexboxLayout>
-   
-      </StackLayout>
+       <NavBarBurgerMenu 
+        :isBell="false" 
+        :ismenu="true"
+        routeBack="/home"
+        row="0"
+      /> 
+     
 
       <StackLayout row="1"
         marginTop="4"
@@ -58,7 +48,7 @@
                   top="0"
                   left="0"
                 >
-                  <image
+                  <ImageCacheIt
                     ref="imagevideo"
                     width="100%"
                     minHeight="250"
@@ -66,8 +56,17 @@
                     :src="imagevideo"
                     stretch="aspectFill"
                   />
+                  
+                   <WebView 
+                    v-if="false"
+                    width="100%"
+                    minHeight="250"
+                    background="#242522"
+                    :src="baseUrl+'/storage/'+video" 
+                  />
                 </StackLayout>
                 <FlexboxLayout
+                v-if="true"
                   @tap="onTapOpenVideo"
                   justifyContent="center"
                   alignItems="center"
@@ -87,7 +86,7 @@
               </AbsoluteLayout >
             </StackLayout>
 
-            <StackLayout >
+            <StackLayout v-if="textValue && textValue.description">
 
               <FlexboxLayout
                 marginTop="8"
@@ -109,10 +108,15 @@
                 />
               </FlexboxLayout>
 
-              <HtmlView  marginTop="8" marginLeft="16" :html="textValue.description" />
-            </StackLayout>
-
+              <Label 
+                textWrap 
+                backgroundColor="transparent"  
+                marginTop="8" 
+                marginLeft="16" 
+                :text="textValue.description" 
+              />
               
+            </StackLayout>
 
             <StackLayout row="4"> 
               <FlexboxLayout
@@ -240,6 +244,11 @@ export default {
     };
   },
   computed:{
+
+       getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    },
+      
     dataPackage(){
       let arr = []
       this.subscriptions.forEach((e)=>{
@@ -349,6 +358,7 @@ export default {
           props:{data:exe.exercise}
         }))
     },
+   
     processPressButtomPlay(){
       if(!this.buttomPlay.registered){
 

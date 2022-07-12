@@ -20,7 +20,9 @@
         marginBottom="8"
       />
       
+
   <label textWrap backgroundColor="transparent"  color="black"  marginLeft="8"  marginBottom="4" :text="data.text" />
+
 
   
    <image alignSelf="center" v-if="data.img"

@@ -1,26 +1,16 @@
 <template>
     <Page  class="seccion-register-bg-invert" actionBarHidden="true">
-
-          <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
-      <GridLayout marginTop="24" columns="*" rows="*,*,*">
-         
+      <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
+      <GridLayout marginTop="24" columns="*" rows="*,*,*"> 
          <ActivityIndicator 
           marginTop="16"
           :busy="loadingState" 
             />
       </GridLayout>
     </StackLayout>
-
-
-
         <FlexboxLayout v-else exDirection="column" justifyContent="center">
-            
 
-            
             <StackLayout marginRight="24" marginLeft="24">
-
-
-
                 <FlexboxLayout   
                   marginRight="12"
                  flexDirection="column"
@@ -73,12 +63,6 @@
                   editable="false"
                   @tap="onTapExperience"
                 />
-
-                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
-                 marginLeft="14" marginRight="16" 
-                 borderRadius="10" selectedIndex="0" :items="items_selectPicker_experience"
-                  backgroundColor="#FFFFFF" height="36"  /> -->
-                
                     <Label marginLeft="16" marginTop="8" color="#949494" text="What’s your main reason for joining?" fontSize="16" 
                     textAlignment="left"  />
 
@@ -105,18 +89,6 @@
                   editable="false"
                   @tap="onTapExcersice"
                 />
-
-
-
-               <!--  <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"             marginLeft="14" marginRight="16" 
-                borderRadius="10" selectedIndex="0" :items="items_selectPicker_reason"
-                 backgroundColor="#FFFFFF" height="36"  /> -->
-
-                <!-- <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
-                 marginLeft="14" marginRight="16" 
-                 borderRadius="10" selectedIndex="0" :items="items_selectPicker_where_exercise"
-                  backgroundColor="#FFFFFF" height="36"  /> -->
-
                    <Label  marginLeft="16" marginTop="8" color="#949494" text="How often do you want to work out?" fontSize="16" 
                     textAlignment="left" />
 
@@ -131,10 +103,6 @@
                   editable="false"
                   @tap="onTapFrecuence"
                 />
-              <!--   <DropDown paddingLeft="24" paddingRight="24" color="#949494" marginBottom="4"
-                 marginLeft="14" marginRight="16" 
-                 borderRadius="10" selectedIndex="0" :items="items_selectPicker_concurrence"
-                  backgroundColor="#FFFFFF" height="36"  /> -->
 
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
@@ -147,7 +115,7 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import cache from '~/store/cache';
+import { ApplicationSettings } from '@nativescript/core';
 import moment from 'moment'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
@@ -215,7 +183,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
     methods:{
         processUserUpdate(){
                 
-           const dataCache = JSON.parse(cache.get('userProfile'))
+           const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
 
             const body = {
                     "user_id": dataCache.user.id ,
@@ -234,7 +202,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
             .catch(this.onError)
         },
         onSuccess(res){
-            cache.set("userProfile",JSON.stringify(res.data))
+            ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home',{clearHistory:true})
 
 

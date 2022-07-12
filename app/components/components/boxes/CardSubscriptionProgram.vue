@@ -34,7 +34,7 @@
           /> -->
         </FlexboxLayout>
 
-        <HtmlView color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.description" />
+        <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :text="data.description" />
 
         <StackLayout >
           <FlexboxLayout 
@@ -65,8 +65,8 @@
   </AbsoluteLayout>
 </template>
 <script>
-
-import cache from "~/store/cache";
+import { ApplicationSettings } from '@nativescript/core';
+// import cache from "~/store/cache";
 export default {
   props: {
     data: {
@@ -79,7 +79,7 @@ export default {
   },
   methods:{
     redirect(packagedata, price){
-      const cach = JSON.parse(cache.get("userProfile")) 
+      const cach = JSON.parse(ApplicationSettings.getString('userProfile',"{}")) 
 
       if(
         !cach.user.address ||

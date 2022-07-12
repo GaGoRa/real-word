@@ -3,9 +3,10 @@
     class="seccion-register-bg-invert" 
     actionBarHidden="true"
   >
-    <StackLayout marginTop="32"  >
+    <StackLayout :marginTop="getMarginOS"  >
       
-      <NavBarBurgerMenu 
+      <NavBarBurgerMenu
+        :isBell="false"
         :ismenu="true" 
         :program_id="data.program_id" />
             
@@ -26,7 +27,7 @@
         />
       </StackLayout>
 
-      <HtmlView marginLeft="24"
+      <Label backgroundColor="transparent" marginLeft="24"
         color="black"
         fontSize="24"
         marginTop="4"
@@ -101,6 +102,11 @@ import CardProgram from "~/components/components/boxes/CardProgram.vue";
       },
       mounted(){
          console.log('pageDay this data',this.data)
+      },
+      computed:{
+         getMarginOS(){
+      return global.isIOS ? '0' : '32' 
+    },
       }
     };
 </script>

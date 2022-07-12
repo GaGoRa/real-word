@@ -67,7 +67,7 @@
                   top="0"
                   left="0"
                 >
-                  <image
+                  <ImageCacheIt
                     ref="imagevideo"
                     width="100%"
                     minHeight="250"

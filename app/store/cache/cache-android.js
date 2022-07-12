@@ -1,28 +1,28 @@
 import { Utils } from '@nativescript/core'
 
-var cache = {};
+let cacheAndroid = {};
 
-var sharedPreferences = Utils.ad.getApplicationContext().getSharedPreferences("cache.db", 0);
+let sharedPreferences = Utils.ad.getApplicationContext().getSharedPreferences("cache.db", 0);
 
 // Get the value of an item by key
-cache.get = function(key) {
+cacheAndroid.get = function(key) {
 
   return sharedPreferences.getString(key, undefined);
 };
 
 // Set an item in the storage
-cache.set = function(key, value) {
+cacheAndroid.set = function(key, value) {
   sharedPreferences.edit().putString(key, value).commit();
 };
 
 // Delete an item by key
-cache.delete = function(key) {
+cacheAndroid.delete = function(key) {
   sharedPreferences.edit().remove(key).commit();
 };
 
 // Clear all items
-cache.clear = function() {
+cacheAndroid.clear = function() {
   sharedPreferences.edit().clear().commit();
 };
 
-export default cache
+export default cacheAndroid

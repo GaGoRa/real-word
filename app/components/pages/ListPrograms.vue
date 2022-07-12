@@ -1,32 +1,10 @@
 <template>
   <Page class="page-home" actionBarHidden="true">
-    <StackLayout marginTop="32">
-    <NavBarBurgerMenu/>
-    <!-- <ActionBar
-      marginTop="16"
-      height="64"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <StackLayout>
-        <FlexboxLayout
-          justifyContent="space-between"
-          paddingRight="24"
-          width="100%"
-        >
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-          <Image src="~/assets/icons/burger_menu_icon.png" height="24" />
-        </FlexboxLayout>
-      </StackLayout>
-    </ActionBar> -->
+
+    <StackLayout :marginTop="getMarginOS">
+    <NavBarBurgerMenu :isBell="false"/>
     <ScrollView>
-      <GridLayout marginTop="24" columns="*" rows="*,*">
+      <GridLayout marginTop="0" columns="*" rows="*,*">
         <StackLayout
           col="0"
           row="0"
@@ -74,7 +52,9 @@ import cardImage from "~/components/components/boxes/cardImage";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 import {DEFAULT_LIST_PROGRAMS} from "../../resource/constans"
 import { apiGet,baseUrl } from "~/resource/http";
+import helMixin from "~/mixins/help.js"
 export default {
+mixins:[helMixin],
   components: {
     cardImage,
     NavBarBurgerMenu

@@ -41,13 +41,14 @@ export default {
       navbarTittle:{
         title:"Subscription"
       },
-      subscriptions: [DEFAULT_CARD_SUBSCRIPTION],
+      subscriptions: '',
     };
   },
   async mounted(){
+    this.subscriptions = [DEFAULT_CARD_SUBSCRIPTION]
     const data = await apiGet('/get_subscription')
-    console.log("data",data);
     this.subscriptions = [data.data]
+    
   },
   methods:{
     async onCancel(){
