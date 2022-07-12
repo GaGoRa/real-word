@@ -18,7 +18,7 @@
         :text="data.tittle"
       />
 
-      <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text ? data.text :'<p></p>'" />
+      <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="8" marginTop="8" :html="data.text ? data.text :''" />
 
       <FlexboxLayout justifyContent="space-between">
         <Label

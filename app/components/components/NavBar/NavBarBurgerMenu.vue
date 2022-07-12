@@ -67,7 +67,7 @@ BurgerMenu,
           this.$navigator.navigate('/program',{props:{id:this.program_id}})
         } else{
 
-          $navigator.back()
+          this.$navigator.back()
         }
       }
     }
