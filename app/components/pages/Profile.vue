@@ -1,257 +1,261 @@
 <template>
-  <Page class="page-home" actionBarHidden="true">
+  <Page class="page-home" actionBarHidden="true" >
     <StackLayout :marginTop="getMarginOS">
-   <NavBar :data="navbar" :ismenu="false" />
-    <!-- <ActionBar
-      marginTop="16"
-      title=""
-      backgroundColor="transparent"
-      flat="true"
-    >
-      <FlexboxLayout
-        marginTop="32"
-        class="bg-label"
-        justifyContent="flex-start"
-      >
-        <StackLayout marginRight="64">
-          <Image
-            src="~/assets/icons/Icon feather-arrow-left-circle.png"
-            height="40"
-            width="40"
-            @tap="$navigator.navigate('/home')"
-          />
-        </StackLayout>
-        <StackLayout
-          width="100%"
-          backgroundImage="~/assets/icons/Group_403.png"
-          class="bg-label"
-          height="12"
-        >
-          <Label
-            textAlignment="center"
-            text="Profile"
-            fontSize="24"
-            color="#FFFFFF"
-            fontWeight="900"
-            paddingTop="2"
-          />
-        </StackLayout>
-      </FlexboxLayout>
-    </ActionBar> -->
+      <NavBar :data="navbar" :ismenu="false" />
 
-     <ScrollView  scrollBarIndicatorVisible="false" > 
+      <ScrollView  scrollBarIndicatorVisible="false" > 
 
-      <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
-      <GridLayout marginTop="24" columns="*" rows="*,*,*">
-         
-         <ActivityIndicator 
-          marginTop="16"
-          :busy="loadingState" 
+        <StackLayout v-if="loadingState" marginTop="32"  marginRight="16" >
+          <GridLayout marginTop="24" columns="*" rows="*,*,*">
+            <ActivityIndicator 
+              marginTop="16"
+              :busy="loadingState" 
             />
-      </GridLayout>
+          </GridLayout>
+        </StackLayout>
+
+        <StackLayout v-else marginRight="24" marginTop="32" marginLeft="24">
+          
+          <Label  v-if="!!errorsMessage.errorMessage" 
+            :text="errorsMessage.errorMessage" 
+            fontSize="16" 
+            fontWeight="400"
+            textAlignment="left" 
+            color="red" 
+            marginLeft="32" 
+            marginTop="0" 
+            marginBottom="0" 
+          /> 
+
+          <Label
+            marginLeft="16"
+            marginTop="8"
+            color="#FFFFFF"
+            text="General Information?"
+            fontWeight="900"
+            fontSize="16"
+            textAlignment="left"
+          />
+
+          <TextField
+            v-model="textValue.firstName"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="First Name"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+
+          <TextField
+            v-model="textValue.middleName"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="Middle Name"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+
+
+          <StackLayout v-if="!ios">
+            <TextField 
+              editable="false" 
+              @tap="onTapDataPicker" 
+              color="#949494" 
+              marginBottom="6"
+              marginLeft="14"
+              marginRight="16" 
+              :hint="textValue.date_of_birth == '' ? 'Date of birth' : fecha(textValue.date_of_birth)"
+              borderRadius="10" 
+              backgroundColor="#FFFFFF" 
+              height="36"
+             
+            />
+          </StackLayout>
+         
+          <StackLayout v-else marginRight="16" marginLeft="16">
+            <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " />
+            <Label :text="textValue.date_of_birth " />
+          </StackLayout>
+         
+
+          <TextField
+            v-model="textValue.lastName"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="Last Name"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+
+
+          <StackLayout v-if="!global.isIOS ">
+            <TextField 
+              editable="false" 
+              @tap="onTapDataPicker" 
+              color="#949494" 
+              marginBottom="6"
+              marginLeft="14"
+              marginRight="16" 
+              :hint="textValue.date_of_birth == '' ? 'Date of birth' : fecha(textValue.date_of_birth)"
+              borderRadius="10" 
+              backgroundColor="#FFFFFF" 
+              height="36"
+             
+            />
+          </StackLayout>
+         
+          <StackLayout v-else backgraund="blue" marginRight="16" marginLeft="16">
+            <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " />
+          </StackLayout>
+         
+
+          <TextField
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            :hint="textValue.gender"
+            @tap="onTapGender"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            editable="false"
+            height="36"
+          />
+
+
+          <Label
+            marginLeft="16"
+            marginTop="8"
+            color="#FFFFFF"
+            text="Contact Information"
+            fontWeight="900"
+            fontSize="16"
+            textAlignment="left"
+          />
+          <TextField
+            v-model="textValue.phone"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="Phone #"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+          <TextField
+            v-model="textValue.email"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="Email"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+            editable="false"
+          />
+          <TextField
+            v-model="textValue.address"
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            hint="Address"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+          <TextField
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            :hint="textValue.state"
+            @tap="onTapState"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            editable="false"
+            height="36"
+          />
+          <TextField
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            :hint="textValue.country"
+            @tap="onTapCountry"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            editable="false"
+            height="36"
+          />
+          <TextField
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            v-model="textValue.city"
+            hint="City"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+          />
+          <TextField
+            color="#949494"
+            marginBottom="6"
+            marginLeft="14"
+            marginRight="16"
+            v-model="textValue.postal_code"
+            hint="Postal Code"
+            borderRadius="10"
+            backgroundColor="#FFFFFF"
+            height="36"
+            keyboardType="number"
+          />
+
+          <Label
+            marginLeft="16"
+            marginTop="8"
+            color="#FFFFFF"
+            text="Fitness information"
+            fontWeight="900"
+            fontSize="16"
+            textAlignment="left"
+          />
+
+          <StackLayout v-if="loadingStateButtom"  marginBottom="16" marginTop="16"  marginRight="16" >
+                  <ActivityIndicator 
+                    :busy="loadingStateButtom" 
+                      />
+                  </StackLayout>
+
+          <Button v-else
+            borderRadius="16"
+            marginTop="32"
+            fontSize="16"
+            text="Save"
+            backgroundColor="red"
+            width="200"
+            height="40"
+            fontWeight="900"
+            color="#FFFFFF"
+            marginBottom="32"
+            @tap="proccessUpdateProfile"
+          />
+        </StackLayout>
+
+      </ScrollView>
     </StackLayout>
-
-
-    <StackLayout v-else marginRight="24" marginTop="32" marginLeft="24">
-        <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
-                  textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
-
-      <Label
-        marginLeft="16"
-        marginTop="8"
-        color="#FFFFFF"
-        text="General Information?"
-        fontWeight="900"
-        fontSize="16"
-        textAlignment="left"
-       
-
-      />
-      <TextField
-        v-model="textValue.firstName"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="First Name"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        v-model="textValue.middleName"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Middle Name"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        v-model="textValue.lastName"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Last Name"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      
-        <TextField 
-          editable="false" 
-          @tap="onTapDataPicker" 
-          color="#949494" 
-          marginBottom="6"
-          marginLeft="14"
-          marginRight="16" 
-          :hint="textValue.date_of_birth == '' ? 'Date of birth' : fecha(textValue.date_of_birth)"
-          borderRadius="10" 
-          backgroundColor="#FFFFFF" 
-          height="36"  
-        />
-
-      
-        <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        :hint="textValue.gender"
-        @tap="onTapGender"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        editable="false"
-        height="36"
-      />
-
-
-      <Label
-        marginLeft="16"
-        marginTop="8"
-        color="#FFFFFF"
-        text="Contact Information"
-        fontWeight="900"
-        fontSize="16"
-        textAlignment="left"
-      />
-      <TextField
-        v-model="textValue.phone"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Phone #"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        v-model="textValue.email"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Email"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-          editable="false"
-      />
-      <TextField
-        v-model="textValue.address"
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Address"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        :hint="textValue.state"
-        @tap="onTapState"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        editable="false"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        :hint="textValue.country"
-        @tap="onTapCountry"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        editable="false"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        v-model="textValue.city"
-        hint="City"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        v-model="textValue.postal_code"
-        hint="Postal Code"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-        keyboardType="number"
-      />
-
-      <Label
-        marginLeft="16"
-        marginTop="8"
-        color="#FFFFFF"
-        text="Fitness information"
-        fontWeight="900"
-        fontSize="16"
-        textAlignment="left"
-      />
-
-        <StackLayout v-if="loadingStateButtom"  marginBottom="16" marginTop="16"  marginRight="16" >
-                <ActivityIndicator 
-                  :busy="loadingStateButtom" 
-                    />
-                </StackLayout>
-
-      <Button v-else
-        borderRadius="16"
-        marginTop="32"
-        fontSize="16"
-        text="Save"
-        backgroundColor="red"
-        width="200"
-        height="40"
-        fontWeight="900"
-        color="#FFFFFF"
-        marginBottom="32"
-        @tap="proccessUpdateProfile"
-      />
-    </StackLayout>
-     </ScrollView>
-     </StackLayout>
   </Page>
 
 </template>
@@ -274,7 +278,7 @@ export default {
       navbar:{
         title:"Profile"
       },
-      loadingState:true,
+      loadingState:false,
       loadingStateButtom:false,
       textValue:{
         state:'State',
@@ -348,6 +352,8 @@ export default {
       this.textValue.city          = response.data.user.city
       this.textValue.country_id    = response.data.user.country_id
       this.textValue.country         = this.textValue.countrys.data.find((e)=>e.id == this.textValue.country_id).description
+
+      this.loadingState = false
     },
     onError(err){
       this.errorsMessage.errorMessage = "A ocurrido un error"
@@ -445,11 +451,15 @@ export default {
   computed:{
     getMarginOS(){
       return global.isIOS ? '0' : '32' 
+    },
+    ios(){
+      return global.isIOS
+
     }
   }
 };
 </script>
-
+   
 <style scoped>
 .home-panel {
   vertical-align: center;
@@ -459,5 +469,20 @@ export default {
 
 .description-label {
   margin-bottom: 15;
+}
+
+
+.date-picker {
+  vertical-align:middle;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  color:#949494;
+  margin-bottom:6;
+  margin-left:14;
+  margin-right:16;
+  border-radius:10;
+  background-color:#FFFFFF;
+  height:36;
 }
 </style>

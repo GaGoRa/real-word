@@ -37,7 +37,13 @@
         />
       </FlexboxLayout>
 
-        <Label backgroundColor="transparent" color="#FFFFFF" fontSize="24" marginLeft="16" :html="data.text" />
+        <Label 
+          textWrap
+          backgroundColor="transparent" 
+          color="#FFFFFF" 
+          fontSize="12" 
+          marginLeft="16" 
+          :text="data.text" />
 
     
     </StackLayout>

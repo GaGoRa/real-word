@@ -108,10 +108,15 @@
                 />
               </FlexboxLayout>
 
-              <Label backgroundColor="transparent"  marginTop="8" marginLeft="16" :html="textValue.description" />
-            </StackLayout>
-
+              <Label 
+                textWrap 
+                backgroundColor="transparent"  
+                marginTop="8" 
+                marginLeft="16" 
+                :text="textValue.description" 
+              />
               
+            </StackLayout>
 
             <StackLayout row="4"> 
               <FlexboxLayout
