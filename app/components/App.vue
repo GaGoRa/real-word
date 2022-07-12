@@ -33,7 +33,8 @@ export default {
   },
   created(){
     let cacheData = ApplicationSettings.getString('userProfile',"{}")
-    this.islog = Object.keys(JSON.parse(cacheData)).length === 0 ? false:true
+    console.log("?????????????????????????????????",JSON.parse(cacheData).hasOwnProperty('token'));
+    this.islog = JSON.parse(cacheData).hasOwnProperty('token') ? true :false
   },
 
   computed: {

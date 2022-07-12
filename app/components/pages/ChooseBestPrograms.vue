@@ -115,7 +115,7 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import { ApplicationSettings } from '@nativescript/core';
+import { ApplicationSettings ,Dialogs} from '@nativescript/core';
 import moment from 'moment'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
@@ -196,10 +196,15 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
                 }
 
 
-            console.log(body);
-            apiPost(body,"/update_user")
-            .then(this.onSuccess)
-            .catch(this.onError)
+            if (Object.keys(body).length !== 0){
+           
+              apiPost(body,"/update_user")
+              .then(this.onSuccess)
+              .catch(this.onError)
+              
+           }else{
+            this.$navigator.navigate('/home',{clearHistory:true})
+           }
         },
         onSuccess(res){
             ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
@@ -289,7 +294,17 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
         },
         fecha(value){
            return moment(value).format('MM/DD/YYYY')
-        }
+        },
+         alertDialog(err){
+            Dialogs.alert({
+              message: "Have a problem , close the app and try again",
+              okButtonText: 'OK',
+              theme:5
+      }).then(()=>{
+          console.log("Have a problem", err);
+      });
+
+          }
     },
     created (){
         const genderResource = apiGet("/gender")
@@ -312,6 +327,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
                 this.items_selectPicker_concurrence = value[4][0]
                   this.loadingState = false  
             }).catch(err =>{
+              alertDialog(err)
                     console.log('err',err,typeof err);
             })
              
