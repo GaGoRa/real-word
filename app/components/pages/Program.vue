@@ -352,7 +352,7 @@ export default {
           completed: exe.status,
           day: exe.number,
           body: exe.muscular_group,
-          text: exe.description || "<p></p>",
+          text: exe.description || "",
           url:url,
           image: this.imagevideo,
           props:{data:exe.exercise}
