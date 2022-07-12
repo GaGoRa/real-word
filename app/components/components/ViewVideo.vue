@@ -17,7 +17,11 @@
         background="#242522"
         :width="medidas.width" 
         :src="vid" 
+       
       />
+          
+
+
 
         <StackLayout 
           top="32"
@@ -67,7 +71,7 @@ export default {
         return {
           top: 100,
           left: 0,
-          height: 400,
+          height: 300,
           width: '100%',
         }
       }

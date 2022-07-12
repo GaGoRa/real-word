@@ -4,6 +4,8 @@ import Navigator from 'nativescript-vue-navigator'
 import { routes } from './routes'
 import MultiDrawer from 'nativescript-vue-multi-drawer'
 import store from './store/index'
+//import DateTimePicker from '@nativescript/datetimepicker/vue';
+//Vue.use(DateTimePicker);
 Vue.config.silent = true;
 Vue.use(Navigator, { routes })
 Vue.use(MultiDrawer)
@@ -12,6 +14,7 @@ Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down"
 Vue.registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
 Vue.registerElement('ImageCacheIt', () => require('@triniwiz/nativescript-image-cache-it').ImageCacheIt);
 Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager"). PreviousNextView)
+Vue.registerElement('DateTimePicker', () => require('@nativescript/datetimepicker/vue').DateTimePicker);
 // Vue.registerElement("VideoPlayer", () => require("@nstudio/nativescript-exoplayer").Video);
 // ns resources generate splashes App_Resources/iOS/Assets.xcassets/LaunchScreen.Center.imageset/LaunchScreen-Center.png --background "#000000"
 
