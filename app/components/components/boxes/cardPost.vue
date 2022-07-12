@@ -20,14 +20,14 @@
         marginBottom="8"
       />
       
-  <HtmlView  color="black"  marginLeft="8"  marginBottom="4" :html="data.text" />
+  <label textWrap backgroundColor="transparent"  color="black"  marginLeft="8"  marginBottom="4" :text="data.text" />
 
   
    <image alignSelf="center" v-if="data.img"
-      width="160"
+      width="100%"
       height="120"
       :src="data.img" stretch="aspectFill"
-      borderRadius="20"
+      borderRadius="10"
       marginBottom="16"
       />
     

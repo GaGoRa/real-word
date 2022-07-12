@@ -18,6 +18,9 @@
         width="100%" 
         :src="vid" 
       />
+          
+
+
 
         <StackLayout 
           top="32"
