@@ -1,5 +1,5 @@
 <template>
-  <Page height="60%" backgroundColor="white" borderRadius="50"  actionBarHidden="true" >
+  <Page :height="configPage.page.height" backgroundColor="white" borderRadius="50"  actionBarHidden="true" >
   
     <GridLayout width="100%"  columns="*" rows="*,auto">
       <ListPicker
@@ -7,7 +7,7 @@
         :selectedIndex="selectedIndex"
         @selectedIndexChange="selectedIndexChanged"
         row="0" col="0"
-        height="300"
+        :height="configPage.listPicker.height"
       />
 
       <Button
@@ -50,6 +50,18 @@ export default {
       })
 
       return arr
+    },
+    configPage(){
+      if(global.isIOS){
+        return {
+          page:{height:''},
+          listPicker:{height:''}
+        }
+      }
+      return {
+        page:{height:'60%'},
+        listPicker:{height:'300'}
+      }
     },
     selectedIndex: {
       get: function () {
