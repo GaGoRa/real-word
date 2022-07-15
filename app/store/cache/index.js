@@ -1,17 +1,17 @@
 
 
 // import {cache as cacheAndroid} from"./cache.android";
-// import {cache as cacheIOS} from"./cache.ios";
-let cache;
+// // import {cache as cacheIOS} from"./cache.ios";
+// let cache;
 
-if (global.isIOS) {  
+// if (global.isIOS) {  
 
-     cache = require('./cache.ios')
-     module.exports = cache
-}else{
-     cache = require('./cache.android')
-  }
+//      cache = require('./cache.ios')
+//      module.exports = cache
+// }else{
+//      cache = require('./cache.android')
+//   }
 
 
-module.exports = global.isIOS ? require('./cache-ios') : require('./cache-android')
+// module.exports = global.isIOS ? require('./cache-ios') : require('./cache-android')
 
