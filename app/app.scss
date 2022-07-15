@@ -132,3 +132,24 @@ DropDown {
       box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
+
+.form_input{
+  height: 48;
+  background-color: white;
+  border-radius: 10; 
+  margin-bottom: 6;
+  font-size: 14;
+  placeholder-color: rgba(0,0,0,.1); 
+    color: black;
+
+}
+
+TextField{
+  //color: red;
+}
+ListPicker{
+  color: black;
+}
+.action-bar {
+      margin-top:-22;  
+    }

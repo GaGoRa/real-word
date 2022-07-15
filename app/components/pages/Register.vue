@@ -1,189 +1,219 @@
 <template>
-    <Page  class="seccion-register-bg-invert" actionBarHidden="true">
-            <FlexboxLayout flexDirection="column" justifyContent="center">
-               
-                <StackLayout marginRight="24"  marginLeft="24">
-                    
-                    <Label text="Register" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="#949494" marginBottom="16" />
+  <Page  class="seccion-register-bg-invert" actionBarHidden="true"> 
+    <ScrollView height="100%" width="100%">
+     <StackLayout >
+      <GridLayout  columns="*" height="100%" rows="*,auto">
 
-                    <!-- <StackLayout marginRight="12" orientation="horizontal"  marginLeft="12" borderRadius="12" height="40" backgroundColor="#2051D8"
-                        color="#FFFFFF" marginBottom="16" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
-                                <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
-                            <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
-                        </StackLayout> -->
-<!-- 
-                    <StackLayout marginRight="12" marginLeft="12" orientation="horizontal"  borderRadius="12" height="40" backgroundColor="#FFFFFF"
-                        color="#FFFFFF" marginBottom="32" paddingLeft="32" paddingRight="32" class="stack-layout-btn">
-                            <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
-                            <Label verticalAlignment="middle" @tap="processLoginGoogle" horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
-                        </StackLayout> -->
+        <StackLayout row="0" col="0" height="100%" paddingTop="100" paddingBottom="100">
+        
+              <Label 
+                text="Register" 
+                fontSize="24" 
+                fontWeight="900"
+                textAlignment="center" 
+                color="#949494" 
+                marginBottom="16" 
+              />
 
-                    <Label text="or" fontSize="24" fontWeight="900"
-                        textAlignment="center" color="#FFFFFF" marginBottom="16" />
 
-                     <Label  v-if="!!errorsMessages.errorMessage" 
-                     
-                    @tap="haveCode ? $navigator.navigate('/verification-code',{
+              <StackLayout 
+                marginRight="12" 
+                orientation="horizontal"  
+                marginLeft="12" 
+                borderRadius="12" 
+                height="40" 
+                backgroundColor="#2051D8"
+                color="#FFFFFF" 
+                marginBottom="16" 
+                paddingLeft="32" 
+                paddingRight="32" 
+                class="stack-layout-btn">
+                  <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
+                  <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
+              </StackLayout>
+
+              <StackLayout 
+                marginRight="12" 
+                marginLeft="12" 
+                orientation="horizontal"  
+                borderRadius="12" 
+                height="40" 
+                backgroundColor="#FFFFFF" 
+                color="#FFFFFF" 
+                marginBottom="0" 
+                paddingLeft="32" 
+                paddingRight="32" 
+                class="stack-layout-btn">
+                  <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
+                  <Label verticalAlignment="middle" @tap="processLoginGoogle" horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
+              </StackLayout>
+
+              <Label 
+                text="or" 
+                fontSize="24"
+                fontWeight="900"
+                textAlignment="center" 
+                color="#FFFFFF" 
+                marginBottom="16" 
+              />
+
+              <Label  
+                v-if="!!errorsMessages.errorMessage" 
+                @tap="haveCode ? $navigator.navigate('/verification-code',{
                         props:{
-                            data:{
-                                typePage:'CreateUser'
-                                }
-                              }
-                            }) :null"
-                     fontSize="16" fontWeight="400"
-                        textAlignment="center" color="red" marginLeft="32" marginTop="0" marginBottom="0">
-                         <FormattedString>
-                             <span fontSize="12" :text="errorsMessages.errorMessage" />
-                             <span v-if="haveCode" text=", do you have a code? Tap here"  fontSize="12" fontWeight="900" textWrap="true"/>
-                             <!-- <span v-if="haveCode" text=", do you have a code? Tap here" @tap="$navigator.navigate('/verification-code')" fontSize="12" fontWeight="900" textWrap="true"/> -->
-                    </FormattedString>
-                        </Label> 
-             <!-- <PreviousNextView > -->
+                          data:{
+                              typePage:'CreateUser'
+                          }
+                        }
+                      }) :null"
+                fontSize="16" 
+                fontWeight="400"
+                textAlignment="center" 
+                color="red" 
+                marginLeft="32" 
+                marginTop="0" 
+                marginBottom="0" >
+                <FormattedString>
+                  <span fontSize="12" :text="errorsMessages.errorMessage" />
+                  <span v-if="haveCode" text=", do you have a code? Tap here"  fontSize="12" fontWeight="900" textWrap="true"/>
+                </FormattedString>
+              </Label> 
 
-                  <TextField 
-                    height="38" 
-                    v-model="textFieldValue.firstName"
-                    hint="First Name" 
-                    backgroundColor="#FFFFFF"
-                    borderRadius="10" 
-                    marginBottom="6"  />
+              <TextField 
+                class="form_input" 
+                v-model="textFieldValue.firstName"
+                hint="First Name"  
+              />
 
-                    <Label  
-                      v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" 
-                      fontSize="16" 
-                      fontWeight="400"
-                      textAlignment="left" 
-                      color="red" 
-                      marginLeft="32" 
-                      marginTop="0" 
-                      marginBottom="0" 
-                    /> 
+                <Label  
+                  v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                /> 
 
-                    <TextField 
-                      height="38" 
-                      v-model="textFieldValue.lastName" 
-                      marginBottom="6" 
-                      hint="Last Name" 
-                      backgroundColor="#FFFFFF"
-                      borderRadius="10"
-                    />
-                      <Label  
-                        v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" 
-                        fontSize="16" 
-                        fontWeight="400"
-                        textAlignment="left" 
-                        color="red" 
-                        marginLeft="32" 
-                        marginTop="0" 
-                        marginBottom="0" 
-                      />
+              <TextField 
+                v-model="textFieldValue.lastName" 
+                hint="Last Name" 
+                class="form_input" 
+              />
+                <Label  
+                  v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                />
 
-                   
-                    <TextField 
-                      height="38" 
-                      :hint="country"
-                      backgroundColor="#FFFFFF" 
-                      borderRadius="10"
-                      marginBottom="6" 
-                      editable="false"
-                      @tap="onTapState"
-                    />
-                        <Label  
-                          v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" 
-                          fontSize="16" 
-                          fontWeight="400"
-                          textAlignment="left" 
-                          color="red" 
-                          marginLeft="32" 
-                          marginTop="0" 
-                          marginBottom="0"
-                        />
+              <TextField 
+                class="form_input" 
+                :hint="country"
+                :text="country != 'Country' ? country:''"
+                editable="false"
+                @tap="onTapState"
+              />
+                <Label  
+                  v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0"
+                />
 
-                    <TextField 
-                      keyboardType="email"
-                      tabTextFontSize="50" 
-                      class="textbox" 
-                      height="38"  
-                      v-model="textFieldValue.email" 
-                      hint="Email"
-                      backgroundColor="#FFFFFF" 
-                      borderRadius="10" 
-                      marginBottom="6"
-                    />
-                      <Label  
-                        v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" 
-                        fontSize="16" 
-                        fontWeight="400"
-                        textAlignment="left" 
-                        color="red" 
-                        marginLeft="32" 
-                        marginTop="0" 
-                        marginBottom="0" 
-                      />
+              <TextField 
+                keyboardType="email"
+                tabTextFontSize="50" 
+                class="form_input" 
+                v-model="textFieldValue.email" 
+                hint="Email"
+              />
+                <Label  
+                  v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                />
 
+              <TextField 
+                keyboardType="phone" 
+                v-model="textFieldValue.phone" 
+                hint="Phone #"
+                class="form_input"  
+              />
+                  <Label 
+                    v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" 
+                    fontSize="16" 
+                    fontWeight="400"
+                    textAlignment="left" 
+                    color="red" 
+                    marginLeft="32" 
+                    marginTop="0" 
+                    marginBottom="0" 
+                  />
+                  
+              <TextField 
+                v-model="textFieldValue.password" 
+                hint="Password"
+                secure="true"
+                class="form_input" 
+              />
+                <Label  
+                  v-if="!!errorsMessages.password" :text="errorsMessages.password" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="8" 
+                />
+        </StackLayout>
+        
+        <StackLayout marginTop="auto" row="2" col="0" paddingBottom="32">
+          <Button 
+            borderRadius="16" 
+            marginTop="16" 
+            fontSize="16"
+            text="Register" 
+            backgroundColor="red" 
+            width="200"
+            height="40" 
+            fontWeight="900" 
+            color="#FFFFFF"
+            marginBottom="8" 
+            @tap="processCreateUser"
+          />
+          <FlexboxLayout justifyContent="center">
+            <StackLayout>
+              <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
+            </StackLayout>
+            <Label text="Already Register?" color="black" marginRight="8" @tap="passPrueba" />
+            <Label text="Login" textDecoration="underline" fontWeight="900"  color="black" @tap="$navigator.navigate('/login-aplication')" />
+            <StackLayout>
+              <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
+            </StackLayout>
+          </FlexboxLayout>
+        </StackLayout>
 
-                    <TextField 
-                      keyboardType="phone" 
-                      height="38" 
-                      v-model="textFieldValue.phone" 
-                      hint="Phone #"
-                      backgroundColor="#FFFFFF" 
-                      borderRadius="10"
-                      marginBottom="6" 
-                    />
-                        <Label 
-                          v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" 
-                          fontSize="16" 
-                          fontWeight="400"
-                          textAlignment="left" 
-                          color="red" 
-                          marginLeft="32" 
-                          marginTop="0" 
-                          marginBottom="0" 
-                        />
-                    
-                    <TextField 
-                      height="38" 
-                      v-model="textFieldValue.password" 
-                      hint="password"
-                      secure="true"
-                      backgroundColor="#FFFFFF" borderRadius="10"
-                      marginBottom="16" 
-                    />
-                        <Label  
-                          v-if="!!errorsMessages.password" :text="errorsMessages.password" 
-                          fontSize="16" 
-                          fontWeight="400"
-                          textAlignment="left" 
-                          color="red" 
-                          marginLeft="32" 
-                          marginTop="0" 
-                          marginBottom="8" 
-                        />
-
-                    <Button borderRadius="16" marginTop="" fontSize="16"
-                        text="Register" backgroundColor="red" width="200"
-                        height="40" fontWeight="900" color="#FFFFFF"
-                        marginBottom="32" @tap="processCreateUser"/>
-                    
-                    <FlexboxLayout justifyContent="center">
-                        <StackLayout>
-                        <Label text="" backgroundColor="red" width="50"  marginTop="12" marginRight="8" verticalAlignment="bottom" height="3"/>
-                        </StackLayout>
-                        <Label text="Already Register?" color="black"
-                            marginRight="8" @tap="passPrueba" />
-                        <Label text="Login" textDecoration="underline"
-                            fontWeight="900"  color="black" @tap="$navigator.navigate('/login-aplication')" />
-                        <StackLayout>
-                    <Label text="" backgroundColor="red" width="50" verticalAlignment="bottom" marginLeft="8" marginTop="12" height="3"/>
-                        </StackLayout>
-                    </FlexboxLayout>
-
-                </StackLayout>
-            </FlexboxLayout>
-            
-    </Page>
+      </GridLayout>
+    <!-- </FlexboxLayout> -->
+      </StackLayout>
+    </ScrollView >
+  </Page>
 </template>
 
 <script>
