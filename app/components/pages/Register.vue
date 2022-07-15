@@ -41,20 +41,43 @@
                         </Label> 
              <!-- <PreviousNextView > -->
 
-                    <TextField height="38" v-model="textFieldValue.firstName"
-                        hint="First Name" backgroundColor="#FFFFFF"
-                        borderRadius="10" marginBottom="6"  />
-                        <Label  v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
+                  <TextField 
+                    height="38" 
+                    v-model="textFieldValue.firstName"
+                    hint="First Name" 
+                    backgroundColor="#FFFFFF"
+                    borderRadius="10" 
+                    marginBottom="6"  />
 
-                    <TextField height="38" v-model="textFieldValue.lastName" marginBottom="6" 
-                        hint="Last Name" backgroundColor="#FFFFFF" borderRadius="10"
-                        />
-                        <Label  v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+                    <Label  
+                      v-if="!!errorsMessages.ErrorFirstName" :text="errorsMessages.ErrorFirstName" 
+                      fontSize="16" 
+                      fontWeight="400"
+                      textAlignment="left" 
+                      color="red" 
+                      marginLeft="32" 
+                      marginTop="0" 
+                      marginBottom="0" 
+                    /> 
 
-                    <!-- <SelectInput :hint="hint" @toggleSelectDrawer="miFuncion" :drawerState="drawerState"/> -->
-                    <!-- <DropDown paddingLeft="24" paddingRight="24" color="grey" marginBottom="4" marginLeft="14" marginRight="16" hint="Country" borderRadius="10" selectedIndex="0" :items="items_selectPicker" backgroundColor="#FFFFFF" height="36"  /> -->
+                    <TextField 
+                      height="38" 
+                      v-model="textFieldValue.lastName" 
+                      marginBottom="6" 
+                      hint="Last Name" 
+                      backgroundColor="#FFFFFF"
+                      borderRadius="10"
+                    />
+                      <Label  
+                        v-if="!!errorsMessages.ErrorLastName" :text="errorsMessages.ErrorLastName" 
+                        fontSize="16" 
+                        fontWeight="400"
+                        textAlignment="left" 
+                        color="red" 
+                        marginLeft="32" 
+                        marginTop="0" 
+                        marginBottom="0" 
+                      />
 
                    
                     <TextField 
@@ -66,29 +89,78 @@
                       editable="false"
                       @tap="onTapState"
                     />
+                        <Label  
+                          v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" 
+                          fontSize="16" 
+                          fontWeight="400"
+                          textAlignment="left" 
+                          color="red" 
+                          marginLeft="32" 
+                          marginTop="0" 
+                          marginBottom="0"
+                        />
+
+                    <TextField 
+                      keyboardType="email"
+                      tabTextFontSize="50" 
+                      class="textbox" 
+                      height="38"  
+                      v-model="textFieldValue.email" 
+                      hint="Email"
+                      backgroundColor="#FFFFFF" 
+                      borderRadius="10" 
+                      marginBottom="6"
+                    />
+                      <Label  
+                        v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" 
+                        fontSize="16" 
+                        fontWeight="400"
+                        textAlignment="left" 
+                        color="red" 
+                        marginLeft="32" 
+                        marginTop="0" 
+                        marginBottom="0" 
+                      />
 
 
-                        <Label  v-if="!!errorsMessages.ErrorCountry" :text="errorsMessages.ErrorCountry" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
-
-                    <TextField keyboardType="email"  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.email" hint="Email"
-                        backgroundColor="#FFFFFF" borderRadius="10" marginBottom="6"/>
-                        <Label  v-if="!!errorsMessages.ErrorEmail" :text="errorsMessages.ErrorEmail" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
-
-
-                    <TextField keyboardType="number" height="38" v-model="textFieldValue.phone" hint="Phone #"
-                        backgroundColor="#FFFFFF" borderRadius="10"
-                        marginBottom="6" />
-                        <Label  v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
+                    <TextField 
+                      keyboardType="phone" 
+                      height="38" 
+                      v-model="textFieldValue.phone" 
+                      hint="Phone #"
+                      backgroundColor="#FFFFFF" 
+                      borderRadius="10"
+                      marginBottom="6" 
+                    />
+                        <Label 
+                          v-if="!!errorsMessages.ErrorPhone" :text="errorsMessages.ErrorPhone" 
+                          fontSize="16" 
+                          fontWeight="400"
+                          textAlignment="left" 
+                          color="red" 
+                          marginLeft="32" 
+                          marginTop="0" 
+                          marginBottom="0" 
+                        />
                     
-                    <TextField  height="38" v-model="textFieldValue.password" hint="password"
-                     secure="true"
-                        backgroundColor="#FFFFFF" borderRadius="10"
-                        marginBottom="16" />
-                        <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
-                        textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="8" />
+                    <TextField 
+                      height="38" 
+                      v-model="textFieldValue.password" 
+                      hint="password"
+                      secure="true"
+                      backgroundColor="#FFFFFF" borderRadius="10"
+                      marginBottom="16" 
+                    />
+                        <Label  
+                          v-if="!!errorsMessages.password" :text="errorsMessages.password" 
+                          fontSize="16" 
+                          fontWeight="400"
+                          textAlignment="left" 
+                          color="red" 
+                          marginLeft="32" 
+                          marginTop="0" 
+                          marginBottom="8" 
+                        />
 
                     <Button borderRadius="16" marginTop="" fontSize="16"
                         text="Register" backgroundColor="red" width="200"
