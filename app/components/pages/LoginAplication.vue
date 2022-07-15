@@ -143,22 +143,27 @@ import { ApplicationSettings } from '@nativescript/core';
             },
 
             onError(err){
-                this.loadingLogin = false
+                     this.loadingLogin = false
+                const error = JSON.parse(err.content)
                 this.errorsMessages={
                     errorMessage:'',
                     email:'',
                     password:''
                     
                 }
-                const error = JSON.parse(err.content)
-                
-                if(!!error.email){    
-                    this.errorsMessages.email = error.email[0]
+                if(err.statusCode === 422){
+                    if(!!error.email){    
+                        this.errorsMessages.email = error.email[0]
+                        }
+                    if(!!error.password){
+                        this.errorsMessages.password = error.password[0]
+                        }
+                } else if (err.statusCode === 403){
                     
+                    this.errorsMessages.errorMessage = error.message
+
                 }
-                if(!!error.password){
-                     this.errorsMessages.password = error.password[0]
-                }
+                this.loadingLogin = false
 
                 
             }
