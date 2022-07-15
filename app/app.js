@@ -17,7 +17,8 @@ Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardma
 Vue.registerElement('DateTimePicker', () => require('@nativescript/datetimepicker/vue').DateTimePicker);
 // Vue.registerElement("VideoPlayer", () => require("@nstudio/nativescript-exoplayer").Video);
 // ns resources generate splashes App_Resources/iOS/Assets.xcassets/LaunchScreen.Center.imageset/LaunchScreen-Center.png --background "#000000"
-
+Vue.registerElement('Carousel', () => require('@nstudio/nativescript-carousel').Carousel)
+Vue.registerElement('CarouselItem', () => require('@nstudio/nativescript-carousel').CarouselItem)
   
 new Vue({
   render: h => h(App),
