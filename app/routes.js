@@ -4,7 +4,6 @@ import RegisterPage from './components/pages/Register.vue'
 import VerificationCodePage from './components/pages/VerificationCode.vue'
 import CreatePasswordPage from './components/pages/CreatePassword.vue'
 import WelcomePage from './components/pages/Welcome.vue'
-
 import HelpPage from './components/pages/Help.vue'
 import LogoutPage from './components/pages/Logout.vue'
 import PaymentsPage from './components/pages/Payments.vue'
@@ -118,4 +117,5 @@ export const routes = {
   '/pdf-view': {
     component: PDFView,
   },
+  
 }

@@ -1,6 +1,13 @@
 <template>
   <Page class="page-home"  actionBarHidden="true">
-      <StackLayout :marginTop="getMarginOS">
+    <MultiDrawer v-model="onDrawer">
+    <StackLayout slot="right">
+      <RightDrawer />
+    </StackLayout>
+    <StackLayout slot="left">
+      <LeftDrawer />
+    </StackLayout>
+    <StackLayout :marginTop="getMarginOS">
       <NavBarBurgerMenu :isBell="true" :ismenu="true" />
 
 
@@ -158,16 +165,23 @@
       </GridLayout>
     </ScrollView>
     </StackLayout>
+
+    </MultiDrawer>
+
   </Page>
 </template>
 <script>
+import { mapState, mapMutations } from "vuex";
+
 import cardImage from "~/components/components/boxes/cardImage.vue";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
 import { apiGet ,baseUrl } from "~/resource/http";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
-// import cache from "~/store/cache";
+import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
+import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
+
 import { ApplicationSettings , } from '@nativescript/core';
 import * as application from "@nativescript/core/application";
 
@@ -176,6 +190,8 @@ import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADI
 
 export default {
   components: {
+    RightDrawer,
+    LeftDrawer,
     NavBarBurgerMenu,
     cardImage,
     BurgerMenu,
@@ -183,6 +199,7 @@ export default {
     BellMenu
   },
   computed:{
+    ...mapState(["drawerState"]),
     getMarginOS(){
       return global.isIOS ? '0' : '32' 
     }

@@ -9,6 +9,7 @@
     "@nativescript/core": "~8.1.1",
     "@nativescript/datetimepicker": "^2.1.10",
     "@nativescript/theme": "~3.0.1",
+    "@nstudio/nativescript-carousel": "^8.0.3",
     "@triniwiz/nativescript-image-cache-it": "^7.0.16",
     "axios": "^0.25.0",
     "moment": "^2.29.3",

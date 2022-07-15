@@ -12,7 +12,15 @@
         width="70%"
         backgroundImage="~/assets/icons/barra.png"
         class="bg-label"
-      />
+      >
+       <Label
+            marginLeft="24"
+            color="#FFFFFF"
+            fontSize="24"
+            fontWeight="900"
+            text="community"
+          />
+        </StackLayout>
        
       <StackLayout marginRight="24">
         <Image
@@ -21,6 +29,8 @@
           width="40"
           @tap="toggleSwitchMenu(false)"
         />
+
+
       </StackLayout>
       
     </FlexboxLayout>
