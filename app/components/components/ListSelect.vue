@@ -1,5 +1,5 @@
 <template>
-  <Page :height="configPage.page.height" backgroundColor="white" borderRadius="50"  actionBarHidden="true" >
+  <Page :height="configPage.page.height" backgroundColor="white"   actionBarHidden="true" >
   
     <GridLayout width="100%"  columns="*" rows="*,auto">
       <ListPicker
