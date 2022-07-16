@@ -99,7 +99,7 @@ export default {
       }).then(() => {
         this.toggleSwitchMenu(false)
         ApplicationSettings.remove('userProfile')
-      this.$navigator.navigate('/login')
+      this.$navigator.navigate('/login',{clearHistory:true})
 
       });
           },

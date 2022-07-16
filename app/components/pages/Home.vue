@@ -1,16 +1,8 @@
 <template>
   <Page class="page-home"  actionBarHidden="true">
-    <MultiDrawer v-model="onDrawer">
-    <StackLayout slot="right">
-      <RightDrawer />
-    </StackLayout>
-    <StackLayout slot="left">
-      <LeftDrawer />
-    </StackLayout>
+    
     <StackLayout :marginTop="getMarginOS">
       <NavBarBurgerMenu :isBell="true" :ismenu="true" />
-
-
     <ScrollView>
       <GridLayout  columns="*" rows="*,*,*,*,*,*,*,*">
         <FlexboxLayout
@@ -166,13 +158,9 @@
     </ScrollView>
     </StackLayout>
 
-    </MultiDrawer>
-
   </Page>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
-
 import cardImage from "~/components/components/boxes/cardImage.vue";
 import BurgerMenu from "~/components/components/menuDrawer/burgerMenu.vue";
 import BellMenu from "~/components/components/menuDrawer/bellMenu.vue";
@@ -181,7 +169,6 @@ import { apiGet ,baseUrl } from "~/resource/http";
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
 import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
-
 import { ApplicationSettings , } from '@nativescript/core';
 import * as application from "@nativescript/core/application";
 
@@ -199,7 +186,6 @@ export default {
     BellMenu
   },
   computed:{
-    ...mapState(["drawerState"]),
     getMarginOS(){
       return global.isIOS ? '0' : '32' 
     }
@@ -214,6 +200,7 @@ export default {
     };
   },
   methods:{
+
     onSuccess(res){
       this.poular_programs = !!res.data.popular.length ? this.generateImageCard(res.data.popular,275,192): DEFAULT_POPULAR_PROGRAMS
       this.recommended = !!res.data.recommended.length ? this.generateImageCard(res.data.recommended,275,96) : DEFAULT_RECOMMENDATED

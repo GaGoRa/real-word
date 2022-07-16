@@ -31,16 +31,25 @@
 
                 <!-- <PreviousNextView> -->
                     <StackLayout>
-                <TextField keyboardType="email" height="38" v-model="textFieldValue.email"
-                    hint="Email" backgroundColor="#FFFFFF" borderRadius="10"/>
+                <TextField 
+                class="form_input" 
+                keyboardType="email" 
+                v-model="textFieldValue.email"
+                hint="Email"
+                />
+
                 <Label  v-if="!!errorsMessages.email" :text="errorsMessages.email" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />
                     </StackLayout>
                     
                     <StackLayout>
 
-                <TextField  tabTextFontSize="50" class="textbox" height="38"  v-model="textFieldValue.password" hint="Password"
-                    backgroundColor="#FFFFFF" borderRadius="10" marginBottom="6"  secure="true" />
+                <TextField 
+                class="form_input" 
+                tabTextFontSize="50"
+                v-model="textFieldValue.password"
+                hint="Password"
+                marginBottom="6"  secure="true" />
                      
                      <Label  v-if="!!errorsMessages.password" :text="errorsMessages.password" fontSize="16" fontWeight="400"
                     textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" />

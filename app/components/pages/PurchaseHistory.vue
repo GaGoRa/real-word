@@ -29,7 +29,6 @@
 import NavBar from '../components/NavBar.vue'
 import CardHistoryPayment from '../components/boxes/CardHistoryPayment.vue'
 import { apiGet, apiPost } from '~/resource/http';
-import {apiMock,dataTestHistory} from '../../resource/mockdataPrograms'
 import {DEFAULT_CARD_HISTORY} from "../../resource/constans"
 //import {dateFormat} from '../../resource/helper'     
 export default {

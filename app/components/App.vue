@@ -1,13 +1,30 @@
 <template>
+  <MultiDrawer v-model="onDrawer">
+    <StackLayout slot="right">
+      <RightDrawer />
+    </StackLayout>
+    <StackLayout slot="left">
+      <LeftDrawer />
+    </StackLayout>
     <Navigator :defaultRoute=" islog ? '/home' : '/login'" />
+  </MultiDrawer>
 </template>
 
 <script>
 import { ApplicationSettings } from '@nativescript/core';
 
+import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
+import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
+import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
+import { mapState, mapMutations } from "vuex";
+//import cache from "~/store/cache/index.js"
+
+
 export default {
   components: {
-   
+    RightDrawer,
+    SelectDrawer,
+    LeftDrawer
   },
   data() {
     return {
@@ -16,7 +33,6 @@ export default {
   },
   created(){
     let cacheData = ApplicationSettings.getString('userProfile',"{}")
-    console.log("?????????????????????????????????",JSON.parse(cacheData).hasOwnProperty('token'));
     this.islog = JSON.parse(cacheData).hasOwnProperty('token') ? true :false
   },
 

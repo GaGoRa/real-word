@@ -8,7 +8,10 @@ import store from './store/index'
 //Vue.use(DateTimePicker);
 Vue.config.silent = true;
 Vue.use(Navigator, { routes })
-Vue.use(MultiDrawer)
+Vue.use(MultiDrawer,{ 
+  left:{canSwipeOpen:false},
+  right:{canSwipeOpen:false}
+})
 Vue.registerElement('PDFView', () => require('@finanzritter/nativescript-pdf-view').PDFView)
 Vue.registerElement("DropDown", () => require("nativescript-drop-down/drop-down").DropDown);
 Vue.registerElement("VideoPlayer", () => require("nativescript-videoplayer").Video);
