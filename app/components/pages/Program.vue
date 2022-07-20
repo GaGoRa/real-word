@@ -342,13 +342,27 @@ export default {
       // console.log('res',res);
     },
     onError(err){
+      const error = JSON.parse(err.content)
+
+      if(err.statusCode === 403){
+        console.log("MAX programs,",err);
       Dialogs.alert({
               title: "Error Message",
-              message: "Have a error , please try again",
+              message: error.message,
               okButtonText: "OK"
           }).then( ()=> {
               console.log("Error",new Error(err));
           });
+      }else{
+      console.log("Error progra,,",err);
+      Dialogs.alert({
+        title: "Error Message",
+              message: "Have a error , please try again",
+              okButtonText: "OK"
+          }).then( ()=> {
+            console.log("Error",new Error(err));
+          });
+      }
     },
     getExercises(res,url){
       // console.log('res', res)

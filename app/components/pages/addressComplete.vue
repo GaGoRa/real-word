@@ -192,6 +192,7 @@ export default {
   },
   methods:{
     onBack(){
+      hideKeyboard()
        this.$navigator.back()
       // setTimeout(()=>{
       //   this.$modal.close()
@@ -252,7 +253,7 @@ export default {
                         props:{ 
                           data: this.states, 
                           key: 'name',
-                          value: this.state_id
+                          value: this.state
                         } })
 
       this.state_id = data.id

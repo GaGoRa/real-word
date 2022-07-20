@@ -8,7 +8,7 @@
             />
       </GridLayout>
     </StackLayout>
-        <FlexboxLayout v-else exDirection="column" justifyContent="center">
+        <FlexboxLayout v-else flexDirection="column" justifyContent="center">
 
             <StackLayout marginRight="24" marginLeft="24">
                 <FlexboxLayout   
@@ -18,7 +18,8 @@
                  justifyContent="center" >
                      <Label text="SKIP" fontSize="16" marginRight="4" fontWeight="300"
                     color="#949494" />
-                <Image @tap="$navigator.navigate('/home',{clearHistory:true})"
+                <Image @tap="tapSkipChooseProgram"
+                
                 src="~/assets/icons/icon_arrow_next.png" height="48" width="48" />
                 </FlexboxLayout>
 
@@ -186,6 +187,10 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
       }
     },
     methods:{
+        tapSkipChooseProgram(){
+          hideKeyboard()
+          this.$navigator.navigate('/home',{clearHistory:true})
+        },
         processUserUpdate(){
               this.loading = true
            const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
