@@ -581,7 +581,7 @@ console.log('response',response)
       
       const data = await this.$navigator.modal('/list_select',{ frame: 'modalNavigator', 
                         props:{ 
-                          data: this.textValue.WhereDoes, 
+                          data: this.textValue.whereDoes, 
                           key: 'description',
                           value: this.textValue.whereDo
                         } })
