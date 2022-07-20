@@ -546,7 +546,7 @@ export default {
       hideKeyboard()
       const dataCache = JSON.parse(ApplicationSettings.getString('userProfile',"{}"))
       const date_birthIOS = getdateIOS( this.date_of_birth.ano,this.date_of_birth.mes,this.date_of_birth.dia)
-      const body ={
+      let body ={
             "user_id":dataCache.user.id,
             "name":this.textValue.firstName,
             "email":this.textValue.email,
