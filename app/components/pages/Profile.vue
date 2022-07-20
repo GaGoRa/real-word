@@ -147,9 +147,7 @@
               />
             </GridLayout >
             
-             <!-- <MaskedTextField text="9999999999" mask="(999) 999-9999" keyboardType="phone"/> -->
-            <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " />
-            <!-- <Label :text="textValue.date_of_birth " /> -->
+            <!-- <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " /> -->
           </StackLayout>
          
 
@@ -378,12 +376,12 @@ import NavBar from '../components/NavBar.vue'
 
 import { mapMutations } from "vuex";
 import { apiGet, apiPost } from '~/resource/http';
-import { ApplicationSettings } from '@nativescript/core';
+import { ApplicationSettings, isIOS } from '@nativescript/core';
 // import cache from '~/store/cache/index';
 import { dateFormat_YYYY_DD_MM, getValueById, getValueByIdArray} from "~/resource/helper";
 import moment from 'moment'
 import help from '~/mixins/help'
-import {hideKeyboard} from '../../resource/helper' 
+import {hideKeyboard ,getdateIOS} from '../../resource/helper' 
 
 export default {
   mixins:[help],
@@ -490,9 +488,19 @@ export default {
       this.textValue.middleName    = response.data.user.middle_name
       this.textValue.lastName      = response.data.user.last_name
       if(response.data.user.date_of_birth){
-        this.textValue.date_of_birth = response.data.user.date_of_birth
+         const date = getdateIOS(
+          response.data.user.date_of_birth.split('-')[0],//year
+          response.data.user.date_of_birth.split('-')[1],//month
+          response.data.user.date_of_birth.split('-')[2],//day
+          )
+        if(isIOS){
+            this.textValue.date_of_birth.ano = date.getFullYear()
+            this.textValue.date_of_birth.mes = (date.getMonth() + 1)
+            this.textValue.date_of_birth.day = date.getDay() 
+        }else{
+          this.textValue.date_of_birth = response.data.user.date_of_birth
+        }
       }else{
-             // this.textValue.date_of_birth = moment()
       }
       this.textValue.state_id      = response.data.user.state_id
       this.textValue.state         = !!this.textValue.state_id ? getValueByIdArray(this.textValue.states.data,this.textValue.state_id,"name") : this.textValue.state
@@ -515,7 +523,6 @@ export default {
       this.textValue.howOften = !!this.textValue.howOften_id ? getValueByIdArray(this.textValue.howOftenArray,this.textValue.howOften_id,"description") :this.textValue.howOften
 
       this.textValue.whereDo_id = response.data.user.exercise_place_id
-        console.log('this.textValue.whereDo_id',this.textValue.whereDo_id,this.textValue.whereDoes)
       this.textValue.whereDo =!!this.textValue.whereDo_id ? getValueByIdArray(this.textValue.whereDoes,this.textValue.whereDo_id,"description") : this.textValue.whereDo
 
 
@@ -529,7 +536,6 @@ export default {
       this.errorsMessage.errorMessage = "A ocurrido un error"
     },
     fecha(value){
-      console.log('aja')
       return moment(value).format('MM/DD/YYYY')
     },
     bindMoment(){
@@ -539,6 +545,7 @@ export default {
       this.loadingStateButtom = true
       hideKeyboard()
       const dataCache = JSON.parse(ApplicationSettings.getString('userProfile',"{}"))
+      const date_birthIOS = getdateIOS( )
       const body ={
             "user_id":dataCache.user.id,
             "name":this.textValue.firstName,
@@ -551,16 +558,20 @@ export default {
             "country_id":this.textValue.country_id,
             "state_id":this.textValue.state_id,
             "postal_code":this.textValue.postal_code,
-            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYY_DD_MM(this.textValue.date_of_birth) : null,
+            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYY_DD_MM(  this.textValue.date_of_birth) : null,
             "telephone":this.textValue.phone,
             "experience_id":this.textValue.experience_id,
             "reason_id":this.textValue.reason_id,
             "frequency_id":this.textValue.howOften_id,
             "exercise_place_id":this.textValue.whereDo_id
-
-
-
         }
+
+        if(isIOS){
+          body = {...body,
+          date_of_birth:  dateFormat_YYYY_DD_MM(date_birthIOS)
+          }
+        }
+
         apiPost(body,"/update_user")
         .then(this.onSuccessUpdate)
         .catch(this.onError)
@@ -653,22 +664,7 @@ export default {
         // }
         return (fecha);
     },
-    // getDataUser(){
-    //   const dataUser = JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user
-    //     this.textValue.firstName = dataUser.name
-    //     this.textValue.middleName = dataUser.middle_name
-    //     this.textValue.lastName = dataUser.last_name
-    //     this.textValue.date_of_birth = dataUser.date_of_birth
-    //     this.textValue.gender = getValueById(this.textValue.genders,dataUser.gender_id,'description')
-    //     this.textValue.phone = dataUser.telephone
-    //     this.textValue.email = dataUser.email
-    //     this.textValue.address = dataUser.address
-    //     this.textValue.city = dataUser.city
-    //     this.textValue.country = getValueById(this.textValue.countrys.data,dataUser.country_id,'description')
-    //     this.textValue.postal_code = dataUser.postal_code
-    //     this.textValue.state = getValueById(this.textValue.states.data,dataUser.state_id,'name')
-    //     this.$forceUpdate()
-    // },
+    
     onSuccessUpdate(res){
       hideKeyboard()
       ApplicationSettings.setString('userProfile',JSON.stringify(res.data))
@@ -730,7 +726,6 @@ export default {
                           value: this.textValue.whereDo
                         } })
 
-                        console.log("data",data)
       this.textValue.whereDo_id = data.id
       this.textValue.whereDo = data.description
     },
@@ -743,7 +738,6 @@ export default {
                           value: this.textValue.howOften_id
                         } })
 
-        console.log("data",data)
 
       this.textValue.howOften_id = data.id
       this.textValue.howOften = data.description

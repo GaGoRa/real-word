@@ -52,6 +52,10 @@
         return String(finalDate)
 }
 
+export function getdateIOS(year,month,day) {
+    const newMonth =  parseInt(month) -1 
+  return new Date(parseInt(year),newMonth,parseInt(day))
+}
 
  export function dateFormat_YYYY_DD_MM(originalDate){
 
