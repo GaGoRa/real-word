@@ -55,60 +55,62 @@
 <script>
 import NavBarBurgerMenu from "../components/NavBar/NavBarBurgerMenu.vue";
 import CardProgram from "~/components/components/boxes/CardProgram.vue";
-
-    export default {
-          components:{CardProgram,
-         NavBarBurgerMenu
+import help from '~/mixins/help'
+export default {
+  mixins:[help],
+  components:{
+    CardProgram,
+    NavBarBurgerMenu
+  },
+  props:{
+    data:{
+      type:Object,
+      default:{}
     },
-      props:{
-        data:{
-          type:Object,
-          default:{}
+    status_program_id:{
+      type: Number
+    }
+  },
+  data() {
+  return {
+    day:{
+        day:"1",
+        bodyPart:"Legs",
+        exercise:[
+          {
+            text: "Squat",
+            sets: 4,
+            reps: 15,
+            minReps: 10,
+            maxWeight:0,
+            maxReps:0,
+            completeDate:'12/10/2022'
+
+          },{
+            text: "Squat",
+            sets: 4,
+            reps: 15,
+            minReps: 10,
+            maxWeight:0,
+            maxReps:0,
+            completeDate:'12/10/2022'
+
         },
-        status_program_id:{
-          type: Number
-        }
-      },
-      data() {
-      return {
-        day:{
-            day:"1",
-            bodyPart:"Legs",
-            exercise:[
-              {
-                text: "Squat",
-                sets: 4,
-                reps: 15,
-                minReps: 10,
-                maxWeight:0,
-                maxReps:0,
-                completeDate:'12/10/2022'
+        ] ,
+                
 
-              },{
-                text: "Squat",
-                sets: 4,
-                reps: 15,
-                minReps: 10,
-                maxWeight:0,
-                maxReps:0,
-                completeDate:'12/10/2022'
-
-            },
-            ] ,
-                    
-
-                }
-            };
-      },
-      mounted(){
-         console.log('pageDay this data',this.data)
-      },
-      computed:{
-         getMarginOS(){
-      return global.isIOS ? '0' : '32' 
-    },
-      }
-    };
+            }
+        };
+  },
+  mounted(){
+     console.log('pageDay this data',this.data)
+  },
+  computed:{
+     // getMarginOS(){ // enviado a mixin
+     //    return global.isIOS ? '0' : '32' 
+     //  },
+  }
+};
 </script>
 
 <style scoped>

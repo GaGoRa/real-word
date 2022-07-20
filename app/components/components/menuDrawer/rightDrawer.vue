@@ -18,7 +18,8 @@
         marginLeft=""
         width="80%"
         backgroundImage="~/assets/icons/Group_403.png"
-        class="bg-label"
+        backgroundRepeat="no-repeat"
+        backgroundSize="contain"
       >
         <Label
           marginLeft="64"

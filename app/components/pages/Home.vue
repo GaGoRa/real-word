@@ -171,11 +171,13 @@ import RightDrawer from "~/components/components/menuDrawer/rightDrawer";
 import LeftDrawer from "~/components/components/menuDrawer/leftDrawer";
 import { ApplicationSettings , } from '@nativescript/core';
 import * as application from "@nativescript/core/application";
+import help from '~/mixins/help'
 
 import {DEFAULT_POPULAR_PROGRAMS,DEFAULT_RECOMMENDATED,DEFAULT_MY_PROGRAMS_LOADING, getDefaultMyPrograms
 } from "../../resource/constans"
 
 export default {
+  mixins:[help],
   components: {
     RightDrawer,
     LeftDrawer,
@@ -186,9 +188,9 @@ export default {
     BellMenu
   },
   computed:{
-    getMarginOS(){
-      return global.isIOS ? '0' : '32' 
-    }
+    // getMarginOS(){ //enviado a mixin
+    //   return global.isIOS ? '0' : '0' 
+    // }
   },
   data() {
     return {

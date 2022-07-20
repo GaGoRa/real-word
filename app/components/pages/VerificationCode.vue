@@ -19,7 +19,23 @@
                                 <span :text="email" fontSize="8" fontWeight="800" textWrap="true"/>
                             </FormattedString>
                         </Label>
-                        <FlexboxLayout justifyContent="center" marginBottom="32">
+                        <TextField
+                                v-if="isIOS"
+                                padding="0"
+                                textAlignment="center"
+                                fontSize="22"
+                                keyboardType="number"  
+                                maxLength="6" 
+                                letterSpacing: 10; 
+                                class="inputsolo"
+                                width="600" 
+                                height="60"
+                                backgroundColor="#FFFFFF" 
+                                borderRadius="8" 
+                                marginRight="4"
+                               
+                            />
+                        <FlexboxLayout v-if="!isIOS" justifyContent="center" marginBottom="32">
 
                             <TextField
                                 padding="0"
@@ -168,9 +184,15 @@ import { apiPost} from '~/resource/http';
             code(){
                 return this.stringCode.code1+this.stringCode.code2+this.stringCode.code3+this.stringCode.code4+this.stringCode.code5+this.stringCode.code6
             },
-              getMarginOS(){
-                    return global.isIOS ? '0' : '40' 
-                }
+            getMarginOS(){
+                return global.isIOS ? '0' : '40' 
+            },
+            isIOS(){
+            if(global.isIOS){
+            return true
+            }
+            return false
+            }
         },
         methods:{
 
@@ -247,7 +269,7 @@ import { apiPost} from '~/resource/http';
                 this.token = data.token
              }
         
-        
+            
     };
 </script>
 
@@ -260,5 +282,8 @@ import { apiPost} from '~/resource/http';
 
     .description-label {
         margin-bottom: 15;
+    }
+    .inputsolo{
+        letter-spacing: 1; 
     }
 </style>

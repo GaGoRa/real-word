@@ -30,8 +30,12 @@ import NavBar from '../components/NavBar.vue'
 import CardHistoryPayment from '../components/boxes/CardHistoryPayment.vue'
 import { apiGet, apiPost } from '~/resource/http';
 import {DEFAULT_CARD_HISTORY} from "../../resource/constans"
-//import {dateFormat} from '../../resource/helper'     
+//import {dateFormat} from '../../resource/helper'  
+
+  import help from '~/mixins/help'
+   
 export default {
+    mixins:[help],
   components:{
 NavBar, 
     CardHistoryPayment ,
