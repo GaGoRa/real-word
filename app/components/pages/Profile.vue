@@ -558,7 +558,7 @@ export default {
             "country_id":this.textValue.country_id,
             "state_id":this.textValue.state_id,
             "postal_code":this.textValue.postal_code,
-            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYY_DD_MM( this.textValue.date_of_birth) : null,
+            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYYMMDD( this.textValue.date_of_birth) : null,
             "telephone":this.textValue.phone,
             "experience_id":this.textValue.experience_id,
             "reason_id":this.textValue.reason_id,
@@ -568,7 +568,7 @@ export default {
 
         if(isIOS){
           body = {...body,
-          date_of_birth:  dateFormat_YYYY_DD_MM(date_birthIOS)
+          date_of_birth:  dateFormat_YYYYMMDD(date_birthIOS)
           }
         }
 
@@ -578,7 +578,7 @@ export default {
     },
     async onTapDataPicker(){
       const data = await this.$navigator.modal('/date',{id:"mimodal",props:{value: this.textValue.date_of_birth}})
-      this.textValue.date_of_birth = data
+      this.textValue.date_of_birth =  data
       this.$forceUpdate()
     },
     IsNumeric(valor) {

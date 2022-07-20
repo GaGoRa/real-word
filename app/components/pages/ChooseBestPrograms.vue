@@ -30,58 +30,80 @@
                     textAlignment="center" color="#949494" marginBottom="16" />
                 
                 <TextField 
-                  color="#949494" 
+                  class="form_input"
                   marginBottom="6"
                   marginLeft="14" 
                   marginRight="16" 
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" height="36"
                   :hint="gender" 
                   editable="false"
                   @tap="onTapGender"
                 />
                
-                 
-
                    <StackLayout v-if="!ios">
-            <TextField 
+                  <TextField 
                   editable="false" 
                   @tap="onTapDataPicker" 
-                  color="#949494" 
+                   class="form_input"
                   marginBottom="6"
                   marginLeft="14"
                   marginRight="16" 
                   :hint="textValue.date_of_birth == '' ? 'Date of birth':fecha(textValue.date_of_birth)"
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" 
-                  height="36"  />
+                   />
           </StackLayout>
          
-          <StackLayout v-else marginRight="16" marginLeft="16">
-            <TextField 
-              v-model="textValue.date_of_birth"
-              marginBottom="6"
-              marginLeft="14"
-              marginRight="16" 
-              :hint="fecha(textValue.date_of_birth)"
-              borderRadius="10" 
-              backgroundColor="#FFFFFF" 
-              class="form_input" 
-              @textChange="textChange"
-              keyboardType="datetime"
-            />
-             <!-- <MaskedTextField text="9999999999" mask="(999) 999-9999" keyboardType="phone"/> -->
-            <!-- <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " /> -->
-            <!-- <Label :text="textValue.date_of_birth " /> -->
+         <StackLayout v-else marginRight="16" marginLeft="16"> 
+            <GridLayout columns="*,*,*" >
+              <TextField 
+                col="0"
+                marginBottom="6"
+                marginLeft="0"
+                marginRight="4" 
+                v-model="date_of_birth.dia"
+                textAlign="center"
+                maxLength="2" 
+                hint="00"
+                borderRadius="10" 
+                backgroundColor="#FFFFFF" 
+                class="form_input" 
+                keyboardType="datetime"
+              />
+              <TextField 
+                col="1"
+                marginBottom="6"
+                marginLeft="4"
+                marginRight="4" 
+                v-model="date_of_birth.mes"
+                textAlign="center"
+                hint="00"
+                maxLength="2" 
+                borderRadius="10" 
+                backgroundColor="#FFFFFF" 
+                class="form_input" 
+                keyboardType="datetime"
+              />
+              <TextField 
+                col="2"
+                marginBottom="6"
+                marginLeft="4"
+                marginRight="0" 
+                v-model="date_of_birth.ano"
+                textAlign="center"
+                hint="0000"
+                maxLength="4" 
+                borderRadius="10" 
+                backgroundColor="#FFFFFF" 
+                class="form_input" 
+                keyboardType="datetime"
+              />
+            </GridLayout >
+            
           </StackLayout>
 
                  <TextField 
-                  color="#949494" 
+                  class="form_input"
                   marginBottom="6"
                   marginLeft="14" 
                   marginRight="16" 
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" height="36"
                   :hint="experience" 
                   editable="false"
                   @tap="onTapExperience"
@@ -90,24 +112,21 @@
                     textAlignment="left"  />
 
                 <TextField 
-                  color="#949494" 
+                  class="form_input"
                   marginBottom="6"
                   marginLeft="14" 
                   marginRight="16" 
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" height="36"
                   :hint="reason" 
                   editable="false"
                   @tap="onTapReason"
                 />
 
                 <TextField 
-                  color="#949494" 
+                  class="form_input"
                   marginBottom="6"
                   marginLeft="14" 
                   marginRight="16" 
                   borderRadius="10" 
-                  backgroundColor="#FFFFFF" height="36"
                   :hint="exercise" 
                   editable="false"
                   @tap="onTapExcersice"
@@ -116,12 +135,11 @@
                     textAlignment="left" />
 
                     <TextField 
-                  color="#949494" 
+                  class="form_input"
+
                   marginBottom="6"
                   marginLeft="14" 
                   marginRight="16" 
-                  borderRadius="10" 
-                  backgroundColor="#FFFFFF" height="36"
                   :hint="frequency" 
                   editable="false"
                   @tap="onTapFrecuence"
@@ -141,10 +159,10 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-import { ApplicationSettings ,Dialogs} from '@nativescript/core';
+import { ApplicationSettings ,isIOS,Dialogs} from '@nativescript/core';
 import moment from 'moment'
-import { hideKeyboard} from '../../resource/helper'
-import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
+import { hideKeyboard,getdateIOS} from '../../resource/helper'
+import {  dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
       data(){
           return {
@@ -194,8 +212,12 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
             exercise: "Where do you exercise",
             frequency: "Select one",
             loadingState:true,
-            loading:false
-
+            loading:false,
+            date_of_birth:{
+            dia:null, 
+            mes:null, 
+            ano: null
+      },
           }
       },
     computed: {
@@ -221,7 +243,10 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
               this.loading = true
            const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
 
-            const body = {
+          const date_birthIOS = getdateIOS( this.date_of_birth.ano,this.date_of_birth.mes,this.date_of_birth.dia)
+
+
+            let body = {
                     "user_id": dataCache.user.id ,
                     "gender_id":this.textValue.gender_id ,
                     "date_of_birth":dateFormat_YYYYMMDD(this.textValue.date_of_birth) ,
@@ -230,6 +255,11 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
                     "frequency_id":this.textValue.frequency_id ,
                     "exercise_place_id":this.textValue.exercise_place_id 
                 }
+                 if(isIOS){
+          body = {...body,
+          date_of_birth:  dateFormat_YYYYMMDD(date_birthIOS)
+          }
+        }
 
 
             if (Object.keys(body).length !== 0){
