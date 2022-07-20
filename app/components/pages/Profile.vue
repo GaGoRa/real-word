@@ -85,9 +85,9 @@
             />
 
 
-          <!-- <StackLayout v-if="!ios">
+          <StackLayout v-if="!ios">
             <TextField 
-              v-model="getTextDateBirth"
+              :text="fecha(textValue.date_of_birth)"
               editable="false" 
               @tap="onTapDataPicker" 
               marginBottom="6"
@@ -101,13 +101,13 @@
             />
           </StackLayout>
          
-          <StackLayout v-else marginRight="16" marginLeft="16"> -->
+          <StackLayout v-else marginRight="16" marginLeft="16">
             <TextField 
               
               marginBottom="6"
               marginLeft="14"
               marginRight="16" 
-              
+              v-model="textValue.date_of_birth"
               borderRadius="10" 
               backgroundColor="#FFFFFF" 
               class="form_input" 
@@ -117,7 +117,7 @@
              <!-- <MaskedTextField text="9999999999" mask="(999) 999-9999" keyboardType="phone"/> -->
             <!-- <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " /> -->
             <!-- <Label :text="textValue.date_of_birth " /> -->
-          <!-- </StackLayout> -->
+          </StackLayout>
          
 
           <!-- <TextField
@@ -381,7 +381,7 @@ export default {
         firstName:'',
         middleName:'',
         lastName:'',
-        date_of_birth:  'Date of birth',
+        date_of_birth:  '',
         state_id:'',
         gender_id:'',
         gender:'Gender',
@@ -398,7 +398,9 @@ export default {
       },
       errorsMessage:{
         errorMessage:""
-      }
+      },
+      primerslap: false,
+      segundoslap: false,
     };
   },
   filters:{
@@ -442,13 +444,8 @@ export default {
   methods:{
     ...mapMutations(["toggleSwitchMenu"]),
     textChange({value, object}){
-      // console.log(this.textValue.date_of_birth)
-      // this.textValue.date_of_birth = value
-      // console.log(value, this.textValue.date_of_birth)
-      if(value.length == 2){
-        this.textValue.date_of_birth = value+'/'
-        object.android.setSelection(2)
-      }
+     this.textValue.date_of_birth = this.formateafecha(value)
+     console.log(value.length)
     },
     async getUser(){
       const response = await apiGet('/get_user')
@@ -458,7 +455,7 @@ export default {
       if(response.data.user.date_of_birth){
         this.textValue.date_of_birth = response.data.user.date_of_birth
       }else{
-             this.textValue.date_of_birth = moment()
+             // this.textValue.date_of_birth = moment()
       }
       this.textValue.state_id      = response.data.user.state_id
       this.textValue.state         = !!this.textValue.state_id ? getValueByIdArray(this.textValue.states.data,this.textValue.state_id,"name") : this.textValue.state
@@ -537,23 +534,105 @@ export default {
       this.textValue.date_of_birth = data
       this.$forceUpdate()
     },
-      // getDataUser(){
-      //   const dataUser = JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user
-      //     this.textValue.firstName = dataUser.name
-      //     this.textValue.middleName = dataUser.middle_name
-      //     this.textValue.lastName = dataUser.last_name
-      //     this.textValue.date_of_birth = dataUser.date_of_birth
-      //     this.textValue.gender = getValueById(this.textValue.genders,dataUser.gender_id,'description')
-      //     this.textValue.phone = dataUser.telephone
-      //     this.textValue.email = dataUser.email
-      //     this.textValue.address = dataUser.address
-      //     this.textValue.city = dataUser.city
-      //     this.textValue.country = getValueById(this.textValue.countrys.data,dataUser.country_id,'description')
-      //     this.textValue.postal_code = dataUser.postal_code
-      //     this.textValue.state = getValueById(this.textValue.states.data,dataUser.state_id,'name')
+    IsNumeric(valor) {
+        var log = valor.length;
+        var sw = "S";
+        var x;
+        for (x = 0; x < log; x++) {
+            let v1 = valor.substr(x, 1);
+            let v2 = parseInt(v1);
+            //Compruebo si es un valor numérico
+            if (isNaN(v2)) {
+                sw = "N";
+            }
+        }
+        if (sw == "S") {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    formateafecha(fecha) {
+        var long = fecha.length;
+        var dia;
+        var mes;
+        var ano;
 
-      //     this.$forceUpdate()
-      // },
+        if ((long >= 2) && (this.primerslap == false)) {
+            dia = fecha.substr(0, 2);
+            if ((this.IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) {
+                fecha = fecha.substr(0, 2) + "/" + fecha.substr(3, 7);
+                this.primerslap = true;
+            } else {
+                fecha = "";
+                this.primerslap = false;
+            }
+        } else {
+            dia = fecha.substr(0, 1);
+            if (this.IsNumeric(dia) == false) {
+                fecha = "";
+            }
+            if ((long <= 2) && (this.primerslap = true)) {
+                fecha = fecha.substr(0, 1);
+                this.primerslap = false;
+            }
+        }
+        if ((long >= 5) && (this.segundoslap == false)) {
+            mes = fecha.substr(3, 2);
+            if ((this.IsNumeric(mes) == true) && (mes <= 12) && (mes != "00")) {
+                fecha = fecha.substr(0, 5) + "/" + fecha.substr(6, 4);
+                this.segundoslap = true;
+            } else {
+                fecha = fecha.substr(0, 3);;
+                this.segundoslap = false;
+            }
+        } else {
+            if ((long <= 5) && (this.segundoslap = true)) {
+                fecha = fecha.substr(0, 4);
+                this.segundoslap = false;
+            }
+        }
+        if (long >= 7) {
+            ano = fecha.substr(6, 4);
+            if (this.IsNumeric(ano) == false) {
+                fecha = fecha.substr(0, 6);
+            } else {
+                if (long == 10) {
+                    if ((ano == 0) || (ano < 1900) || (ano > 2100)) {
+                        fecha = fecha.substr(0, 6);
+                    }
+                }
+            }
+        }
+
+        // if (long >= 10) {
+        //     fecha = fecha.substr(0, 10);
+        //     dia = fecha.substr(0, 2);
+        //     mes = fecha.substr(3, 2);
+        //     ano = fecha.substr(6, 4);
+        //     // Año no viciesto y es febrero y el dia es mayor a 28
+        //     if ((ano % 4 != 0) && (mes == 02) && (dia > 28)) {
+        //       fecha = fecha.substr(0, 2) + "/";
+        //     }
+        // }
+        return (fecha);
+    },
+    // getDataUser(){
+    //   const dataUser = JSON.parse(ApplicationSettings.getString('userProfile',"{}")).user
+    //     this.textValue.firstName = dataUser.name
+    //     this.textValue.middleName = dataUser.middle_name
+    //     this.textValue.lastName = dataUser.last_name
+    //     this.textValue.date_of_birth = dataUser.date_of_birth
+    //     this.textValue.gender = getValueById(this.textValue.genders,dataUser.gender_id,'description')
+    //     this.textValue.phone = dataUser.telephone
+    //     this.textValue.email = dataUser.email
+    //     this.textValue.address = dataUser.address
+    //     this.textValue.city = dataUser.city
+    //     this.textValue.country = getValueById(this.textValue.countrys.data,dataUser.country_id,'description')
+    //     this.textValue.postal_code = dataUser.postal_code
+    //     this.textValue.state = getValueById(this.textValue.states.data,dataUser.state_id,'name')
+    //     this.$forceUpdate()
+    // },
     onSuccessUpdate(res){
       hideKeyboard()
       ApplicationSettings.setString('userProfile',JSON.stringify(res.data))
