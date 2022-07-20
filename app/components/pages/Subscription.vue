@@ -41,11 +41,10 @@ export default {
       navbarTittle:{
         title:"Subscription"
       },
-      subscriptions: '',
+      subscriptions: DEFAULT_CARD_SUBSCRIPTION ,
     };
   },
   async mounted(){
-    this.subscriptions = [DEFAULT_CARD_SUBSCRIPTION]
     const data = await apiGet('/get_subscription')
     this.subscriptions = [data.data]
     

@@ -2,7 +2,7 @@
 export const ERROR_MESSAGE_REGISTER = {
 }
 
-export const DEFAULT_CARD_SUBSCRIPTION = {
+export const DEFAULT_CARD_SUBSCRIPTION = [{
   
       tittle: "",
       class:'label_skeleton',
@@ -13,7 +13,7 @@ export const DEFAULT_CARD_SUBSCRIPTION = {
       height:'2008',
       recurrence:''
     
-}
+}]
 
 
 export const DEFAULT_CARD_HISTORY = [ {
