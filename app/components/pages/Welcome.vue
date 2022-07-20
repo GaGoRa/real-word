@@ -4,7 +4,7 @@
     <StackLayout marginTop="32" marginBottom="48" col="0" row="0">
              <FlexboxLayout  justifyContent="flex-end" >
            
-                <Image @tap="$navigator.navigate('/choose-best-progrmans')"
+                <Image @tap="$navigator.navigate('/choose-best-programs')"
                 src="~/assets/icons/icon_arrow_next.png" height="48" width="48" marginRight="32"/>
             </FlexboxLayout>
     </StackLayout>  

@@ -212,7 +212,7 @@ import { apiPost} from '~/resource/http';
                 console.log('typePage',this.data,ApplicationSettings.setString("userProfile",JSON.stringify(res.data)))
                     ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
                  if(this.data.typePage === "CreateUser"){
-                     this.$navigator.navigate('/choose-best-programs')
+                     this.$navigator.navigate('/welcome')
                  }else{
                      this.$navigator.navigate('/create-password')
                  }

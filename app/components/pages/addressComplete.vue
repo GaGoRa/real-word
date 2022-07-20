@@ -68,7 +68,19 @@
         borderRadius="10"
         backgroundColor="#FFFFFF"
         height="36"
+      /> 
+      <TextField
+        color="#949494"
+        marginBottom="6"
+        marginLeft="14"
+        marginRight="16"
+        v-model="city"
+        hint="City"
+        borderRadius="10"
+        backgroundColor="#FFFFFF"
+        height="36"
       />
+
       <TextField
         color="#949494"
         marginBottom="6"
@@ -82,28 +94,18 @@
         height="36"
       />
 
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        v-model="city"
-        hint="City"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
+     
       <TextField
         color="#949494"
         marginBottom="6"
         marginLeft="14"
         marginRight="16"
         v-model="postal_code"
-        hint="Postal Code"
+        hint="Zip code"
         borderRadius="10"
         backgroundColor="#FFFFFF"
         height="36"
-        keyboardType="number"
+         keyboardType="number"
       />
       
       <Button
