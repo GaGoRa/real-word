@@ -494,9 +494,9 @@ export default {
           response.data.user.date_of_birth.split('-')[2],//day
           )
         if(isIOS){
-            this.textValue.date_of_birth.ano = date.getFullYear()
-            this.textValue.date_of_birth.mes = (date.getMonth() + 1)
-            this.textValue.date_of_birth.day = date.getDay() 
+            this.date_of_birth.ano = date.getFullYear()
+            this.date_of_birth.mes = (date.getMonth() + 1)
+            this.date_of_birth.dia = date.getDay() 
         }else{
           this.textValue.date_of_birth = response.data.user.date_of_birth
         }
