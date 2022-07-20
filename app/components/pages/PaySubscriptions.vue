@@ -8,7 +8,7 @@
         
       </GridLayout  >
     </ActionBar> -->
-    <StackLayout marginTop="32" >
+    <StackLayout  >
      <NavBarBurgerMenu :isBell="false" :ismenu="false" :program_id="navbar.program_id"/>
     <ScrollView >
       <AbsoluteLayout >
