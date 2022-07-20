@@ -1,15 +1,8 @@
 <template>
   <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" backgroundColor="white">
-    <!-- <ActionBar background="#FFFFFF" class="shadow-none" boxShadow="0">
-      <GridLayout columns="*,auto" rows="*" width="100%" paddingRight="16" paddingBottom="8" paddingTop="16">
-        <StackLayout @tap="$navigator.back()" col="0" row="0" >
-          <image src="~/assets/icons/Icon feather-arrow-left-circle.png" verticalAlignment="left" width="40" height="40"  />
-        </StackLayout>
-        
-      </GridLayout  >
-    </ActionBar> -->
-    <StackLayout  >
-     <NavBarBurgerMenu :isBell="false" :ismenu="false" :program_id="navbar.program_id"/>
+   
+    <StackLayout marginTop="32" >
+     <NavBarBurgerMenu :isBell="false" :ismenu="false" :program_id="program_id"/>
     <ScrollView >
       <AbsoluteLayout >
         <WebView left="0" top="0" width="100%" :src="url" v-if="url" />

@@ -94,6 +94,7 @@
  import { apiPost } from '~/resource/http'
 // import cache from '~/store/cache';
 import { ApplicationSettings } from '@nativescript/core';
+import { hideKeyboard} from '../../resource/helper'
 
   export default {
       data(){
@@ -121,6 +122,7 @@ import { ApplicationSettings } from '@nativescript/core';
             this.$navigator.navigate('/home')
         },
         processLogin(){
+            hideKeyboard()
             this.loadingLogin = true
             const body ={
                 "email": String(this.textFieldValue.email).trim().toLocaleLowerCase(),

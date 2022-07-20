@@ -32,6 +32,7 @@
 <script>
 import { apiPost } from '~/resource/http';
 import { ApplicationSettings,Dialogs } from '@nativescript/core';
+import { hideKeyboard } from '../../resource/helper'
     export default {
         data() {
             return {
@@ -48,7 +49,8 @@ import { ApplicationSettings,Dialogs } from '@nativescript/core';
         },
         methods:{
         processCreateNewPassword(){
-   
+                hideKeyboard()
+
                const body ={
                    email:this.emailUser,
                    password:this.textFieldValue.password,

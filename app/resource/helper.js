@@ -1,7 +1,8 @@
  import moment from "moment";
- import {Cache} from"@nativescript/core/ui/image-cache";
- import {fromFile} from"@nativescript/core/image-source";
-
+ import { isIOS } from "@nativescript/core/platform";
+ import * as utils from "@nativescript/core/utils/utils";
+ import * as app from "@nativescript/core/application";
+ 
 //  export function GetImageCache() {
 
 // const cache = new Cache();
@@ -79,3 +80,17 @@ export function getValueByIdArray(lista,id,key){
 
 return elemento[key]
 }
+
+
+export const hideKeyboard = () => {
+  if (isIOS) {
+    app.ios.nativeApp.sendActionToFromForEvent(
+      "resignFirstResponder",
+      null,
+      null,
+      null
+    );
+  } else {
+    utils.ad.dismissSoftInput();
+  }
+};

@@ -25,6 +25,7 @@
 <script>
 import BurgerMenu from '../menuDrawer/burgerMenu.vue'
 import BellMenu from '../menuDrawer/bellMenu.vue'
+import {hideKeyboard} from '../../../resource/helper'
 
 export default {
   components:{
@@ -59,6 +60,7 @@ BurgerMenu,
 
   methods: {
     onTapBack(){
+      hideKeyboard()
       if(this.routeBack){
         this.$navigator.navigate(this.routeBack)
       }else{

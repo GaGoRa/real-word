@@ -8,7 +8,7 @@
             />
       </GridLayout>
     </StackLayout>
-        <FlexboxLayout v-else exDirection="column" justifyContent="center">
+        <FlexboxLayout v-else flexDirection="column" justifyContent="center">
 
             <StackLayout marginRight="24" marginLeft="24">
                 <FlexboxLayout   
@@ -18,7 +18,8 @@
                  justifyContent="center" >
                      <Label text="SKIP" fontSize="16" marginRight="4" fontWeight="300"
                     color="#949494" />
-                <Image @tap="$navigator.navigate('/home',{clearHistory:true})"
+                <Image @tap="tapSkipChooseProgram"
+                
                 src="~/assets/icons/icon_arrow_next.png" height="48" width="48" />
                 </FlexboxLayout>
 
@@ -142,6 +143,7 @@
 import { apiPost,apiGet} from '~/resource/http';
 import { ApplicationSettings ,Dialogs} from '@nativescript/core';
 import moment from 'moment'
+import { hideKeyboard} from '../../resource/helper'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
       data(){
@@ -211,6 +213,10 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
       }
     },
     methods:{
+        tapSkipChooseProgram(){
+          hideKeyboard()
+          this.$navigator.navigate('/home',{clearHistory:true})
+        },
         processUserUpdate(){
               this.loading = true
            const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
@@ -233,17 +239,20 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
               .catch(this.onError)
               
            }else{
+            hideKeyboard()
             this.$navigator.navigate('/home',{clearHistory:true})
            }
         },
         onSuccess(res){
             this.loading = false
+            hideKeyboard()
             ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home',{clearHistory:true})
 
 
         },
         onError(err){
+            hideKeyboard()
             this.loading = false
                 alert({
                         title: "Error Message",
