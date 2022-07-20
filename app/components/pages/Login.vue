@@ -80,8 +80,8 @@
                         verticalAlignment="buttom"
                         android:indicatorAnimation="swap" 
                         color="white"
-                       debug="true"
-                       row="0" col="0"
+                        debug="true"
+                        row="0" col="0"
                         marginBottom="10" 
 
                         >
