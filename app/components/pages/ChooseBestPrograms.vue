@@ -103,7 +103,10 @@
                   editable="false"
                   @tap="onTapFrecuence"
                 />
-
+                  <StackLayout v-if="loading" marginTop="16" marginBottom="16"  marginRight="16" >
+         
+                <ActivityIndicator :busy="loading"  />
+                </StackLayout>
                 <Button borderRadius="16" marginTop="16" fontSize="16"
                     text="Save" backgroundColor="red" width="200"
                     height="40" fontWeight="900" color="#FFFFFF"
@@ -166,7 +169,8 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
             reason: "Select one",
             exercise: "Where do you exercise",
             frequency: "Select one",
-            loadingState:true
+            loadingState:true,
+            loading:false
 
           }
       },
@@ -182,7 +186,7 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
     },
     methods:{
         processUserUpdate(){
-                
+              this.loading = true
            const dataCache = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
 
             const body = {
@@ -207,12 +211,14 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
            }
         },
         onSuccess(res){
+            this.loading = false
             ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home',{clearHistory:true})
 
 
         },
         onError(err){
+            this.loading = false
                 alert({
                         title: "Error Message",
                         message: "there is an error to update",

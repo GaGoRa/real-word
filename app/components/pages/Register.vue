@@ -184,6 +184,11 @@
         </StackLayout>
         
         <StackLayout marginTop="auto" row="2" col="0" paddingBottom="32">
+           <StackLayout v-if="loading" marginTop="16" marginBottom="16"  marginRight="16" >
+         
+                <ActivityIndicator :busy="loading"  />
+                </StackLayout>
+
           <Button 
             borderRadius="16" 
             marginTop="16" 
@@ -255,6 +260,7 @@ import { ApplicationSettings } from '@nativescript/core';
               ErrorPassword:'',
               errorMessage:''
             },
+            loading:false
           }
 
       },
@@ -306,7 +312,7 @@ import { ApplicationSettings } from '@nativescript/core';
                 }
 
             ApplicationSettings.setString("userProfile",JSON.stringify(userCache))
-           this.$navigator.navigate('/verification-code',{props:{
+           this.$navigator.navigate('/choose-best-programs',{props:{
             data:
                 {
                     typePage:"CreateUser"
@@ -339,6 +345,8 @@ import { ApplicationSettings } from '@nativescript/core';
             this.drawerState = event
         },
         processCreateUser(){ 
+
+          this.loading = true
         //     const body = {
         //     "name": "Asd",
         //     "last_name": "Asd",
@@ -381,10 +389,10 @@ import { ApplicationSettings } from '@nativescript/core';
 
              }
             //navigate('/home')
+             this.loading = false
         },
         onError(err){
-
-
+          this.loading = false
         const error = JSON.parse(err.content)
 
                 this.errorsMessages={

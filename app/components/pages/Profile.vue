@@ -173,7 +173,7 @@
             class="form_input" 
             editable="false"
           />
-          <!-- ADRRESSS
+          ADRRESSS
 
             <TextField
             v-model="textValue.address"
@@ -182,7 +182,6 @@
             marginRight="16"
             hint="Address"
             borderRadius="10"
-            backgroundColor="#FFFFFF"
              class="form_input" 
           />
           <TextField
@@ -192,7 +191,6 @@
             :hint="textValue.state"
             @tap="onTapState"
             borderRadius="10"
-            backgroundColor="#FFFFFF"
             editable="false"
              class="form_input" 
           />   
@@ -203,7 +201,6 @@
             v-model="textValue.city"
             hint="City"
             borderRadius="10"
-            backgroundColor="#FFFFFF"
             class="form_input" 
           />
           <TextField
@@ -213,10 +210,9 @@
             v-model="textValue.postal_code"
             hint="Zip Code"
             borderRadius="10"
-            backgroundColor="#FFFFFF"
              class="form_input" 
             keyboardType="number"
-          /> -->
+          />
 
           <Label
             marginLeft="16"
