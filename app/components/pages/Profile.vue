@@ -1,5 +1,5 @@
 <template>
-  <Page class="page-home" actionBarHidden="true" >
+  <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:mtf="nativescript-masked-text-field" class="page-home" actionBarHidden="true" >
     <StackLayout :marginTop="getMarginOS">
       <NavBar :data="navbar" :ismenu="false" />
 
@@ -85,7 +85,7 @@
             />
 
 
-          <StackLayout v-if="!ios">
+          <!-- <StackLayout v-if="!ios">
             <TextField 
               v-model="getTextDateBirth"
               editable="false" 
@@ -101,10 +101,23 @@
             />
           </StackLayout>
          
-          <StackLayout v-else marginRight="16" marginLeft="16">
-            <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " />
-            <Label :text="textValue.date_of_birth " />
-          </StackLayout>
+          <StackLayout v-else marginRight="16" marginLeft="16"> -->
+            <TextField 
+              
+              marginBottom="6"
+              marginLeft="14"
+              marginRight="16" 
+              
+              borderRadius="10" 
+              backgroundColor="#FFFFFF" 
+              class="form_input" 
+              @textChange="textChange"
+              keyboardType="datetime"
+            />
+             <!-- <MaskedTextField text="9999999999" mask="(999) 999-9999" keyboardType="phone"/> -->
+            <!-- <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " /> -->
+            <!-- <Label :text="textValue.date_of_birth " /> -->
+          <!-- </StackLayout> -->
          
 
           <!-- <TextField
@@ -161,6 +174,7 @@
             borderRadius="10"
             backgroundColor="#FFFFFF"
              class="form_input" 
+             keyboardType="phone"
           />
           <TextField
             v-model="textValue.email"
@@ -173,7 +187,7 @@
             class="form_input" 
             editable="false"
           />
-          ADRRESSS
+          
 
             <TextField
             v-model="textValue.address"
@@ -385,6 +399,11 @@ export default {
       }
     };
   },
+  filters:{
+    fechas(value){
+      return moment(value).format('MM/DD/YYYY')
+    },
+  },
   async mounted(){
     try {
       const responseState = await apiGet('/get_state')
@@ -420,7 +439,15 @@ export default {
   },
   methods:{
     ...mapMutations(["toggleSwitchMenu"]),
-
+    textChange({value, object}){
+      // console.log(this.textValue.date_of_birth)
+      // this.textValue.date_of_birth = value
+      // console.log(value, this.textValue.date_of_birth)
+      if(value.length == 2){
+        this.textValue.date_of_birth = value+'/'
+        object.android.setSelection(2)
+      }
+    },
     async getUser(){
       const response = await apiGet('/get_user')
       console.log('response',response)
@@ -466,6 +493,7 @@ export default {
       this.errorsMessage.errorMessage = "A ocurrido un error"
     },
     fecha(value){
+      console.log('aja')
       return moment(value).format('MM/DD/YYYY')
     },
     bindMoment(){
@@ -671,12 +699,12 @@ export default {
         }
     },
       
-       getTextDateBirth(){
+    getTextDateBirth(){
       if(this.textValue.date_of_birth){
         return this.textValue.date_of_birth
-        }else{
-          return ''
-        }
+      }else{
+        return ''
+      }
     },
 
     

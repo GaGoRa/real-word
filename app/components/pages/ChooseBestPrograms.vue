@@ -40,7 +40,10 @@
                   @tap="onTapGender"
                 />
                
-                 <TextField 
+                 
+
+                   <StackLayout v-if="!ios">
+            <TextField 
                   editable="false" 
                   @tap="onTapDataPicker" 
                   color="#949494" 
@@ -51,6 +54,25 @@
                   borderRadius="10" 
                   backgroundColor="#FFFFFF" 
                   height="36"  />
+          </StackLayout>
+         
+          <StackLayout v-else marginRight="16" marginLeft="16">
+            <TextField 
+              v-model="textValue.date_of_birth"
+              marginBottom="6"
+              marginLeft="14"
+              marginRight="16" 
+              :hint="fecha(textValue.date_of_birth)"
+              borderRadius="10" 
+              backgroundColor="#FFFFFF" 
+              class="form_input" 
+              @textChange="textChange"
+              keyboardType="datetime"
+            />
+             <!-- <MaskedTextField text="9999999999" mask="(999) 999-9999" keyboardType="phone"/> -->
+            <!-- <DatePicker class="date-picker" width="100%" v-model="textValue.date_of_birth " /> -->
+            <!-- <Label :text="textValue.date_of_birth " /> -->
+          </StackLayout>
 
                  <TextField 
                   color="#949494" 
@@ -178,6 +200,10 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
       message() {
         return "Blank {N}-Vue app";
       }
+    },
+    ios(){
+      return global.isIOS
+
     },
     filters: {
       datefilter: function (value) {
