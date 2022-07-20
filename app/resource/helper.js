@@ -78,7 +78,6 @@ export function getValueById(objeto,id,key){
 
 export function getValueByIdArray(lista,id,key){
 
-        console.log('lista',lista,id,key)
 
     const elemento = lista.find( e => e.id === id)
 
