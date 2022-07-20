@@ -545,7 +545,7 @@ export default {
       this.loadingStateButtom = true
       hideKeyboard()
       const dataCache = JSON.parse(ApplicationSettings.getString('userProfile',"{}"))
-      const date_birthIOS = getdateIOS( )
+      const date_birthIOS = getdateIOS( this.date_of_birth.ano,this.date_of_birth.mes,this.date_of_birth.dia)
       const body ={
             "user_id":dataCache.user.id,
             "name":this.textValue.firstName,
@@ -558,7 +558,7 @@ export default {
             "country_id":this.textValue.country_id,
             "state_id":this.textValue.state_id,
             "postal_code":this.textValue.postal_code,
-            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYY_DD_MM(  this.textValue.date_of_birth) : null,
+            "date_of_birth": this.textValue.date_of_birth ? dateFormat_YYYY_DD_MM( this.textValue.date_of_birth) : null,
             "telephone":this.textValue.phone,
             "experience_id":this.textValue.experience_id,
             "reason_id":this.textValue.reason_id,
