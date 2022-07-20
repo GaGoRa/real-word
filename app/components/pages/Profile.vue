@@ -173,7 +173,7 @@
             class="form_input" 
             editable="false"
           />
-          ADRRESSS
+          <!-- ADRRESSS -->
 
             <TextField
             v-model="textValue.address"
@@ -185,6 +185,7 @@
              class="form_input" 
           />
           <TextField
+            v-model="getTextState"
             marginBottom="6"
             marginLeft="14"
             marginRight="16"
@@ -335,6 +336,7 @@ import { ApplicationSettings } from '@nativescript/core';
 import { dateFormat_YYYY_DD_MM, getValueById, getValueByIdArray} from "~/resource/helper";
 import moment from 'moment'
 import help from '~/mixins/help'
+import {hideKeyboard} from '../../resource/helper' 
 
 export default {
   mixins:[help],
@@ -423,7 +425,6 @@ export default {
 
     async getUser(){
       const response = await apiGet('/get_user')
-      console.log('response',response)
       this.textValue.firstName     = response.data.user.name
       this.textValue.middleName    = response.data.user.middle_name
       this.textValue.lastName      = response.data.user.last_name
@@ -431,10 +432,9 @@ export default {
         this.textValue.date_of_birth = response.data.user.date_of_birth
       }
       this.textValue.state_id      = response.data.user.state_id
-      this.textValue.state         = !!this.textValue.state_id ? getValueByIdArray(this.textValue.states.data,this.textValue.state_id,"name") : ""
+      this.textValue.state         = !!this.textValue.state_id ? getValueByIdArray(this.textValue.states.data,this.textValue.state_id,"name") : this.textValue.state
       
       this.textValue.gender_id     = response.data.user.gender_id
-      console.log('textValue',this.textValue.gender_id )
 
       this.textValue.gender        = !!this.textValue.gender_id ? getValueByIdArray(this.textValue.genders,this.textValue.gender_id,"description") :  this.textValue.gender
       this.textValue.phone         = response.data.user.telephone
@@ -463,6 +463,7 @@ export default {
       this.loadingState = false
     },
     onError(err){
+      
       this.errorsMessage.errorMessage = "A ocurrido un error"
     },
     fecha(value){
@@ -473,6 +474,7 @@ export default {
     },
     proccessUpdateProfile(){
       this.loadingStateButtom = true
+      hideKeyboard()
       const dataCache = JSON.parse(ApplicationSettings.getString('userProfile',"{}"))
       const body ={
             "user_id":dataCache.user.id,
@@ -523,10 +525,11 @@ export default {
       //     this.$forceUpdate()
       // },
     onSuccessUpdate(res){
+      hideKeyboard()
       ApplicationSettings.setString('userProfile',JSON.stringify(res.data))
       this.toggleSwitchMenu(false)
       this.loadingStateButtom = false
-        this.$navigator.navigate('/home')
+      this.$navigator.navigate('/home')
     },
     async onTapState(){
 
@@ -534,7 +537,7 @@ export default {
                         props:{ 
                           data: this.textValue.states.data, 
                           key: 'name',
-                          value: this.textValue.state_id
+                          value: this.textValue.state
                         } })
 
       this.textValue.state_id = data.id
@@ -546,7 +549,7 @@ export default {
                         props:{ 
                           data: this.textValue.genders, 
                           key: 'description',
-                          value: this.textValue.gender_id
+                          value: this.textValue.gender
                         } })
       this.textValue.gender_id = data.id
       this.textValue.gender = data.description
@@ -674,6 +677,13 @@ export default {
        getTextDateBirth(){
       if(this.textValue.date_of_birth){
         return this.textValue.date_of_birth
+        }else{
+          return ''
+        }
+    },
+    getTextState(){
+      if(this.textValue.state_id){
+        return this.textValue.state
         }else{
           return ''
         }

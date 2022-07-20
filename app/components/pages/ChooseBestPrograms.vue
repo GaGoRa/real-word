@@ -120,6 +120,7 @@
 import { apiPost,apiGet} from '~/resource/http';
 import { ApplicationSettings ,Dialogs} from '@nativescript/core';
 import moment from 'moment'
+import { hideKeyboard} from '../../resource/helper'
 import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper'
   export default {
       data(){
@@ -207,17 +208,20 @@ import { dateFormat_YYYY_DD_MM ,dateFormat_YYYYMMDD} from '../../resource/helper
               .catch(this.onError)
               
            }else{
+            hideKeyboard()
             this.$navigator.navigate('/home',{clearHistory:true})
            }
         },
         onSuccess(res){
             this.loading = false
+            hideKeyboard()
             ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
             this.$navigator.navigate('/home',{clearHistory:true})
 
 
         },
         onError(err){
+            hideKeyboard()
             this.loading = false
                 alert({
                         title: "Error Message",

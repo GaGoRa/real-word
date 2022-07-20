@@ -37,77 +37,96 @@
       </FlexboxLayout>
     </ActionBar>
 
-    <!-- <StackLayout marginRight="24" backgroundColor="blue" marginLeft="24">
-      <Label
-        marginLeft="16"
-        marginTop="8"
-        color="#FFFFFF"
-        text="General Information?"
-        fontWeight="900"
-        fontSize="16"
-        textAlignment="left"
-      />
-    </StackLayout> -->
+   
     <StackLayout marginRight="24" marginTop="32" marginLeft="24">
-      <!-- <Label
-        marginLeft="16"
-        marginTop="8"
-        color="#FFFFFF"
-        text="General Information?"
-        fontWeight="900"
-        fontSize="16"
-        textAlignment="left"
-      /> -->
+      
       <TextField
-        color="#949494"
-        marginBottom="6"
+        
         marginLeft="14"
         marginRight="16"
         v-model="address"
         hint="Address"
-        borderRadius="10"
         backgroundColor="#FFFFFF"
-        height="36"
+         class="form_input" 
       /> 
+        <Label  
+                  v-if="!!errorsMessages.address" :text="errorsMessages.address" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                />
+
       <TextField
-        color="#949494"
-        marginBottom="6"
+        class="form_input" 
         marginLeft="14"
         marginRight="16"
         v-model="city"
         hint="City"
-        borderRadius="10"
         backgroundColor="#FFFFFF"
-        height="36"
       />
-
+ <Label  
+                  v-if="!!errorsMessages.city" :text="errorsMessages.city" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                />
       <TextField
-        color="#949494"
-        marginBottom="6"
+        v-model="getTextState"
+        class="form_input" 
         marginLeft="14"
         marginRight="16"
         :hint="state"
         @tap="onTapState"
-        borderRadius="10"
         backgroundColor="#FFFFFF"
         editable="false"
-        height="36"
       />
-
+      <Label  
+                  v-if="!!errorsMessages.state" :text="errorsMessages.state" 
+                  fontSize="16" 
+                  fontWeight="400"
+                  textAlignment="left" 
+                  color="red" 
+                  marginLeft="32" 
+                  marginTop="0" 
+                  marginBottom="0" 
+                />
      
       <TextField
-        color="#949494"
-        marginBottom="6"
+        
         marginLeft="14"
         marginRight="16"
         v-model="postal_code"
         hint="Zip code"
         borderRadius="10"
         backgroundColor="#FFFFFF"
-        height="36"
+        class="form_input" 
          keyboardType="number"
       />
-      
+         <Label  
+          v-if="!!errorsMessages.postal_code" :text="errorsMessages.postal_code" 
+          fontSize="16" 
+          fontWeight="400"
+          textAlignment="left" 
+          color="red" 
+          marginLeft="32" 
+          marginTop="0" 
+          marginBottom="0" 
+        />
+
+      <StackLayout v-if="loading" marginTop="16" marginBottom="16"  marginRight="16" >
+         
+                <ActivityIndicator :busy="loading"  />
+                </StackLayout>
+
+
       <Button
         borderRadius="16"
         marginTop="32"
@@ -128,9 +147,8 @@
 
 <script>
 import { apiPost,apiGet} from '~/resource/http';
-// import cache from "~/store/cache";
 import { ApplicationSettings } from '@nativescript/core';
-
+import { hideKeyboard} from '../../resource/helper'
 export default {
   props:{
     package:{
@@ -158,7 +176,14 @@ export default {
       city:'',
       postal_code:'',
       states: [],
-      state: 'Staste'
+      state: 'Staste',
+      loading: false,
+      errorsMessages:{
+        address:'',
+        city:'',
+        state:'',
+        postal_code:'',
+        }
     };
   },
   async mounted(){
@@ -173,25 +198,53 @@ export default {
       // },500)
     },
     async onSave(){
-      
+      hideKeyboard()
+     this.errorsMessages={
+        address:'',
+        city:'',
+        state:'',
+        postal_code:'',
+        }
+      this.loading = true
       let data = {
         address: this.address,
         state_id: this.state_id,
         city: this.city,
         postal_code: this.postal_code,
       }
-      const response = await apiPost(data,'/update_address')
-
-        let c = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
-        c.user = response.data
-        ApplicationSettings.setString("userProfile",JSON.stringify(c))
-
-        this.$navigator.navigate('/pay-subscription',{ 
-            props: { 
-              package: this.package,
-              price: this.price
-            },
-          })
+      try {
+        const response = await apiPost(data,'/update_address')
+  
+          let c = JSON.parse( ApplicationSettings.getString('userProfile',"{}"))
+          c.user = response.data
+           this.loading = false
+          ApplicationSettings.setString("userProfile",JSON.stringify(c))
+           
+          this.$navigator.navigate('/pay-subscription',{ 
+              props: { 
+                package: this.package,
+                price: this.price
+              },
+            })
+        
+      } catch (err) {
+        this.loading = false
+        hideKeyboard()
+        const error = JSON.parse(err.content)  
+        if(!!error.address){
+          this.errorsMessages.address = error.address[0]
+        }
+        if(!!error.city){
+          this.errorsMessages.city = error.city[0]
+        }
+        if(!!error.postal_code){
+          this.errorsMessages.postal_code = error.postal_code[0]
+        }
+        if(!!error.state_id){
+          this.errorsMessages.state_id = error.state_id[0]
+        }
+        
+      }
     },
     async onTapState(){
       
@@ -206,7 +259,19 @@ export default {
       this.state = data.name
 
     }
+  },
+
+  computed:{
+    getTextState(){
+      if(this.state_id){
+        return this.state
+        }else{
+          return ''
+        }
+    },
+
   }
+
 };
 </script>
 

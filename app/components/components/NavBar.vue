@@ -14,7 +14,7 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="40"
             width="40"
-            @tap="$navigator.back()"
+            @tap="tapBack"
           />
         </StackLayout>
         <StackLayout
@@ -37,7 +37,7 @@
 </template>
 <script>
 
-
+import {hideKeyboard} from '../../resource/helper'
 
 export default {
   props:{
@@ -56,7 +56,15 @@ export default {
       
     };
   },
-  methods: {},
+  methods: {
+
+      tapBack(){
+        hideKeyboard()
+        this.$navigator.back()
+      }
+
+
+  },
 };
 </script>
 

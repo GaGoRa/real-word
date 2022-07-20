@@ -303,6 +303,7 @@
 </template>
 <script>
 import { apiPost } from '~/resource/http';
+import {hideKeyboard} from '../../../resource/helper'
 
 export default {
   props: {
@@ -356,6 +357,7 @@ export default {
       this.showLogs = !this.showLogs
     },
     async onTapLog(){
+      hideKeyboard()
       this.saveLoading = true
 
       const data = await apiPost({

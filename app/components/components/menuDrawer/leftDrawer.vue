@@ -28,8 +28,8 @@
           src="~/assets/icons/Icon feather-arrow-right-circle - copia.png"
           height="40"
           width="40"
-          @tap="toggleSwitchMenu(false)"
-        />
+          @tap="tapCloseDrawer"
+        /> 
       </StackLayout>
       
     </FlexboxLayout>
@@ -79,7 +79,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { apiGet } from "~/resource/http";
-import cache from "~/store/cache";
+import { hideKeyboard} from '../../../resource/helper' 
 import CardPost from "../boxes/cardPost.vue"
 
 export default {
@@ -139,6 +139,10 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSwitchMenu"]),
+    tapCloseDrawer(){
+        hideKeyboard()
+       this.toggleSwitchMenu(false)
+    },
   
   onSuccess(res){
     this.CardPosts = this.getCardPost(res[0])

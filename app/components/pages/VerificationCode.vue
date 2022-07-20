@@ -156,7 +156,7 @@
 // import cache from '~/store/cache'
 import { ApplicationSettings } from '@nativescript/core';
 import { apiPost} from '~/resource/http';
-
+import {hideKeyboard} from '../../resource/helper'
     export default {
         props:{
             data:{
@@ -231,7 +231,7 @@ import { apiPost} from '~/resource/http';
                 textInput.focus()   
             },
             onSuccess(res){
-                console.log('typePage',this.data,ApplicationSettings.setString("userProfile",JSON.stringify(res.data)))
+                    hideKeyboard()
                     ApplicationSettings.setString("userProfile",JSON.stringify(res.data))
                  if(this.data.typePage === "CreateUser"){
                      this.$navigator.navigate('/welcome')

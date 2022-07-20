@@ -226,6 +226,7 @@ import { apiPost, apiGet } from '~/resource/http';
 import SelectInput from "~/components/components/menuDrawer/selectInput";
 import SelectDrawer from "~/components/components/menuDrawer/selectDrawer";
 import { ApplicationSettings } from '@nativescript/core';
+import {hideKeyboard} from '../../resource/helper'
 
   export default {
     components: {
@@ -377,6 +378,7 @@ import { ApplicationSettings } from '@nativescript/core';
         },
 
         onSuccess(response){
+          hideKeyboard()
              if(response.message === "User Registered"){
                 ApplicationSettings.setString("userProfile",JSON.stringify(response.data))
                 this.$navigator.navigate('/verification-code',{props:{
