@@ -496,7 +496,7 @@ export default {
         if(isIOS){
             this.date_of_birth.ano = date.getFullYear()
             this.date_of_birth.mes = (date.getMonth() + 1)
-            this.date_of_birth.dia = date.getDay() 
+            this.date_of_birth.dia = date.getDate() 
         }else{
           this.textValue.date_of_birth = response.data.user.date_of_birth
         }

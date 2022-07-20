@@ -7,7 +7,7 @@
       :width="data.width"
       :height="data.height"
       :src="data.img"
-      stretch="none"
+      :stretch="aspect"
       borderRadius="20"
       horizontalAlignment="center"
     ></ImageCacheIt>
@@ -45,6 +45,14 @@ export default {
     return {
       url:"",
     };
+  },
+  computed:{
+    aspect(){
+      if(global.isIOS){
+        return 'aspectFill'
+      }
+      return 'none'
+    }
   },
   mounted(){
     //  const response = GetImageCache()
