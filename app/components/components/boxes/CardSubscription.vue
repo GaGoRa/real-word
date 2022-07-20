@@ -30,6 +30,8 @@
           :text="`${data.recurrence} ${data.mount}`"
         />
         <StackLayout>
+
+
           <Button
             v-if="data.status == 'active'"
             borderRadius="8"
@@ -78,25 +80,24 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+
+    };
   },
   methods:{
     async onTapCancel(){
-      
+    
       const data = await apiPost({package_id: this.data.package_id},'/subscription/cancel_subscription')
       this.isLoading = true
-      setTimeout(()=>{
         this.$emit('onCancel', true)
-        this.isLoading = false
+      
 
-      }, 3000)
         
     },
     async onTapReanudar(){
       
       const data = await apiPost({package_id: this.data.package_id},'/subscription/reanudar_subscription')
 
-      console.log(data)
     }
   }
 };

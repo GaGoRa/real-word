@@ -1,7 +1,7 @@
 <template>
   <Page actionBarHidden="true" >
     <StackLayout marginTop="32" >
-     <NavBarBurgerMenu :ismenu="false"/>
+     <NavBarBurgerMenu :ismenu="false" :isBell="false"/>
     <ScrollView >
       <AbsoluteLayout >
 

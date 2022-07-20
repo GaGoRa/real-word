@@ -3,9 +3,17 @@
       <StackLayout 
       backgroundColor="trasparent"
       :marginTop="getMarginOS" >
-       <NavBar  :data="navbar"/>
+       <NavBar   :data="navbar"/>
+
+      
+             <StackLayout v-if="loading" marginTop="16" marginBottom="16"  marginRight="16" >
+         
+                <ActivityIndicator :busy="loading"  />
+                </StackLayout>
+          
 
       <CardSubscription
+      v-else
         v-for="(item, key) in subscriptions"
         :key="`subscription-${key}`"
         :data="item"
@@ -40,9 +48,12 @@ export default {
   data() {
     return { 
       navbar:{
-        title:"Subscription"
+        title:"Subscription",
+        optionsNavigate:{
+          url:'/home'
+        }
       },
-
+    loading:false,
       navbarTittle:{
         title:"Subscription"
       },
@@ -56,9 +67,14 @@ export default {
   },
   methods:{
     async onCancel(){
+      this.loading=true
+
       this.subscriptions = []
       const data = await apiGet('/get_subscription')
       this.subscriptions.push(data.data)
+      this.$forceUpdate()
+
+       this.loading=false
     }
   },
   computed:{

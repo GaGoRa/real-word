@@ -1,7 +1,7 @@
 <template>
   <Page xmlns:stripe="@triniwiz/nativescript-stripe" actionBarHidden="true" backgroundColor="white">
    
-    <StackLayout marginTop="32" >
+    <StackLayout  >
      <NavBarBurgerMenu :isBell="false" :ismenu="false" :program_id="program_id"/>
     <ScrollView >
       <AbsoluteLayout >

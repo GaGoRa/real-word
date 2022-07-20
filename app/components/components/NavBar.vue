@@ -60,7 +60,12 @@ export default {
 
       tapBack(){
         hideKeyboard()
-        this.$navigator.back()
+        if(this.data.optionsNavigate){
+          this.$navigator.navigate(this.data.optionsNavigate.url)
+        }else{
+          this.$navigator.back()
+
+        }
       }
 
 
