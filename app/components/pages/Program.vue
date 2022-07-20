@@ -170,7 +170,7 @@
                   :key="`exercise-${key}`"
                   :data="item"
                   :status_program_id="status_program_id"
-                  :programButtom="buttomPlay.registered "
+                  :programButtom="buttomPlay.registered"
                 />
               </StackLayout>
               <StackLayout v-else>
@@ -199,7 +199,12 @@ import { apiGet, apiPost,baseUrl } from "~/resource/http";
 import { Dialogs } from "@nativescript/core";
 import { DEFAULT_POPULAR_PROGRAMS} from "../../resource/constans"
 import  CardImage  from "../components/boxes/cardImage.vue"
+import help from '~/mixins/help'
+
+
+
 export default {
+    mixins:[help],
   components: {
     CardSubscriptionProgram,
     CardExercise,
@@ -245,9 +250,9 @@ export default {
   },
   computed:{
 
-       getMarginOS(){
-      return global.isIOS ? '0' : '32' 
-    },
+    //    getMarginOS(){ //enviado a mixin
+    //   return global.isIOS ? '0' : '32' 
+    // },
       
     dataPackage(){
       let arr = []

@@ -43,27 +43,26 @@
             text="Gold Subscription"
           />
         </StackLayout>
-          <StackLayout  col="0"
-          row="1">
-        <FlexboxLayout
-          marginTop="16"
-          marginBottom="14"
-        >
-          <Image
-            marginLeft="24"
-            src="~/assets/icons/icon_details.png"
-            height="24"
-          />
+        <StackLayout  col="0"  row="1">
+          <FlexboxLayout
+            marginTop="16"
+            marginBottom="14"
+          >
+            <Image
+              marginLeft="24"
+              src="~/assets/icons/icon_details.png"
+              height="24"
+            />
 
-          <Label
-            paddingTop="2"
-            marginLeft="8"
-            color="#FFFFFF"
-            fontSize="17"
-            fontWeight="400"
-            text="DETAILS"
-          />
-        </FlexboxLayout>
+            <Label
+              paddingTop="2"
+              marginLeft="8"
+              color="#FFFFFF"
+              fontSize="17"
+              fontWeight="400"
+              text="DETAILS"
+            />
+          </FlexboxLayout>
         </StackLayout>
 
         <TextView col="0"  marginLeft="24" row="2" marginBottom="24" editable="false">
@@ -96,59 +95,59 @@
             />
         </FlexboxLayout>
 
-      <StackLayout   marginRight="16" marginLeft="16" col="0" row="4">
-      
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Card holder Name"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="16"
-        hint="Credit Card #"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-      />
-      <StackLayout>
-          <FlexboxLayout >
-          <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft="14"
-        marginRight="8"
-        hint="Expiration Date"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-        width="50%"
-      />
+        <StackLayout   marginRight="16" marginLeft="16" col="0" row="4">
+        
         <TextField
-        color="#949494"
-        marginBottom="6"
-        marginLeft=""
-        marginRight="16"
-        hint="CVV"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="36"
-        width="50%"
-      />
+          color="#949494"
+          marginBottom="6"
+          marginLeft="14"
+          marginRight="16"
+          hint="Card holder Name"
+          borderRadius="10"
+          backgroundColor="#FFFFFF"
+          height="36"
+        />
+        <TextField
+          color="#949494"
+          marginBottom="6"
+          marginLeft="14"
+          marginRight="16"
+          hint="Credit Card #"
+          borderRadius="10"
+          backgroundColor="#FFFFFF"
+          height="36"
+        />  
+        <StackLayout>
+            <FlexboxLayout >
+            <TextField
+          color="#949494"
+          marginBottom="6"
+          marginLeft="14"
+          marginRight="8"
+          hint="Expiration Date"
+          borderRadius="10"
+          backgroundColor="#FFFFFF"
+          height="36"
+          width="50%"
+        />
+        <TextField
+          color="#949494"
+          marginBottom="6"
+          marginLeft=""
+          marginRight="16"
+          hint="CVV"
+          borderRadius="10"
+          backgroundColor="#FFFFFF"
+          height="36"
+          width="50%"
+        />
 
       
         <!-- Bottoms-->
 
         
 
-        </FlexboxLayout>
+          </FlexboxLayout>
 
       
            
@@ -161,7 +160,7 @@
 
           </FlexboxLayout>
           <FlexboxLayout 
-         marginTop="16" marginLeft="16" paddingBottom="8" marginBottom="16" justifyContent="space-between">
+          marginTop="16" marginLeft="16" paddingBottom="8" marginBottom="16" justifyContent="space-between">
              <StackLayout width="45%" orientation="horizontal"   borderRadius="12" height="40" backgroundColor="#000000"
                      paddingLeft="32" paddingRight="32" class="stack-layout-btn">
                             <Image src="~/assets/icons/btn_apple.png" padding="4" height="40"  margin="0" />
@@ -188,34 +187,34 @@
           </FlexboxLayout>
 
 
-      </StackLayout>
+          </StackLayout>
         
        
-        </StackLayout>
+            </StackLayout>
 
-        
-        <StackLayout col="0" row="5">
-                   
-       <Button
-        borderRadius="12"
-        marginTop="16"
-        fontSize="16"
-        text="Purchase"
-        backgroundColor="red"
-        width="200"
-        height="40"
-        fontWeight="900"
-        color="#FFFFFF"
-        marginBottom="32"
-        @tap="$navigator.navigate('/home')"
-      />
-        </StackLayout>
+            
+            <StackLayout col="0" row="5">
+                       
+           <Button
+            borderRadius="12"
+            marginTop="16"
+            fontSize="16"
+            text="Purchase"
+            backgroundColor="red"
+            width="200"
+            height="40"
+            fontWeight="900"
+            color="#FFFFFF"
+            marginBottom="32"
+            @tap="$navigator.navigate('/home')"
+          />
+          </StackLayout>
 
        
 
        
       </GridLayout>
-       </StackLayout>
+    </StackLayout>
   </Page>
 </template>
 <script>

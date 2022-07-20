@@ -14,7 +14,7 @@
             src="~/assets/icons/Icon feather-arrow-left-circle.png"
             height="35"
             width="35"
-            @tap=" onTapBack "
+            @tap="onTapBack"
           />
           </StackLayout>
              <BurgerMenu v-if="ismenu"/>

@@ -25,7 +25,12 @@ import NavBarBurgerMenu from "~/components/components/NavBar/NavBarBurgerMenu.vu
 import { apiGet } from '~/resource/http';
 import {DEFAULT_CARD_SUBSCRIPTION} from "../../resource/constans"
 import NavBarTittle from "~/components/components/NavBar.vue";
+import help from '~/mixins/help'
+
+   
+
 export default {
+   mixins:[help],
   components:{
     NavBar,
     CardSubscription,
@@ -58,9 +63,9 @@ export default {
     }
   },
   computed:{
-    getMarginOS(){
-      return global.isIOS ? '0' : '32' 
-  },
+  //   getMarginOS(){
+  //     return global.isIOS ? '0' : '32' 
+  // },
 
   },
 };

@@ -14,7 +14,7 @@
       borderRadius="16"
       padding="16"
       class="box-shadow"
-      @tap="data.url 
+      @tap="programButtom
         ? $navigator.navigate(data.url, { props: { data:data, status_program_id: status_program_id} }) 
        : alertDialog()"
     >

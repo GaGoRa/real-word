@@ -338,7 +338,10 @@ import { ApplicationSettings } from '@nativescript/core';
 // import cache from '~/store/cache/index';
 import { dateFormat_YYYY_DD_MM, getValueById, getValueByIdArray} from "~/resource/helper";
 import moment from 'moment'
+import help from '~/mixins/help'
+
 export default {
+  mixins:[help],
   components:{
     NavBar,
   },
@@ -424,7 +427,7 @@ export default {
 
     async getUser(){
       const response = await apiGet('/get_user')
-console.log('response',response)
+      console.log('response',response)
       this.textValue.firstName     = response.data.user.name
       this.textValue.middleName    = response.data.user.middle_name
       this.textValue.lastName      = response.data.user.last_name
@@ -622,9 +625,9 @@ console.log('response',response)
 
   },
   computed:{
-    getMarginOS(){
-      return global.isIOS ? '0' : '32' 
-    },
+    // getMarginOS(){ //enviado a mixin
+    //   return global.isIOS ? '0' : '32' 
+    // },
     ios(){
       return global.isIOS
 
