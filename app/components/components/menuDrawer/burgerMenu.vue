@@ -19,7 +19,7 @@ export default {
   },
   computed:{
       getSizeOS(){
-      return global.isIOS ? '35' : '24' 
+      return global.isIOS ? '35' : '35' 
     },
     getIsIos(){
       return global.isIOS

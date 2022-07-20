@@ -16,7 +16,7 @@
               />
 
 
-              <StackLayout 
+              <!-- <StackLayout 
                 marginRight="12" 
                 orientation="horizontal"  
                 marginLeft="12" 
@@ -30,9 +30,9 @@
                 class="stack-layout-btn">
                   <Image src="~/assets/icons/icon_facebook.png" height="24" marginRight="16" />
                   <Label verticalAlignment="middle" horizontalAlignment="center" text="Login in with Facebook" marginTop="4" fontSize="14" color="#FFFFFF" />
-              </StackLayout>
+              </StackLayout> -->
 
-              <StackLayout 
+              <!-- <StackLayout 
                 marginRight="12" 
                 marginLeft="12" 
                 orientation="horizontal"  
@@ -46,16 +46,16 @@
                 class="stack-layout-btn">
                   <Image src="~/assets/icons/icon_google.png" height="24" marginRight="16" />
                   <Label verticalAlignment="middle" @tap="processLoginGoogle" horizontalAlignment="center" text="Sign in with Google" marginTop="4" fontSize="14" color="black" />
-              </StackLayout>
+              </StackLayout> -->
 
-              <Label 
+              <!-- <Label 
                 text="or" 
                 fontSize="24"
                 fontWeight="900"
                 textAlignment="center" 
                 color="#FFFFFF" 
                 marginBottom="16" 
-              />
+              /> -->
 
               <Label  
                 v-if="!!errorsMessages.errorMessage" 

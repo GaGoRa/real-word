@@ -7,20 +7,21 @@
       marginBottom="32"
       justifyContent="flex-start"
     >
-    <StackLayout
+      <StackLayout
         marginRight="24"
         width="70%"
         backgroundImage="~/assets/icons/barra.png"
-        class="bg-label"
+        backgroundRepeat="no-repeat"
+        backgroundSize="contain"
       >
-       <Label
-            marginLeft="24"
-            color="#FFFFFF"
-            fontSize="24"
-            fontWeight="900"
-            text="community"
-          />
-        </StackLayout>
+        <Label
+          marginLeft="24"
+          color="#FFFFFF"
+          fontSize="24"
+          fontWeight="900"
+          text="Community"
+        />
+      </StackLayout>
        
       <StackLayout marginRight="24">
         <Image
@@ -29,35 +30,49 @@
           width="40"
           @tap="toggleSwitchMenu(false)"
         />
-
-
       </StackLayout>
       
     </FlexboxLayout>
-     <Label  v-if="!!errorsMessage.errorMessage" :text="errorsMessage.errorMessage" fontSize="16" fontWeight="400"
-                  textAlignment="left" color="red" marginLeft="32" marginTop="0" marginBottom="0" /> 
+    <GridLayout columns="*" rows="auto, *">
+      <StackLayout row="0" col="0">
+        <Label  
+          v-if="!!errorsMessage.errorMessage" 
+          :text="errorsMessage.errorMessage" 
+          fontSize="16" 
+          fontWeight="400"
+          textAlignment="left" 
+          color="red" 
+          marginLeft="32" 
+          marginTop="0" 
+          marginBottom="0" 
+        /> 
 
-     <TextField
-        v-model="textValue.search"
-        color="#949494"
-        marginBottom="16"
-        marginLeft="14"
-        marginRight="16"
-        hint="Search"
-        borderRadius="10"
-        backgroundColor="#FFFFFF"
-        height="44"
-        @textChange="onChangeFilter"
-      />
-      <ScrollView >
-      <StackLayout >
-      <CardPost v-for="(item, key) in CardPosts"
-            :key="`cardPost-${key}`"
-            :data="item"
-            marginBottom="16"
-          />
+        <TextField
+          v-model="textValue.search"
+          color="#949494"
+          marginBottom="16"
+          marginLeft="14"
+          marginRight="16"
+          hint="Search"
+          borderRadius="10"
+          backgroundColor="#FFFFFF"
+          height="44"
+          @textChange="onChangeFilter"
+        />
+      </StackLayout>
+      <StackLayout row="1" col="0">
+        <ScrollView >
+          <StackLayout >
+            <CardPost v-for="(item, key) in CardPosts"
+              :key="`cardPost-${key}`"
+              :data="item"
+              marginBottom="16"
+            />
           </StackLayout >
-          </ScrollView >
+        </ScrollView >
+      </StackLayout>
+
+    </GridLayout>
 
   </StackLayout>
 </template>

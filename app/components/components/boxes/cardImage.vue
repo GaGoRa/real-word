@@ -7,7 +7,7 @@
       :width="data.width"
       :height="data.height"
       :src="data.img"
-      stretch="aspectFill"
+      stretch="none"
       borderRadius="20"
       horizontalAlignment="center"
     ></ImageCacheIt>
