@@ -39,23 +39,23 @@
                   @tap="onTapGender"
                 />
                
-                   <StackLayout v-if="!ios">
-                  <TextField 
-                  editable="false" 
-                  @tap="onTapDataPicker" 
-                   class="form_input"
-                  marginBottom="6"
-                  marginLeft="14"
-                  marginRight="16" 
-                  :hint="textValue.date_of_birth == '' ? 'Date of birth':fecha(textValue.date_of_birth)"
-                   />
-          </StackLayout>
+                <StackLayout v-if="!ios">
+                      <TextField 
+                        editable="false" 
+                        @tap="onTapDataPicker" 
+                         class="form_input"
+                        marginBottom="6"
+                        marginLeft="14"
+                        marginRight="16" 
+                        :hint="textValue.date_of_birth == '' ? 'Date of birth':fecha(textValue.date_of_birth)"
+                      />
+                </StackLayout>
          
-         <StackLayout v-else marginRight="16" marginLeft="16"> 
-            <GridLayout columns="*,*,*" >
+          <StackLayout v-else marginRight="16" marginLeft="16"> 
+            <GridLayout height="50" columns="*,*,*" >
               <TextField 
                 col="0"
-                marginBottom="6"
+               
                 marginLeft="0"
                 marginRight="4" 
                 v-model="date_of_birth.dia"
@@ -69,7 +69,7 @@
               />
               <TextField 
                 col="1"
-                marginBottom="6"
+               
                 marginLeft="4"
                 marginRight="4" 
                 v-model="date_of_birth.mes"
@@ -83,7 +83,7 @@
               />
               <TextField 
                 col="2"
-                marginBottom="6"
+                
                 marginLeft="4"
                 marginRight="0" 
                 v-model="date_of_birth.ano"
@@ -214,21 +214,22 @@ import {  dateFormat_YYYYMMDD} from '../../resource/helper'
             loadingState:true,
             loading:false,
             date_of_birth:{
-            dia:null, 
-            mes:null, 
-            ano: null
+            dia:15, 
+            mes:12, 
+            ano: 1991
       },
           }
       },
     computed: {
       message() {
         return "Blank {N}-Vue app";
-      }
-    },
-    ios(){
+      },
+      ios(){
       return global.isIOS
 
     },
+    },
+    
     filters: {
       datefilter: function (value) {
         return moment(value).format('MM-DD-YYYY')
