@@ -430,6 +430,8 @@ export default {
       this.textValue.lastName      = response.data.user.last_name
       if(response.data.user.date_of_birth){
         this.textValue.date_of_birth = response.data.user.date_of_birth
+      }else{
+             this.textValue.date_of_birth = moment()
       }
       this.textValue.state_id      = response.data.user.state_id
       this.textValue.state         = !!this.textValue.state_id ? getValueByIdArray(this.textValue.states.data,this.textValue.state_id,"name") : this.textValue.state
